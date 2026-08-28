@@ -20,3 +20,4 @@
 - [x] Write and run Vitest coverage for core procedures, recommendation guardrails, workflow state transitions, and access-control behavior.
 - [x] Visually verify desktop and mobile routes, resolve presentation defects, and create the first completed project checkpoint.
 - [x] Integrate the managed agricultural storefront with real product browsing, cart, checkout, and order-state visibility.
+- [x] Fix homepage AI mutation error when the AI service returns no directly readable answer.

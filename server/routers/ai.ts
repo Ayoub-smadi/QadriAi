@@ -8,6 +8,16 @@ const messageSchema = z.object({ role: z.enum(["user", "assistant"]), content: z
 
 const SAFETY_INSTRUCTIONS = `You are Al-Qadri Smart Agriculture's cautious agricultural assistant. Answer primarily in Arabic unless the user writes in English. You may use the user's agricultural profile as context, but state uncertainty when key site data is missing. Give practical, explainable guidance: observations, likely factors, safe next steps, and what data is needed. Do not claim a certain plant disease from text alone. Do not prescribe pesticide brands, exact pesticide doses, or unsafe chemical combinations. For potentially urgent crop loss, severe pest pressure, unknown toxicity, contaminated water, or any risk to people, animals, food, or groundwater, explicitly advise contacting a licensed local agricultural expert. Always end with this concise disclaimer in the user's language: "تنبيه: الإرشاد الذكي مساعد ولا يغني عن فحص مهندس زراعي محلي عند الحالات الحساسة أو الحرجة."`;
 
+function extractTextContent(content: unknown): string {
+  if (typeof content === "string") return content.trim();
+  if (!Array.isArray(content)) return "";
+  return content.map(part => {
+    if (typeof part === "string") return part;
+    if (part && typeof part === "object" && "type" in part && part.type === "text" && "text" in part && typeof part.text === "string") return part.text;
+    return "";
+  }).filter(Boolean).join("\n").trim();
+}
+
 export const aiRouter = router({
   consult: protectedProcedure.input(z.object({ messages: z.array(messageSchema).min(1).max(8) })).mutation(async ({ ctx, input }) => {
     const profile = await getAgriculturalProfile(ctx.user.id);
@@ -23,8 +33,8 @@ export const aiRouter = router({
         ...input.messages,
       ],
     });
-    const content = response.choices[0]?.message?.content;
-    if (!content || typeof content !== "string") throw new Error("The AI service did not return an answer. Please try again.");
+    const content = extractTextContent(response.choices[0]?.message?.content);
+    if (!content) throw new Error("The AI service returned an empty answer. Please try again or use a more specific question.");
     return { content };
   }),
   diagnose: protectedProcedure.input(z.object({ imageDataUrl: z.string().min(30).max(5_500_000), mimeType: z.enum(["image/jpeg", "image/png", "image/webp"]), note: z.string().max(1200).optional() })).mutation(async ({ ctx, input }) => {
@@ -54,8 +64,8 @@ export const aiRouter = router({
       ],
       response_format: { type: "json_schema", json_schema: { name: "plant_triage", strict: true, schema } },
     });
-    const raw = response.choices[0]?.message?.content;
-    if (!raw || typeof raw !== "string") throw new Error("The image analysis did not return a result. Please try again.");
+    const raw = extractTextContent(response.choices[0]?.message?.content);
+    if (!raw) throw new Error("The image analysis returned an empty result. Please try again.");
     const result = JSON.parse(raw) as { confidence: number; urgency: "routine" | "monitor" | "critical" } & Record<string, unknown>;
     await savePlantAnalysis(ctx.user.id, { imageKey: stored.key, imageUrl: stored.url, result, confidence: result.confidence, escalation: result.urgency });
     return { imageUrl: stored.url, ...result };
