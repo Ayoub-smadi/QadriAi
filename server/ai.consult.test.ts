@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 
 vi.mock("./db", () => ({
   getAgriculturalProfile: vi.fn().mockResolvedValue(undefined),
+  listPublishedKnowledge: vi.fn().mockResolvedValue([]),
   savePlantAnalysis: vi.fn(),
 }));
 vi.mock("./_core/llm", () => ({
@@ -25,5 +26,6 @@ describe("ai.consult response normalization", () => {
     const result = await appRouter.createCaller(context()).ai.consult({ messages: [{ role: "user", content: "كيف أبدأ؟" }] });
     expect(result.content).toContain("ابدأ بفحص الرطوبة والصرف");
     expect(result.content).toContain("استشر مختصًا");
+    expect(result.content).toContain("تنبيه: الإرشاد الذكي مساعد ولا يغني عن فحص مهندس زراعي محلي");
   });
 });

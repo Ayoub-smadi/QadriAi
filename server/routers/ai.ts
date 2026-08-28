@@ -1,12 +1,42 @@
 import { z } from "zod";
-import { getAgriculturalProfile, savePlantAnalysis } from "../db";
+import { getAgriculturalProfile, listPublishedKnowledge, savePlantAnalysis } from "../db";
 import { invokeLLM, listLLMModels } from "../_core/llm";
 import { protectedProcedure, router } from "../_core/trpc";
 import { storagePut } from "../storage";
 
 const messageSchema = z.object({ role: z.enum(["user", "assistant"]), content: z.string().min(1).max(2500) });
 
-const SAFETY_INSTRUCTIONS = `You are Al-Qadri Smart Agriculture's cautious agricultural assistant. Answer primarily in Arabic unless the user writes in English. You may use the user's agricultural profile as context, but state uncertainty when key site data is missing. Give practical, explainable guidance: observations, likely factors, safe next steps, and what data is needed. Do not claim a certain plant disease from text alone. Do not prescribe pesticide brands, exact pesticide doses, or unsafe chemical combinations. For potentially urgent crop loss, severe pest pressure, unknown toxicity, contaminated water, or any risk to people, animals, food, or groundwater, explicitly advise contacting a licensed local agricultural expert. Always end with this concise disclaimer in the user's language: "تنبيه: الإرشاد الذكي مساعد ولا يغني عن فحص مهندس زراعي محلي عند الحالات الحساسة أو الحرجة."`;
+const SAFETY_INSTRUCTIONS = `You are Al-Qadri Smart Agriculture's careful, evidence-oriented agricultural assistant. Answer in Arabic by default and in English when the user writes in English. Your scope includes crops, trees, houseplants, soil, irrigation, pruning, propagation, planting, pests, diseases, harvest, landscaping, farm planning, and agricultural economics.
+
+Accuracy protocol: answer the user's actual question first, then give practical steps. Use the supplied agricultural profile and the retrieved knowledge context as primary grounding. Distinguish clearly between observed facts, likely causes, and hypotheses. Do not invent a species-specific fact, local regulation, product label, weather condition, or treatment result. When the answer depends on plant species, cultivar, growth stage, season, climate, soil, water quality, or symptoms, say what is missing and ask no more than three focused follow-up questions while still giving safe first steps. Use units and ranges only when well-supported, and explain that local conditions can change them. For pruning or planting advice, state the timing and the reason. For watering advice, explain how to check soil/root-zone moisture instead of prescribing a blind schedule.
+
+Safety protocol: do not claim a certain disease from text or a single image; present differential possibilities and what evidence would separate them. Do not prescribe pesticide brands, exact pesticide doses, unsafe chemical combinations, or off-label uses. Recommend reading the local product label and consulting a licensed local agricultural expert before any chemical intervention. Escalate clearly for rapid spread, severe wilting, unknown toxicity, contaminated water or soil, food-safety risk, protected or regulated species, or risk to people, animals, pollinators, or groundwater. For simple low-risk questions, answer directly without unnecessary alarm. If a question is outside agriculture, say briefly that you specialize in agriculture and invite an agricultural question. End in the user's language with a concise disclaimer: Arabic: "تنبيه: الإرشاد الذكي مساعد ولا يغني عن فحص مهندس زراعي محلي عند الحالات الحساسة أو الحرجة." English: "Note: AI guidance is an aid and does not replace an assessment by a local agricultural professional for sensitive or critical cases."`;
+
+const LOCAL_KNOWLEDGE_CONTEXT = `
+- الزيتون: يتحمل الجفاف نسبيًا بعد التأسيس، لكن اختيار الصنف والإنتاج يتأثران بملوحة المياه والصرف والتقليم والآفات. افحص الملوحة والصرف قبل زيادة الري أو التسميد.
+- نخيل التمر: ملائم للحرارة، لكن جودة المياه والملوحة والصرف والتلقيح والإدارة الموسمية تؤثر في الإنتاج. لا تُعمّم جدول ري دون معرفة التربة والمناخ وعمر النخلة.
+- البندورة: تحتاج ضوءًا جيدًا وصرفًا مناسبًا وريًا منتظمًا دون تشبع مستمر. راقب أسفل الأوراق، النمو الحديث، والانتشار قبل ترجيح سبب المرض.
+- الري بالتنقيط: يحسّن توصيل الماء لمنطقة الجذور، لكنه يحتاج ترشيحًا وضبط ضغط وتقسيم قطاعات وفحص انسداد النقاطات.
+- البياض الدقيقي والمنّ: قد تتشابه أعراضهما مع إجهاد بيئي أو مشاكل ري؛ اعزل النبات المصاب إن أمكن، حسّن التهوية، وثبّت التشخيص قبل أي مبيد.
+- في المناطق الحارة والجافة: الماء والملوحة والحرارة والرياح عوامل مترابطة؛ اجمع قياسات الموقع قبل اعتماد خطة زراعة أو ري.`;
+
+async function buildKnowledgeContext() {
+  try {
+    const published = await listPublishedKnowledge();
+    if (published.length) {
+      return JSON.stringify(published.slice(0, 12).map(item => ({ nameAr: item.nameAr, nameEn: item.nameEn, scientificName: item.scientificName, summaryAr: item.summaryAr, summaryEn: item.summaryEn, growingData: item.growingData })));
+    }
+  } catch (error) {
+    console.warn("[AI] Knowledge context unavailable; using local safety notes", error);
+  }
+  return LOCAL_KNOWLEDGE_CONTEXT;
+}
+
+function addLanguageDisclaimer(content: string, userQuestion: string) {
+  const isArabic = /[\u0600-\u06FF]/.test(userQuestion);
+  const disclaimer = isArabic ? "تنبيه: الإرشاد الذكي مساعد ولا يغني عن فحص مهندس زراعي محلي عند الحالات الحساسة أو الحرجة." : "Note: AI guidance is an aid and does not replace an assessment by a local agricultural professional for sensitive or critical cases.";
+  return content.includes(disclaimer) ? content : `${content.trim()}\n\n${disclaimer}`;
+}
 
 function extractTextContent(content: unknown): string {
   if (typeof content === "string") return content.trim();
@@ -22,19 +52,21 @@ export const aiRouter = router({
   consult: protectedProcedure.input(z.object({ messages: z.array(messageSchema).min(1).max(8) })).mutation(async ({ ctx, input }) => {
     const profile = await getAgriculturalProfile(ctx.user.id);
     const profileContext = profile ? JSON.stringify({ country: profile.country, city: profile.city, region: profile.region, landArea: profile.landArea, landType: profile.landType, soilType: profile.soilType, waterSource: profile.waterSource, waterQuality: profile.waterQuality, irrigationSystem: profile.irrigationSystem, currentPlants: profile.currentPlants, currentCrops: profile.currentCrops, landGoal: profile.landGoal, budgetRange: profile.budgetRange }) : "No saved agricultural profile yet.";
+    const knowledgeContext = await buildKnowledgeContext();
+    const latestQuestion = input.messages.at(-1)?.content ?? "";
     const models = await listLLMModels();
     const available = new Set(models.data.map(model => model.id));
-    const candidates = ["claude-sonnet-4-6", "gpt-5", "gemini-3-flash-preview", "gpt-5-mini"].filter(model => available.has(model));
+    const candidates = ["gpt-5", "gemini-3.1-pro-preview", "gemini-3-flash-preview", "gpt-5-mini", "gpt-5-nano"].filter(model => available.has(model));
     if (!candidates.length && models.data[0]?.id) candidates.push(models.data[0].id);
     if (!candidates.length) throw new Error("No AI model is currently available.");
     const consultationMessages = [
-      { role: "system" as const, content: `${SAFETY_INSTRUCTIONS}\nYou can answer any question about farming, plants, trees, crops, soil, irrigation, pests, diseases, propagation, pruning, landscaping, and agricultural planning. If a question is outside agriculture, briefly explain that this assistant is specialized in agriculture and invite an agricultural question.\nUser agricultural profile: ${profileContext}` },
+      { role: "system" as const, content: `${SAFETY_INSTRUCTIONS}\nRetrieved agricultural knowledge context (use it as grounding, not as permission to invent missing details): ${knowledgeContext}\nUser agricultural profile: ${profileContext}` },
       ...input.messages,
     ];
     let content = "";
     for (const model of candidates) {
       try {
-        const response = await invokeLLM({ model, maxTokens: 1200, messages: consultationMessages });
+        const response = await invokeLLM({ model, ...(model.startsWith("gpt-5") ? { maxCompletionTokens: 1800, reasoning: { effort: "low" } } : { maxTokens: 1800 }), messages: consultationMessages });
         content = extractTextContent(response.choices[0]?.message?.content);
         if (content) break;
       } catch (error) {
@@ -42,7 +74,7 @@ export const aiRouter = router({
       }
     }
     if (!content) throw new Error("The AI service returned an empty answer. Please try again or use a more specific agricultural question.");
-    return { content };
+    return { content: addLanguageDisclaimer(content, latestQuestion) };
   }),
   diagnose: protectedProcedure.input(z.object({ imageDataUrl: z.string().min(30).max(5_500_000), mimeType: z.enum(["image/jpeg", "image/png", "image/webp"]), note: z.string().max(1200).optional() })).mutation(async ({ ctx, input }) => {
     const matches = input.imageDataUrl.match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/);
