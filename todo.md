@@ -1,0 +1,22 @@
+# Project TODO
+
+- [x] Establish the Arabic-first visual identity using #35530E and white, with responsive mobile-first layouts, accessible contrast, and subtle motion.
+- [x] Implement a complete Arabic/English localization catalog, persistent language switcher, and correct RTL/LTR direction handling across public, dashboard, and administration views.
+- [x] Build public navigation, landing page, service discovery, and authenticated entry points for the connected agricultural journey.
+- [x] Extend role modeling and role-based access control for user, agricultural expert, and administrator journeys.
+- [x] Create an agricultural-profile onboarding workflow that captures location, land, soil, water, irrigation, crops, goals, and budget data.
+- [x] Create the core relational schema and query layer for profiles, farms, gardens, growing records, tasks, projects, designs, recommendations, analyses, knowledge items, reviews, notifications, and operational metrics.
+- [x] Build the unified user dashboard for farms, gardens, projects, analyses, designs, orders, subscriptions, notifications, and recommended next actions.
+- [x] Create a structured, searchable agricultural knowledge hub for plants, crops, trees, diseases, pests, irrigation methods, regions, and growing guidance.
+- [x] Implement a contextual AI agricultural engineer interface that incorporates user profile data and presents explainable answers with safety disclaimers.
+- [x] Implement smart data-collection flows that identify required site information before creating recommendations or plans.
+- [x] Build explainable plant-selection and farm-planning workflows that provide suitability tiers, reasons, quantities, estimated costs, irrigation, and care guidance.
+- [x] Build a plant image-diagnosis workflow with secure image metadata, confidence level, symptoms, possible causes, corrective steps, prevention advice, and critical-case escalation notices.
+- [x] Implement farm and garden management dashboards with plant/crop status, growth records, scheduled care activities, task calendar, and project follow-up.
+- [x] Implement landscape-design and irrigation-design request workflows with AI draft, review statuses, expert comments, and shareable final-report views.
+- [x] Build expert and administrator control centers for agricultural content, user roles, review queues, projects, branding settings, safety rules, and operational analytics.
+- [x] Define subscription and payment-ready domain models without coupling the system to a single payment provider.
+- [x] Implement loading, empty, error, and authorization states across core flows and validate inputs at the client and server boundaries.
+- [x] Write and run Vitest coverage for core procedures, recommendation guardrails, workflow state transitions, and access-control behavior.
+- [x] Visually verify desktop and mobile routes, resolve presentation defects, and create the first completed project checkpoint.
+- [x] Integrate the managed agricultural storefront with real product browsing, cart, checkout, and order-state visibility.

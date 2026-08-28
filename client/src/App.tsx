@@ -1,42 +1,42 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { CartProvider } from "./contexts/CartContext";
+import { CartDrawer } from "./components/CartDrawer";
+import { LanguageProvider } from "./lib/i18n";
+import Control from "./pages/Control";
+import Dashboard from "./pages/Dashboard";
+import Diagnosis from "./pages/Diagnosis";
+import Engineer from "./pages/Engineer";
 import Home from "./pages/Home";
+import Knowledge from "./pages/Knowledge";
+import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import Projects from "./pages/Projects";
+import Selector from "./pages/Selector";
+import SharedReport from "./pages/SharedReport";
+import Shop from "./pages/Shop";
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
-  return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
-  );
+  return <Switch>
+    <Route path="/" component={Home} />
+    <Route path="/dashboard" component={Dashboard} />
+    <Route path="/engineer" component={Engineer} />
+    <Route path="/selector" component={Selector} />
+    <Route path="/diagnosis" component={Diagnosis} />
+    <Route path="/knowledge" component={Knowledge} />
+    <Route path="/projects" component={Projects} />
+    <Route path="/shop" component={Shop} />
+    <Route path="/reports/:shareToken" component={SharedReport} />
+    <Route path="/profile" component={Profile} />
+    <Route path="/control" component={Control} />
+    <Route path="/404" component={NotFound} />
+    <Route component={NotFound} />
+  </Switch>;
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
-function App() {
-  return (
-    <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
-  );
+export default function App() {
+  return <ErrorBoundary><ThemeProvider defaultTheme="light"><LanguageProvider><TooltipProvider><CartProvider><Toaster /><Router /><CartDrawer /></CartProvider></TooltipProvider></LanguageProvider></ThemeProvider></ErrorBoundary>;
 }
-
-export default App;
