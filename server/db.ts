@@ -5,6 +5,7 @@ import type { User } from "../drizzle/schema";
 import { nanoid } from "nanoid";
 import { ENV } from "./_core/env";
 import { createLocalOpenId, hashPassword, normalizePhone, normalizeUsername } from "./credentialAuth";
+import { baseKnowledge as expandedKnowledge } from "./knowledgeSeed";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -133,17 +134,33 @@ const baseKnowledge = [
   { category: "region" as const, nameAr: "الزراعة في المناطق الحارة والجافة", nameEn: "Hot-arid growing", scientificName: "", summaryAr: "تتأثر الخيارات بالماء والملوحة والحرارة والرياح؛ اجمع قياسات الموقع قبل اعتماد خطة الزراعة أو الري.", summaryEn: "Choices are affected by water, salinity, heat, and wind; collect site measurements before adopting a planting or irrigation plan.", growingData: { water: "حسب الموقع", light: "شمس قوية", regions: ["الشرق الأوسط"] } },
 ];
 
+const fallbackKnowledge = [...expandedKnowledge].map((item, index) => ({ ...item, id: -(index + 1), status: "published" as const, reviewedBy: null, updatedAt: new Date() }));
+
+function filterFallbackKnowledge(input?: { query?: string; category?: string }) {
+  const query = input?.query?.trim().toLocaleLowerCase();
+  const category = input?.category && input.category !== "all" ? input.category : undefined;
+  return fallbackKnowledge.filter(item => {
+    const data = item.growingData as { countries?: readonly string[] } | null;
+    const searchable = [item.nameAr, item.nameEn, item.scientificName, item.summaryAr, item.summaryEn, ...(data?.countries ?? []), ...(data && "watch" in data ? (data.watch as readonly string[]) : [])].join(" ").toLocaleLowerCase();
+    return (!category || item.category === category) && (!query || searchable.includes(query));
+  });
+}
+
 async function ensureCuratedKnowledge() {
   const db = await getDb();
   if (!db) return;
-  const existing = await db.select({ id: knowledgeItems.id }).from(knowledgeItems).limit(1);
-  if (existing.length) return;
-  await db.insert(knowledgeItems).values(baseKnowledge.map(item => ({ ...item, status: "published" as const })));
+  const curatedKnowledge = [...expandedKnowledge];
+  const existing = await db.select({ nameAr: knowledgeItems.nameAr }).from(knowledgeItems);
+  const existingNames = new Set(existing.map(item => item.nameAr));
+  const missing = curatedKnowledge.filter(item => !existingNames.has(item.nameAr));
+  if (missing.length) {
+    await db.insert(knowledgeItems).values(missing.map(item => ({ ...item, status: "published" as const })));
+  }
 }
 
 export async function listPublishedKnowledge(input?: { query?: string; category?: string }) {
   const db = await getDb();
-  if (!db) return [];
+  if (!db) return filterFallbackKnowledge(input);
   await ensureCuratedKnowledge();
   const query = input?.query?.trim();
   const category = input?.category && input.category !== "all" ? input.category : undefined;
@@ -155,7 +172,7 @@ export async function listPublishedKnowledge(input?: { query?: string; category?
 
 export async function listKnowledgeForControl() {
   const db = await getDb();
-  if (!db) return [];
+  if (!db) return fallbackKnowledge;
   await ensureCuratedKnowledge();
   return db.select().from(knowledgeItems).orderBy(desc(knowledgeItems.updatedAt));
 }
