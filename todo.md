@@ -21,5 +21,6 @@
 - [x] Visually verify desktop and mobile routes, resolve presentation defects, and create the first completed project checkpoint.
 - [x] Integrate the managed agricultural storefront with real product browsing, cart, checkout, and order-state visibility.
 - [x] Fix homepage AI mutation error when the AI service returns no directly readable answer.
-- [ ] Upload the completed project to a GitHub repository and verify the remote URL.
-- [ ] Upload the completed project to the provided GitHub repository https://github.com/Ayoub-smadi/QadriAi.git and verify the pushed commit.
+- [x] Upload the completed project to a GitHub repository and verify the remote URL.
+- [x] Upload the completed project to the provided GitHub repository https://github.com/Ayoub-smadi/QadriAi.git and verify the pushed commit.
+- [x] Retry the GitHub push using the user-provided credential without persisting it in the project.
