@@ -1,9 +1,8 @@
 import { useAuth } from "@/_core/hooks/useAuth";
-import { startLogin } from "@/const";
 import { PlatformShell } from "@/components/PlatformShell";
 import { useLanguage } from "@/lib/i18n";
 import { ArrowLeft, ArrowRight, Bot, CheckCircle2, ClipboardCheck, Leaf, LineChart, ScanSearch, ShieldCheck, Sprout, TreePine, Waves } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 
 const heroImage = "/manus-storage/al-qadri-smart-agriculture-hero_28e6f928.jpg";
@@ -11,6 +10,7 @@ const heroImage = "/manus-storage/al-qadri-smart-agriculture-hero_28e6f928.jpg";
 export default function Home() {
   const { language, t } = useLanguage();
   const { isAuthenticated } = useAuth();
+  const [, setLocation] = useLocation();
   const Arrow = language === "ar" ? ArrowLeft : ArrowRight;
   const steps = [
     { icon: Bot, ar: "اسأل", en: "Ask" }, { icon: ScanSearch, ar: "حلّل", en: "Analyze" }, { icon: Sprout, ar: "خطّط", en: "Plan" }, { icon: ClipboardCheck, ar: "راجع", en: "Review" }, { icon: LineChart, ar: "تابع", en: "Follow up" },
@@ -31,7 +31,7 @@ export default function Home() {
             <div className="inline-flex items-center gap-2 rounded-full border border-[#5d7d30]/18 bg-white/80 px-3 py-1.5 text-xs font-bold text-[#476b19]"><span className="size-1.5 rounded-full bg-[#88a849]" />{language === "ar" ? "ذكاء زراعي مسؤول، بتوجيه من الخبرة" : "Responsible AI, guided by agricultural expertise"}</div>
             <h1 className="mt-6 text-balance text-4xl font-bold leading-[1.16] tracking-tight text-[#29410d] sm:text-5xl lg:text-6xl">{language === "ar" ? "مهندس زراعي ذكي بين يديك." : "An intelligent agricultural engineer at your fingertips."}</h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-[#607052]">{language === "ar" ? "من الاستشارة والتشخيص إلى التخطيط والمتابعة، يساعدك القادري الزراعي الذكي في اتخاذ قرارات أوضح لحديقتك أو مزرعتك — بذكاء سياقي ومراجعة خبراء عند الحاجة." : "From consultation and diagnosis to planning and follow-up, Al-Qadri helps you make clearer decisions for your garden or farm—with contextual intelligence and expert review when needed."}</p>
-            <div className="mt-8 flex flex-wrap gap-3"><Button asChild className="h-12 rounded-xl bg-[#35530e] px-5 text-base text-white shadow-[0_12px_24px_rgba(53,83,14,.22)] hover:bg-[#294108]"><Link href={isAuthenticated ? "/dashboard" : "/selector"}>{t.start}<Arrow className="ms-2 size-4" /></Link></Button>{!isAuthenticated && <Button onClick={() => startLogin()} variant="outline" className="h-12 rounded-xl border-[#35530e]/20 bg-white px-5 text-base text-[#35530e] hover:bg-[#f4f7f0]">{t.signIn}</Button>}</div>
+            <div className="mt-8 flex flex-wrap gap-3"><Button asChild className="h-12 rounded-xl bg-[#35530e] px-5 text-base text-white shadow-[0_12px_24px_rgba(53,83,14,.22)] hover:bg-[#294108]"><Link href={isAuthenticated ? "/dashboard" : "/selector"}>{t.start}<Arrow className="ms-2 size-4" /></Link></Button>{!isAuthenticated && <Button onClick={() => setLocation("/auth")} variant="outline" className="h-12 rounded-xl border-[#35530e]/20 bg-white px-5 text-base text-[#35530e] hover:bg-[#f4f7f0]">{t.signIn}</Button>}</div>
             <div className="mt-10 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-[#5d6b4d]"><span className="flex items-center gap-2"><ShieldCheck className="size-4 text-[#66852e]" />{language === "ar" ? "توصيات حذرة" : "Cautious guidance"}</span><span className="flex items-center gap-2"><CheckCircle2 className="size-4 text-[#66852e]" />{language === "ar" ? "خطوات قابلة للتفسير" : "Explainable next steps"}</span></div>
           </div>
           <div className="order-1 lg:order-2"><div className="relative mx-auto max-w-[720px]"><div className="absolute -inset-4 rounded-[2.25rem] bg-[#6c8b37]/15 blur-2xl" /><img src={heroImage} alt={language === "ar" ? "مزرعة عصرية مزودة بتقنيات ري ذكية" : "Modern farm with smart irrigation technology"} className="relative aspect-[16/11] w-full rounded-[2rem] object-cover shadow-[0_24px_60px_rgba(42,62,18,.22)]" /><div className="absolute bottom-4 start-4 max-w-[260px] rounded-2xl border border-white/65 bg-white/90 p-4 shadow-xl backdrop-blur"><div className="flex items-center gap-2 text-xs font-bold text-[#35530e]"><Waves className="size-4" />{language === "ar" ? "نقطة بداية ذكية" : "A smarter starting point"}</div><p className="mt-2 text-xs leading-5 text-[#5f6d50]">{language === "ar" ? "ابدأ بجمع بيانات الموقع، ثم انتقل إلى توصية مفهومة ومراجعة عند الحاجة." : "Collect site data first, then move to a clear recommendation and review when required."}</p></div></div></div>

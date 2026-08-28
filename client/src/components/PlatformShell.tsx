@@ -1,5 +1,4 @@
 import { useAuth } from "@/_core/hooks/useAuth";
-import { startLogin } from "@/const";
 import { useLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { BadgeCheck, Bot, BookOpen, ChevronLeft, ClipboardList, FlaskConical, Leaf, LayoutDashboard, Menu, ScanSearch, ShoppingBag, Sprout, UserRound } from "lucide-react";
@@ -23,7 +22,7 @@ export const navigation = [
 export function PlatformShell({ children, title, eyebrow, compact = false }: PlatformShellProps) {
   const { language, setLanguage, t } = useLanguage();
   const { user, isAuthenticated } = useAuth();
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const [mobileMenu, setMobileMenu] = useState(false);
   const { itemCount, openCart } = useCart();
   const initials = user?.name?.trim().slice(0, 1) || "ق";
@@ -46,9 +45,10 @@ export function PlatformShell({ children, title, eyebrow, compact = false }: Pla
           </nav>}
 
           <div className="flex items-center gap-2">
+            {isAuthenticated && <span className="hidden max-w-[180px] truncate text-xs font-bold text-[#5d6a4f] lg:block">{language === "ar" ? `أهلًا، ${user?.name || "بك"}` : `Welcome, ${user?.name || "there"}`}</span>}
             <button type="button" onClick={openCart} className="relative grid size-9 place-items-center rounded-xl border border-[#35530e]/15 text-[#35530e] hover:bg-[#f3f6ee]" aria-label={language === "ar" ? "فتح سلة المشتريات" : "Open shopping cart"}><ShoppingBag className="size-4" />{itemCount > 0 && <span className="absolute -end-1 -top-1 grid size-4 place-items-center rounded-full bg-[#35530e] text-[9px] font-bold text-white">{itemCount}</span>}</button>
             <button type="button" onClick={() => setLanguage(language === "ar" ? "en" : "ar")} className="rounded-lg border border-[#35530e]/15 bg-white px-2.5 py-1.5 text-xs font-bold text-[#35530e] transition-colors hover:bg-[#f3f6ee]" aria-label="Switch language">{language === "ar" ? "EN" : "ع"}</button>
-            {isAuthenticated ? <Link href="/profile" className="grid size-9 place-items-center rounded-xl bg-[#eaf0e2] text-sm font-bold text-[#35530e] no-underline" aria-label={t.profile}>{initials}</Link> : <Button onClick={() => startLogin()} className="hidden rounded-xl bg-[#35530e] px-4 text-white shadow-md hover:bg-[#294108] sm:inline-flex">{t.signIn}</Button>}
+            {isAuthenticated ? <Link href="/profile" className="grid size-9 place-items-center rounded-xl bg-[#eaf0e2] text-sm font-bold text-[#35530e] no-underline" aria-label={t.profile}>{initials}</Link> : <Button onClick={() => setLocation("/auth") } className="hidden rounded-xl bg-[#35530e] px-4 text-white shadow-md hover:bg-[#294108] sm:inline-flex">{t.signIn}</Button>}
             <button onClick={() => setMobileMenu(!mobileMenu)} className="grid size-9 place-items-center rounded-xl border border-[#35530e]/15 text-[#35530e] xl:hidden" aria-expanded={mobileMenu} aria-label="Open navigation"><Menu className="size-5" /></button>
           </div>
         </div>
@@ -64,6 +64,7 @@ export function PlatformShell({ children, title, eyebrow, compact = false }: Pla
 export function AccessGate({ children }: { children: ReactNode }) {
   const { isAuthenticated } = useAuth();
   const { t } = useLanguage();
+  const [, setLocation] = useLocation();
   if (isAuthenticated) return <>{children}</>;
-  return <section className="container py-12 sm:py-20"><div className="mx-auto max-w-lg rounded-[2rem] border border-[#35530e]/10 bg-white p-8 text-center shadow-[0_20px_60px_rgba(46,69,21,.08)]"><span className="mx-auto grid size-14 place-items-center rounded-2xl bg-[#edf3e6] text-[#35530e]"><UserRound className="size-7" /></span><h2 className="mt-5 text-2xl font-bold text-[#293d12]">{t.loginTitle}</h2><p className="mt-3 leading-7 text-[#627055]">{t.loginText}</p><Button onClick={() => startLogin()} className="mt-7 rounded-xl bg-[#35530e] px-6 text-white hover:bg-[#294108]">{t.loginAction}<ChevronLeft className="ms-2 size-4" /></Button></div></section>;
+  return <section className="container py-12 sm:py-20"><div className="mx-auto max-w-lg rounded-[2rem] border border-[#35530e]/10 bg-white p-8 text-center shadow-[0_20px_60px_rgba(46,69,21,.08)]"><span className="mx-auto grid size-14 place-items-center rounded-2xl bg-[#edf3e6] text-[#35530e]"><UserRound className="size-7" /></span><h2 className="mt-5 text-2xl font-bold text-[#293d12]">{t.loginTitle}</h2><p className="mt-3 leading-7 text-[#627055]">{t.loginText}</p><Button onClick={() => setLocation("/auth") } className="mt-7 rounded-xl bg-[#35530e] px-6 text-white hover:bg-[#294108]">{t.loginAction}<ChevronLeft className="ms-2 size-4" /></Button></div></section>;
 }

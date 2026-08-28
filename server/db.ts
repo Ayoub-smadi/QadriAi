@@ -1,8 +1,10 @@
 import { and, desc, eq, inArray, like, or } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { agriProjects, careTasks, expertReviews, farms, gardens, growingRecords, InsertUser, knowledgeItems, notifications, plantAnalyses, platformSettings, projectDesigns, recommendations, subscriptions, userProfiles, users } from "../drizzle/schema";
+import type { User } from "../drizzle/schema";
 import { nanoid } from "nanoid";
 import { ENV } from "./_core/env";
+import { createLocalOpenId, hashPassword, normalizePhone, normalizeUsername } from "./credentialAuth";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -34,11 +36,50 @@ export async function upsertUser(user: InsertUser): Promise<void> {
   await db.insert(users).values(values).onDuplicateKeyUpdate({ set: updateSet });
 }
 
+const localUsers = new Map<string, User>();
+let localUserId = 1;
+
 export async function getUserByOpenId(openId: string) {
   const db = await getDb();
-  if (!db) return undefined;
+  if (!db) return localUsers.get(openId);
   const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
   return result[0];
+}
+
+export async function findCredentialUser(identifier: string) {
+  const username = normalizeUsername(identifier);
+  const phone = normalizePhone(identifier);
+  const db = await getDb();
+  if (!db) return Array.from(localUsers.values()).find(user => user.username === username || user.phone === phone);
+  const result = await db.select().from(users).where(or(eq(users.username, username), eq(users.phone, phone))).limit(1);
+  return result[0];
+}
+
+export async function createCredentialUser(input: { name: string; phone: string; password: string; username?: string; role?: "user" | "admin" }) {
+  const phone = normalizePhone(input.phone);
+  const username = input.username ? normalizeUsername(input.username) : null;
+  const passwordHash = hashPassword(input.password);
+  const db = await getDb();
+  if (!db) {
+    const now = new Date();
+    const user: User = { id: localUserId++, openId: createLocalOpenId(), username, phone, passwordHash, name: input.name.trim(), email: null, loginMethod: "credentials", role: input.role ?? "user", createdAt: now, updatedAt: now, lastSignedIn: now };
+    localUsers.set(user.openId, user);
+    return user;
+  }
+  const openId = createLocalOpenId();
+  await db.insert(users).values({ openId, username, phone, passwordHash, name: input.name.trim(), loginMethod: "credentials", role: input.role ?? "user", lastSignedIn: new Date() });
+  return getUserByOpenId(openId);
+}
+
+export async function touchCredentialUser(user: User) {
+  const db = await getDb();
+  if (!db) {
+    const updated = { ...user, lastSignedIn: new Date(), updatedAt: new Date() };
+    localUsers.set(user.openId, updated);
+    return updated;
+  }
+  await db.update(users).set({ lastSignedIn: new Date() }).where(eq(users.id, user.id));
+  return getUserByOpenId(user.openId);
 }
 
 export type AgriculturalProfileInput = {

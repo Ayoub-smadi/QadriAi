@@ -7,6 +7,7 @@ import { CartProvider } from "./contexts/CartContext";
 import { CartDrawer } from "./components/CartDrawer";
 import { LanguageProvider } from "./lib/i18n";
 import Control from "./pages/Control";
+import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Diagnosis from "./pages/Diagnosis";
 import Engineer from "./pages/Engineer";
@@ -22,6 +23,7 @@ import Shop from "./pages/Shop";
 function Router() {
   return <Switch>
     <Route path="/" component={Home} />
+    <Route path="/auth" component={Auth} />
     <Route path="/dashboard" component={Dashboard} />
     <Route path="/engineer" component={Engineer} />
     <Route path="/selector" component={Selector} />
