@@ -23,18 +23,25 @@ export const aiRouter = router({
     const profile = await getAgriculturalProfile(ctx.user.id);
     const profileContext = profile ? JSON.stringify({ country: profile.country, city: profile.city, region: profile.region, landArea: profile.landArea, landType: profile.landType, soilType: profile.soilType, waterSource: profile.waterSource, waterQuality: profile.waterQuality, irrigationSystem: profile.irrigationSystem, currentPlants: profile.currentPlants, currentCrops: profile.currentCrops, landGoal: profile.landGoal, budgetRange: profile.budgetRange }) : "No saved agricultural profile yet.";
     const models = await listLLMModels();
-    const preferred = models.data.find(model => model.id === "gpt-5-mini")?.id ?? models.data[0]?.id;
-    if (!preferred) throw new Error("No AI model is currently available.");
-    const response = await invokeLLM({
-      model: preferred,
-      maxTokens: 900,
-      messages: [
-        { role: "system", content: `${SAFETY_INSTRUCTIONS}\nUser agricultural profile: ${profileContext}` },
-        ...input.messages,
-      ],
-    });
-    const content = extractTextContent(response.choices[0]?.message?.content);
-    if (!content) throw new Error("The AI service returned an empty answer. Please try again or use a more specific question.");
+    const available = new Set(models.data.map(model => model.id));
+    const candidates = ["claude-sonnet-4-6", "gpt-5", "gemini-3-flash-preview", "gpt-5-mini"].filter(model => available.has(model));
+    if (!candidates.length && models.data[0]?.id) candidates.push(models.data[0].id);
+    if (!candidates.length) throw new Error("No AI model is currently available.");
+    const consultationMessages = [
+      { role: "system" as const, content: `${SAFETY_INSTRUCTIONS}\nYou can answer any question about farming, plants, trees, crops, soil, irrigation, pests, diseases, propagation, pruning, landscaping, and agricultural planning. If a question is outside agriculture, briefly explain that this assistant is specialized in agriculture and invite an agricultural question.\nUser agricultural profile: ${profileContext}` },
+      ...input.messages,
+    ];
+    let content = "";
+    for (const model of candidates) {
+      try {
+        const response = await invokeLLM({ model, maxTokens: 1200, messages: consultationMessages });
+        content = extractTextContent(response.choices[0]?.message?.content);
+        if (content) break;
+      } catch (error) {
+        console.warn(`[AI] consultation model ${model} failed; trying fallback`, error);
+      }
+    }
+    if (!content) throw new Error("The AI service returned an empty answer. Please try again or use a more specific agricultural question.");
     return { content };
   }),
   diagnose: protectedProcedure.input(z.object({ imageDataUrl: z.string().min(30).max(5_500_000), mimeType: z.enum(["image/jpeg", "image/png", "image/webp"]), note: z.string().max(1200).optional() })).mutation(async ({ ctx, input }) => {

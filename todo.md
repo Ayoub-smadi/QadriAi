@@ -24,3 +24,5 @@
 - [x] Upload the completed project to a GitHub repository and verify the remote URL.
 - [x] Upload the completed project to the provided GitHub repository https://github.com/Ayoub-smadi/QadriAi.git and verify the pushed commit.
 - [x] Retry the GitHub push using the user-provided credential without persisting it in the project.
+- [ ] Fix agricultural assistant failures so general questions about farming, plants, and trees receive reliable answers.
+- [ ] Push the latest agricultural AI assistant modification to https://github.com/Ayoub-smadi/QadriAi.git and verify the updated main branch.
