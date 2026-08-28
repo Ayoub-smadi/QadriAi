@@ -23,9 +23,14 @@ function context(): TrpcContext {
 
 describe("ai.consult response normalization", () => {
   it("returns text when the gateway sends multipart text content", async () => {
-    const result = await appRouter.createCaller(context()).ai.consult({ messages: [{ role: "user", content: "كيف أبدأ؟" }] });
+    const result = await appRouter.createCaller(context()).ai.consult({ messages: [{ role: "user", content: "كيف أبدأ زراعة الزيتون؟" }] });
     expect(result.content).toContain("ابدأ بفحص الرطوبة والصرف");
     expect(result.content).toContain("استشر مختصًا");
     expect(result.content).toContain("تنبيه: الإرشاد الذكي مساعد ولا يغني عن فحص مهندس زراعي محلي");
+  });
+
+  it("answers general questions without an agricultural refusal or forced disclaimer", async () => {
+    const result = await appRouter.createCaller(context()).ai.consult({ messages: [{ role: "user", content: "ما هي عاصمة الأردن؟" }] });
+    expect(result.content).not.toContain("تنبيه: الإرشاد الذكي مساعد ولا يغني عن فحص مهندس زراعي محلي");
   });
 });
