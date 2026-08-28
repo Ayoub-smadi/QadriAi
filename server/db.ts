@@ -1,4 +1,4 @@
-import { and, desc, eq, inArray, like, or } from "drizzle-orm";
+import { and, desc, eq, inArray, like, not, or } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { agriProjects, careTasks, expertReviews, farms, gardens, growingRecords, InsertUser, knowledgeItems, notifications, plantAnalyses, platformSettings, projectDesigns, recommendations, subscriptions, userProfiles, users } from "../drizzle/schema";
 import type { User } from "../drizzle/schema";
@@ -140,8 +140,8 @@ function filterFallbackKnowledge(input?: { query?: string; category?: string }) 
   const query = input?.query?.trim().toLocaleLowerCase();
   const category = input?.category && input.category !== "all" ? input.category : undefined;
   return fallbackKnowledge.filter(item => {
-    const data = item.growingData as { countries?: readonly string[] } | null;
-    const searchable = [item.nameAr, item.nameEn, item.scientificName, item.summaryAr, item.summaryEn, ...(data?.countries ?? []), ...(data && "watch" in data ? (data.watch as readonly string[]) : [])].join(" ").toLocaleLowerCase();
+    const richerData = item.growingData as { countries?: readonly string[]; diseases?: readonly string[]; pests?: readonly string[] } | null;
+    const searchable = [item.nameAr, item.nameEn, item.scientificName, item.summaryAr, item.summaryEn, ...(richerData?.countries ?? []), ...(richerData?.diseases ?? []), ...(richerData?.pests ?? [])].join(" ").toLocaleLowerCase();
     return (!category || item.category === category) && (!query || searchable.includes(query));
   });
 }
@@ -150,6 +150,7 @@ async function ensureCuratedKnowledge() {
   const db = await getDb();
   if (!db) return;
   const curatedKnowledge = [...expandedKnowledge];
+  await db.delete(knowledgeItems).where(not(eq(knowledgeItems.category, "tree")));
   const existing = await db.select({ nameAr: knowledgeItems.nameAr }).from(knowledgeItems);
   const existingNames = new Set(existing.map(item => item.nameAr));
   const missing = curatedKnowledge.filter(item => !existingNames.has(item.nameAr));
@@ -166,7 +167,7 @@ export async function listPublishedKnowledge(input?: { query?: string; category?
   const category = input?.category && input.category !== "all" ? input.category : undefined;
   const conditions = [eq(knowledgeItems.status, "published")];
   if (category) conditions.push(eq(knowledgeItems.category, category as typeof knowledgeItems.category.enumValues[number]));
-  if (query) conditions.push(or(like(knowledgeItems.nameAr, `%${query}%`), like(knowledgeItems.nameEn, `%${query}%`), like(knowledgeItems.scientificName, `%${query}%`), like(knowledgeItems.summaryAr, `%${query}%`), like(knowledgeItems.summaryEn, `%${query}%`))!);
+  if (query) conditions.push(or(like(knowledgeItems.nameAr, `%${query}%`), like(knowledgeItems.nameEn, `%${query}%`), like(knowledgeItems.scientificName, `%${query}%`), like(knowledgeItems.summaryAr, `%${query}%`), like(knowledgeItems.summaryEn, `%${query}%`), like(knowledgeItems.growingData, `%${query}%`))!);
   return db.select().from(knowledgeItems).where(and(...conditions));
 }
 
