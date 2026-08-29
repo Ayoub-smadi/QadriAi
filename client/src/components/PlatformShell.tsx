@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import { BadgeCheck, Bot, BookOpen, ChevronLeft, ClipboardList, FlaskConical, Leaf, LayoutDashboard, Menu, ScanSearch, ShoppingBag, Sprout, UserRound } from "lucide-react";
+import { BadgeCheck, Bot, BookOpen, ChevronLeft, ClipboardList, DraftingCompass, FlaskConical, Leaf, LayoutDashboard, Menu, ScanSearch, ShoppingBag, Sprout, UserRound } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { ReactNode, useState } from "react";
 import { Link, useLocation } from "wouter";
@@ -11,6 +11,7 @@ type PlatformShellProps = { children: ReactNode; title?: string; eyebrow?: strin
 
 export const navigation = [
   { href: "/dashboard", label: "dashboard", icon: LayoutDashboard },
+  { href: "/designer", label: "designer", icon: DraftingCompass },
   { href: "/engineer", label: "engineer", icon: Bot },
   { href: "/selector", label: "selector", icon: Sprout },
   { href: "/diagnosis", label: "diagnosis", icon: ScanSearch },

@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { PlatformShell } from "@/components/PlatformShell";
 import { useLanguage } from "@/lib/i18n";
-import { ArrowLeft, ArrowRight, Bot, CheckCircle2, ClipboardCheck, Droplets, Gauge, Globe2, Leaf, LineChart, Mail, Phone, ScanSearch, ShieldCheck, Sprout, SunMedium, TreePine, Waves } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bot, CheckCircle2, ClipboardCheck, DraftingCompass, Droplets, Gauge, Globe2, Leaf, LineChart, Mail, Phone, ScanSearch, ShieldCheck, Sprout, SunMedium, TreePine, Waves } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -66,6 +66,7 @@ export default function Home() {
   ];
   const services = [
     { icon: Bot, title: language === "ar" ? "المهندس الزراعي الذكي" : "AI agricultural engineer", text: language === "ar" ? "إرشاد سياقي يراعي موقعك ومياهك وتربتك وأهدافك." : "Context-aware guidance shaped by your place, water, soil, and goals.", href: "/engineer", tone: "bg-[#eff5e7]" },
+    { icon: DraftingCompass, title: language === "ar" ? "مصمم لاندسكيب وري" : "Landscape & irrigation designer", text: language === "ar" ? "صمّم أرضك بالسحب والإفلات، احسب الكميات، وصدّر مخططك وتقريرك الفني." : "Design with drag & drop, estimate quantities, and export your plan and technical report.", href: "/designer", tone: "bg-[#e8f2e7]" },
     { icon: ScanSearch, title: language === "ar" ? "حلّل نباتك" : "Analyze a plant", text: language === "ar" ? "ارفع صورة لتحصل على قراءة أولية حذرة وخطوات آمنة." : "Upload a photo for cautious initial triage and safe next steps.", href: "/diagnosis", tone: "bg-[#f6f1e6]" },
     { icon: Sprout, title: language === "ar" ? "ماذا أزرع؟" : "What should I grow?", text: language === "ar" ? "ترشيحات قابلة للتفسير قبل بدء التخطيط أو التنفيذ." : "Explainable suitability recommendations before you plan or build.", href: "/selector", tone: "bg-[#edf3ee]" },
     { icon: TreePine, title: language === "ar" ? "تابع مزرعتك وحديقتك" : "Manage farms & gardens", text: language === "ar" ? "مهام العناية والمشاريع والسجل الزراعي في مساحة واحدة." : "Care tasks, projects, and your agricultural record in one workspace.", href: "/dashboard", tone: "bg-[#edf0df]" },

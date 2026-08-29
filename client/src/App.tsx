@@ -9,6 +9,7 @@ import { LanguageProvider } from "./lib/i18n";
 import Control from "./pages/Control";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import Designer from "./pages/Designer";
 import Diagnosis from "./pages/Diagnosis";
 import Engineer from "./pages/Engineer";
 import Home from "./pages/Home";
@@ -25,6 +26,7 @@ function Router() {
     <Route path="/" component={Home} />
     <Route path="/auth" component={Auth} />
     <Route path="/dashboard" component={Dashboard} />
+    <Route path="/designer" component={Designer} />
     <Route path="/engineer" component={Engineer} />
     <Route path="/selector" component={Selector} />
     <Route path="/diagnosis" component={Diagnosis} />
