@@ -12,14 +12,19 @@ export const knowledgeRouter = router({
 });
 
 export const plannerRouter = router({
-  evaluate: publicProcedure.input(z.object({ country: z.string().min(2).max(64), area: z.string().min(1).max(80), soilType: z.string().min(2).max(120), waterSource: z.string().min(2).max(120), goal: z.string().min(2).max(240), season: z.string().min(2).max(80) })).mutation(({ input }) => {
-    const isArid = ["Saudi Arabia", "UAE", "Qatar", "السعودية", "الإمارات", "قطر"].includes(input.country);
+  evaluate: publicProcedure.input(z.object({ country: z.string().min(2).max(64), region: z.string().min(2).max(100).optional(), climate: z.string().min(2).max(80).optional(), area: z.string().min(1).max(80), soilType: z.string().min(2).max(120), waterSource: z.string().min(2).max(120), goal: z.string().min(2).max(240), season: z.string().min(2).max(80) })).mutation(({ input }) => {
+    const region = input.region ?? "غير محددة";
+    const climate = input.climate ?? "غير محدد";
+    const arid = ["Saudi Arabia", "Qatar", "السعودية", "قطر", "حار جاف", "صحراوي"].includes(input.country) || ["حار جاف", "صحراوي"].includes(climate);
+    const coldRisk = ["بارد", "جبلي", "مرتفعات"].includes(climate);
+    const poorDrainage = /طين|ثقيلة|مالحة|heavy|clay|saline/i.test(input.soilType);
     const entries = [
-      { plant: "الزيتون / Olive", tier: "recommended", reason: isArid ? "يتحمل ظروف الجفاف نسبيًا بعد التأسيس، مع ضرورة التحقق من الملوحة والصرف." : "ملائم مبدئيًا للمناخ المتوسطي، بشرط مواءمة الصنف والموقع.", quantities: "تحدد بعد أبعاد الموقع والمسافات الزراعية", costs: "تقدير مبدئي يحتاج أسعارًا محلية", irrigation: "يراجع مع ضغط الشبكة وجودة المياه" },
-      { plant: "الخضروات الموسمية / Seasonal vegetables", tier: "good", reason: "قد تكون مناسبة عند توفر برنامج ري منتظم وتحديد الموسم الفعلي وحماية النبات عند الحاجة.", quantities: "تقسم المساحة إلى أحواض وفق نوع المحصول", costs: "تتأثر بالموسم والبذور وشبكة الري", irrigation: "ري منتظم مع مراقبة الرطوبة" },
-      { plant: "نباتات عالية الاستهلاك المائي", tier: "caution", reason: "لا يمكن التوصية بها قبل معرفة كمية المياه، ملوحتها، وتكلفة تشغيل الري.", quantities: "غير محسوبة قبل قياس الماء", costs: "قد ترتفع مع تشغيل الري", irrigation: "يحتاج تقييمًا فنيًا" },
+      { plant: "الزيتون / Olive", tier: poorDrainage ? "good" : "recommended", reason: `يناسب ${region} مبدئيًا؛ يتحمل الجفاف بعد التأسيس، لكن نجاحه يعتمد على الصنف والصرف والملوحة.`, quantities: "شتلات على مسافات يحددها الصنف وقوة الأصل ومساحة الأرض", costs: "تقدير محلي للشتلات وتجهيز الحفرة والري", irrigation: "ري تأسيسي منتظم ثم تخفيفه بعد التجذير مع فحص الرطوبة والملوحة", plantingTime: coldRisk ? "أواخر الشتاء بعد زوال الصقيع" : "الخريف إلى أواخر الشتاء", plantingMethod: "شتلة مطعمة سليمة في حفرة جيدة الصرف، مع إبقاء منطقة التطعيم فوق سطح التربة" },
+      { plant: "الحمضيات / Citrus", tier: arid && poorDrainage ? "caution" : "good", reason: "مناسبة للمناطق الدافئة إذا توفر صرف ممتاز وحماية من الصقيع وماء غير شديد الملوحة.", quantities: "تحدد المسافات حسب الأصل والصنف ونظام الخدمة", costs: "شتلات مطعمة + شبكة ري + تحسين صرف عند الحاجة", irrigation: "رطوبة منتظمة دون تغدق؛ راقب الملوحة والحديد", plantingTime: coldRisk ? "الربيع بعد الصقيع" : "الخريف أو الربيع المعتدل", plantingMethod: "شتلة مطعمة، دون دفن منطقة التطعيم، مع ملش بعيد عن الجذع" },
+      { plant: "الرمان / Pomegranate", tier: "recommended", reason: "خيار قوي نسبيًا للمناخات الدافئة والجافة عند انتظام الري وتحسين الصرف.", quantities: "تُحسب بعد معرفة المساحة وطريقة التربية", costs: "شتلات + تجهيز تربة + ري بالتنقيط عند الإمكان", irrigation: "منخفض إلى متوسط بعد التأسيس، مع انتظام أثناء الإزهار وتضخم الثمار", plantingTime: coldRisk ? "الربيع" : "الخريف إلى الربيع", plantingMethod: "شتلة سليمة في شمس كاملة مع تقليم تأسيسي وإزالة السرطانات" },
+      { plant: "محاصيل موسمية / Seasonal crops", tier: "good", reason: `تُختار حسب موسم ${input.season} ودرجة الحرارة في ${region}، وليست قائمة واحدة صالحة لكل المواقع.`, quantities: "قسّم المساحة إلى أحواض واترك جزءًا للتجربة", costs: "بذور أو شتلات، تجهيز تربة، ري، ومكافحة حشائش", irrigation: "ري خفيف ومتقارب للبادرات ثم حسب رطوبة منطقة الجذور", plantingTime: "حسب تقويم المنطقة ودرجة حرارة التربة", plantingMethod: "ابدأ بصنف موصى به محليًا، حضّر التربة، ازرع على العمق الموصى به، وسجّل تاريخ الزراعة" },
     ];
-    return { completeness: 86, missing: ["أبعاد الموقع الدقيقة", "تحليل ملوحة المياه أو التربة"], entries, basis: `تمت المراجعة مبدئيًا وفق الدولة (${input.country})، نوع التربة، مصدر المياه، المساحة والهدف. هذه ليست خطة تنفيذية نهائية.` };
+    return { completeness: 92, missing: ["تحليل ملوحة المياه", "تحليل التربة التفصيلي", "إحداثيات أو ارتفاع الموقع"], entries, basis: `تمت التوصية مبدئيًا وفق الدولة ${input.country}، المنطقة ${region}، المناخ ${climate}، نوع التربة ${input.soilType}، الموسم ${input.season}، مصدر المياه ${input.waterSource}، والمساحة ${input.area}.` };
   }),
 });
 

@@ -13,12 +13,12 @@ function contextFor(role: "user" | "expert" | "admin" | null): TrpcContext {
 describe("agricultural planner", () => {
   it("returns explainable suitability tiers and named missing data", async () => {
     const caller = appRouter.createCaller(contextFor(null));
-    const result = await caller.planner.evaluate({ country: "Jordan", area: "250 m²", soilType: "loam", waterSource: "tank", goal: "home production", season: "spring" });
+    const result = await caller.planner.evaluate({ country: "Jordan", region: "Jordan Valley", climate: "Mediterranean", area: "250 m²", soilType: "loam", waterSource: "tank", goal: "home production", season: "spring" });
 
-    expect(result.completeness).toBe(86);
-    expect(result.entries).toHaveLength(3);
-    expect(result.entries.map(item => item.tier)).toEqual(["recommended", "good", "caution"]);
-    expect(result.missing).toContain("أبعاد الموقع الدقيقة");
+    expect(result.completeness).toBe(92);
+    expect(result.entries).toHaveLength(4);
+    expect(result.entries.map(item => item.tier)).toEqual(["recommended", "good", "recommended", "good"]);
+    expect(result.missing).toContain("تحليل ملوحة المياه");
   });
 });
 
