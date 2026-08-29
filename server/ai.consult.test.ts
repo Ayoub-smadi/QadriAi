@@ -39,6 +39,40 @@ describe("ai.consult response normalization", () => {
   });
 });
 
+describe("ai.generateDesign natural-language layout", () => {
+  it("preserves requested counts and spacing from an Arabic farm brief", async () => {
+    vi.mocked(invokeLLM).mockResolvedValueOnce({
+      choices: [{ message: { content: JSON.stringify({
+        title: "مزرعة البيوت البلاستيكية والبركة",
+        mode: "landscape",
+        elements: [
+          { id: "greenhouse-1", kind: "greenhouse", x: 150, y: 150, quantity: 1, rotation: 0 },
+          { id: "greenhouse-2", kind: "greenhouse", x: 270, y: 150, quantity: 1, rotation: 0 },
+          { id: "greenhouse-3", kind: "greenhouse", x: 150, y: 250, quantity: 1, rotation: 0 },
+          { id: "greenhouse-4", kind: "greenhouse", x: 270, y: 250, quantity: 1, rotation: 0 },
+          { id: "pond-1", kind: "pond", x: 450, y: 200, quantity: 1, rotation: 0 },
+        ],
+        measurements: [{ id: "spacing-1", start: { x: 198, y: 150 }, end: { x: 198, y: 170 }, distance: 1 }],
+        summaryAr: "أربع بيوت بلاستيكية مستقلة مع مسافة متر بينها وبركة ماء بجانبها.",
+        summaryEn: "Four separate greenhouses with one meter spacing and a water pond beside them.",
+      }) } }],
+    } as any);
+
+    const result = await appRouter.createCaller(context()).ai.generateDesign({
+      description: "بدي مزرعة فيها أربع بيوت بلاستيك بينهم متر مسافة وجنبهم بركة ماء",
+      language: "ar",
+      siteWidth: 30,
+      siteLength: 20,
+    });
+
+    expect(result.mode).toBe("landscape");
+    expect(result.elements.filter(element => element.kind === "greenhouse")).toHaveLength(4);
+    expect(result.elements.find(element => element.kind === "pond")).toBeTruthy();
+    expect(result.measurements[0]?.distance).toBe(1);
+    expect(result.summaryAr).toContain("أربع بيوت");
+  });
+});
+
 describe("ai.diagnose storage fallback", () => {
   it("continues with inline image analysis when storage presigning fails", async () => {
     vi.mocked(storagePut).mockRejectedValueOnce(new Error("Storage presign failed (404): 404 page not found"));

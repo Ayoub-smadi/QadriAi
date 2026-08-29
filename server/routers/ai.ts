@@ -22,6 +22,28 @@ const LOCAL_KNOWLEDGE_CONTEXT = `
 
 const PREFERRED_MODELS = ["gpt-5", "gemini-3.1-pro-preview", "gemini-3-flash-preview", "gpt-5-mini", "gpt-5-nano"];
 
+const DESIGN_ELEMENT_KINDS = ["tree", "shrub", "flower", "bench", "fountain", "path", "greenhouse", "pond", "sprinkler", "dripLine", "pump", "tank", "valve", "light"] as const;
+const generatedDesignSchema = z.object({
+  title: z.string().min(1).max(120),
+  mode: z.enum(["landscape", "irrigation"]),
+  elements: z.array(z.object({
+    id: z.string().min(1).max(80),
+    kind: z.enum(DESIGN_ELEMENT_KINDS),
+    x: z.number().min(18).max(582),
+    y: z.number().min(18).max(402),
+    quantity: z.number().int().min(1).max(1000),
+    rotation: z.number().min(-360).max(360),
+  })).max(100),
+  measurements: z.array(z.object({
+    id: z.string().min(1).max(80),
+    start: z.object({ x: z.number().min(18).max(582), y: z.number().min(18).max(402) }),
+    end: z.object({ x: z.number().min(18).max(582), y: z.number().min(18).max(402) }),
+    distance: z.number().min(0).max(2000),
+  })).max(100),
+  summaryAr: z.string().min(1).max(1200),
+  summaryEn: z.string().min(1).max(1200),
+});
+
 async function chooseConsultationModels() {
   try {
     const models = await listLLMModels();
@@ -101,6 +123,34 @@ export const aiRouter = router({
     }
     if (!content) throw new Error("The AI service is temporarily unavailable. Please try again shortly.");
     return { content: addLanguageDisclaimer(content, latestQuestion) };
+  }),
+  generateDesign: protectedProcedure.input(z.object({ description: z.string().min(8).max(5000), language: z.enum(["ar", "en"]).default("ar"), siteWidth: z.number().min(1).max(1000).default(30), siteLength: z.number().min(1).max(1000).default(20) })).mutation(async ({ input }) => {
+    const designPrompt = `حوّل وصف المستخدم إلى مخطط تفاعلي دقيق. لا تتجاهل أي عدد أو مسافة أو علاقة مكانية صريحة في الوصف. استخدم العناصر المتاحة فقط: tree شجرة، shrub شجيرة، flower زهور، bench مقعد، fountain نافورة، path ممر، greenhouse بيت بلاستيكي، pond بركة ماء، sprinkler رشاش، dripLine خط تنقيط، pump مضخة، tank خزان، valve محبس، light إنارة.
+
+الإحداثيات داخل لوحة 600×420؛ ضع العناصر ضمن x من 18 إلى 582 وy من 18 إلى 402. وزّع العناصر المكررة بوضوح بدل تجميعها في نقطة واحدة. عندما يطلب المستخدم عددًا من العناصر مع علاقة مكانية أو مسافة بينها، أخرج كل عنصر كعنصر مستقل بمعرّف فريد وquantity=1؛ لا تستخدم quantity للتجميع في هذه الحالة. إذا ذكر المستخدم مسافة مثل متر واحد بين عناصر، أضف قياسًا يعبّر عنها تقريبًا مع الحفاظ على المسافة في summary. حوّل عبارات مثل بيت بلاستيكي/دفيئة/بيوت زراعية إلى greenhouse، وبركة/حوض/مسبح ماء إلى pond. حدد mode إلى irrigation فقط إذا كان الوصف يركز على شبكة الري، وإلا استخدم landscape. اكتب summaryAr بالعربية وsummaryEn بالإنجليزية، واذكر أي افتراض ضروري باختصار. أعد JSON فقط مطابقًا للمخطط.
+
+أبعاد الموقع الحالية: ${input.siteWidth}م × ${input.siteLength}م.
+لغة المستخدم: ${input.language === "ar" ? "العربية" : "English"}.
+وصف المستخدم:
+${input.description}`;
+    const messages = [
+      { role: "system" as const, content: "You are a precise landscape and irrigation layout planner. Preserve every explicit count, distance, and spatial relationship. Return only valid JSON matching the requested schema. Never invent unavailable element kinds." },
+      { role: "user" as const, content: designPrompt },
+    ];
+    let parsed: z.infer<typeof generatedDesignSchema> | null = null;
+    const candidates = await chooseConsultationModels();
+    for (const model of candidates) {
+      try {
+        const response = await invokeLLM({ model, ...(model.startsWith("gpt-5") ? { maxCompletionTokens: 2200, reasoning: { effort: "low" } } : { maxTokens: 2200 }), messages, responseFormat: { type: "json_schema", json_schema: { name: "landscape_design", strict: true, schema: { type: "object", properties: { title: { type: "string" }, mode: { type: "string", enum: ["landscape", "irrigation"] }, elements: { type: "array", items: { type: "object", properties: { id: { type: "string" }, kind: { type: "string", enum: DESIGN_ELEMENT_KINDS }, x: { type: "number" }, y: { type: "number" }, quantity: { type: "integer" }, rotation: { type: "number" } }, required: ["id", "kind", "x", "y", "quantity", "rotation"], additionalProperties: false } }, measurements: { type: "array", items: { type: "object", properties: { id: { type: "string" }, start: { type: "object", properties: { x: { type: "number" }, y: { type: "number" } }, required: ["x", "y"], additionalProperties: false }, end: { type: "object", properties: { x: { type: "number" }, y: { type: "number" } }, required: ["x", "y"], additionalProperties: false }, distance: { type: "number" } }, required: ["id", "start", "end", "distance"], additionalProperties: false } }, summaryAr: { type: "string" }, summaryEn: { type: "string" } }, required: ["title", "mode", "elements", "measurements", "summaryAr", "summaryEn"], additionalProperties: false } } } });
+        const raw = extractTextContent(response.choices[0]?.message?.content);
+        parsed = generatedDesignSchema.parse(JSON.parse(raw));
+        break;
+      } catch (error) {
+        console.warn(`[AI] design generation model ${model} failed; trying fallback`, error);
+      }
+    }
+    if (!parsed) throw new Error("تعذر تحويل الوصف إلى مخطط الآن. جرّب وصفًا أوضح أو أعد المحاولة.");
+    return parsed;
   }),
   diagnose: protectedProcedure.input(z.object({ imageDataUrl: z.string().min(30).max(5_500_000), mimeType: z.enum(["image/jpeg", "image/png", "image/webp"]), note: z.string().max(1200).optional() })).mutation(async ({ ctx, input }) => {
     const matches = input.imageDataUrl.match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/);
