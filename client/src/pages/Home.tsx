@@ -3,15 +3,61 @@ import { PlatformShell } from "@/components/PlatformShell";
 import { useLanguage } from "@/lib/i18n";
 import { ArrowLeft, ArrowRight, Bot, CheckCircle2, ClipboardCheck, Droplets, Gauge, Leaf, LineChart, ScanSearch, ShieldCheck, Sprout, SunMedium, TreePine, Waves } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const heroImage = "/manus-storage/al-qadri-smart-agriculture-hero_28e6f928.jpg";
+
+function useTypewriter(text: string) {
+  const [visibleText, setVisibleText] = useState("");
+
+  useEffect(() => {
+    let index = 0;
+    let deleting = false;
+    let timer: ReturnType<typeof setTimeout>;
+
+    const tick = () => {
+      if (!deleting && index < text.length) {
+        index += 1;
+        setVisibleText(text.slice(0, index));
+        timer = setTimeout(tick, 28);
+        return;
+      }
+
+      if (!deleting) {
+        deleting = true;
+        timer = setTimeout(tick, 2600);
+        return;
+      }
+
+      if (index > 0) {
+        index -= 1;
+        setVisibleText(text.slice(0, index));
+        timer = setTimeout(tick, 14);
+        return;
+      }
+
+      deleting = false;
+      timer = setTimeout(tick, 500);
+    };
+
+    setVisibleText("");
+    tick();
+    return () => clearTimeout(timer);
+  }, [text]);
+
+  return visibleText;
+}
 
 export default function Home() {
   const { language, t } = useLanguage();
   const { isAuthenticated } = useAuth();
   const [, setLocation] = useLocation();
   const Arrow = language === "ar" ? ArrowLeft : ArrowRight;
+  const bioText = language === "ar"
+    ? "المهندس ثامر القادري من الشخصيات الزراعية البارزة في الأردن، كرّس سنوات طويلة لخدمة القطاع الزراعي وتطويره. ومن خلال إدارته لمشاتل القادري الزراعية، أسهم في توفير أصناف متميزة من الأشجار والنباتات، مع الحرص على الجودة والابتكار وتقديم أفضل الخدمات للمزارعين والمهتمين بالزراعة. ويُعرف برؤيته المهنية وخبرته الواسعة واهتمامه بنشر الثقافة الزراعية وتعزيز التنمية الخضراء، مما أكسبه مكانة مرموقة واحتراماً كبيراً في هذا المجال. كما يُشهد له بحسن التعامل والالتزام والمصداقية، وهي صفات جعلت من اسمه رمزاً للثقة والتميز في القطاع الزراعي."
+    : "Engineer Thamer Al-Qadri is one of Jordan's distinguished agricultural figures. He has devoted many years to serving and advancing the agricultural sector. Through his leadership of Al-Qadri Agricultural Nurseries, he has helped provide distinguished varieties of trees and plants while championing quality, innovation, and excellent service for farmers and gardening enthusiasts. He is known for his professional vision, broad experience, and continued commitment to agricultural education and green development—earning lasting respect across the sector. His integrity, reliability, and warm dealings have made his name a trusted symbol of excellence in agriculture."
+  const typedBio = useTypewriter(bioText);
   const steps = [
     { icon: Bot, ar: "اسأل", en: "Ask" }, { icon: ScanSearch, ar: "حلّل", en: "Analyze" }, { icon: Sprout, ar: "خطّط", en: "Plan" }, { icon: ClipboardCheck, ar: "راجع", en: "Review" }, { icon: LineChart, ar: "تابع", en: "Follow up" },
   ];
@@ -37,6 +83,8 @@ export default function Home() {
           <div className="order-1 lg:order-2"><div className="relative mx-auto max-w-[720px]"><div className="absolute -inset-4 rounded-[2.25rem] bg-[#6c8b37]/15 blur-2xl" /><div className="relative aspect-[16/11] w-full overflow-hidden rounded-[2rem] border border-[#35530e]/10 bg-gradient-to-br from-[#f9fbf3] via-[#edf4df] to-[#dce9c3] shadow-[0_24px_60px_rgba(42,62,18,.18)]"><div className="absolute -end-10 -top-12 size-48 rounded-full bg-white/55 blur-2xl" /><div className="absolute -bottom-20 -start-12 size-56 rounded-full bg-[#b4ce65]/35 blur-3xl" /><span className="absolute start-[12%] top-[14%] grid size-10 place-items-center rounded-2xl border border-white/80 bg-white/80 text-[#6c8b2a] shadow-sm"><SunMedium className="size-5" /></span><span className="absolute end-[14%] top-[24%] grid size-11 place-items-center rounded-2xl border border-white/80 bg-white/80 text-[#4e8b9a] shadow-sm"><Droplets className="size-5" /></span><span className="absolute end-[19%] bottom-[22%] grid size-10 place-items-center rounded-2xl border border-white/80 bg-white/80 text-[#78923a] shadow-sm"><Gauge className="size-5" /></span><img src="/assets/tractor.png" alt={language === "ar" ? "حديقة زراعية مع نافورة وأشجار" : "Agricultural park with a fountain and trees"} className="absolute bottom-[7%] left-1/2 h-[64%] w-auto max-w-[70%] -translate-x-1/2 object-contain drop-shadow-[0_18px_12px_rgba(53,83,14,.2)]" /><div className="absolute bottom-3 start-3 max-w-[190px] rounded-xl border border-white/70 bg-white/90 p-2.5 shadow-lg backdrop-blur"><div className="flex items-center gap-1.5 text-[11px] font-bold text-[#35530e]"><Waves className="size-3.5" />{language === "ar" ? "مزرعة أذكى، بحجم أخف" : "A lighter, smarter farm visual"}</div></div></div></div></div>
         </div>
       </section>
+
+      <section className="container py-12 sm:py-16"><div className="relative overflow-hidden rounded-[2rem] border border-[#35530e]/10 bg-[#f4f8ee] p-6 shadow-[0_16px_40px_rgba(48,67,22,.07)] sm:p-9" dir={language === "ar" ? "rtl" : "ltr"}><div className="pointer-events-none absolute -end-16 -top-20 size-48 rounded-full bg-[#dcebbd]/70 blur-3xl" /><div className="relative max-w-4xl"><p className="text-xs font-bold tracking-[.16em] text-[#759244]">{language === "ar" ? "رؤية زراعية من الأردن" : "AN AGRICULTURAL VISION FROM JORDAN"}</p><h2 className="mt-2 text-2xl font-bold tracking-tight text-[#293d12] sm:text-3xl">{language === "ar" ? "المهندس ثامر القادري" : "Engineer Thamer Al-Qadri"}</h2><p className="mt-5 min-h-[11rem] text-base leading-8 text-[#5f6d50] sm:min-h-[8rem]" aria-live="polite">{typedBio}<span className="ms-1 inline-block font-bold text-[#6d9335] animate-pulse">|</span></p><div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold text-[#496327]"><a href="tel:0777772211" className="rounded-full border border-[#bcd3a1] bg-white/80 px-4 py-2 transition hover:bg-white">{language === "ar" ? "الهاتف: 0777772211" : "Phone: 0777772211"}</a><a href="mailto:tamerqadri@gmail.com" className="rounded-full border border-[#bcd3a1] bg-white/80 px-4 py-2 transition hover:bg-white">tamerqadri@gmail.com</a></div></div></div></section>
 
       <section className="container py-12 sm:py-16"><div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="text-xs font-bold tracking-[.16em] text-[#759244]">{language === "ar" ? "رحلة مترابطة" : "A CONNECTED JOURNEY"}</p><h2 className="mt-2 text-3xl font-bold tracking-tight text-[#293d12]">{language === "ar" ? "من الملاحظة إلى متابعة ذات معنى" : "From observation to meaningful follow-up"}</h2></div><p className="max-w-md text-sm leading-6 text-[#68775a]">{language === "ar" ? "ليست خدمات منفصلة؛ كل خطوة تحفظ سياقك وتفتح ما بعدها." : "These are not disconnected tools; every step preserves context and unlocks the next."}</p></div><div className="mt-9 grid grid-cols-5 gap-2 sm:gap-4">{steps.map((step, index) => <div key={step.ar} className="relative text-center">{index < steps.length - 1 && <span className="absolute top-5 start-[61%] hidden h-px w-[78%] bg-[#cfdcc0] md:block" />}<span className="relative mx-auto grid size-10 place-items-center rounded-xl bg-[#e9f0df] text-[#35530e] sm:size-12"><step.icon className="size-4 sm:size-5" /></span><p className="mt-2 text-xs font-bold text-[#4d5d3b]">{language === "ar" ? step.ar : step.en}</p></div>)}</div></section>
 
