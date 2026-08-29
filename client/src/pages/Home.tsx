@@ -13,32 +13,39 @@ function useTypewriter(text: string) {
 
   useEffect(() => {
     let index = 0;
-    let deleting = false;
+    let phase: "typing" | "pause" | "deleting" | "rewriting" | "done" = "typing";
     let timer: ReturnType<typeof setTimeout>;
 
     const tick = () => {
-      if (!deleting && index < text.length) {
-        index += 1;
-        setVisibleText(text.slice(0, index));
-        timer = setTimeout(tick, 28);
+      if (phase === "typing" || phase === "rewriting") {
+        if (index < text.length) {
+          index += 1;
+          setVisibleText(text.slice(0, index));
+          timer = setTimeout(tick, 28);
+          return;
+        }
+        phase = phase === "typing" ? "pause" : "done";
+        timer = setTimeout(tick, phase === "pause" ? 2600 : 0);
         return;
       }
 
-      if (!deleting) {
-        deleting = true;
-        timer = setTimeout(tick, 2600);
-        return;
-      }
-
-      if (index > 0) {
-        index -= 1;
-        setVisibleText(text.slice(0, index));
+      if (phase === "pause") {
+        phase = "deleting";
         timer = setTimeout(tick, 14);
         return;
       }
 
-      deleting = false;
-      timer = setTimeout(tick, 500);
+      if (phase === "deleting") {
+        if (index > 0) {
+          index -= 1;
+          setVisibleText(text.slice(0, index));
+          timer = setTimeout(tick, 14);
+          return;
+        }
+        phase = "rewriting";
+        timer = setTimeout(tick, 500);
+        return;
+      }
     };
 
     setVisibleText("");
