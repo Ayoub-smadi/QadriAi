@@ -108,7 +108,14 @@ export const aiRouter = router({
     const bytes = Buffer.from(matches[2], "base64");
     if (!bytes.length || bytes.length > 4_000_000) throw new Error("The image must be smaller than 4 MB.");
     const extension = input.mimeType === "image/png" ? "png" : input.mimeType === "image/webp" ? "webp" : "jpg";
-    const stored = await storagePut(`plant-analyses/${ctx.user.id}/diagnosis.${extension}`, bytes, input.mimeType);
+    let stored: Awaited<ReturnType<typeof storagePut>> | null = null;
+    try {
+      stored = await storagePut(`plant-analyses/${ctx.user.id}/diagnosis.${extension}`, bytes, input.mimeType);
+    } catch (error) {
+      // Storage is useful for history, but must not prevent the live image analysis.
+      // The original data URL is already validated and is sent directly to the vision model below.
+      console.warn("[AI] Image storage unavailable; continuing with inline image analysis", error);
+    }
     const models = await listLLMModels();
     const model = models.data.find(item => item.id === "gemini-3-flash-preview")?.id ?? models.data.find(item => item.id === "gpt-5-mini")?.id ?? models.data[0]?.id;
     if (!model) throw new Error("No AI model is currently available.");
@@ -132,7 +139,7 @@ export const aiRouter = router({
     const raw = extractTextContent(response.choices[0]?.message?.content);
     if (!raw) throw new Error("The image analysis returned an empty result. Please try again.");
     const result = JSON.parse(raw) as { confidence: number; urgency: "routine" | "monitor" | "critical" } & Record<string, unknown>;
-    await savePlantAnalysis(ctx.user.id, { imageKey: stored.key, imageUrl: stored.url, result, confidence: result.confidence, escalation: result.urgency });
-    return { imageUrl: stored.url, ...result };
+    await savePlantAnalysis(ctx.user.id, { imageKey: stored?.key ?? null, imageUrl: stored?.url ?? null, result, confidence: result.confidence, escalation: result.urgency });
+    return { imageUrl: stored?.url ?? null, ...result };
   }),
 });

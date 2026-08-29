@@ -261,7 +261,7 @@ export async function savePlatformSetting(updatedByUserId: number, settingKey: s
   return listPlatformSettings();
 }
 
-export async function savePlantAnalysis(userId: number, analysis: { imageKey: string; imageUrl: string; result: Record<string, unknown>; confidence: number; escalation: "routine" | "monitor" | "critical" }) {
+export async function savePlantAnalysis(userId: number, analysis: { imageKey?: string | null; imageUrl?: string | null; result: Record<string, unknown>; confidence: number; escalation: "routine" | "monitor" | "critical" }) {
   const db = await getDb();
   if (!db) throw new Error("The database is currently unavailable.");
   const inserted = await db.insert(plantAnalyses).values({ userId, ...analysis });

@@ -9,8 +9,12 @@ vi.mock("./_core/llm", () => ({
   listLLMModels: vi.fn().mockResolvedValue({ data: [{ id: "gpt-5-mini" }] }),
   invokeLLM: vi.fn().mockResolvedValue({ choices: [{ message: { content: [{ type: "text", text: "ابدأ بفحص الرطوبة والصرف." }, { type: "text", text: "تنبيه: استشر مختصًا عند الحالة الحرجة." }] } }] }),
 }));
+vi.mock("./storage", () => ({ storagePut: vi.fn() }));
 
 import { appRouter } from "./routers";
+import { savePlantAnalysis } from "./db";
+import { invokeLLM } from "./_core/llm";
+import { storagePut } from "./storage";
 import type { TrpcContext } from "./_core/context";
 
 function context(): TrpcContext {
@@ -32,5 +36,34 @@ describe("ai.consult response normalization", () => {
   it("answers general questions without an agricultural refusal or forced disclaimer", async () => {
     const result = await appRouter.createCaller(context()).ai.consult({ messages: [{ role: "user", content: "ما هي عاصمة الأردن؟" }] });
     expect(result.content).not.toContain("تنبيه: الإرشاد الذكي مساعد ولا يغني عن فحص مهندس زراعي محلي");
+  });
+});
+
+describe("ai.diagnose storage fallback", () => {
+  it("continues with inline image analysis when storage presigning fails", async () => {
+    vi.mocked(storagePut).mockRejectedValueOnce(new Error("Storage presign failed (404): 404 page not found"));
+    vi.mocked(invokeLLM).mockResolvedValueOnce({
+      choices: [{ message: { content: JSON.stringify({
+        likelyPlant: "Tomato",
+        confidence: 72,
+        urgency: "monitor",
+        observations: ["Leaf discoloration"],
+        possibleCauses: ["Water stress"],
+        safeNextSteps: ["Check root-zone moisture"],
+        prevention: ["Improve monitoring"],
+        escalationNotice: "Consult a local agricultural expert if symptoms spread.",
+        limitations: "A photo cannot confirm the cause.",
+      }) } }],
+    } as any);
+
+    const result = await appRouter.createCaller(context()).ai.diagnose({
+      imageDataUrl: `data:image/png;base64,${"a".repeat(40)}`,
+      mimeType: "image/png",
+      note: "The leaves look pale.",
+    });
+
+    expect(result.imageUrl).toBeNull();
+    expect(result.likelyPlant).toBe("Tomato");
+    expect(savePlantAnalysis).toHaveBeenCalledWith(1, expect.objectContaining({ imageKey: null, imageUrl: null }));
   });
 });

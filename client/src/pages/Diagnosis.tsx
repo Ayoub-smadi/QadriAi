@@ -7,7 +7,7 @@ import { AlertTriangle, CheckCircle2, CircleAlert, FileImage, Loader2, ScanSearc
 import { ChangeEvent, useState } from "react";
 import { toast } from "sonner";
 
-type Diagnosis = { imageUrl: string; likelyPlant: string; confidence: number; urgency: "routine" | "monitor" | "critical"; observations: string[]; possibleCauses: string[]; safeNextSteps: string[]; prevention: string[]; escalationNotice: string; limitations: string };
+type Diagnosis = { imageUrl: string | null; likelyPlant: string; confidence: number; urgency: "routine" | "monitor" | "critical"; observations: string[]; possibleCauses: string[]; safeNextSteps: string[]; prevention: string[]; escalationNotice: string; limitations: string };
 
 export default function Diagnosis() {
   const { language } = useLanguage();
