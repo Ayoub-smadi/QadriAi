@@ -1,10 +1,27 @@
 import { z } from "zod";
 import { getAgriculturalProfile, listPublishedKnowledge, savePlantAnalysis } from "../db";
-import { invokeLLM, listLLMModels } from "../_core/llm";
-import { protectedProcedure, router } from "../_core/trpc";
+import { invokeLLM, listLLMModels, type MessageContent } from "../_core/llm";
+import { transcribeAudio } from "../_core/voiceTranscription";
+import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
 import { storagePut } from "../storage";
 
 const messageSchema = z.object({ role: z.enum(["user", "assistant"]), content: z.string().min(1).max(2500) });
+const attachmentSchema = z.object({ type: z.enum(["image", "audio"]), dataUrl: z.string().min(30).max(25_000_000), mimeType: z.string().max(80).optional(), name: z.string().max(160).optional() });
+const consultInputSchema = z.object({ messages: z.array(messageSchema).min(1).max(8), attachments: z.array(attachmentSchema).max(3).optional(), language: z.enum(["ar", "en"]).optional() });
+
+const IMAGE_MIME_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+const AUDIO_MIME_TYPES = new Set(["audio/webm", "audio/mpeg", "audio/mp3", "audio/wav", "audio/wave", "audio/ogg", "audio/mp4", "audio/m4a"]);
+
+function decodeDataUrl(dataUrl: string, kind: "image" | "audio") {
+  const match = dataUrl.match(/^data:([^;,]+);base64,([A-Za-z0-9+/=]+)$/);
+  if (!match) throw new Error(kind === "image" ? "الصورة المرفقة غير صالحة." : "التسجيل الصوتي المرفق غير صالح.");
+  const mimeType = match[1].toLowerCase().split(";", 1)[0];
+  const allowed = kind === "image" ? IMAGE_MIME_TYPES : AUDIO_MIME_TYPES;
+  if (!allowed.has(mimeType)) throw new Error(kind === "image" ? "استخدم صورة JPG أو PNG أو WebP." : "استخدم تسجيلًا صوتيًا بصيغة WebM أو MP3 أو WAV أو M4A.");
+  const bytes = Buffer.from(match[2], "base64");
+  if (!bytes.length) throw new Error(kind === "image" ? "تعذر قراءة الصورة المرفقة." : "تعذر قراءة التسجيل الصوتي.");
+  return { mimeType, bytes };
+}
 
 const SAFETY_INSTRUCTIONS = `You are Al-Qadri's helpful, careful assistant. Answer the user's question directly, in Arabic by default and in English when the user writes in English. You can answer general questions as well as questions about crops, trees, houseplants, soil, irrigation, pruning, propagation, planting, pests, diseases, harvest, landscaping, farm planning, and agricultural economics. Do not reject a question merely because it is outside agriculture; answer it normally when safe, and briefly state uncertainty when the topic needs specialist context.
 
@@ -20,7 +37,7 @@ const LOCAL_KNOWLEDGE_CONTEXT = `
 - البياض الدقيقي والمنّ: قد تتشابه أعراضهما مع إجهاد بيئي أو مشاكل ري؛ اعزل النبات المصاب إن أمكن، حسّن التهوية، وثبّت التشخيص قبل أي مبيد.
 - في المناطق الحارة والجافة: الماء والملوحة والحرارة والرياح عوامل مترابطة؛ اجمع قياسات الموقع قبل اعتماد خطة زراعة أو ري.`;
 
-const PREFERRED_MODELS = ["gpt-5", "gemini-3.1-pro-preview", "gemini-3-flash-preview", "gpt-5-mini", "gpt-5-nano"];
+const PREFERRED_MODELS = ["gpt-5-mini", "gemini-3-flash-preview", "gpt-5", "gemini-3.1-pro-preview", "gpt-5-nano"];
 
 const DESIGN_ELEMENT_KINDS = ["tree", "shrub", "flower", "bench", "fountain", "path", "greenhouse", "pond", "sprinkler", "dripLine", "pump", "tank", "valve", "light"] as const;
 const generatedDesignSchema = z.object({
@@ -88,20 +105,37 @@ function extractTextContent(content: unknown): string {
 }
 
 export const aiRouter = router({
-  consult: protectedProcedure.input(z.object({ messages: z.array(messageSchema).min(1).max(8) })).mutation(async ({ ctx, input }) => {
+  consult: publicProcedure.input(consultInputSchema).mutation(async ({ ctx, input }) => {
     let profile;
     try {
-      profile = await getAgriculturalProfile(ctx.user.id);
+      profile = ctx.user ? await getAgriculturalProfile(ctx.user.id) : undefined;
     } catch (error) {
       console.warn("[AI] Agricultural profile unavailable; continuing without it", error);
     }
     const profileContext = profile ? JSON.stringify({ country: profile.country, city: profile.city, region: profile.region, landArea: profile.landArea, landType: profile.landType, soilType: profile.soilType, waterSource: profile.waterSource, waterQuality: profile.waterQuality, irrigationSystem: profile.irrigationSystem, currentPlants: profile.currentPlants, currentCrops: profile.currentCrops, landGoal: profile.landGoal, budgetRange: profile.budgetRange }) : "No saved agricultural profile yet.";
     const knowledgeContext = await buildKnowledgeContext();
     const latestQuestion = input.messages.at(-1)?.content ?? "";
+    const attachmentText: string[] = [];
+    const imageParts: MessageContent[] = [];
+    for (const attachment of input.attachments ?? []) {
+      if (attachment.type === "image") {
+        decodeDataUrl(attachment.dataUrl, "image");
+        imageParts.push({ type: "image_url", image_url: { url: attachment.dataUrl, detail: "high" } });
+        attachmentText.push("حلّل الصورة المرفقة مع السؤال، واذكر ما تلاحظه وما لا يمكن تأكيده منها.");
+      } else {
+        decodeDataUrl(attachment.dataUrl, "audio");
+        const transcript = await transcribeAudio({ audioUrl: attachment.dataUrl, language: input.language, prompt: "Transcribe the user's agricultural question accurately. Keep crop, plant, soil, irrigation, pest, and place names." });
+        if ("error" in transcript) throw new Error(`تعذر تحويل التسجيل الصوتي إلى نص: ${transcript.error}`);
+        if (transcript.text.trim()) attachmentText.push(`نص التسجيل الصوتي: ${transcript.text.trim()}`);
+      }
+    }
+    const questionText = [latestQuestion, ...attachmentText].filter(Boolean).join("\n\n") || "أجب عن المرفقات المرسلة واطلب توضيحًا إذا لم يكن السؤال واضحًا.";
+    const userContent: MessageContent[] = [{ type: "text", text: questionText }, ...imageParts];
     const candidates = await chooseConsultationModels();
     const consultationMessages = [
       { role: "system" as const, content: `${SAFETY_INSTRUCTIONS}\nRetrieved agricultural knowledge context (use it as grounding, not as permission to invent missing details): ${knowledgeContext}\nUser agricultural profile: ${profileContext}` },
-      ...input.messages,
+      ...input.messages.slice(0, -1),
+      { role: "user" as const, content: userContent },
     ];
     let content = "";
     for (const model of candidates) {
@@ -122,7 +156,7 @@ export const aiRouter = router({
       }
     }
     if (!content) throw new Error("The AI service is temporarily unavailable. Please try again shortly.");
-    return { content: addLanguageDisclaimer(content, latestQuestion) };
+    return { content: addLanguageDisclaimer(content, questionText) };
   }),
   generateDesign: protectedProcedure.input(z.object({ description: z.string().min(8).max(5000), language: z.enum(["ar", "en"]).default("ar"), siteWidth: z.number().min(1).max(1000).default(30), siteLength: z.number().min(1).max(1000).default(20) })).mutation(async ({ input }) => {
     const designPrompt = `حوّل وصف المستخدم إلى مخطط تفاعلي دقيق. لا تتجاهل أي عدد أو مسافة أو علاقة مكانية صريحة في الوصف. استخدم العناصر المتاحة فقط: tree شجرة، shrub شجيرة، flower زهور، bench مقعد، fountain نافورة، path ممر، greenhouse بيت بلاستيكي، pond بركة ماء، sprinkler رشاش، dripLine خط تنقيط، pump مضخة، tank خزان، valve محبس، light إنارة.

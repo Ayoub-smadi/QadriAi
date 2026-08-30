@@ -9,11 +9,15 @@ vi.mock("./_core/llm", () => ({
   listLLMModels: vi.fn().mockResolvedValue({ data: [{ id: "gpt-5-mini" }] }),
   invokeLLM: vi.fn().mockResolvedValue({ choices: [{ message: { content: [{ type: "text", text: "ابدأ بفحص الرطوبة والصرف." }, { type: "text", text: "تنبيه: استشر مختصًا عند الحالة الحرجة." }] } }] }),
 }));
+vi.mock("./_core/voiceTranscription", () => ({
+  transcribeAudio: vi.fn().mockResolvedValue({ task: "transcribe", language: "ar", duration: 2, text: "كيف أحافظ على الزيتون؟", segments: [] }),
+}));
 vi.mock("./storage", () => ({ storagePut: vi.fn() }));
 
 import { appRouter } from "./routers";
 import { savePlantAnalysis } from "./db";
 import { invokeLLM } from "./_core/llm";
+import { transcribeAudio } from "./_core/voiceTranscription";
 import { storagePut } from "./storage";
 import type { TrpcContext } from "./_core/context";
 
@@ -36,6 +40,31 @@ describe("ai.consult response normalization", () => {
   it("answers general questions without an agricultural refusal or forced disclaimer", async () => {
     const result = await appRouter.createCaller(context()).ai.consult({ messages: [{ role: "user", content: "ما هي عاصمة الأردن؟" }] });
     expect(result.content).not.toContain("تنبيه: الإرشاد الذكي مساعد ولا يغني عن فحص مهندس زراعي محلي");
+  });
+});
+
+describe("ai.consult multimodal inputs", () => {
+  it("passes an attached image to the agricultural model", async () => {
+    vi.mocked(invokeLLM).mockResolvedValueOnce({ choices: [{ message: { content: "الصورة تُظهر نباتًا يحتاج فحص الرطوبة." } }] } as any);
+    const result = await appRouter.createCaller(context()).ai.consult({
+      messages: [{ role: "user", content: "ما المشكلة في هذا النبات؟" }],
+      attachments: [{ type: "image", dataUrl: `data:image/png;base64,${"a".repeat(40)}`, mimeType: "image/png", name: "plant.png" }],
+      language: "ar",
+    });
+    expect(result.content).toContain("الصورة تُظهر");
+    const lastCall = vi.mocked(invokeLLM).mock.calls.at(-1)?.[0] as any;
+    expect(lastCall.messages.at(-1).content).toEqual(expect.arrayContaining([expect.objectContaining({ type: "image_url" })]));
+  });
+
+  it("transcribes an attached audio question before answering", async () => {
+    vi.mocked(invokeLLM).mockResolvedValueOnce({ choices: [{ message: { content: "افحص رطوبة التربة والصرف حول الزيتون." } }] } as any);
+    const result = await appRouter.createCaller(context()).ai.consult({
+      messages: [{ role: "user", content: "استمع إلى التسجيل وأجبني." }],
+      attachments: [{ type: "audio", dataUrl: `data:audio/webm;base64,${"a".repeat(40)}`, mimeType: "audio/webm", name: "question.webm" }],
+      language: "ar",
+    });
+    expect(result.content).toContain("افحص رطوبة");
+    expect(transcribeAudio).toHaveBeenCalled();
   });
 });
 
