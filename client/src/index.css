@@ -129,4 +129,9 @@
 
 html[dir="rtl"] .prose { text-align: start; }
 html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
+@keyframes qadri-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1deg); }
+  50% { transform: translate3d(0, -10px, 0) rotate(1deg); }
+}
+
 @media (prefers-reduced-motion: no-preference) { a, button { transition-duration: 180ms; transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1); } button:active { transform: scale(.97); } }
