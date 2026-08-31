@@ -1,0 +1,15 @@
+{
+  "records": 5999,
+  "unique_species_keys": 5999,
+  "image_records": 1773,
+  "licensed_image_records": 1772,
+  "fallback_records": 4226,
+  "country_record_counts": {
+    "الأردن": 2691,
+    "مصر": 4090,
+    "السعودية": 1946,
+    "فلسطين": 2842,
+    "قطر": 479
+  },
+  "family_count": 325
+}
