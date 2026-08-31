@@ -35,3 +35,7 @@ Add structured JSON or normalized tables for plant type, per-country suitability
 ## Decision needed before bulk implementation
 
 The user must choose whether the catalogue should include only species with verified cultivation evidence in at least one target country, or also ornamental/exotic species that can grow under controlled conditions. The user must also approve a two-track image policy: real licensed photographs where available, and clearly labeled educational lifecycle illustrations where seed/seedling/juvenile/adult photographs are unavailable. Without that policy, claiming 4,000 species with complete real lifecycle photography would be inaccurate and may violate image licenses.
+
+## Verification snapshot
+
+The local Knowledge page loaded successfully after the large-index integration. It displayed 6,009 available taxa, country filtering, paginated cards, growth-stage details from seed to adult, GBIF source links, and real image attribution/license links when the merged GBIF media record was available. Species without a real open image use the site's AI Plant icon as a clearly generic educational fallback. TypeScript checking and the production build passed; existing analytics placeholders and large-chunk notices remain warnings only.
