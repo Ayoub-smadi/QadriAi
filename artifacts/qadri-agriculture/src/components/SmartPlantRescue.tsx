@@ -95,18 +95,10 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
           <path d="M63 274H161" stroke="#E5B79C" strokeWidth="4" strokeLinecap="round" opacity=".8" />
         </g>
 
-        <g className="window-rescue__woman" filter="url(#window-rescue-shadow)">
-          <path d="M102 168C84 179 78 202 89 220C99 236 123 241 138 226C151 213 150 188 137 175C128 166 114 163 102 168Z" fill="#3E2A2B" />
-          <circle cx="116" cy="196" r="30" fill="#E8AB83" stroke="#B87562" strokeWidth="3" />
-          <path d="M87 194C89 166 105 153 127 160C144 165 151 181 147 197C138 183 126 179 111 181C103 182 95 188 87 194Z" fill="#473033" />
-          <circle cx="106" cy="201" r="2.5" fill="#563B3A" />
-          <circle cx="126" cy="201" r="2.5" fill="#563B3A" />
-          <path className="window-rescue__sad-mouth" d="M109 214C114 210 120 210 125 214" stroke="#995B59" strokeWidth="2.5" strokeLinecap="round" />
-          <path className="window-rescue__happy-mouth" d="M108 211C113 217 121 217 127 211" stroke="#995B59" strokeWidth="2.5" strokeLinecap="round" />
-          <path d="M84 276C87 242 100 228 116 228C136 228 153 247 157 280L163 348H75L84 276Z" fill="#8DB8A0" stroke="#668C7E" strokeWidth="3" />
-          <path d="M99 244C103 268 101 303 96 342M136 244C130 272 132 308 139 342" stroke="#B6D2BA" strokeWidth="3" strokeLinecap="round" opacity=".8" />
-          <path d="M84 274L150 292" stroke="#668C7E" strokeWidth="13" strokeLinecap="round" />
-          <path d="M145 287C165 280 177 270 187 256" stroke="#E8AB83" strokeWidth="11" strokeLinecap="round" />
+        <g className="window-rescue__girl" filter="url(#window-rescue-shadow)">
+          <image href="/assets/girl.png" x="45" y="142" width="168" height="168" preserveAspectRatio="xMidYMid meet" />
+          <path className="window-rescue__sad-face" d="M119 229C124 225 130 225 135 229M119 239C124 235 130 235 135 239" stroke="#7D474C" strokeWidth="2.4" strokeLinecap="round" opacity=".9" />
+          <path className="window-rescue__phone-arm" d="M144 274C163 280 178 271 188 256" stroke="#F1B18A" strokeWidth="11" strokeLinecap="round" />
           <g className="window-rescue__phone">
             <rect x="174" y="239" width="35" height="62" rx="7" transform="rotate(16 174 239)" fill="#2D4050" stroke="#1E2C37" strokeWidth="3" />
             <rect x="180" y="247" width="23" height="42" rx="3" transform="rotate(16 180 247)" fill="#BBD7C0" />
@@ -131,24 +123,24 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
       </svg>
 
       <div className="window-rescue__stage window-rescue__stage--sad">
-        <span>{isArabic ? "شو صار فيها؟" : "What happened?"}</span>
+        <span>{isArabic ? "ليش ذبلت؟" : "Why is it wilted?"}</span>
         <Camera className="size-4" />
       </div>
       <div className="window-rescue__stage window-rescue__stage--reply">
         <MessageCircle className="size-4" />
-        <span>{isArabic ? "بدها إضاءة خفيفة" : "It needs soft light"}</span>
+        <span>{isArabic ? "النبتة بحاجة لإضاءة خفيفة" : "It needs soft light"}</span>
       </div>
       <div className="window-rescue__stage window-rescue__stage--window">
         <SunMedium className="size-4" />
-        <span>{isArabic ? "افتحي الشبك" : "Open the screen"}</span>
+        <span>{isArabic ? "حاضر، بفتح الشبك" : "Opening the screen"}</span>
       </div>
       <div className="window-rescue__stage window-rescue__stage--happy">
-        <span>{isArabic ? "رجعت تكبر!" : "It is growing!"}</span>
+        <span>{isArabic ? "رجعت أفضل" : "It is better now"}</span>
         <span className="window-rescue__heart" aria-hidden="true">♥</span>
       </div>
 
       <div className="window-rescue__caption">
-        <span>{isArabic ? "الروبوت يلاحظ · هي تتصرف · النبتة تكبر" : "Robot notices · she acts · plant grows"}</span>
+        <span>{isArabic ? "نصيحة صغيرة صنعت فرقاً كبيراً" : "A small tip made a big difference"}</span>
         <span className="window-rescue__progress" />
       </div>
     </div>

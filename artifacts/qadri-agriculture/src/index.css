@@ -475,8 +475,9 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 .window-rescue__sunbeam { animation: window-rescue-light 9s ease-in-out infinite; }
 .window-rescue__sick-plant { transform-box: fill-box; transform-origin: center bottom; animation: window-rescue-sick 9s ease-in-out infinite; }
 .window-rescue__healthy-plant { transform-box: fill-box; transform-origin: center bottom; animation: window-rescue-healthy 9s cubic-bezier(.22,.8,.28,1) infinite; }
+.window-rescue__girl { transform-box: fill-box; transform-origin: center bottom; animation: window-rescue-woman 9s ease-in-out infinite; }
+.window-rescue__sad-face { animation: window-rescue-face-sad 9s ease-in-out infinite; }
 .window-rescue__phone { transform-box: fill-box; transform-origin: center; animation: window-rescue-phone 9s ease-in-out infinite; }
-.window-rescue__woman { transform-box: fill-box; transform-origin: center bottom; animation: window-rescue-woman 9s ease-in-out infinite; }
 .window-rescue__sad-mouth { animation: window-rescue-face-sad 9s ease-in-out infinite; }
 .window-rescue__happy-mouth { animation: window-rescue-face-happy 9s ease-in-out infinite; }
 .window-rescue__phone-bubble { animation: window-rescue-bubble 9s ease-in-out infinite; }
