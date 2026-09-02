@@ -155,6 +155,11 @@ class SDKServer {
 
   private getSessionSecret() {
     const secret = ENV.cookieSecret;
+    if (!secret) {
+      throw new Error(
+        "Authentication is not configured. Set JWT_SECRET or SESSION_SECRET in the deployment environment.",
+      );
+    }
     return new TextEncoder().encode(secret);
   }
 

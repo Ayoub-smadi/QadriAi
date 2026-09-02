@@ -7,6 +7,7 @@ import { ADMIN_PASSWORD, ADMIN_USERNAME, normalizePhone, normalizeUsername, veri
 import { sdk } from "./_core/sdk";
 import type { TrpcContext } from "./_core/context";
 import { getSessionCookieOptions } from "./_core/cookies";
+import { ENV } from "./_core/env";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { aiRouter } from "./routers/ai";
@@ -26,11 +27,28 @@ async function issueCredentialSession(ctx: Pick<TrpcContext, "req" | "res">, use
   return publicUser(user);
 }
 
+function assertCredentialAuthConfiguration() {
+  if (!ENV.cookieSecret) {
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "إعدادات تسجيل الدخول غير مكتملة. أضف JWT_SECRET أو SESSION_SECRET في Vercel.",
+    });
+  }
+
+  if (ENV.isProduction && !ENV.databaseUrl) {
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message: "قاعدة بيانات الإنتاج غير مهيأة. أضف DATABASE_URL في Vercel.",
+    });
+  }
+}
+
 export const appRouter = router({
   system: systemRouter,
   auth: router({
     me: publicProcedure.query(opts => publicUser(opts.ctx.user)),
     register: publicProcedure.input(z.object({ name: z.string().trim().min(2).max(120), phone: z.string().trim().min(7).max(32), password: z.string().min(6).max(128) })).mutation(async ({ input, ctx }) => {
+      assertCredentialAuthConfiguration();
       const phone = normalizePhone(input.phone);
       if (await db.findCredentialUser(phone)) throw new TRPCError({ code: "CONFLICT", message: "هذا الرقم مسجل مسبقًا." });
       const user = await db.createCredentialUser({ name: input.name, phone, password: input.password });
@@ -38,6 +56,7 @@ export const appRouter = router({
       return issueCredentialSession(ctx, user);
     }),
     login: publicProcedure.input(z.object({ identifier: z.string().trim().min(1).max(120), password: z.string().min(1).max(128), admin: z.boolean().default(false) })).mutation(async ({ input, ctx }) => {
+      assertCredentialAuthConfiguration();
       let user = await db.findCredentialUser(input.identifier);
       if (input.admin) {
         if (normalizeUsername(input.identifier) !== normalizeUsername(ADMIN_USERNAME) || input.password !== ADMIN_PASSWORD) throw new TRPCError({ code: "UNAUTHORIZED", message: "بيانات دخول الأدمن غير صحيحة." });
