@@ -13,6 +13,7 @@ import {
   Leaf,
   LayoutDashboard,
   Menu,
+  Phone,
   ScanSearch,
   ShoppingBag,
   Sprout,
@@ -20,7 +21,7 @@ import {
   X,
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
-import { ReactNode, useState } from "react";
+import { Fragment, ReactNode, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "./ui/button";
 
@@ -65,64 +66,49 @@ export function PlatformShell({
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 overflow-hidden border-b border-white/10 bg-primary text-primary-foreground shadow-[0_10px_32px_rgba(53,83,14,.22)]">
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#b4ce65]/80 to-transparent" />
-        <div className="container relative flex h-[76px] items-center justify-between gap-3">
+      <header className="sticky top-0 z-50 overflow-hidden border-b border-white/10 bg-primary text-primary-foreground shadow-[0_12px_36px_rgba(53,83,14,.25)]">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#b4ce65]/90 to-transparent" />
+
+        <div className="border-b border-white/10 bg-[#294108]/80">
+          <div className="container flex h-9 items-center justify-between gap-4 text-[11px] font-semibold text-[#dce9bd]">
+            <a
+              href="tel:0777772211"
+              dir="ltr"
+              className="inline-flex items-center gap-2 rounded-full px-1.5 py-1 no-underline transition-colors hover:text-white"
+              aria-label="Call 0777772211"
+            >
+              <span className="grid size-5 place-items-center rounded-full bg-[#b4ce65] text-[#29410d]">
+                <Phone className="size-3" />
+              </span>
+              <span>0777772211</span>
+            </a>
+            <span className="hidden items-center gap-1.5 sm:inline-flex">
+              <BadgeCheck className="size-3.5 text-[#b4ce65]" />
+              {t.safe}
+            </span>
+          </div>
+        </div>
+
+        <div className="container relative flex h-[78px] items-center justify-between gap-4">
           <Link
             href="/"
             className="group flex min-w-0 items-center gap-3 no-underline"
             aria-label={t.home}
           >
-            <span className="grid size-10 shrink-0 place-items-center rounded-2xl border border-white/15 bg-white/10 shadow-[0_8px_22px_rgba(15,35,3,.22)] transition-transform duration-200 group-hover:-rotate-6 group-hover:bg-white/15">
-              <Leaf className="size-5 text-[#d7e9a8]" />
+            <span className="grid size-12 shrink-0 place-items-center rounded-[1.1rem] border border-white/20 bg-white/10 shadow-[0_8px_24px_rgba(15,35,3,.24)] transition-transform duration-200 group-hover:-rotate-6 group-hover:bg-white/15">
+              <Leaf className="size-6 text-[#d7e9a8]" />
             </span>
             <span className="hidden min-w-0 leading-tight sm:block">
-              <strong className="block truncate text-[15px] font-bold text-white">
+              <strong className="block max-w-[240px] truncate text-base font-bold text-white">
                 {t.brand}
               </strong>
-              <small className="text-[10px] font-semibold tracking-[.18em] text-[#c7dc91]">
+              <small className="text-[10px] font-semibold tracking-[.2em] text-[#c7dc91]">
                 SMART AGRICULTURE
               </small>
             </span>
           </Link>
 
-          {!compact && (
-            <nav
-              className="hidden items-center gap-0.5 xl:flex"
-              aria-label="Primary navigation"
-            >
-              {navigation.map(item => {
-                const Icon = item.icon;
-                const active = isActive(item.href);
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    aria-current={active ? "page" : undefined}
-                    className={cn(
-                      "group relative flex items-center gap-1.5 rounded-xl px-2.5 py-2 text-[13px] font-semibold no-underline transition-colors",
-                      active
-                        ? "bg-white/16 text-white"
-                        : "text-[#e1eccb] hover:bg-white/10 hover:text-white"
-                    )}
-                  >
-                    <Icon className="size-4 shrink-0" />
-                    <span>{t[item.label]}</span>
-                    <span
-                      className={cn(
-                        "absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full transition-opacity",
-                        active
-                          ? "bg-[#b4ce65] opacity-100"
-                          : "bg-white/60 opacity-0 group-hover:opacity-70"
-                      )}
-                    />
-                  </Link>
-                );
-              })}
-            </nav>
-          )}
-
-          <div className="flex shrink-0 items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
             {isAuthenticated && (
               <span className="hidden max-w-[180px] truncate text-xs font-bold text-[#e1eccb] 2xl:block">
                 {language === "ar"
@@ -133,14 +119,14 @@ export function PlatformShell({
             <button
               type="button"
               onClick={openCart}
-              className="relative grid size-9 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65]"
+              className="relative grid size-11 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65]"
               aria-label={
                 language === "ar" ? "فتح سلة المشتريات" : "Open shopping cart"
               }
             >
-              <ShoppingBag className="size-4" />
+              <ShoppingBag className="size-5" />
               {itemCount > 0 && (
-                <span className="absolute -end-1 -top-1 grid size-4 place-items-center rounded-full bg-[#b4ce65] text-[9px] font-extrabold text-[#29410d]">
+                <span className="absolute -end-1 -top-1 grid size-5 place-items-center rounded-full bg-[#b4ce65] text-[10px] font-extrabold text-[#29410d]">
                   {itemCount}
                 </span>
               )}
@@ -148,7 +134,7 @@ export function PlatformShell({
             <button
               type="button"
               onClick={() => setLanguage(language === "ar" ? "en" : "ar")}
-              className="rounded-lg border border-white/20 bg-white/10 px-2.5 py-1.5 text-xs font-bold text-white transition-colors hover:bg-white/18 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65]"
+              className="rounded-xl border border-white/20 bg-white/10 px-3 py-2.5 text-xs font-bold text-white transition-colors hover:bg-white/18 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65]"
               aria-label="Switch language"
             >
               {language === "ar" ? "EN" : "ع"}
@@ -156,7 +142,7 @@ export function PlatformShell({
             {isAuthenticated ? (
               <Link
                 href="/profile"
-                className="grid size-9 place-items-center rounded-xl bg-[#dcebbd] text-sm font-extrabold text-primary no-underline transition-transform hover:-translate-y-0.5 hover:bg-white"
+                className="grid size-11 place-items-center rounded-xl bg-[#dcebbd] text-base font-extrabold text-primary no-underline transition-transform hover:-translate-y-0.5 hover:bg-white"
                 aria-label={t.profile}
               >
                 {initials}
@@ -164,7 +150,7 @@ export function PlatformShell({
             ) : (
               <Button
                 onClick={() => setLocation("/auth")}
-                className="hidden rounded-xl bg-white px-4 font-bold text-primary shadow-md hover:bg-[#eef5e4] sm:inline-flex"
+                className="hidden h-11 rounded-xl bg-white px-5 font-bold text-primary shadow-md hover:bg-[#eef5e4] sm:inline-flex"
               >
                 {t.signIn}
               </Button>
@@ -173,7 +159,7 @@ export function PlatformShell({
               <button
                 type="button"
                 onClick={() => setMobileMenu(!mobileMenu)}
-                className="grid size-9 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65] xl:hidden"
+                className="grid size-11 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65] xl:hidden"
                 aria-expanded={mobileMenu}
                 aria-label={
                   mobileMenu
@@ -186,14 +172,59 @@ export function PlatformShell({
                 }
               >
                 {mobileMenu ? (
-                  <X className="size-5" />
+                  <X className="size-6" />
                 ) : (
-                  <Menu className="size-5" />
+                  <Menu className="size-6" />
                 )}
               </button>
             )}
           </div>
         </div>
+
+        {!compact && (
+          <div className="hidden border-t border-white/10 bg-[#294108]/70 xl:block">
+            <nav
+              className="container flex items-stretch justify-center gap-1 overflow-x-auto py-2"
+              aria-label="Primary navigation"
+            >
+              {navigation.map((item, index) => {
+                const Icon = item.icon;
+                const active = isActive(item.href);
+                return (
+                  <Fragment key={item.href}>
+                    {index === 4 && (
+                      <span
+                        className="mx-2 my-2 w-px shrink-0 bg-white/15"
+                        aria-hidden="true"
+                      />
+                    )}
+                    <Link
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "group relative flex min-w-[74px] shrink-0 flex-col items-center justify-center gap-1 rounded-xl px-3 py-2.5 text-center text-[11px] font-bold no-underline transition-all",
+                        active
+                          ? "bg-[#b4ce65] text-[#29410d] shadow-[0_6px_16px_rgba(180,206,101,.2)]"
+                          : "text-[#e1eccb] hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
+                      )}
+                    >
+                      <Icon className="size-5.5 shrink-0" />
+                      <span className="whitespace-nowrap">{t[item.label]}</span>
+                      <span
+                        className={cn(
+                          "absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full transition-opacity",
+                          active
+                            ? "bg-white/80 opacity-100"
+                            : "bg-[#b4ce65] opacity-0 group-hover:opacity-80"
+                        )}
+                      />
+                    </Link>
+                  </Fragment>
+                );
+              })}
+            </nav>
+          </div>
+        )}
 
         {mobileMenu && !compact && (
           <div className="border-t border-white/10 bg-[#294108]/95 px-4 py-4 backdrop-blur-xl xl:hidden">
@@ -211,13 +242,15 @@ export function PlatformShell({
                     onClick={closeMobileMenu}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "flex items-center gap-2 rounded-xl border px-3 py-3 text-sm font-semibold no-underline transition-colors",
+                      "flex min-h-[66px] items-center gap-3 rounded-xl border px-3 py-3 text-sm font-bold no-underline transition-colors",
                       active
                         ? "border-[#b4ce65]/50 bg-[#b4ce65] text-[#29410d]"
                         : "border-white/10 bg-white/10 text-white hover:bg-white/16"
                     )}
                   >
-                    <Icon className="size-4 shrink-0" />
+                    <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-black/10">
+                      <Icon className="size-5" />
+                    </span>
                     <span className="truncate">{t[item.label]}</span>
                   </Link>
                 );
@@ -226,18 +259,22 @@ export function PlatformShell({
                 <Link
                   href="/profile"
                   onClick={closeMobileMenu}
-                  className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/10 px-3 py-3 text-sm font-semibold text-white no-underline transition-colors hover:bg-white/16"
+                  className="flex min-h-[66px] items-center gap-3 rounded-xl border border-white/10 bg-white/10 px-3 py-3 text-sm font-bold text-white no-underline transition-colors hover:bg-white/16"
                 >
-                  <UserRound className="size-4" />
+                  <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-black/10">
+                    <UserRound className="size-5" />
+                  </span>
                   <span className="truncate">{t.profile}</span>
                 </Link>
               ) : (
                 <Link
                   href="/auth"
                   onClick={closeMobileMenu}
-                  className="flex items-center gap-2 rounded-xl border border-white/60 bg-white px-3 py-3 text-sm font-bold text-primary no-underline transition-colors hover:bg-[#eef5e4]"
+                  className="flex min-h-[66px] items-center gap-3 rounded-xl border border-white/60 bg-white px-3 py-3 text-sm font-bold text-primary no-underline transition-colors hover:bg-[#eef5e4]"
                 >
-                  <UserRound className="size-4" />
+                  <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-[#edf3e6]">
+                    <UserRound className="size-5" />
+                  </span>
                   <span className="truncate">{t.signIn}</span>
                 </Link>
               )}
