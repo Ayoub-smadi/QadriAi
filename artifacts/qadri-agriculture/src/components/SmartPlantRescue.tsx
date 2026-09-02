@@ -1,4 +1,4 @@
-import { CircleCheck, ScanLine, Sprout } from "lucide-react";
+import { Camera, MessageCircle, SunMedium } from "lucide-react";
 
 type SmartPlantRescueProps = {
   language: "ar" | "en";
@@ -10,133 +10,146 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
   return (
     <div
       dir={isArabic ? "rtl" : "ltr"}
-      className="simple-plant-rescue relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] border border-[#c8d6ae] bg-[#f6f8ee] shadow-[0_24px_60px_rgba(53,83,14,.14)]"
+      className="window-rescue relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] border border-[#d9d7bd] bg-[#fbfaf2] shadow-[0_24px_60px_rgba(72,73,39,.14)]"
       role="img"
       aria-label={
         isArabic
-          ? "روبوت حارس يفحص نبتة ذابلة ويضيف السماد حتى تنمو خضراء"
-          : "A small guardian robot scans a wilted plant, adds fertilizer, and helps it grow green"
+          ? "فتاة حزينة تصور نبتة ذابلة بهاتفها، يرد عليها روبوت بأن النبتة تحتاج إضاءة خفيفة، فتفتح الشبك وتعود النبتة خضراء وكبيرة وتفرح"
+          : "A sad girl photographs a wilted plant, the robot says it needs soft light, she opens the window screen, and the plant grows green while she smiles"
       }
     >
-      <div className="simple-rescue-orbit simple-rescue-orbit--one" />
-      <div className="simple-rescue-orbit simple-rescue-orbit--two" />
-
-      <div className="absolute inset-x-6 top-6 z-10 flex items-center justify-between">
-        <span className="simple-rescue-brand">
-          <span className="simple-rescue-brand__dot" />
-          QADRI AI
-        </span>
-        <span className="simple-rescue-leaf" aria-hidden="true">
-          <Sprout className="size-4" />
-        </span>
+      <div className="window-rescue__label">
+        <span className="window-rescue__dot" />
+        {isArabic ? "حكاية نبتة" : "A PLANT STORY"}
       </div>
 
       <svg
-        className="simple-rescue-scene"
+        className="window-rescue__scene"
         viewBox="0 0 400 500"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
         <defs>
-          <radialGradient id="simple-rescue-backdrop" cx="0" cy="0" r="1" gradientTransform="translate(202 220) rotate(90) scale(190)">
-            <stop stopColor="#F9FBEF" />
-            <stop offset="1" stopColor="#DDEAC5" />
-          </radialGradient>
-          <linearGradient id="simple-rescue-robot" x1="116" y1="312" x2="258" y2="420" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#FFFFFF" />
-            <stop offset="1" stopColor="#DDE9CA" />
+          <linearGradient id="window-rescue-wall" x1="0" y1="0" x2="400" y2="500" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#F8F7E9" />
+            <stop offset="1" stopColor="#E8EDD6" />
           </linearGradient>
-          <filter id="simple-rescue-shadow" x="-30%" y="-30%" width="160%" height="180%">
-            <feDropShadow dx="0" dy="14" stdDeviation="11" floodColor="#35530E" floodOpacity=".16" />
+          <linearGradient id="window-rescue-sunbeam" x1="285" y1="115" x2="160" y2="390" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#FFF4B7" stopOpacity=".72" />
+            <stop offset="1" stopColor="#FFF4B7" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="window-rescue-pot" x1="184" y1="347" x2="228" y2="407" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#D99B65" />
+            <stop offset="1" stopColor="#B96F47" />
+          </linearGradient>
+          <filter id="window-rescue-shadow" x="-30%" y="-30%" width="170%" height="190%">
+            <feDropShadow dx="0" dy="10" stdDeviation="9" floodColor="#53613A" floodOpacity=".2" />
           </filter>
         </defs>
 
-        <circle cx="200" cy="237" r="172" fill="url(#simple-rescue-backdrop)" />
-        <path d="M45 382C111 351 147 377 200 358C254 339 298 357 355 334" stroke="#B2CC87" strokeWidth="3" strokeLinecap="round" opacity=".7" />
-        <path d="M70 406C130 380 164 405 211 389C260 373 294 390 335 374" stroke="#C8DDAA" strokeWidth="3" strokeLinecap="round" opacity=".8" />
-        <ellipse cx="201" cy="415" rx="110" ry="20" fill="#A7C27C" opacity=".26" />
+        <rect width="400" height="500" fill="url(#window-rescue-wall)" />
+        <path d="M0 417C78 397 130 423 203 406C274 389 332 397 400 380V500H0V417Z" fill="#E1E8CF" />
+        <path d="M15 91C61 59 97 67 121 104" stroke="#D4DBC1" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="48" cy="113" r="5" fill="#D4DBC1" />
+        <circle cx="80" cy="89" r="3" fill="#D4DBC1" />
 
-        <g className="simple-rescue-scan">
-          <path d="M112 154H143M112 154V184M288 154H257M288 154V184M112 310H143M112 310V280M288 310H257M288 310V280" stroke="#6B9A3C" strokeWidth="4" strokeLinecap="round" />
-          <path className="simple-rescue-scan-line" d="M113 168H287" stroke="#7DAE49" strokeWidth="3" strokeLinecap="round" />
+        <g className="window-rescue__window">
+          <rect x="246" y="62" width="119" height="166" rx="15" fill="#B6D8D1" stroke="#879D77" strokeWidth="5" />
+          <rect x="256" y="72" width="99" height="146" rx="9" fill="#DDF1DF" />
+          <path d="M305 72V218M256 145H355" stroke="#879D77" strokeWidth="5" />
+          <circle cx="332" cy="98" r="12" fill="#FFF0A6" opacity=".75" />
+          <path className="window-rescue__sunbeam" d="M267 210L298 93L354 93L321 231L268 301L224 301L267 210Z" fill="url(#window-rescue-sunbeam)" />
+          <g className="window-rescue__screen">
+            <path d="M251 59H360M251 76H360M251 93H360M251 110H360M251 127H360M251 144H360M251 161H360M251 178H360M251 195H360M251 212H360" stroke="#A8AF8F" strokeWidth="7" opacity=".8" />
+            <path d="M256 61V215M274 61V215M292 61V215M310 61V215M328 61V215M346 61V215" stroke="#C3C8A6" strokeWidth="2" opacity=".8" />
+          </g>
         </g>
 
-        <g className="simple-rescue-plant simple-rescue-plant--sick" filter="url(#simple-rescue-shadow)">
-          <path d="M204 354C204 298 197 244 179 205" stroke="#A39B4A" strokeWidth="9" strokeLinecap="round" />
-          <path d="M199 279C226 250 254 249 281 263C259 291 231 300 199 290" fill="#C5BB4D" />
-          <path d="M184 250C157 226 129 228 105 246C122 271 150 280 184 266" fill="#D2C853" />
-          <path d="M202 324C228 306 252 311 274 329C250 346 226 349 202 340" fill="#B1A73F" />
-          <path d="M177 211C168 185 172 163 188 143C205 166 200 191 182 218" fill="#D5CB5A" />
+        <g className="window-rescue__plant">
+          <ellipse cx="207" cy="420" rx="57" ry="13" fill="#879B62" opacity=".25" />
+          <path d="M179 356H240L231 416C230 424 224 429 216 429H202C194 429 188 424 187 416L179 356Z" fill="url(#window-rescue-pot)" stroke="#9E6446" strokeWidth="3" />
+          <path d="M173 357H246V372C246 377 242 381 237 381H182C177 381 173 377 173 372V357Z" fill="#EBB177" stroke="#A76948" strokeWidth="3" />
+
+          <g className="window-rescue__sick-plant">
+            <path d="M208 359C209 326 205 294 195 265" stroke="#9C8D4D" strokeWidth="8" strokeLinecap="round" />
+            <path d="M205 312C181 289 162 291 146 309C164 328 184 330 207 323" fill="#C3B64F" />
+            <path d="M203 288C226 269 244 269 261 281C245 301 225 306 203 299" fill="#D0C352" />
+            <path d="M194 267C185 246 188 228 201 212C215 230 211 251 198 273" fill="#D5CA5A" />
+          </g>
+
+          <g className="window-rescue__healthy-plant">
+            <path d="M208 359C208 313 215 269 226 219" stroke="#4E8D45" strokeWidth="9" strokeLinecap="round" />
+            <path d="M215 306C245 276 270 274 294 286C276 315 250 327 215 320" fill="#63A94A" />
+            <path d="M216 282C190 249 163 245 137 260C151 294 180 308 217 297" fill="#8BCB59" />
+            <path d="M209 337C239 309 269 312 292 331C269 355 239 359 209 349" fill="#4A963F" />
+            <path d="M225 225C216 196 225 173 246 153C264 182 255 211 232 232" fill="#A0D968" />
+            <path d="M232 220C241 201 246 177 246 153" stroke="#DEF1A7" strokeWidth="3" strokeLinecap="round" />
+          </g>
         </g>
 
-        <g className="simple-rescue-plant simple-rescue-plant--healthy" filter="url(#simple-rescue-shadow)">
-          <path d="M204 355C204 290 208 226 220 157" stroke="#4F8A39" strokeWidth="10" strokeLinecap="round" />
-          <path d="M209 282C239 240 274 234 309 250C289 284 257 300 209 293" fill="#62A642" />
-          <path d="M211 248C180 211 146 205 111 225C128 261 163 279 211 263" fill="#83C34F" />
-          <path d="M204 331C238 294 278 294 313 316C285 348 246 357 204 347" fill="#4D9138" />
-          <path d="M197 304C166 273 132 278 101 307C130 338 164 341 200 322" fill="#72B748" />
-          <path d="M220 166C207 126 220 92 247 64C270 105 258 145 229 178" fill="#9CD75B" />
-          <path d="M227 157C240 129 247 99 247 64" stroke="#DDF2A6" strokeWidth="4" strokeLinecap="round" />
+        <g className="window-rescue__chair">
+          <path d="M58 250C58 229 73 213 94 213H130C151 213 166 229 166 250V399H58V250Z" fill="#D59E83" stroke="#AE715B" strokeWidth="4" />
+          <path d="M68 388V465M155 388V465" stroke="#A86551" strokeWidth="8" strokeLinecap="round" />
+          <path d="M50 465H176" stroke="#A86551" strokeWidth="8" strokeLinecap="round" />
+          <path d="M63 274H161" stroke="#E5B79C" strokeWidth="4" strokeLinecap="round" opacity=".8" />
         </g>
 
-        <g className="simple-rescue-soil">
-          <ellipse cx="204" cy="358" rx="65" ry="13" fill="#A8784B" />
-          <path d="M157 360C175 352 190 365 204 357C220 348 237 360 253 355" stroke="#D3A06B" strokeWidth="3" strokeLinecap="round" opacity=".75" />
-          <circle cx="172" cy="367" r="3" fill="#C88D59" />
-          <circle cx="238" cy="366" r="3" fill="#C88D59" />
+        <g className="window-rescue__woman" filter="url(#window-rescue-shadow)">
+          <path d="M102 168C84 179 78 202 89 220C99 236 123 241 138 226C151 213 150 188 137 175C128 166 114 163 102 168Z" fill="#3E2A2B" />
+          <circle cx="116" cy="196" r="30" fill="#E8AB83" stroke="#B87562" strokeWidth="3" />
+          <path d="M87 194C89 166 105 153 127 160C144 165 151 181 147 197C138 183 126 179 111 181C103 182 95 188 87 194Z" fill="#473033" />
+          <circle cx="106" cy="201" r="2.5" fill="#563B3A" />
+          <circle cx="126" cy="201" r="2.5" fill="#563B3A" />
+          <path className="window-rescue__sad-mouth" d="M109 214C114 210 120 210 125 214" stroke="#995B59" strokeWidth="2.5" strokeLinecap="round" />
+          <path className="window-rescue__happy-mouth" d="M108 211C113 217 121 217 127 211" stroke="#995B59" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M84 276C87 242 100 228 116 228C136 228 153 247 157 280L163 348H75L84 276Z" fill="#8DB8A0" stroke="#668C7E" strokeWidth="3" />
+          <path d="M99 244C103 268 101 303 96 342M136 244C130 272 132 308 139 342" stroke="#B6D2BA" strokeWidth="3" strokeLinecap="round" opacity=".8" />
+          <path d="M84 274L150 292" stroke="#668C7E" strokeWidth="13" strokeLinecap="round" />
+          <path d="M145 287C165 280 177 270 187 256" stroke="#E8AB83" strokeWidth="11" strokeLinecap="round" />
+          <g className="window-rescue__phone">
+            <rect x="174" y="239" width="35" height="62" rx="7" transform="rotate(16 174 239)" fill="#2D4050" stroke="#1E2C37" strokeWidth="3" />
+            <rect x="180" y="247" width="23" height="42" rx="3" transform="rotate(16 180 247)" fill="#BBD7C0" />
+            <circle cx="190" cy="257" r="4" fill="#F5F1C0" />
+            <circle cx="193" cy="270" r="3" fill="#6B9A3C" />
+            <circle cx="197" cy="281" r="3" fill="#6B9A3C" />
+          </g>
         </g>
 
-        <g className="simple-rescue-fertilizer">
-          <circle cx="193" cy="313" r="5" fill="#D69B4D" />
-          <circle cx="207" cy="325" r="4" fill="#C98942" />
-          <circle cx="222" cy="314" r="5" fill="#E4B460" />
-          <path d="M204 301V335M190 307L176 332M218 307L235 331" stroke="#D69B4D" strokeWidth="3" strokeLinecap="round" strokeDasharray="2 9" />
+        <g className="window-rescue__phone-bubble">
+          <path d="M211 107C211 92 222 81 237 81H335C350 81 361 92 361 107V154C361 169 350 180 335 180H272L248 196V180H237C222 180 211 169 211 154V107Z" fill="#FFFFFF" stroke="#D0DAB9" strokeWidth="3" />
+          <image href="/assets/agriculture-robot.png" x="221" y="92" width="49" height="49" preserveAspectRatio="xMidYMid meet" />
+          <path d="M281 107H338M281 121H326" stroke="#607B52" strokeWidth="4" strokeLinecap="round" />
+          <path d="M281 143H336" stroke="#8BA66A" strokeWidth="4" strokeLinecap="round" />
+          <path d="M281 157H316" stroke="#8BA66A" strokeWidth="4" strokeLinecap="round" />
         </g>
 
-        <g className="simple-rescue-robot" filter="url(#simple-rescue-shadow)">
-          <rect x="101" y="376" width="174" height="28" rx="14" fill="#35530E" opacity=".18" />
-          <rect x="113" y="349" width="151" height="65" rx="27" fill="url(#simple-rescue-robot)" stroke="#799A55" strokeWidth="3" />
-          <rect x="137" y="312" width="104" height="63" rx="25" fill="#FBFDF5" stroke="#799A55" strokeWidth="3" />
-          <rect x="151" y="329" width="76" height="23" rx="11.5" fill="#294A39" />
-          <circle cx="173" cy="340.5" r="5" fill="#BDE27B" />
-          <circle cx="204" cy="340.5" r="5" fill="#BDE27B" />
-          <circle cx="175" cy="339" r="1.5" fill="#FFFFFF" />
-          <circle cx="206" cy="339" r="1.5" fill="#FFFFFF" />
-          <path d="M165 391H212" stroke="#9EB885" strokeWidth="4" strokeLinecap="round" />
-          <path d="M186 312V292" stroke="#789A55" strokeWidth="4" strokeLinecap="round" />
-          <circle cx="186" cy="284" r="9" fill="#D7EDB1" stroke="#789A55" strokeWidth="3" />
-          <circle cx="186" cy="284" r="3" fill="#6B9A3C" />
-          <path d="M122 414V426M251 414V426" stroke="#547A38" strokeWidth="8" strokeLinecap="round" />
-          <circle cx="121" cy="430" r="10" fill="#35530E" />
-          <circle cx="252" cy="430" r="10" fill="#35530E" />
-          <path className="simple-rescue-arm" d="M243 362C272 360 278 334 272 306C270 296 277 288 288 286" stroke="#D4E1C1" strokeWidth="10" strokeLinecap="round" />
-          <path d="M243 362C272 360 278 334 272 306C270 296 277 288 288 286" stroke="#789A55" strokeWidth="3" strokeLinecap="round" />
-          <path d="M285 279L301 274L297 293L284 289Z" fill="#E9B968" stroke="#A56C32" strokeWidth="2" />
-          <path d="M300 283L308 283" stroke="#F3D58E" strokeWidth="3" strokeLinecap="round" />
+        <g className="window-rescue__reply">
+          <circle cx="284" cy="194" r="17" fill="#FFFFFF" stroke="#B4CB91" strokeWidth="3" />
+          <path d="M276 194L281 199L292 187" stroke="#6E9D45" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
         </g>
       </svg>
 
-      <div className="simple-rescue-message simple-rescue-message--scan">
-        <ScanLine className="size-4" />
-        <span>{isArabic ? "أفحص النبتة" : "Scanning plant"}</span>
+      <div className="window-rescue__stage window-rescue__stage--sad">
+        <span>{isArabic ? "شو صار فيها؟" : "What happened?"}</span>
+        <Camera className="size-4" />
       </div>
-      <div className="simple-rescue-message simple-rescue-message--treat">
-        <Sprout className="size-4" />
-        <span>{isArabic ? "أضيف ما تحتاجه" : "Adding what it needs"}</span>
+      <div className="window-rescue__stage window-rescue__stage--reply">
+        <MessageCircle className="size-4" />
+        <span>{isArabic ? "بدها إضاءة خفيفة" : "It needs soft light"}</span>
       </div>
-      <div className="simple-rescue-message simple-rescue-message--grow">
-        <CircleCheck className="size-4" />
-        <span>{isArabic ? "عادت للنمو" : "Growing again"}</span>
+      <div className="window-rescue__stage window-rescue__stage--window">
+        <SunMedium className="size-4" />
+        <span>{isArabic ? "افتحي الشبك" : "Open the screen"}</span>
+      </div>
+      <div className="window-rescue__stage window-rescue__stage--happy">
+        <span>{isArabic ? "رجعت تكبر!" : "It is growing!"}</span>
+        <span className="window-rescue__heart" aria-hidden="true">♥</span>
       </div>
 
-      <div className="simple-rescue-caption">
-        <span>{isArabic ? "من الذبول إلى الحياة" : "From wilted to alive"}</span>
-        <div className="simple-rescue-dots" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-        </div>
+      <div className="window-rescue__caption">
+        <span>{isArabic ? "الروبوت يلاحظ · هي تتصرف · النبتة تكبر" : "Robot notices · she acts · plant grows"}</span>
+        <span className="window-rescue__progress" />
       </div>
     </div>
   );
