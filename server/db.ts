@@ -1,5 +1,5 @@
 import { and, desc, eq, inArray, like, not, or } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/node-postgres";
 import { agriProjects, careTasks, expertReviews, farms, gardens, growingRecords, InsertUser, knowledgeItems, notifications, plantAnalyses, platformSettings, projectDesigns, recommendations, subscriptions, userProfiles, users } from "../drizzle/schema";
 import type { User } from "../drizzle/schema";
 import { nanoid } from "nanoid";
@@ -34,7 +34,7 @@ export async function upsertUser(user: InsertUser): Promise<void> {
   }
   values.role = user.role ?? (user.openId === ENV.ownerOpenId ? "admin" : "user");
   updateSet.role = values.role;
-  await db.insert(users).values(values).onDuplicateKeyUpdate({ set: updateSet });
+  await db.insert(users).values(values).onConflictDoUpdate({ target: users.openId, set: updateSet });
 }
 
 const localUsers = new Map<string, User>();
@@ -101,7 +101,8 @@ export async function getAgriculturalProfile(userId: number) {
 export async function saveAgriculturalProfile(userId: number, profile: AgriculturalProfileInput) {
   const db = await getDb();
   if (!db) throw new Error("The database is currently unavailable.");
-  await db.insert(userProfiles).values({ userId, ...profile }).onDuplicateKeyUpdate({
+  await db.insert(userProfiles).values({ userId, ...profile }).onConflictDoUpdate({
+    target: userProfiles.userId,
     set: { ...profile, updatedAt: new Date() },
   });
   return getAgriculturalProfile(userId);
@@ -257,7 +258,7 @@ export async function listPlatformSettings() {
 export async function savePlatformSetting(updatedByUserId: number, settingKey: string, settingValue: Record<string, unknown>) {
   const db = await getDb();
   if (!db) throw new Error("The database is currently unavailable.");
-  await db.insert(platformSettings).values({ settingKey, settingValue, updatedByUserId }).onDuplicateKeyUpdate({ set: { settingValue, updatedByUserId, updatedAt: new Date() } });
+  await db.insert(platformSettings).values({ settingKey, settingValue, updatedByUserId }).onConflictDoUpdate({ target: platformSettings.settingKey, set: { settingValue, updatedByUserId, updatedAt: new Date() } });
   return listPlatformSettings();
 }
 
