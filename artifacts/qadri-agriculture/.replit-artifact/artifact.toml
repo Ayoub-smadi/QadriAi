@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Al-Qadri Smart Agriculture"
+description = "A bilingual smart agriculture platform that helps gardeners and farmers diagnose plants, plan landscapes and irrigation, choose suitable crops, and manage ongoing care."
+version = "1.0.0"
+id = "artifacts/qadri-agriculture"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22365
+
+[services.development]
+run = "pnpm --filter @workspace/qadri-agriculture run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/qadri-agriculture", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/qadri-agriculture/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22365"
+BASE_PATH = "/"
