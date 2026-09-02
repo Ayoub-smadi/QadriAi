@@ -1,62 +1,46 @@
-import { type ReactNode } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ErrorBoundary } from '@/components/error-boundary';
-import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import NotFound from '@/pages/not-found';
-import {
-  Route,
-  Switch,
-  useLocation,
-  Router as WouterRouter,
-} from 'wouter';
-
-const queryClient = new QueryClient();
-
-function Home() {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold text-gray-900">
-          Replit Agent is building...
-        </h1>
-        <p className="mt-2 text-sm text-gray-600">
-          Your app will appear here once it's ready.
-        </p>
-      </div>
-    </div>
-  );
-}
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Route, Switch } from "wouter";
+import ErrorBoundary from "./components/ErrorBoundary";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { CartProvider } from "./contexts/CartContext";
+import { CartDrawer } from "./components/CartDrawer";
+import { LanguageProvider } from "./lib/i18n";
+import Control from "./pages/Control";
+import Auth from "./pages/Auth";
+import Dashboard from "./pages/Dashboard";
+import Designer from "./pages/Designer";
+import Diagnosis from "./pages/Diagnosis";
+import Engineer from "./pages/Engineer";
+import Home from "./pages/Home";
+import Knowledge from "./pages/Knowledge";
+import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import Projects from "./pages/Projects";
+import Selector from "./pages/Selector";
+import SharedReport from "./pages/SharedReport";
+import Shop from "./pages/Shop";
 
 function Router() {
-  return (
-    // Keep a shared shell (sidebar, navbar) outside the boundary so it
-    // survives a page crash.
-    <RoutedErrorBoundary>
-      <Switch>
-        <Route path="/" component={Home} />
-        <Route component={NotFound} />
-      </Switch>
-    </RoutedErrorBoundary>
-  );
+  return <Switch>
+    <Route path="/" component={Home} />
+    <Route path="/auth" component={Auth} />
+    <Route path="/dashboard" component={Dashboard} />
+    <Route path="/designer" component={Designer} />
+    <Route path="/engineer" component={Engineer} />
+    <Route path="/selector" component={Selector} />
+    <Route path="/diagnosis" component={Diagnosis} />
+    <Route path="/knowledge" component={Knowledge} />
+    <Route path="/projects" component={Projects} />
+    <Route path="/shop" component={Shop} />
+    <Route path="/reports/:shareToken" component={SharedReport} />
+    <Route path="/profile" component={Profile} />
+    <Route path="/control" component={Control} />
+    <Route path="/404" component={NotFound} />
+    <Route component={NotFound} />
+  </Switch>;
 }
 
-function RoutedErrorBoundary({ children }: { children: ReactNode }) {
-  const [location] = useLocation();
-  return <ErrorBoundary resetKey={location}>{children}</ErrorBoundary>;
+export default function App() {
+  return <ErrorBoundary><ThemeProvider defaultTheme="light"><LanguageProvider><TooltipProvider><CartProvider><Toaster /><Router /><CartDrawer /></CartProvider></TooltipProvider></LanguageProvider></ThemeProvider></ErrorBoundary>;
 }
-
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
-  );
-}
-
-export default App;

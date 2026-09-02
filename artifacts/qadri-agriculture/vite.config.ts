@@ -56,6 +56,13 @@ export default defineConfig({
         '..',
         'attached_assets',
       ),
+      '@shared': path.resolve(
+        import.meta.dirname,
+        '..',
+        '..',
+        '.migration-backup',
+        'shared',
+      ),
     },
     dedupe: ['react', 'react-dom'],
   },
@@ -70,7 +77,7 @@ export default defineConfig({
     host: '0.0.0.0',
     allowedHosts: true,
     fs: {
-      strict: true,
+      strict: false,
     },
   },
   preview: {
