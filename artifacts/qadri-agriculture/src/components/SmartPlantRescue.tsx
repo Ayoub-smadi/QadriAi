@@ -89,16 +89,19 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
         </g>
 
         <g className="window-rescue__chair">
-          <path d="M58 250C58 229 73 213 94 213H130C151 213 166 229 166 250V399H58V250Z" fill="#D59E83" stroke="#AE715B" strokeWidth="4" />
-          <path d="M68 388V465M155 388V465" stroke="#A86551" strokeWidth="8" strokeLinecap="round" />
-          <path d="M50 465H176" stroke="#A86551" strokeWidth="8" strokeLinecap="round" />
-          <path d="M63 274H161" stroke="#E5B79C" strokeWidth="4" strokeLinecap="round" opacity=".8" />
+          <path d="M28 250C28 229 43 213 64 213H100C121 213 136 229 136 250V399H28V250Z" fill="#D59E83" stroke="#AE715B" strokeWidth="4" />
+          <path d="M38 388V465M125 388V465" stroke="#A86551" strokeWidth="8" strokeLinecap="round" />
+          <path d="M20 465H146" stroke="#A86551" strokeWidth="8" strokeLinecap="round" />
+          <path d="M33 274H131" stroke="#E5B79C" strokeWidth="4" strokeLinecap="round" opacity=".8" />
         </g>
 
         <g className="window-rescue__girl" filter="url(#window-rescue-shadow)">
-          <image href="/assets/girl.png" x="45" y="142" width="168" height="168" preserveAspectRatio="xMidYMid meet" />
+          <path d="M78 278C83 263 96 254 113 254C132 254 146 265 151 282L161 363H68L78 278Z" fill="#F7E8B5" stroke="#B87864" strokeWidth="3" />
+          <path d="M92 357L88 430M139 357L151 430" stroke="#6D5160" strokeWidth="11" strokeLinecap="round" />
+          <path d="M82 429L104 429M143 429L165 429" stroke="#4C3A45" strokeWidth="8" strokeLinecap="round" />
+          <image href="/assets/girl.png" x="51" y="139" width="140" height="140" preserveAspectRatio="xMidYMid meet" />
           <path className="window-rescue__sad-face" d="M119 229C124 225 130 225 135 229M119 239C124 235 130 235 135 239" stroke="#7D474C" strokeWidth="2.4" strokeLinecap="round" opacity=".9" />
-          <path className="window-rescue__phone-arm" d="M144 274C163 280 178 271 188 256" stroke="#F1B18A" strokeWidth="11" strokeLinecap="round" />
+          <path className="window-rescue__phone-arm" d="M135 278C157 282 178 271 188 256" stroke="#F1B18A" strokeWidth="11" strokeLinecap="round" />
           <g className="window-rescue__phone">
             <rect x="174" y="239" width="35" height="62" rx="7" transform="rotate(16 174 239)" fill="#2D4050" stroke="#1E2C37" strokeWidth="3" />
             <rect x="180" y="247" width="23" height="42" rx="3" transform="rotate(16 180 247)" fill="#BBD7C0" />
