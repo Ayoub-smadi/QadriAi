@@ -158,8 +158,8 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 .window-rescue__window { animation: rescue-window 12s ease-in-out infinite; }
 .window-rescue__screen { animation: rescue-screen 12s ease-in-out infinite; transform-origin: center; }
 .window-rescue__sunbeam { animation: rescue-sun 12s ease-in-out infinite; }
-@keyframes rescue-sick { 0%, 30% { opacity: 1; } 38%, 100% { opacity: 0; } }
-@keyframes rescue-healthy { 0%, 64% { opacity: 0; transform: scale(.72) translateY(24px); } 72%, 100% { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes rescue-sick { 0%, 68% { opacity: 1; } 76%, 100% { opacity: 0; } }
+@keyframes rescue-healthy { 0%, 68% { opacity: 0; transform: scale(.72) translateY(24px); } 76%, 100% { opacity: 1; transform: scale(1) translateY(0); } }
 @keyframes rescue-girl { 0%, 56% { transform: translateX(0); } 64%, 76% { transform: translateX(110px); } 86%, 100% { transform: translateX(0); } }
 @keyframes rescue-phone { 0%, 26% { transform: rotate(0); } 32%, 52% { transform: rotate(-7deg); } 60%, 100% { transform: rotate(0); } }
 @keyframes rescue-arm { 0%, 58% { opacity: 1; } 66%, 100% { opacity: .25; } }
