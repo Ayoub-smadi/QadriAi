@@ -19,10 +19,12 @@ export type PlantKnowledgeEntry = {
   description: { ar: string; en: string };
   plantingGuidance: { ar: string; en: string };
   careGuidance: { ar: string; en: string };
+  careSteps?: { ar: string[]; en: string[] };
   water: { ar: string; en: string };
   light: { ar: string; en: string };
   diseases: PlantIssue[];
   pests: PlantIssue[];
+  prevention?: { ar: string; en: string };
   source: { label: string; url: string };
 };
 
@@ -203,26 +205,54 @@ export const plantKnowledge: PlantKnowledgeEntry[] = [
     id: "damask-rose",
     nameAr: "الورد الجوري",
     nameEn: "Damask rose",
-    scientificName: "Rosa × damascena",
+    scientificName: "Rosa damascena",
     categoryTags: ["shrubs", "flowers", "ornamental"],
     supportedCountries: ["الأردن", "فلسطين", "مصر", "قطر"],
     imagePath: "/assets/knowledge-rose.svg",
     description: {
-      ar: "شجيرة مزهرة عطرية من أشهر نباتات الحدائق العربية، تصلح للأحواض والأصص مع شمس جيدة وتهوية لطيفة.",
-      en: "A fragrant flowering shrub beloved in Arab gardens, suited to beds and containers with good sun and gentle airflow.",
+      ar: "شجيرة مزهرة معمّرة تتميز بأزهارها العطرية وألوانها المتنوعة، وتناسب الحدائق المنزلية والحدائق العامة وتنسيق المواقع. تفضل الإضاءة الجيدة والتربة الخصبة جيدة التصريف.",
+      en: "A perennial flowering shrub known for its fragrant blooms and varied colors. It suits home gardens, public landscapes, and garden design, and prefers good light and fertile, well-drained soil.",
     },
     plantingGuidance: {
-      ar: "ازرع الشتلة في الخريف أو نهاية الشتاء بتربة جيدة الصرف، واترك مسافة تسمح بمرور الهواء حول الأغصان.",
-      en: "Plant in autumn or late winter in well-drained soil, leaving room for air to move around the branches.",
+      ar: "تزرع في تربة جيدة التصريف مع إضافة المادة العضوية، ويفضل اختيار موقع تصله أشعة الشمس المباشرة. تزرع الشتلات مع ترك مسافة مناسبة بينها لضمان التهوية والنمو الجيد.",
+      en: "Plant in well-drained soil enriched with organic matter, preferably in a location that receives direct sunlight. Space seedlings appropriately to support airflow and healthy growth.",
     },
     careGuidance: {
-      ar: "أزل الأزهار الذابلة، وقلم الأغصان الضعيفة بعد السكون، وأضف سمادًا عضويًا متوازنًا في بداية الموسم.",
-      en: "Deadhead spent blooms, prune weak wood after dormancy, and add balanced organic matter at the start of the season.",
+      ar: "العناية المنتظمة تشمل الري والتسميد والتقليم وإزالة الأزهار الذابلة، مع المحافظة على صرف التربة.",
+      en: "Regular care includes watering, feeding, pruning, and removing spent blooms while keeping the soil well drained.",
+    },
+    careSteps: {
+      ar: [
+        "الري المنتظم حسب درجة الحرارة ونوع التربة.",
+        "إضافة السماد العضوي والأسمدة المناسبة خلال موسم النمو.",
+        "التقليم لإزالة الأفرع الضعيفة والمصابة وتحسين التهوية.",
+        "إزالة الأزهار الذابلة لتحفيز الإزهار.",
+        "المحافظة على التربة جيدة التصريف وتجنب تجمع المياه حول الجذور.",
+      ],
+      en: [
+        "Water regularly according to temperature and soil type.",
+        "Add organic matter and suitable fertilizer during the growing season.",
+        "Prune weak and affected branches to improve airflow.",
+        "Remove spent blooms to encourage flowering.",
+        "Keep the soil well drained and prevent water from collecting around the roots.",
+      ],
     },
     water: { ar: "ري عميق عند جفاف سطح التربة؛ تجنب رش الأوراق مساءً.", en: "Deep water when the surface dries; avoid wetting foliage in the evening." },
     light: { ar: "شمس مباشرة 5–7 ساعات مع ظل خفيف في أشد الحر.", en: "5–7 hours of direct sun with light shelter during extreme heat." },
-    diseases: [{ nameAr: "البياض الدقيقي", nameEn: "Powdery mildew", treatmentAr: "حسّن التهوية، خفف تزاحم الأغصان وأزل الأوراق المصابة مبكرًا.", treatmentEn: "Improve airflow, thin crowded growth, and remove affected leaves early." }],
-    pests: [{ nameAr: "حشرة المن", nameEn: "Aphids", treatmentAr: "اغسل النموات الحديثة وراقب الحشرات النافعة قبل استخدام صابون زراعي مسجل.", treatmentEn: "Wash new growth and protect beneficial insects before using a registered horticultural soap." }],
+    diseases: [
+      { nameAr: "البياض الدقيقي", nameEn: "Powdery mildew", treatmentAr: "حسّن التهوية وتجنب الري على الأوراق وأزل الأجزاء المصابة.", treatmentEn: "Improve airflow, avoid wetting foliage, and remove affected parts." },
+      { nameAr: "البقعة السوداء", nameEn: "Black spot", treatmentAr: "أزل الأوراق المصابة وحافظ على جفاف الأوراق ونظافة المنطقة المحيطة.", treatmentEn: "Remove affected leaves, keep foliage dry, and clean the surrounding area." },
+      { nameAr: "الصدأ", nameEn: "Rust", treatmentAr: "أزل الأوراق المصابة وحسّن التهوية واستشر مختصًا عند استمرار الإصابة.", treatmentEn: "Remove affected leaves, improve airflow, and consult a specialist if symptoms persist." },
+      { nameAr: "أعفان الجذور", nameEn: "Root rot", treatmentAr: "حسّن الصرف وتجنب تجمع المياه حول الجذور، وافحص الجذور عند الحاجة.", treatmentEn: "Improve drainage, prevent standing water, and inspect roots when needed." },
+    ],
+    pests: [
+      { nameAr: "المنّ", nameEn: "Aphids", treatmentAr: "اغسل النموات الحديثة وراقب الحشرات النافعة قبل استخدام صابون زراعي مسجل.", treatmentEn: "Wash new growth and protect beneficial insects before using a registered horticultural soap." },
+      { nameAr: "الحشرات القشرية", nameEn: "Scale insects", treatmentAr: "أزل الحشرات الظاهرة ونظف الأفرع وراقب النموات الجديدة قبل استخدام مبيد مناسب.", treatmentEn: "Remove visible insects, clean the branches, and monitor new growth before using a suitable pesticide." },
+    ],
+    prevention: {
+      ar: "تحسين التهوية، تجنب الري على الأوراق، إزالة الأجزاء المصابة، المحافظة على نظافة المنطقة المحيطة بالنبات، واستخدام مبيد فطري أو حشري مناسب عند الحاجة وفق التشخيص وتعليمات المنتج. وتوصي مراجع البستنة بالتركيز أولاً على اختيار النبات المناسب للمناخ، والري الصحيح، والتباعد والتهوية الجيدة للحد من الأمراض.",
+      en: "Improve airflow, avoid wetting foliage, remove affected parts, keep the area around the plant clean, and use a suitable fungicide or insecticide when needed according to diagnosis and the product label. Horticultural references recommend starting with a climate-suitable plant, correct watering, proper spacing, and good airflow to reduce disease.",
+    },
     source: { label: "Royal Horticultural Society", url: "https://www.rhs.org.uk/" },
   },
   {

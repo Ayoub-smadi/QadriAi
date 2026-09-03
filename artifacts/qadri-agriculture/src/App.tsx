@@ -11,6 +11,8 @@ import EmptyPage from "./pages/EmptyPage";
 import Auth from "./pages/Auth";
 import Engineer from "./pages/Engineer";
 import Home from "./pages/Home";
+import Knowledge from "./pages/Knowledge";
+import KnowledgeDetail from "./pages/KnowledgeDetail";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import SharedReport from "./pages/SharedReport";
@@ -26,7 +28,8 @@ function Router() {
         <Route path="/engineer" component={Engineer} />
         <Route path="/selector" component={EmptyPage} />
         <Route path="/diagnosis" component={EmptyPage} />
-        <Route path="/knowledge" component={EmptyPage} />
+        <Route path="/knowledge/:id" component={KnowledgeDetail} />
+        <Route path="/knowledge" component={Knowledge} />
         <Route path="/projects" component={EmptyPage} />
         <Route path="/shop" component={EmptyPage} />
         <Route path="/reports/:shareToken" component={SharedReport} />
