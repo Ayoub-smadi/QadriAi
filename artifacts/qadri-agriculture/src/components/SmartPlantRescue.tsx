@@ -119,12 +119,15 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
       </svg>
 
       <div className="window-rescue__stage window-rescue__stage--sad">
-        <span>{isArabic ? "ليش ذبلت؟" : "Why is it wilted?"}</span>
+        <span>{isArabic ? "النبتة ذابلة" : "The plant is wilted"}</span>
+      </div>
+      <div className="window-rescue__stage window-rescue__stage--photo">
         <Camera className="size-4" />
+        <span>{isArabic ? "أصوّر النبتة" : "Taking a photo"}</span>
       </div>
       <div className="window-rescue__stage window-rescue__stage--reply">
         <MessageCircle className="size-4" />
-        <span>{isArabic ? "النبتة بحاجة لإضاءة خفيفة" : "It needs soft light"}</span>
+        <span>{isArabic ? "تحتاج إضاءة خفيفة" : "It needs soft light"}</span>
       </div>
       <div className="window-rescue__stage window-rescue__stage--window">
         <SunMedium className="size-4" />

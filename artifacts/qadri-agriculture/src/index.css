@@ -141,6 +141,7 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 .window-rescue__dot { width: .45rem; height: .45rem; border-radius: 999px; background: #65b293; box-shadow: 0 0 0 .22rem rgba(101,178,147,.14); }
 .window-rescue__stage { position: absolute; z-index: 3; display: flex; align-items: center; gap: .35rem; border: 1px solid rgba(3,79,59,.12); border-radius: 999px; background: rgba(255,255,255,.92); padding: .38rem .62rem; color: #245d4d; font-size: .62rem; font-weight: 800; box-shadow: 0 8px 20px rgba(3,79,59,.1); opacity: 0; }
 .window-rescue__stage--sad { inset: 42% auto auto 5%; animation: rescue-stage-sad 12s ease-in-out infinite; }
+.window-rescue__stage--photo { inset: 48% auto auto 5%; animation: rescue-stage-photo 12s ease-in-out infinite; }
 .window-rescue__stage--reply { inset: 33% 4% auto auto; animation: rescue-stage-reply 12s ease-in-out infinite; }
 .window-rescue__stage--window { inset: 50% 4% auto auto; animation: rescue-stage-window 12s ease-in-out infinite; }
 .window-rescue__stage--happy { inset: 68% auto auto 8%; animation: rescue-stage-happy 12s ease-in-out infinite; }
@@ -157,20 +158,21 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 .window-rescue__window { animation: rescue-window 12s ease-in-out infinite; }
 .window-rescue__screen { animation: rescue-screen 12s ease-in-out infinite; transform-origin: center; }
 .window-rescue__sunbeam { animation: rescue-sun 12s ease-in-out infinite; }
-@keyframes rescue-sick { 0%, 18% { opacity: 1; } 26%, 100% { opacity: 0; } }
-@keyframes rescue-healthy { 0%, 26% { opacity: 0; transform: scale(.72) translateY(24px); } 38%, 100% { opacity: 1; transform: scale(1) translateY(0); } }
-@keyframes rescue-girl { 0%, 40% { transform: translateX(0); } 50%, 66% { transform: translateX(110px); } 78%, 100% { transform: translateX(0); } }
-@keyframes rescue-phone { 0%, 20% { transform: rotate(0); } 28%, 42% { transform: rotate(-7deg); } 52%, 100% { transform: rotate(0); } }
-@keyframes rescue-arm { 0%, 47% { opacity: 1; } 56%, 100% { opacity: .25; } }
-@keyframes rescue-bubble { 0%, 20% { opacity: 0; transform: scale(.7); } 28%, 70% { opacity: 1; transform: scale(1); } 82%, 100% { opacity: 0; transform: scale(.8); } }
-@keyframes rescue-reply { 0%, 30% { opacity: 0; transform: scale(.7); } 38%, 75% { opacity: 1; transform: scale(1); } 86%, 100% { opacity: 0; } }
-@keyframes rescue-window { 0%, 48% { transform: translateX(0); } 58%, 76% { transform: translateX(-16px); } 90%, 100% { transform: translateX(0); } }
-@keyframes rescue-screen { 0%, 48% { opacity: 1; } 58%, 76% { opacity: .08; } 90%, 100% { opacity: 1; } }
-@keyframes rescue-sun { 0%, 58% { opacity: .25; } 68%, 100% { opacity: .9; } }
-@keyframes rescue-stage-sad { 0%, 9% { opacity: 0; transform: translateY(6px); } 14%, 24% { opacity: 1; transform: translateY(0); } 30%, 100% { opacity: 0; } }
-@keyframes rescue-stage-reply { 0%, 28% { opacity: 0; transform: translateY(6px); } 34%, 45% { opacity: 1; transform: translateY(0); } 52%, 100% { opacity: 0; } }
-@keyframes rescue-stage-window { 0%, 57% { opacity: 0; transform: translateY(6px); } 63%, 74% { opacity: 1; transform: translateY(0); } 82%, 100% { opacity: 0; } }
-@keyframes rescue-stage-happy { 0%, 81% { opacity: 0; transform: translateY(6px); } 87%, 97% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; } }
+@keyframes rescue-sick { 0%, 30% { opacity: 1; } 38%, 100% { opacity: 0; } }
+@keyframes rescue-healthy { 0%, 64% { opacity: 0; transform: scale(.72) translateY(24px); } 72%, 100% { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes rescue-girl { 0%, 56% { transform: translateX(0); } 64%, 76% { transform: translateX(110px); } 86%, 100% { transform: translateX(0); } }
+@keyframes rescue-phone { 0%, 26% { transform: rotate(0); } 32%, 52% { transform: rotate(-7deg); } 60%, 100% { transform: rotate(0); } }
+@keyframes rescue-arm { 0%, 58% { opacity: 1; } 66%, 100% { opacity: .25; } }
+@keyframes rescue-bubble { 0%, 28% { opacity: 0; transform: scale(.7); } 34%, 58% { opacity: 1; transform: scale(1); } 68%, 100% { opacity: 0; transform: scale(.8); } }
+@keyframes rescue-reply { 0%, 40% { opacity: 0; transform: scale(.7); } 46%, 62% { opacity: 1; transform: scale(1); } 72%, 100% { opacity: 0; } }
+@keyframes rescue-window { 0%, 62% { transform: translateX(0); } 69%, 82% { transform: translateX(-16px); } 92%, 100% { transform: translateX(0); } }
+@keyframes rescue-screen { 0%, 62% { opacity: 1; } 69%, 82% { opacity: .08; } 92%, 100% { opacity: 1; } }
+@keyframes rescue-sun { 0%, 68% { opacity: .25; } 75%, 100% { opacity: .9; } }
+@keyframes rescue-stage-sad { 0%, 7% { opacity: 0; transform: translateY(6px); } 11%, 20% { opacity: 1; transform: translateY(0); } 25%, 100% { opacity: 0; } }
+@keyframes rescue-stage-photo { 0%, 20% { opacity: 0; transform: translateY(6px); } 25%, 34% { opacity: 1; transform: translateY(0); } 39%, 100% { opacity: 0; } }
+@keyframes rescue-stage-reply { 0%, 38% { opacity: 0; transform: translateY(6px); } 44%, 57% { opacity: 1; transform: translateY(0); } 63%, 100% { opacity: 0; } }
+@keyframes rescue-stage-window { 0%, 65% { opacity: 0; transform: translateY(6px); } 71%, 82% { opacity: 1; transform: translateY(0); } 89%, 100% { opacity: 0; } }
+@keyframes rescue-stage-happy { 0%, 86% { opacity: 0; transform: translateY(6px); } 90%, 98% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; } }
 @keyframes rescue-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @media (prefers-reduced-motion: reduce) { .window-rescue__stage, .window-rescue__scene *, .window-rescue__progress::after { animation: none !important; } .window-rescue__sick-plant { opacity: 0; } .window-rescue__healthy-plant, .window-rescue__phone-bubble, .window-rescue__reply, .window-rescue__sunbeam { opacity: 1; } }
 
