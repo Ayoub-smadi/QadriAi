@@ -8,14 +8,20 @@ import {
   ChevronLeft,
   ClipboardList,
   DraftingCompass,
+  Facebook,
+  FileText,
   FlaskConical,
   Home as HomeIcon,
+  Instagram,
   LayoutDashboard,
+  Mail,
   Menu,
+  MessageCircle,
   Phone,
   ScanSearch,
   ShoppingBag,
   Sprout,
+  Store,
   UserRound,
   X,
 } from "lucide-react";
@@ -73,13 +79,13 @@ export function PlatformShell({
             <a
               href="tel:0777772211"
               dir="ltr"
-              className="inline-flex items-center gap-2 rounded-full px-1.5 py-1 no-underline transition-colors hover:text-white"
+              className="inline-flex items-center gap-2 rounded-full px-1.5 py-1 text-sm font-extrabold no-underline transition-colors hover:text-white"
               aria-label="Call 0777772211"
             >
               <span className="grid size-5 place-items-center rounded-full bg-[#9dd7bd] text-[#034f3b]">
                 <Phone className="size-3" />
               </span>
-              <span>0777772211</span>
+              <span dir="ltr">0777772211</span>
             </a>
             <span className="hidden items-center gap-1.5 sm:inline-flex">
               <BadgeCheck className="size-3.5 text-[#9dd7bd]" />
@@ -296,18 +302,54 @@ export function PlatformShell({
         </div>
       )}
       {children}
-      <footer className="mt-16 border-t border-primary/10 bg-white">
-        <div className="container flex flex-col items-center justify-between gap-3 py-7 text-center text-xs text-[#6b775e] sm:flex-row sm:text-start">
-          <span>
-            © {new Date().getFullYear()} {t.brand}
-          </span>
-          <span className="flex items-center gap-1">
-            <FlaskConical className="size-3.5" />
-            {t.safe}
-          </span>
+      <footer className="mt-16 overflow-hidden bg-[#003f31] text-white">
+        <div className="container grid gap-10 py-12 sm:py-14 lg:grid-cols-[1.1fr_1.9fr] lg:items-center">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="grid size-14 place-items-center rounded-2xl border border-white/20 bg-white/10 p-2">
+                <img src="/assets/qadri-bot-logo.png" alt="" aria-hidden="true" className="size-full rounded-xl object-contain" />
+              </span>
+              <div>
+                <p className="text-xl font-bold">{t.brand}</p>
+                <p className="mt-1 text-xs font-semibold tracking-[.18em] text-[#b9dfcf]">SMART AGRICULTURE</p>
+              </div>
+            </div>
+            <p className="mt-5 max-w-md text-sm leading-7 text-[#d5eee3]">
+              {language === "ar" ? "تواصل مع القادري الزراعي لمزيد من المعلومات والخدمات الزراعية." : "Connect with Al-Qadri Agricultural for more information and agricultural services."}
+            </p>
+            <a href="tel:0777772211" dir="ltr" className="mt-5 inline-flex items-center gap-3 text-2xl font-extrabold tracking-wide text-white no-underline transition-colors hover:text-[#b9dfcf]">
+              <Phone className="size-6 text-[#9dd7bd]" />0777772211
+            </a>
+          </div>
+
+          <div>
+            <h2 className="text-lg font-bold">{language === "ar" ? "تواصل معنا" : "Connect with us"}</h2>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+              <FooterLink href="https://api.whatsapp.com/send/?phone=962777772211&text&type=phone_number&app_absent=0" icon={<MessageCircle className="size-5" />} label={language === "ar" ? "واتساب" : "WhatsApp"} />
+              <FooterLink href="https://www.instagram.com/alqadri_agricultural__jerash/" icon={<Instagram className="size-5" />} label={language === "ar" ? "إنستغرام" : "Instagram"} />
+              <FooterLink href="https://web.facebook.com/msateelalqadry?rdid=7y0JQhPVm9CAngY7&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1JquHHzpXy%2F%3F_rdc%3D1%26_rdr#" icon={<Facebook className="size-5" />} label={language === "ar" ? "فيسبوك" : "Facebook"} />
+              <FooterLink href="https://drive.google.com/file/d/1il6mcWDQ_bhefXjxEGfPudlhNvC-91n1/view?usp=sharing" icon={<FileText className="size-5" />} label={language === "ar" ? "الكتيب" : "Brochure"} />
+              <FooterLink href="https://www.alqadrioffers.online/agri-store" icon={<Store className="size-5" />} label={language === "ar" ? "المتجر الزراعي" : "Agricultural store"} />
+              <FooterLink href="mailto:tamerqadri@gmail.com" icon={<Mail className="size-5" />} label="tamerqadri@gmail.com" />
+            </div>
+          </div>
+        </div>
+        <div className="border-t border-white/10">
+          <div className="container flex flex-col items-center justify-between gap-3 py-5 text-center text-xs text-[#b9dfcf] sm:flex-row sm:text-start">
+            <span>© {new Date().getFullYear()} {t.brand}</span>
+            <span className="flex items-center gap-1"><FlaskConical className="size-3.5" />{t.safe}</span>
+          </div>
         </div>
       </footer>
     </div>
+  );
+}
+
+function FooterLink({ href, icon, label }: { href: string; icon: ReactNode; label: string }) {
+  return (
+    <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined} className="flex min-h-12 items-center gap-3 rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-bold text-white no-underline transition-colors hover:bg-white/20">
+      <span className="text-[#9dd7bd]">{icon}</span>{label}
+    </a>
   );
 }
 
