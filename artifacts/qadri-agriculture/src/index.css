@@ -380,33 +380,33 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 }
 
 @keyframes window-rescue-screen {
-  0%, 53% { transform: translateY(0); }
-  65%, 91% { transform: translateY(-72px); }
+  0%, 58% { transform: translateY(0); }
+  66%, 91% { transform: translateY(-72px); }
   100% { transform: translateY(0); }
 }
 
 @keyframes window-rescue-light {
-  0%, 57% { opacity: 0; }
-  66%, 92% { opacity: .9; }
+  0%, 61% { opacity: 0; }
+  68%, 92% { opacity: .9; }
   100% { opacity: 0; }
 }
 
 @keyframes window-rescue-sick {
-  0%, 69% { opacity: 1; transform: translateY(0) rotate(-2deg); }
-  77%, 100% { opacity: 0; transform: translateY(8px) rotate(0); }
+  0%, 73% { opacity: 1; transform: translateY(0) rotate(-2deg); }
+  81%, 100% { opacity: 0; transform: translateY(8px) rotate(0); }
 }
 
 @keyframes window-rescue-healthy {
-  0%, 67% { opacity: 0; transform: translateY(12px) scale(.7); }
-  77% { opacity: 1; transform: translateY(0) scale(.82); }
-  88%, 96% { opacity: 1; transform: translateY(-7px) scale(1.08); }
+  0%, 75% { opacity: 0; transform: translateY(12px) scale(.7); }
+  82% { opacity: 1; transform: translateY(0) scale(.82); }
+  90%, 97% { opacity: 1; transform: translateY(-7px) scale(1.08); }
   100% { opacity: 0; transform: translateY(-10px) scale(1.12); }
 }
 
 @keyframes window-rescue-phone {
-  0%, 12% { transform: translate(0, 0) rotate(0); }
-  20%, 38% { transform: translate(-13px, -22px) rotate(-10deg); }
-  48%, 100% { transform: translate(0, 0) rotate(0); }
+  0%, 20% { transform: translate(0, 0) rotate(0); }
+  25%, 37% { transform: translate(-2px, -2px) rotate(-5deg); }
+  43%, 100% { transform: translate(0, 0) rotate(0); }
 }
 
 @keyframes window-rescue-face-sad {
@@ -421,9 +421,30 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 }
 
 @keyframes window-rescue-woman {
-  0%, 38% { transform: translateY(0); }
-  45%, 65% { transform: translate(18px, -12px); }
-  72%, 100% { transform: translate(0, 0); }
+  0%, 21% { transform: translate(0, 0) rotate(0); }
+  27%, 38% { transform: translate(0, -2px) rotate(-2deg); }
+  43% { transform: translate(18px, -1px) rotate(-1deg); }
+  55%, 78% { transform: translate(78px, -9px) rotate(0); }
+  86%, 96% { transform: translate(78px, -9px) rotate(1deg); }
+  100% { transform: translate(0, 0) rotate(0); }
+}
+
+@keyframes window-rescue-button-action {
+  0%, 59% { opacity: 0; transform: translateY(5px); }
+  64%, 71% { opacity: 1; transform: translateY(0); }
+  78%, 100% { opacity: 0; transform: translateY(5px); }
+}
+
+@keyframes window-rescue-button-pulse {
+  0%, 62% { opacity: 0; transform: scale(.7); }
+  66%, 71% { opacity: 1; transform: scale(1); }
+  78%, 100% { opacity: 0; transform: scale(1.4); }
+}
+
+@keyframes window-rescue-laugh {
+  0%, 80% { opacity: 0; transform: scale(.7) rotate(-3deg); }
+  87%, 97% { opacity: 1; transform: scale(1) rotate(0); }
+  100% { opacity: 0; transform: scale(.8) rotate(3deg); }
 }
 
 @keyframes window-rescue-bubble {
@@ -476,6 +497,10 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 .window-rescue__sick-plant { transform-box: fill-box; transform-origin: center bottom; animation: window-rescue-sick 9s ease-in-out infinite; }
 .window-rescue__healthy-plant { transform-box: fill-box; transform-origin: center bottom; animation: window-rescue-healthy 9s cubic-bezier(.22,.8,.28,1) infinite; }
 .window-rescue__girl { transform-box: fill-box; transform-origin: center bottom; animation: window-rescue-woman 9s ease-in-out infinite; }
+.window-rescue__phone-arm { transform-box: fill-box; transform-origin: left center; }
+.window-rescue__button-action { transform-box: fill-box; transform-origin: left center; animation: window-rescue-button-action 9s ease-in-out infinite; }
+.window-rescue__button-pulse { transform-box: fill-box; transform-origin: center; animation: window-rescue-button-pulse 9s ease-in-out infinite; }
+.window-rescue__laugh { transform-box: fill-box; transform-origin: center; animation: window-rescue-laugh 9s ease-in-out infinite; }
 .window-rescue__sad-face { animation: window-rescue-face-sad 9s ease-in-out infinite; }
 .window-rescue__phone { transform-box: fill-box; transform-origin: center; animation: window-rescue-phone 9s ease-in-out infinite; }
 .window-rescue__sad-mouth { animation: window-rescue-face-sad 9s ease-in-out infinite; }
@@ -492,9 +517,10 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 .window-rescue__progress { display: block; width: 8%; height: .25rem; border-radius: 99px; background: #86A94D; animation: window-rescue-progress 9s cubic-bezier(.22,.8,.28,1) infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .window-rescue__screen, .window-rescue__sunbeam, .window-rescue__sick-plant, .window-rescue__healthy-plant, .window-rescue__phone, .window-rescue__woman, .window-rescue__sad-mouth, .window-rescue__happy-mouth, .window-rescue__phone-bubble, .window-rescue__reply, .window-rescue__stage, .window-rescue__progress { animation: none; }
+  .window-rescue__screen, .window-rescue__sunbeam, .window-rescue__sick-plant, .window-rescue__healthy-plant, .window-rescue__phone, .window-rescue__girl, .window-rescue__button-action, .window-rescue__button-pulse, .window-rescue__laugh, .window-rescue__sad-mouth, .window-rescue__happy-mouth, .window-rescue__phone-bubble, .window-rescue__reply, .window-rescue__stage, .window-rescue__progress { animation: none; }
   .window-rescue__sick-plant, .window-rescue__sad-mouth, .window-rescue__stage--sad, .window-rescue__stage--reply, .window-rescue__stage--window { opacity: 0; }
-  .window-rescue__healthy-plant, .window-rescue__happy-mouth, .window-rescue__stage--happy { opacity: 1; }
+  .window-rescue__girl { transform: translate(78px, -9px); }
+  .window-rescue__healthy-plant, .window-rescue__happy-mouth, .window-rescue__button-action, .window-rescue__button-pulse, .window-rescue__laugh, .window-rescue__stage--happy { opacity: 1; }
   .window-rescue__screen { transform: translateY(-72px); }
   .window-rescue__sunbeam { opacity: .9; }
   .window-rescue__progress { width: 100%; }

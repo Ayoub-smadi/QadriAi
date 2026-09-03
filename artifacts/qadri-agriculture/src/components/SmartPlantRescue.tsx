@@ -14,8 +14,8 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
       role="img"
       aria-label={
         isArabic
-          ? "فتاة حزينة تصور نبتة ذابلة بهاتفها، يرد عليها روبوت بأن النبتة تحتاج إضاءة خفيفة، فتفتح الشبك وتعود النبتة خضراء وكبيرة وتفرح"
-          : "A sad girl photographs a wilted plant, the robot says it needs soft light, she opens the window screen, and the plant grows green while she smiles"
+          ? "فتاة تمسك هاتفها وتنظر إلى نبتة ذابلة، ثم تمشي إلى الشباك وتضغط زر رفعه، فتعود النبتة كبيرة وخضراء وتضحك فرحًا"
+          : "A girl holds her phone and looks at a wilted plant, walks to the window and presses its lift button, then laughs as the plant grows big and green"
       }
     >
       <div className="window-rescue__label">
@@ -90,13 +90,24 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
 
         <g className="window-rescue__girl" filter="url(#window-rescue-shadow)">
           <image href="/assets/girl-full-body-trimmed.png" x="56" y="130" width="84" height="316" preserveAspectRatio="none" />
-          <g className="window-rescue__phone">
-            <rect x="149" y="274" width="35" height="62" rx="7" transform="rotate(16 149 274)" fill="#2D4050" stroke="#1E2C37" strokeWidth="3" />
-            <rect x="155" y="282" width="23" height="42" rx="3" transform="rotate(16 155 282)" fill="#BBD7C0" />
-            <circle cx="165" cy="292" r="4" fill="#F5F1C0" />
-            <circle cx="168" cy="305" r="3" fill="#6B9A3C" />
-            <circle cx="172" cy="316" r="3" fill="#6B9A3C" />
+          <path className="window-rescue__phone-arm" d="M122 276C130 286 138 300 145 309" stroke="#F1B18A" strokeWidth="10" strokeLinecap="round" />
+          <g className="window-rescue__laugh" aria-hidden="true">
+            <path d="M78 212C80 207 84 205 87 206M108 205C112 203 116 205 118 209" stroke="#C87062" strokeWidth="2.5" strokeLinecap="round" opacity=".85" />
+            <path d="M89 215C94 219 100 219 104 214" stroke="#7D474C" strokeWidth="2.4" strokeLinecap="round" />
           </g>
+          <g className="window-rescue__phone">
+            <rect x="132" y="296" width="32" height="56" rx="7" transform="rotate(16 132 296)" fill="#2D4050" stroke="#1E2C37" strokeWidth="3" />
+            <rect x="138" y="304" width="21" height="38" rx="3" transform="rotate(16 138 304)" fill="#BBD7C0" />
+            <circle cx="147" cy="313" r="4" fill="#F5F1C0" />
+            <circle cx="150" cy="325" r="3" fill="#6B9A3C" />
+            <circle cx="154" cy="336" r="3" fill="#6B9A3C" />
+          </g>
+        </g>
+
+        <g className="window-rescue__button-action" aria-hidden="true">
+          <path d="M201 274C218 251 238 226 256 207" stroke="#F1B18A" strokeWidth="10" strokeLinecap="round" />
+          <circle cx="256" cy="207" r="9" fill="#E8B75F" stroke="#9C7542" strokeWidth="3" />
+          <circle className="window-rescue__button-pulse" cx="256" cy="207" r="15" stroke="#E8B75F" strokeWidth="2" />
         </g>
 
         <g className="window-rescue__phone-bubble">
