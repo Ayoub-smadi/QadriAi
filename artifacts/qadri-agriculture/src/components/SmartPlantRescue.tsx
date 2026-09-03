@@ -10,7 +10,7 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
   return (
     <div
       dir={isArabic ? "rtl" : "ltr"}
-      className="window-rescue relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] border border-[#d9d7bd] bg-[#fbfaf2] shadow-[0_24px_60px_rgba(72,73,39,.14)]"
+      className="window-rescue relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] border border-[#d4e4f4] bg-[#f5f9ff] shadow-[0_24px_60px_rgba(31,63,120,.14)]"
       role="img"
       aria-label={
         isArabic
@@ -112,7 +112,7 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
 
         <g className="window-rescue__phone-bubble">
           <path d="M211 107C211 92 222 81 237 81H335C350 81 361 92 361 107V154C361 169 350 180 335 180H272L248 196V180H237C222 180 211 169 211 154V107Z" fill="#FFFFFF" stroke="#D0DAB9" strokeWidth="3" />
-          <image href="/assets/agriculture-robot.png" x="221" y="92" width="49" height="49" preserveAspectRatio="xMidYMid meet" />
+          <image href="/assets/qadri-bot-logo.png" x="221" y="92" width="49" height="49" preserveAspectRatio="xMidYMid meet" />
           <path d="M281 107H338M281 121H326" stroke="#607B52" strokeWidth="4" strokeLinecap="round" />
           <path d="M281 143H336" stroke="#8BA66A" strokeWidth="4" strokeLinecap="round" />
           <path d="M281 157H316" stroke="#8BA66A" strokeWidth="4" strokeLinecap="round" />
