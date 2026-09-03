@@ -88,13 +88,6 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
           </g>
         </g>
 
-        <g className="window-rescue__chair">
-          <path d="M28 250C28 229 43 213 64 213H100C121 213 136 229 136 250V399H28V250Z" fill="#D59E83" stroke="#AE715B" strokeWidth="4" />
-          <path d="M38 388V465M125 388V465" stroke="#A86551" strokeWidth="8" strokeLinecap="round" />
-          <path d="M20 465H146" stroke="#A86551" strokeWidth="8" strokeLinecap="round" />
-          <path d="M33 274H131" stroke="#E5B79C" strokeWidth="4" strokeLinecap="round" opacity=".8" />
-        </g>
-
         <g className="window-rescue__girl" filter="url(#window-rescue-shadow)">
           <path d="M78 278C83 263 96 254 113 254C132 254 146 265 151 282L161 363H68L78 278Z" fill="#F7E8B5" stroke="#B87864" strokeWidth="3" />
           <path d="M92 357L88 430M139 357L151 430" stroke="#6D5160" strokeWidth="11" strokeLinecap="round" />
