@@ -4,7 +4,7 @@ import { agriProjects, careTasks, expertReviews, farms, gardens, growingRecords,
 import type { User } from "../drizzle/schema";
 import { nanoid } from "nanoid";
 import { ENV } from "./_core/env";
-import { createLocalOpenId, hashPassword, normalizePhone, normalizeUsername } from "./credentialAuth";
+import { ADMIN_PASSWORD, ADMIN_PHONE, ADMIN_USERNAME, createLocalOpenId, hashPassword, normalizePhone, normalizeUsername, verifyPassword } from "./credentialAuth";
 import { baseKnowledge as expandedKnowledge } from "./knowledgeSeed";
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -70,6 +70,44 @@ export async function createCredentialUser(input: { name: string; phone: string;
   const openId = createLocalOpenId();
   await db.insert(users).values({ openId, username, phone, passwordHash, name: input.name.trim(), loginMethod: "credentials", role: input.role ?? "user", lastSignedIn: new Date() });
   return getUserByOpenId(openId);
+}
+
+export async function ensureAdminAccount() {
+  if (!ADMIN_PASSWORD) {
+    console.warn("[Auth] ADMIN_PASSWORD is not configured; the admin account was not seeded.");
+    return undefined;
+  }
+
+  const existing = await findCredentialUser(ADMIN_USERNAME);
+  if (!existing) {
+    return createCredentialUser({
+      name: "Ayoub",
+      username: ADMIN_USERNAME,
+      phone: ADMIN_PHONE || "0000000000",
+      password: ADMIN_PASSWORD,
+      role: "admin",
+    });
+  }
+
+  const needsUpdate = existing.role !== "admin" || !verifyPassword(ADMIN_PASSWORD, existing.passwordHash);
+  if (!needsUpdate) return existing;
+
+  const db = await getDb();
+  const now = new Date();
+  if (!db) {
+    const updated = { ...existing, name: "Ayoub", passwordHash: hashPassword(ADMIN_PASSWORD), loginMethod: "credentials", role: "admin" as const, updatedAt: now };
+    localUsers.set(existing.openId, updated);
+    return updated;
+  }
+
+  await db.update(users).set({
+    name: "Ayoub",
+    passwordHash: hashPassword(ADMIN_PASSWORD),
+    loginMethod: "credentials",
+    role: "admin",
+    updatedAt: now,
+  }).where(eq(users.id, existing.id));
+  return getUserByOpenId(existing.openId);
 }
 
 export async function touchCredentialUser(user: User) {

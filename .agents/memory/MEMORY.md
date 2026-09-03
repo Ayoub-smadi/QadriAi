@@ -1,2 +1,3 @@
 - [Imported artifact preview](imported-artifact-preview.md) — imported artifact folders may run through the legacy workflow while remaining absent from the artifact registry.
 - [Quote persistence boundary](quote-persistence-boundary.md) — quote requests currently persist in browser storage until the shared API/database follow-up is implemented.
+- [Admin account persistence](admin-account-persistence.md) — the Ayoub admin identity is database-backed and re-seeded from the secret at server startup.
