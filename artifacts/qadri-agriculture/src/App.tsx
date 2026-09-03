@@ -7,19 +7,13 @@ import { CartProvider } from "./contexts/CartContext";
 import { CartDrawer } from "./components/CartDrawer";
 import { LanguageProvider } from "./lib/i18n";
 import Control from "./pages/Control";
+import EmptyPage from "./pages/EmptyPage";
 import Auth from "./pages/Auth";
-import Dashboard from "./pages/Dashboard";
-import Designer from "./pages/Designer";
-import Diagnosis from "./pages/Diagnosis";
 import Engineer from "./pages/Engineer";
 import Home from "./pages/Home";
-import Knowledge from "./pages/Knowledge";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
-import Projects from "./pages/Projects";
-import Selector from "./pages/Selector";
 import SharedReport from "./pages/SharedReport";
-import Shop from "./pages/Shop";
 
 function Router() {
   return (
@@ -27,14 +21,14 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/auth" component={Auth} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/designer" component={Designer} />
+        <Route path="/dashboard" component={EmptyPage} />
+        <Route path="/designer" component={EmptyPage} />
         <Route path="/engineer" component={Engineer} />
-        <Route path="/selector" component={Selector} />
-        <Route path="/diagnosis" component={Diagnosis} />
-        <Route path="/knowledge" component={Knowledge} />
-        <Route path="/projects" component={Projects} />
-        <Route path="/shop" component={Shop} />
+        <Route path="/selector" component={EmptyPage} />
+        <Route path="/diagnosis" component={EmptyPage} />
+        <Route path="/knowledge" component={EmptyPage} />
+        <Route path="/projects" component={EmptyPage} />
+        <Route path="/shop" component={EmptyPage} />
         <Route path="/reports/:shareToken" component={SharedReport} />
         <Route path="/profile" component={Profile} />
         <Route path="/control" component={Control} />
