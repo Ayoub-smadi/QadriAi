@@ -84,7 +84,7 @@ export default function Home() {
           ? "إرشاد سياقي يراعي موقعك ومياهك وتربتك وأهدافك."
           : "Context-aware guidance shaped by your place, water, soil, and goals.",
       href: "/engineer",
-      tone: "bg-[#eff5e7]",
+      tone: "bg-[#e8f4ff]",
     },
     {
       icon: DraftingCompass,
@@ -94,7 +94,7 @@ export default function Home() {
           ? "صمّم أرضك بالسحب والإفلات، احسب الكميات، وصدّر مخططك وتقريرك الفني."
           : "Design with drag & drop, estimate quantities, and export your plan and technical report.",
       href: "/designer",
-      tone: "bg-[#e8f2e7]",
+      tone: "bg-[#e9f8f6]",
     },
     {
       icon: ScanSearch,
@@ -104,7 +104,7 @@ export default function Home() {
           ? "ارفع صورة لتحصل على قراءة أولية حذرة وخطوات آمنة."
           : "Upload a photo for cautious initial triage and safe next steps.",
       href: "/diagnosis",
-      tone: "bg-[#f6f1e6]",
+      tone: "bg-[#eef4ff]",
     },
     {
       icon: Sprout,
@@ -114,7 +114,7 @@ export default function Home() {
           ? "ترشيحات قابلة للتفسير قبل بدء التخطيط أو التنفيذ."
           : "Explainable suitability recommendations before you plan or build.",
       href: "/selector",
-      tone: "bg-[#edf3ee]",
+      tone: "bg-[#eaf8ed]",
     },
     {
       icon: TreePine,
@@ -124,35 +124,35 @@ export default function Home() {
           ? "مهام العناية والمشاريع والسجل الزراعي في مساحة واحدة."
           : "Care tasks, projects, and your agricultural record in one workspace.",
       href: "/dashboard",
-      tone: "bg-[#edf0df]",
+      tone: "bg-[#edf3ff]",
     },
   ];
 
   return (
     <PlatformShell>
       <main>
-        <section className="relative overflow-hidden border-b border-[#35530e]/10 bg-[#eff3e8]">
+        <section className="relative overflow-hidden border-b border-[#203f78]/10 bg-[#eef6ff]">
           <div
             className="absolute inset-0 opacity-60"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 10% 15%, rgba(255,255,255,.95) 0, transparent 28%), linear-gradient(115deg, rgba(247,250,242,.92), rgba(234,242,225,.18))",
+                "radial-gradient(circle at 10% 15%, rgba(255,255,255,.98) 0, transparent 28%), linear-gradient(115deg, rgba(245,250,255,.95), rgba(225,244,246,.3))",
             }}
           />
           <div className="container relative grid min-h-[610px] items-center gap-10 py-12 lg:grid-cols-[.92fr_1.08fr] lg:py-16">
             <div className="order-2 max-w-2xl lg:order-1">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#5d7d30]/18 bg-white/80 px-3 py-1.5 text-xs font-bold text-[#476b19]">
-                <span className="size-1.5 rounded-full bg-[#88a849]" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#203f78]/18 bg-white/85 px-3 py-1.5 text-xs font-bold text-[#35588a]">
+                <span className="size-1.5 rounded-full bg-[#21cbd0]" />
                 {language === "ar"
                   ? "ذكاء زراعي مسؤول، بتوجيه من الخبرة"
                   : "Responsible AI, guided by agricultural expertise"}
               </div>
-              <h1 className="mt-6 text-balance text-4xl font-bold leading-[1.16] tracking-tight text-[#29410d] sm:text-5xl lg:text-6xl">
+              <h1 className="mt-6 text-balance text-4xl font-bold leading-[1.16] tracking-tight text-[#203f78] sm:text-5xl lg:text-6xl">
                 {language === "ar"
                   ? "مهندس زراعي ذكي بين يديك."
                   : "An intelligent agricultural engineer at your fingertips."}
               </h1>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-[#607052]">
+              <p className="mt-6 max-w-xl text-lg leading-8 text-[#60708c]">
                 {language === "ar"
                   ? "من الاستشارة والتشخيص إلى التخطيط والمتابعة، يساعدك القادري الزراعي الذكي في اتخاذ قرارات أوضح لحديقتك أو مزرعتك — بذكاء سياقي ومراجعة خبراء عند الحاجة."
                   : "From consultation and diagnosis to planning and follow-up, Al-Qadri helps you make clearer decisions for your garden or farm—with contextual intelligence and expert review when needed."}
@@ -160,7 +160,7 @@ export default function Home() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button
                   asChild
-                  className="h-12 rounded-xl bg-[#35530e] px-5 text-base text-white shadow-[0_12px_24px_rgba(53,83,14,.22)] hover:bg-[#294108]"
+                  className="h-12 rounded-xl bg-[#203f78] px-5 text-base text-white shadow-[0_12px_24px_rgba(31,63,120,.22)] hover:bg-[#19345f]"
                 >
                   <Link href={isAuthenticated ? "/dashboard" : "/selector"}>
                     {t.start}
@@ -170,7 +170,7 @@ export default function Home() {
                 <Button
                   asChild
                   variant="outline"
-                  className="h-12 rounded-xl border-[#35530e]/20 bg-white px-5 text-base text-[#35530e] hover:bg-[#f4f7f0]"
+                  className="h-12 rounded-xl border-[#203f78]/20 bg-white px-5 text-base text-[#203f78] hover:bg-[#eef6ff]"
                 >
                   <Link href="/engineer">
                     <Bot className="me-2 size-4" />
@@ -181,26 +181,26 @@ export default function Home() {
                   <Button
                     onClick={() => setLocation("/auth")}
                     variant="outline"
-                    className="h-12 rounded-xl border-[#35530e]/20 bg-white px-5 text-base text-[#35530e] hover:bg-[#f4f7f0]"
+                    className="h-12 rounded-xl border-[#203f78]/20 bg-white px-5 text-base text-[#203f78] hover:bg-[#eef6ff]"
                   >
                     {t.signIn}
                   </Button>
                 )}
               </div>
-              <div className="mt-10 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-[#5d6b4d]">
+              <div className="mt-10 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-[#536987]">
                 <span className="flex items-center gap-2">
-                  <ShieldCheck className="size-4 text-[#66852e]" />
+                  <ShieldCheck className="size-4 text-[#68c77b]" />
                   {language === "ar" ? "توصيات حذرة" : "Cautious guidance"}
                 </span>
                 <span className="flex items-center gap-2">
-                  <CheckCircle2 className="size-4 text-[#66852e]" />
+                  <CheckCircle2 className="size-4 text-[#68c77b]" />
                   {language === "ar" ? "خطوات قابلة للتفسير" : "Explainable next steps"}
                 </span>
               </div>
             </div>
             <div className="order-1 lg:order-2">
               <div className="relative mx-auto w-full max-w-[430px]">
-                <div className="absolute -inset-4 rounded-[2.25rem] bg-[#6c8b37]/15 blur-2xl" />
+                <div className="absolute -inset-4 rounded-[2.25rem] bg-[#21cbd0]/15 blur-2xl" />
                 <SmartPlantRescue language={language} />
               </div>
             </div>
@@ -209,29 +209,29 @@ export default function Home() {
 
         <section className="container py-12 sm:py-16">
           <div
-            className="relative overflow-hidden rounded-[2rem] border border-[#35530e]/10 bg-[#f4f8ee] p-6 shadow-[0_16px_40px_rgba(48,67,22,.07)] sm:p-9"
+            className="relative overflow-hidden rounded-[2rem] border border-[#203f78]/10 bg-[#f2f8ff] p-6 shadow-[0_16px_40px_rgba(31,63,120,.07)] sm:p-9"
             dir={language === "ar" ? "rtl" : "ltr"}
           >
-            <div className="pointer-events-none absolute -end-16 -top-20 size-48 rounded-full bg-[#dcebbd]/70 blur-3xl" />
+            <div className="pointer-events-none absolute -end-16 -top-20 size-48 rounded-full bg-[#ccefe5]/70 blur-3xl" />
             <div className="relative max-w-4xl">
-              <p className="text-xs font-bold tracking-[.16em] text-[#759244]">
+              <p className="text-xs font-bold tracking-[.16em] text-[#4e79a9]">
                 {language === "ar" ? "رؤية زراعية من الأردن" : "AN AGRICULTURAL VISION FROM JORDAN"}
               </p>
-              <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#293d12] sm:text-3xl">
+              <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#203f78] sm:text-3xl">
                 {language === "ar" ? "المهندس ثامر القادري" : "Engineer Thamer Al-Qadri"}
               </h2>
-              <p className="mt-5 min-h-[11rem] text-base leading-8 text-[#5f6d50] sm:min-h-[8rem]" aria-live="polite">
+              <p className="mt-5 min-h-[11rem] text-base leading-8 text-[#60708c] sm:min-h-[8rem]" aria-live="polite">
                 {typedBio}
-                <span className="ms-1 inline-block font-bold text-[#6d9335] animate-pulse">|</span>
+                <span className="ms-1 inline-block font-bold text-[#21cbd0] animate-pulse">|</span>
               </p>
-              <div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold text-[#496327]">
-                <a href="tel:0777772211" className="inline-flex items-center gap-2 rounded-full border border-[#bcd3a1] bg-white/80 px-4 py-2 transition hover:bg-white">
+              <div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold text-[#35588a]">
+                <a href="tel:0777772211" className="inline-flex items-center gap-2 rounded-full border border-[#b8d8e8] bg-white/80 px-4 py-2 transition hover:bg-white">
                   <Phone className="size-4" /><span className="text-base font-bold tracking-wide">0777772211</span>
                 </a>
-                <a href="mailto:tamerqadri@gmail.com" className="inline-flex items-center gap-2 rounded-full border border-[#bcd3a1] bg-white/80 px-4 py-2 transition hover:bg-white">
+                <a href="mailto:tamerqadri@gmail.com" className="inline-flex items-center gap-2 rounded-full border border-[#b8d8e8] bg-white/80 px-4 py-2 transition hover:bg-white">
                   <Mail className="size-4" />tamerqadri@gmail.com
                 </a>
-                <a href="https://www.alqadrioffers.online" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#bcd3a1] bg-white/80 px-4 py-2 transition hover:bg-white">
+                <a href="https://www.alqadrioffers.online" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#b8d8e8] bg-white/80 px-4 py-2 transition hover:bg-white">
                   <Globe2 className="size-4" />
                   {language === "ar" ? "الموقع الإلكتروني" : "Website"}
                 </a>
@@ -243,14 +243,14 @@ export default function Home() {
         <section className="container py-12 sm:py-16">
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
-              <p className="text-xs font-bold tracking-[.16em] text-[#759244]">
+                <p className="text-xs font-bold tracking-[.16em] text-[#4e79a9]">
                 {language === "ar" ? "رحلة مترابطة" : "A CONNECTED JOURNEY"}
               </p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#293d12]">
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#203f78]">
                 {language === "ar" ? "من الملاحظة إلى متابعة ذات معنى" : "From observation to meaningful follow-up"}
               </h2>
             </div>
-            <p className="max-w-md text-sm leading-6 text-[#68775a]">
+            <p className="max-w-md text-sm leading-6 text-[#60708c]">
               {language === "ar"
                 ? "ليست خدمات منفصلة؛ كل خطوة تحفظ سياقك وتفتح ما بعدها."
                 : "These are not disconnected tools; every step preserves context and unlocks the next."}
@@ -260,12 +260,12 @@ export default function Home() {
             {steps.map((step, index) => (
               <div key={step.ar} className="relative text-center">
                 {index < steps.length - 1 && (
-                  <span className="absolute top-5 start-[61%] hidden h-px w-[78%] bg-[#cfdcc0] md:block" />
+                  <span className="absolute top-5 start-[61%] hidden h-px w-[78%] bg-[#c6dcef] md:block" />
                 )}
-                <span className="relative mx-auto grid size-10 place-items-center rounded-xl bg-[#e9f0df] text-[#35530e] sm:size-12">
+                <span className="relative mx-auto grid size-10 place-items-center rounded-xl bg-[#e8f4ff] text-[#203f78] sm:size-12">
                   <step.icon className="size-4 sm:size-5" />
                 </span>
-                <p className="mt-2 text-xs font-bold text-[#4d5d3b]">
+                <p className="mt-2 text-xs font-bold text-[#4b6588]">
                   {language === "ar" ? step.ar : step.en}
                 </p>
               </div>
@@ -274,8 +274,8 @@ export default function Home() {
         </section>
 
         <section className="container pb-16">
-          <div dir={language === "ar" ? "rtl" : "ltr"} className="relative overflow-hidden rounded-[2rem] bg-[#35530e] p-7 text-white shadow-[0_20px_50px_rgba(53,83,14,.2)] sm:p-10">
-            <div className="pointer-events-none absolute -end-10 -top-20 size-56 rounded-full bg-[#84a94b]/30 blur-3xl" />
+          <div dir={language === "ar" ? "rtl" : "ltr"} className="relative overflow-hidden rounded-[2rem] bg-[#203f78] p-7 text-white shadow-[0_20px_50px_rgba(31,63,120,.2)] sm:p-10">
+            <div className="pointer-events-none absolute -end-10 -top-20 size-56 rounded-full bg-[#21cbd0]/25 blur-3xl" />
             <div className="relative grid gap-8 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-bold text-[#e2efcb]">
@@ -285,12 +285,12 @@ export default function Home() {
                 <h2 className="mt-4 max-w-2xl text-3xl font-bold leading-tight sm:text-4xl">
                   {language === "ar" ? "اسأل الذكاء الاصطناعي عن أي موضوع زراعي." : "Ask AI anything about agriculture."}
                 </h2>
-                <p className="mt-4 max-w-xl leading-7 text-[#e1ebd0]">
+                <p className="mt-4 max-w-xl leading-7 text-[#dcecff]">
                   {language === "ar"
                     ? "من الري والتربة إلى اختيار المحاصيل والعناية بالنباتات، اكتب سؤالك وسيجيبك بإرشاد عملي حذر ومفهوم."
                     : "From irrigation and soil to crop selection and plant care, ask your question and get practical, careful, understandable guidance."}
                 </p>
-                <Button asChild className="mt-6 h-11 rounded-xl bg-white px-5 text-[#35530e] hover:bg-[#eef5e4]">
+                <Button asChild className="mt-6 h-11 rounded-xl bg-white px-5 text-[#203f78] hover:bg-[#eef6ff]">
                   <Link href="/engineer">
                     {language === "ar" ? "ابدأ بالسؤال" : "Start asking"}
                     <Arrow className="ms-2 size-4" />
@@ -298,7 +298,7 @@ export default function Home() {
                 </Button>
               </div>
               <div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
-                <p className="text-xs font-bold tracking-[.14em] text-[#d5e5b8]">
+                <p className="text-xs font-bold tracking-[.14em] text-[#bfe9d0]">
                   {language === "ar" ? "أمثلة سريعة" : "QUICK EXAMPLES"}
                 </p>
                 <div className="mt-4 space-y-2">
@@ -317,25 +317,25 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="border-y border-[#35530e]/8 bg-white">
+        <section className="border-y border-[#203f78]/8 bg-white">
           <div className="container py-14 sm:py-20">
             <div className="max-w-2xl">
-              <p className="text-xs font-bold tracking-[.16em] text-[#759244]">
+              <p className="text-xs font-bold tracking-[.16em] text-[#4e79a9]">
                 {language === "ar" ? "خدمات موجهة بالفعل" : "PURPOSEFUL SERVICES"}
               </p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#293d12] sm:text-4xl">
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#203f78] sm:text-4xl">
                 {language === "ar" ? "كل ما تحتاجه لاتخاذ قرار زراعي أفضل" : "Everything needed for a better agricultural decision"}
               </h2>
             </div>
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
               {services.map((service) => (
-                <Link key={service.href} href={service.href} className="group rounded-[1.5rem] border border-[#35530e]/8 bg-white p-5 no-underline shadow-[0_10px_30px_rgba(48,67,22,.05)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(48,67,22,.1)]">
-                  <span className={`grid size-11 place-items-center rounded-xl ${service.tone} text-[#35530e]`}>
+                <Link key={service.href} href={service.href} className="group rounded-[1.5rem] border border-[#203f78]/8 bg-white p-5 no-underline shadow-[0_10px_30px_rgba(31,63,120,.05)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(31,63,120,.1)]">
+                  <span className={`grid size-11 place-items-center rounded-xl ${service.tone} text-[#203f78]`}>
                     <service.icon className="size-5" />
                   </span>
-                  <h3 className="mt-5 text-lg font-bold text-[#314617]">{service.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#68775a]">{service.text}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#52731f]">
+                  <h3 className="mt-5 text-lg font-bold text-[#294b80]">{service.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[#60708c]">{service.text}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#3f76a8]">
                     {language === "ar" ? "اكتشف الخدمة" : "Explore service"}
                     <Arrow className="size-4 transition-transform group-hover:-translate-x-1 rtl:group-hover:translate-x-1" />
                   </span>
@@ -346,9 +346,9 @@ export default function Home() {
         </section>
 
         <section className="container py-16">
-          <div className="grid gap-6 rounded-[2rem] bg-[#35530e] p-7 text-white shadow-[0_20px_50px_rgba(53,83,14,.2)] sm:p-10 lg:grid-cols-[1.2fr_.8fr] lg:items-center">
+          <div className="grid gap-6 rounded-[2rem] bg-[#203f78] p-7 text-white shadow-[0_20px_50px_rgba(31,63,120,.2)] sm:p-10 lg:grid-cols-[1.2fr_.8fr] lg:items-center">
             <div>
-              <p className="text-xs font-bold tracking-[.16em] text-[#d5e5b8]">
+              <p className="text-xs font-bold tracking-[.16em] text-[#bfe9d0]">
                 {language === "ar" ? "الرعاية أولاً" : "SAFETY FIRST"}
               </p>
               <h2 className="mt-3 text-3xl font-bold leading-tight">
@@ -356,14 +356,14 @@ export default function Home() {
                   ? "الذكاء يساند القرار؛ والخبرة تراجع ما يستحق المراجعة."
                   : "Intelligence supports decisions; expertise reviews what deserves review."}
               </h2>
-              <p className="mt-4 max-w-xl leading-7 text-[#e1ebd0]">
+              <p className="mt-4 max-w-xl leading-7 text-[#dcecff]">
                 {language === "ar"
                   ? "نوضح حدود التوصية، نجمع البيانات الناقصة، ونصعّد الحالات الحساسة أو الحرجة إلى المختصين."
                   : "We explain recommendation limits, collect missing data, and escalate sensitive or critical cases to specialists."}
               </p>
             </div>
             <div className="flex justify-start lg:justify-end">
-              <Button asChild className="h-12 rounded-xl bg-white px-5 text-[#35530e] hover:bg-[#eef5e4]">
+              <Button asChild className="h-12 rounded-xl bg-white px-5 text-[#203f78] hover:bg-[#eef6ff]">
                 <Link href="/knowledge">
                   {language === "ar" ? "استكشف قاعدة المعرفة" : "Explore knowledge hub"}
                   <Arrow className="ms-2 size-4" />
