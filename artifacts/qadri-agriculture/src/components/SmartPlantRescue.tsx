@@ -10,7 +10,7 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
   return (
     <div
       dir={isArabic ? "rtl" : "ltr"}
-      className="window-rescue relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] border border-[#d4e4f4] bg-[#f5f9ff] shadow-[0_24px_60px_rgba(31,63,120,.14)]"
+      className="window-rescue relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] border border-[#D4E7DF] bg-[#F3FAF7] shadow-[0_24px_60px_rgba(3,79,59,.14)]"
       role="img"
       aria-label={
         isArabic
@@ -96,7 +96,7 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
             <path d="M89 215C94 219 100 219 104 214" stroke="#7D474C" strokeWidth="2.4" strokeLinecap="round" />
           </g>
           <g className="window-rescue__phone">
-            <rect x="132" y="296" width="32" height="56" rx="7" transform="rotate(16 132 296)" fill="#2D4050" stroke="#1E2C37" strokeWidth="3" />
+             <rect x="132" y="296" width="32" height="56" rx="7" transform="rotate(16 132 296)" fill="#034F3B" stroke="#023A2C" strokeWidth="3" />
             <rect x="138" y="304" width="21" height="38" rx="3" transform="rotate(16 138 304)" fill="#BBD7C0" />
             <circle cx="147" cy="313" r="4" fill="#F5F1C0" />
             <circle cx="150" cy="325" r="3" fill="#6B9A3C" />
