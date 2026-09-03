@@ -66,24 +66,24 @@ export function PlatformShell({
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 overflow-hidden border-b border-white/10 bg-primary text-primary-foreground shadow-[0_12px_36px_rgba(53,83,14,.25)]">
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#b4ce65]/90 to-transparent" />
+      <header className="sticky top-0 z-50 overflow-hidden border-b border-white/10 bg-primary text-primary-foreground shadow-[0_12px_36px_rgba(3,79,59,.25)]">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#9dd7bd]/90 to-transparent" />
 
-        <div className="border-b border-white/10 bg-[#294108]/80">
-          <div className="container flex h-9 items-center justify-between gap-4 text-[11px] font-semibold text-[#dce9bd]">
+        <div className="border-b border-white/10 bg-[#003f31]/80">
+          <div className="container flex h-9 items-center justify-between gap-4 text-[11px] font-semibold text-[#d5eee3]">
             <a
               href="tel:0777772211"
               dir="ltr"
               className="inline-flex items-center gap-2 rounded-full px-1.5 py-1 no-underline transition-colors hover:text-white"
               aria-label="Call 0777772211"
             >
-              <span className="grid size-5 place-items-center rounded-full bg-[#b4ce65] text-[#29410d]">
+              <span className="grid size-5 place-items-center rounded-full bg-[#9dd7bd] text-[#034f3b]">
                 <Phone className="size-3" />
               </span>
               <span>0777772211</span>
             </a>
             <span className="hidden items-center gap-1.5 sm:inline-flex">
-              <BadgeCheck className="size-3.5 text-[#b4ce65]" />
+              <BadgeCheck className="size-3.5 text-[#9dd7bd]" />
               {t.safe}
             </span>
           </div>
@@ -98,11 +98,11 @@ export function PlatformShell({
             <span className="grid size-12 shrink-0 place-items-center rounded-[1.1rem] border border-white/20 bg-white/10 shadow-[0_8px_24px_rgba(15,35,3,.24)] transition-transform duration-200 group-hover:-rotate-6 group-hover:bg-white/15">
               <Leaf className="size-6 text-[#d7e9a8]" />
             </span>
-            <span className="hidden min-w-0 leading-tight sm:block">
+              <span className="hidden min-w-0 leading-tight sm:block">
               <strong className="block max-w-[240px] truncate text-base font-bold text-white">
                 {t.brand}
               </strong>
-              <small className="text-[10px] font-semibold tracking-[.2em] text-[#c7dc91]">
+              <small className="text-[10px] font-semibold tracking-[.2em] text-[#b9dfcf]">
                 SMART AGRICULTURE
               </small>
             </span>
@@ -119,14 +119,14 @@ export function PlatformShell({
             <button
               type="button"
               onClick={openCart}
-              className="relative grid size-11 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65]"
+                className="relative grid size-11 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9dd7bd]"
               aria-label={
                 language === "ar" ? "فتح سلة المشتريات" : "Open shopping cart"
               }
             >
               <ShoppingBag className="size-5" />
               {itemCount > 0 && (
-                <span className="absolute -end-1 -top-1 grid size-5 place-items-center rounded-full bg-[#b4ce65] text-[10px] font-extrabold text-[#29410d]">
+                  <span className="absolute -end-1 -top-1 grid size-5 place-items-center rounded-full bg-[#9dd7bd] text-[10px] font-extrabold text-[#034f3b]">
                   {itemCount}
                 </span>
               )}
@@ -134,7 +134,7 @@ export function PlatformShell({
             <button
               type="button"
               onClick={() => setLanguage(language === "ar" ? "en" : "ar")}
-              className="rounded-xl border border-white/20 bg-white/10 px-3 py-2.5 text-xs font-bold text-white transition-colors hover:bg-white/18 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65]"
+              className="rounded-xl border border-white/20 bg-white/10 px-3 py-2.5 text-xs font-bold text-white transition-colors hover:bg-white/18 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9dd7bd]"
               aria-label="Switch language"
             >
               {language === "ar" ? "EN" : "ع"}
@@ -142,7 +142,7 @@ export function PlatformShell({
             {isAuthenticated ? (
               <Link
                 href="/profile"
-                className="grid size-11 place-items-center rounded-xl bg-[#dcebbd] text-base font-extrabold text-primary no-underline transition-transform hover:-translate-y-0.5 hover:bg-white"
+                className="grid size-11 place-items-center rounded-xl bg-[#d4eee3] text-base font-extrabold text-primary no-underline transition-transform hover:-translate-y-0.5 hover:bg-white"
                 aria-label={t.profile}
               >
                 {initials}
@@ -150,7 +150,7 @@ export function PlatformShell({
             ) : (
               <Button
                 onClick={() => setLocation("/auth")}
-                className="hidden h-11 rounded-xl bg-white px-5 font-bold text-primary shadow-md hover:bg-[#eef5e4] sm:inline-flex"
+                className="hidden h-11 rounded-xl bg-white px-5 font-bold text-primary shadow-md hover:bg-[#e7f5ef] sm:inline-flex"
               >
                 {t.signIn}
               </Button>
@@ -159,7 +159,7 @@ export function PlatformShell({
               <button
                 type="button"
                 onClick={() => setMobileMenu(!mobileMenu)}
-                className="grid size-11 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65] xl:hidden"
+                 className="grid size-11 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9dd7bd] xl:hidden"
                 aria-expanded={mobileMenu}
                 aria-label={
                   mobileMenu
@@ -182,7 +182,7 @@ export function PlatformShell({
         </div>
 
         {!compact && (
-          <div className="hidden border-t border-white/10 bg-[#294108]/70 xl:block">
+          <div className="hidden border-t border-white/10 bg-[#003f31]/90 xl:block">
             <nav
               className="container flex items-stretch justify-center gap-1 overflow-x-auto py-2"
               aria-label="Primary navigation"
@@ -204,8 +204,8 @@ export function PlatformShell({
                       className={cn(
                         "group relative flex min-w-[74px] shrink-0 flex-col items-center justify-center gap-1 rounded-xl px-3 py-2.5 text-center text-[11px] font-bold no-underline transition-all",
                         active
-                          ? "bg-[#b4ce65] text-[#29410d] shadow-[0_6px_16px_rgba(180,206,101,.2)]"
-                          : "text-[#e1eccb] hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
+                          ? "bg-[#9dd7bd] text-[#034f3b] shadow-[0_6px_16px_rgba(157,215,189,.25)]"
+                          : "text-[#d9eee6] hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
                       )}
                     >
                       <Icon className="size-5.5 shrink-0" />
@@ -214,8 +214,8 @@ export function PlatformShell({
                         className={cn(
                           "absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full transition-opacity",
                           active
-                            ? "bg-white/80 opacity-100"
-                            : "bg-[#b4ce65] opacity-0 group-hover:opacity-80"
+                           ? "bg-white/80 opacity-100"
+                           : "bg-[#9dd7bd] opacity-0 group-hover:opacity-80"
                         )}
                       />
                     </Link>
@@ -227,7 +227,7 @@ export function PlatformShell({
         )}
 
         {mobileMenu && !compact && (
-          <div className="border-t border-white/10 bg-[#294108]/95 px-4 py-4 backdrop-blur-xl xl:hidden">
+          <div className="border-t border-white/10 bg-[#003f31]/95 px-4 py-4 backdrop-blur-xl xl:hidden">
             <nav
               className="container grid grid-cols-2 gap-2 sm:grid-cols-3"
               aria-label="Mobile navigation"
