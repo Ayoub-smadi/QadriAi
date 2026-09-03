@@ -2,7 +2,7 @@ import { PlatformShell } from "@/components/PlatformShell";
 import { AIChatBox, type ChatAttachment } from "@/components/AIChatBox";
 import { useLanguage } from "@/lib/i18n";
 import { trpc } from "@/lib/trpc";
-import { AlertTriangle, ShieldCheck, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { useState } from "react";
 
 export default function Engineer() {
@@ -17,5 +17,35 @@ export default function Engineer() {
   });
   const send = (content: string, attachments?: ChatAttachment[]) => { const next = [...messages, { role: "user" as const, content, ...(attachments?.length ? { attachments } : {}) }]; setMessages(next); consultation.mutate({ messages: next.map(message => ({ role: message.role, content: message.content })), attachments, language }); };
   const prompts = language === "ar" ? ["ما المحاصيل المناسبة لمساحة صغيرة؟", "كيف أتحقق من احتياج النبات للماء؟", "كيف أحسّن تربة الحديقة؟"] : ["Which crops suit a small space?", "How can I check a plant’s water needs?", "How can I improve garden soil?"];
-  return <PlatformShell title={language === "ar" ? "اسأل الذكاء الاصطناعي" : "Ask the AI"} eyebrow={language === "ar" ? "إجابات ذكية لكل سؤال زراعي" : "Smart answers for every agricultural question"}><main className="container grid gap-5 py-8 lg:grid-cols-[1fr_320px]"><section className="min-w-0"><div className="mb-4 flex items-center gap-3 rounded-2xl border border-[#35530e]/10 bg-[#edf4e5] p-4 text-sm leading-6 text-[#4e6530]"><span className="grid size-9 shrink-0 place-items-center rounded-xl bg-white text-[#35530e]"><Sparkles className="size-4" /></span><p>{language === "ar" ? "اسأل عن الري، التربة، المحاصيل، الأشجار، الآفات، التقليم أو العناية بالنباتات. تستند الإجابة إلى معلومات ملفك الزراعي، وكلما كانت بيانات الموقع والمياه والتربة أوضح كانت الإرشادات أدق." : "Ask about irrigation, soil, crops, trees, pests, pruning, or plant care. Answers use your agricultural profile, and clearer site, water, and soil data make the guidance more useful."}</p></div><AIChatBox messages={messages} onSendMessage={send} isLoading={consultation.isPending} height="min(650px, 68vh)" className="rounded-[1.5rem] border-[#35530e]/10 shadow-[0_16px_40px_rgba(48,67,22,.07)]" placeholder={language === "ar" ? "اكتب سؤالك الزراعي…" : "Ask an agricultural question…"} emptyStateMessage={language === "ar" ? "كيف يمكنني مساعدتك اليوم؟" : "How can I help today?"} suggestedPrompts={prompts} /></section><aside className="space-y-4"><div className="rounded-[1.5rem] bg-[#35530e] p-5 text-white"><ShieldCheck className="size-6 text-[#d8e9b7]" /><h2 className="mt-4 text-lg font-bold">{language === "ar" ? "كيف نحافظ على سلامة الإرشاد؟" : "How guidance stays safe"}</h2><p className="mt-2 text-sm leading-6 text-[#e0ead0]">{language === "ar" ? "لا نتعامل مع توصيات المبيدات أو الأمراض كحقيقة مؤكدة دون أدلة كافية. في الحالات الحساسة، نوجهك لمهندس محلي مرخّص." : "We do not present pesticide or disease advice as certain without enough evidence. In sensitive cases, we direct you to a licensed local expert."}</p></div><div className="rounded-[1.5rem] border border-[#e5c7b7] bg-[#fffaf7] p-5"><AlertTriangle className="size-5 text-[#a85a38]" /><h3 className="mt-3 font-bold text-[#76442c]">{language === "ar" ? "متى تصعّد الحالة؟" : "When to escalate"}</h3><p className="mt-2 text-sm leading-6 text-[#8b654f]">{language === "ar" ? "عند انتشار سريع للأعراض، ذبول شديد، احتمالات تلوث، أو خطر على الغذاء والإنسان والحيوان." : "For rapidly spreading symptoms, severe wilting, possible contamination, or risks to food, people, or animals."}</p></div></aside></main></PlatformShell>;
+  return (
+    <PlatformShell
+      title={language === "ar" ? "اسأل الذكاء الاصطناعي" : "Ask the AI"}
+      eyebrow={language === "ar" ? "إجابات ذكية لكل سؤال زراعي" : "Smart answers for every agricultural question"}
+    >
+      <main className="container py-8">
+        <section className="min-w-0">
+          <div className="mb-4 flex items-center gap-3 rounded-2xl border border-[#35530e]/10 bg-[#edf4e5] p-4 text-sm leading-6 text-[#4e6530]">
+            <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-white text-[#35530e]">
+              <Sparkles className="size-4" />
+            </span>
+            <p>
+              {language === "ar"
+                ? "اسأل عن الري، التربة، المحاصيل، الأشجار، الآفات، التقليم أو العناية بالنباتات."
+                : "Ask about irrigation, soil, crops, trees, pests, pruning, or plant care."}
+            </p>
+          </div>
+          <AIChatBox
+            messages={messages}
+            onSendMessage={send}
+            isLoading={consultation.isPending}
+            height="min(650px, 68vh)"
+            className="rounded-[1.5rem] border-[#35530e]/10 shadow-[0_16px_40px_rgba(48,67,22,.07)]"
+            placeholder={language === "ar" ? "اكتب سؤالك الزراعي…" : "Ask an agricultural question…"}
+            emptyStateMessage={language === "ar" ? "كيف يمكنني مساعدتك اليوم؟" : "How can I help today?"}
+            suggestedPrompts={prompts}
+          />
+        </section>
+      </main>
+    </PlatformShell>
+  );
 }
