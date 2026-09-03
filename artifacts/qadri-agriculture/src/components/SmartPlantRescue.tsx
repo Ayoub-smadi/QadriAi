@@ -89,18 +89,13 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
         </g>
 
         <g className="window-rescue__girl" filter="url(#window-rescue-shadow)">
-          <path d="M78 278C83 263 96 254 113 254C132 254 146 265 151 282L161 363H68L78 278Z" fill="#F7E8B5" stroke="#B87864" strokeWidth="3" />
-          <path d="M92 357L88 430M139 357L151 430" stroke="#6D5160" strokeWidth="11" strokeLinecap="round" />
-          <path d="M82 429L104 429M143 429L165 429" stroke="#4C3A45" strokeWidth="8" strokeLinecap="round" />
-          <image href="/assets/girl.png" x="51" y="139" width="140" height="140" preserveAspectRatio="xMidYMid meet" />
-          <path className="window-rescue__sad-face" d="M119 229C124 225 130 225 135 229M119 239C124 235 130 235 135 239" stroke="#7D474C" strokeWidth="2.4" strokeLinecap="round" opacity=".9" />
-          <path className="window-rescue__phone-arm" d="M135 278C157 282 178 271 188 256" stroke="#F1B18A" strokeWidth="11" strokeLinecap="round" />
+          <image href="/assets/girl-full-body-trimmed.png" x="56" y="130" width="84" height="316" preserveAspectRatio="none" />
           <g className="window-rescue__phone">
-            <rect x="174" y="239" width="35" height="62" rx="7" transform="rotate(16 174 239)" fill="#2D4050" stroke="#1E2C37" strokeWidth="3" />
-            <rect x="180" y="247" width="23" height="42" rx="3" transform="rotate(16 180 247)" fill="#BBD7C0" />
-            <circle cx="190" cy="257" r="4" fill="#F5F1C0" />
-            <circle cx="193" cy="270" r="3" fill="#6B9A3C" />
-            <circle cx="197" cy="281" r="3" fill="#6B9A3C" />
+            <rect x="149" y="274" width="35" height="62" rx="7" transform="rotate(16 149 274)" fill="#2D4050" stroke="#1E2C37" strokeWidth="3" />
+            <rect x="155" y="282" width="23" height="42" rx="3" transform="rotate(16 155 282)" fill="#BBD7C0" />
+            <circle cx="165" cy="292" r="4" fill="#F5F1C0" />
+            <circle cx="168" cy="305" r="3" fill="#6B9A3C" />
+            <circle cx="172" cy="316" r="3" fill="#6B9A3C" />
           </g>
         </g>
 
