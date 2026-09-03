@@ -66,7 +66,7 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
           </g>
         </g>
 
-        <g className="window-rescue__plant">
+        <g className="window-rescue__plant" transform="translate(0 8)">
           <ellipse cx="207" cy="420" rx="57" ry="13" fill="#879B62" opacity=".25" />
           <path d="M179 356H240L231 416C230 424 224 429 216 429H202C194 429 188 424 187 416L179 356Z" fill="url(#window-rescue-pot)" stroke="#9E6446" strokeWidth="3" />
           <path d="M173 357H246V372C246 377 242 381 237 381H182C177 381 173 377 173 372V357Z" fill="#EBB177" stroke="#A76948" strokeWidth="3" />
@@ -105,9 +105,9 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
         </g>
 
         <g className="window-rescue__button-action" aria-hidden="true">
-          <path d="M201 274C218 251 238 226 256 207" stroke="#F1B18A" strokeWidth="10" strokeLinecap="round" />
-          <circle cx="256" cy="207" r="9" fill="#E8B75F" stroke="#9C7542" strokeWidth="3" />
-          <circle className="window-rescue__button-pulse" cx="256" cy="207" r="15" stroke="#E8B75F" strokeWidth="2" />
+          <path d="M342 274C354 252 366 228 378 207" stroke="#F1B18A" strokeWidth="10" strokeLinecap="round" />
+          <circle cx="378" cy="207" r="9" fill="#E8B75F" stroke="#9C7542" strokeWidth="3" />
+          <circle className="window-rescue__button-pulse" cx="378" cy="207" r="15" stroke="#E8B75F" strokeWidth="2" />
         </g>
 
         <g className="window-rescue__phone-bubble">
@@ -134,7 +134,7 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
       </div>
       <div className="window-rescue__stage window-rescue__stage--window">
         <SunMedium className="size-4" />
-        <span>{isArabic ? "حاضر، بفتح الشبك" : "Opening the screen"}</span>
+        <span>{isArabic ? "أكبس كبسة الكهرباء" : "Pressing the window button"}</span>
       </div>
       <div className="window-rescue__stage window-rescue__stage--happy">
         <span>{isArabic ? "رجعت أفضل" : "It is better now"}</span>

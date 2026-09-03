@@ -226,7 +226,7 @@ export default function Home() {
               </p>
               <div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold text-[#496327]">
                 <a href="tel:0777772211" className="inline-flex items-center gap-2 rounded-full border border-[#bcd3a1] bg-white/80 px-4 py-2 transition hover:bg-white">
-                  <Phone className="size-4" />0777772211
+                  <Phone className="size-4" /><span className="text-base font-bold tracking-wide">0777772211</span>
                 </a>
                 <a href="mailto:tamerqadri@gmail.com" className="inline-flex items-center gap-2 rounded-full border border-[#bcd3a1] bg-white/80 px-4 py-2 transition hover:bg-white">
                   <Mail className="size-4" />tamerqadri@gmail.com

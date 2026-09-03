@@ -80,7 +80,7 @@ export function PlatformShell({
               <span className="grid size-5 place-items-center rounded-full bg-[#b4ce65] text-[#29410d]">
                 <Phone className="size-3" />
               </span>
-              <span>0777772211</span>
+              <span className="text-sm font-bold tracking-wide">0777772211</span>
             </a>
             <span className="hidden items-center gap-1.5 sm:inline-flex">
               <BadgeCheck className="size-3.5 text-[#b4ce65]" />

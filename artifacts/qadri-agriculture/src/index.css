@@ -424,8 +424,13 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
   0%, 21% { transform: translate(0, 0) rotate(0); }
   27%, 38% { transform: translate(0, -2px) rotate(-2deg); }
   43% { transform: translate(18px, -1px) rotate(-1deg); }
-  55%, 78% { transform: translate(78px, -9px) rotate(0); }
-  86%, 96% { transform: translate(78px, -9px) rotate(1deg); }
+  47% { transform: translate(48px, -6px) rotate(0); }
+  51% { transform: translate(78px, 0) rotate(1deg); }
+  55% { transform: translate(110px, -6px) rotate(0); }
+  59% { transform: translate(142px, 0) rotate(1deg); }
+  63% { transform: translate(180px, -6px) rotate(0); }
+  67%, 78% { transform: translate(230px, -9px) rotate(0); }
+  86%, 96% { transform: translate(230px, -9px) rotate(1deg); }
   100% { transform: translate(0, 0) rotate(0); }
 }
 
@@ -519,7 +524,7 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 @media (prefers-reduced-motion: reduce) {
   .window-rescue__screen, .window-rescue__sunbeam, .window-rescue__sick-plant, .window-rescue__healthy-plant, .window-rescue__phone, .window-rescue__girl, .window-rescue__button-action, .window-rescue__button-pulse, .window-rescue__laugh, .window-rescue__sad-mouth, .window-rescue__happy-mouth, .window-rescue__phone-bubble, .window-rescue__reply, .window-rescue__stage, .window-rescue__progress { animation: none; }
   .window-rescue__sick-plant, .window-rescue__sad-mouth, .window-rescue__stage--sad, .window-rescue__stage--reply, .window-rescue__stage--window { opacity: 0; }
-  .window-rescue__girl { transform: translate(78px, -9px); }
+  .window-rescue__girl { transform: translate(230px, -9px); }
   .window-rescue__healthy-plant, .window-rescue__happy-mouth, .window-rescue__button-action, .window-rescue__button-pulse, .window-rescue__laugh, .window-rescue__stage--happy { opacity: 1; }
   .window-rescue__screen { transform: translateY(-72px); }
   .window-rescue__sunbeam { opacity: .9; }
