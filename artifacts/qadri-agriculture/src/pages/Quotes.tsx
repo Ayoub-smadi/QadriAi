@@ -8,7 +8,7 @@ import { itemFromPlant, saveDraft } from "@/data/quoteStore";
 import { useLanguage } from "@/lib/i18n";
 import { DollarSign, Leaf, ListChecks, ShieldCheck, ShoppingBag } from "lucide-react";
 import { useMemo, useState } from "react";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
 
 export default function Quotes() {
   const { language } = useLanguage();
@@ -52,10 +52,7 @@ export default function Quotes() {
               <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{isArabic ? "اطلب عرض سعر يناسب حديقتك" : "Request a quote for your garden"}</h1>
               <p className="mt-4 text-sm leading-7 text-[#d5eee3]">{isArabic ? "تصفح النباتات، حدد الحجم والكمية، ثم أرسل بيانات الاستلام أو التوصيل ليجهز فريقنا عرضك." : "Browse plants, choose size and quantity, then send pickup or delivery details for our team to prepare your quote."}</p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Button onClick={() => setOpen(true)} className="h-12 rounded-xl bg-[#b9dfcf] px-5 font-extrabold text-[#003f31] hover:bg-white"><DollarSign className="me-2 size-5" />{isArabic ? "طلب عرض سعر" : "Request a quote"}</Button>
-              <Link href="/quotes-admin" className="inline-flex h-12 items-center rounded-xl border border-white/25 px-5 text-sm font-bold text-white no-underline transition hover:bg-white/10">{isArabic ? "دخول الإدارة" : "Admin desk"}</Link>
-            </div>
+            <Button onClick={() => setOpen(true)} className="h-12 rounded-xl bg-[#b9dfcf] px-5 font-extrabold text-[#003f31] hover:bg-white"><DollarSign className="me-2 size-5" />{isArabic ? "طلب عرض سعر" : "Request a quote"}</Button>
           </div>
           <div className="relative mt-8 grid gap-3 text-xs font-bold text-[#d5eee3] sm:grid-cols-3">
             <div className="flex items-center gap-2 rounded-xl bg-white/10 p-3"><ListChecks className="size-4 text-[#9dd7bd]" />{isArabic ? "اختيار واضح للنباتات" : "Clear plant selection"}</div>
