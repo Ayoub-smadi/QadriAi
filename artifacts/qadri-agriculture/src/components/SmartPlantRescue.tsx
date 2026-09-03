@@ -14,8 +14,8 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
       role="img"
       aria-label={
         isArabic
-          ? "فتاة تمسك هاتفها وتنظر إلى نبتة ذابلة، ثم تمشي إلى الشباك وتضغط زر رفعه، فتعود النبتة كبيرة وخضراء وتضحك فرحًا"
-          : "A girl holds her phone and looks at a wilted plant, walks to the window and presses its lift button, then laughs as the plant grows big and green"
+        ? "فتاة تمسك هاتفها وتنظر إلى نبتة ذابلة، ثم تقترب من الشباك فينفتح تلقائيًا ويدخل ضوء الشمس، فتعود النبتة كبيرة وخضراء وتضحك فرحًا"
+        : "A girl holds her phone and looks at a wilted plant, approaches the window, and it opens automatically so sunlight enters and the plant grows big and green"
       }
     >
       <div className="window-rescue__label">
@@ -96,18 +96,12 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
             <path d="M89 215C94 219 100 219 104 214" stroke="#7D474C" strokeWidth="2.4" strokeLinecap="round" />
           </g>
           <g className="window-rescue__phone">
-             <rect x="132" y="296" width="32" height="56" rx="7" transform="rotate(16 132 296)" fill="#034F3B" stroke="#023A2C" strokeWidth="3" />
+              <rect x="132" y="296" width="32" height="56" rx="7" transform="rotate(16 132 296)" fill="#004132" stroke="#023A2C" strokeWidth="3" />
             <rect x="138" y="304" width="21" height="38" rx="3" transform="rotate(16 138 304)" fill="#BBD7C0" />
             <circle cx="147" cy="313" r="4" fill="#F5F1C0" />
             <circle cx="150" cy="325" r="3" fill="#6B9A3C" />
             <circle cx="154" cy="336" r="3" fill="#6B9A3C" />
           </g>
-        </g>
-
-        <g className="window-rescue__button-action" aria-hidden="true">
-          <path d="M342 274C354 252 366 228 378 207" stroke="#F1B18A" strokeWidth="10" strokeLinecap="round" />
-          <circle cx="378" cy="207" r="9" fill="#E8B75F" stroke="#9C7542" strokeWidth="3" />
-          <circle className="window-rescue__button-pulse" cx="378" cy="207" r="15" stroke="#E8B75F" strokeWidth="2" />
         </g>
 
         <g className="window-rescue__phone-bubble">
@@ -134,7 +128,7 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
       </div>
       <div className="window-rescue__stage window-rescue__stage--window">
         <SunMedium className="size-4" />
-        <span>{isArabic ? "أكبس كبسة الكهرباء" : "Pressing the window button"}</span>
+         <span>{isArabic ? "الشباك ينفتح تلقائيًا" : "The window opens automatically"}</span>
       </div>
       <div className="window-rescue__stage window-rescue__stage--happy">
         <span>{isArabic ? "رجعت أفضل" : "It is better now"}</span>

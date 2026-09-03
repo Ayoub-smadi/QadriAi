@@ -43,9 +43,9 @@
 }
 
 :root {
-  --primary: #034f3b;
+  --primary: #004132;
   --primary-foreground: #ffffff;
-  --sidebar-primary: #034f3b;
+  --sidebar-primary: #004132;
   --sidebar-primary-foreground: #ffffff;
   --chart-1: oklch(0.74 0.11 120);
   --chart-2: oklch(0.61 0.13 122);
@@ -64,7 +64,7 @@
   --muted: #eef7f3;
   --muted-foreground: #658078;
   --accent: #e0f1e9;
-  --accent-foreground: #034f3b;
+  --accent-foreground: #004132;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: #ffffff;
   --border: #d5e9e0;
@@ -73,7 +73,7 @@
   --sidebar: #ffffff;
   --sidebar-foreground: #123b32;
   --sidebar-accent: #e0f1e9;
-  --sidebar-accent-foreground: #034f3b;
+  --sidebar-accent-foreground: #004132;
   --sidebar-border: #d5e9e0;
   --sidebar-ring: #4c947c;
 }
@@ -154,24 +154,27 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 .window-rescue__phone-arm { animation: rescue-arm 12s ease-in-out infinite; }
 .window-rescue__phone-bubble { transform-origin: 286px 140px; animation: rescue-bubble 12s ease-in-out infinite; }
 .window-rescue__reply { transform-origin: 284px 194px; animation: rescue-reply 12s ease-in-out infinite; }
-.window-rescue__button-action { transform-origin: 378px 207px; animation: rescue-button 12s ease-in-out infinite; }
-.window-rescue__button-pulse { animation: rescue-pulse 12s ease-in-out infinite; }
 .window-rescue__window { animation: rescue-window 12s ease-in-out infinite; }
+.window-rescue__screen { animation: rescue-screen 12s ease-in-out infinite; transform-origin: center; }
 .window-rescue__sunbeam { animation: rescue-sun 12s ease-in-out infinite; }
 @keyframes rescue-sick { 0%, 18% { opacity: 1; } 26%, 100% { opacity: 0; } }
 @keyframes rescue-healthy { 0%, 26% { opacity: 0; transform: scale(.72) translateY(24px); } 38%, 100% { opacity: 1; transform: scale(1) translateY(0); } }
-@keyframes rescue-girl { 0%, 45% { transform: translateX(0); } 56%, 66% { transform: translateX(18px); } 76%, 100% { transform: translateX(0); } }
+@keyframes rescue-girl { 0%, 40% { transform: translateX(0); } 50%, 66% { transform: translateX(110px); } 78%, 100% { transform: translateX(0); } }
 @keyframes rescue-phone { 0%, 20% { transform: rotate(0); } 28%, 42% { transform: rotate(-7deg); } 52%, 100% { transform: rotate(0); } }
 @keyframes rescue-arm { 0%, 47% { opacity: 1; } 56%, 100% { opacity: .25; } }
 @keyframes rescue-bubble { 0%, 20% { opacity: 0; transform: scale(.7); } 28%, 70% { opacity: 1; transform: scale(1); } 82%, 100% { opacity: 0; transform: scale(.8); } }
 @keyframes rescue-reply { 0%, 30% { opacity: 0; transform: scale(.7); } 38%, 75% { opacity: 1; transform: scale(1); } 86%, 100% { opacity: 0; } }
-@keyframes rescue-button { 0%, 52% { opacity: 0; transform: translateX(-8px); } 62%, 82% { opacity: 1; transform: translateX(0); } 92%, 100% { opacity: 0; } }
-@keyframes rescue-pulse { 0%, 58% { opacity: 0; transform: scale(.8); } 68%, 78% { opacity: 1; transform: scale(1.3); } 88%, 100% { opacity: 0; transform: scale(1); } }
-@keyframes rescue-window { 0%, 52% { transform: translateX(0); } 62%, 77% { transform: translateX(-8px); } 90%, 100% { transform: translateX(0); } }
+@keyframes rescue-window { 0%, 48% { transform: translateX(0); } 58%, 76% { transform: translateX(-16px); } 90%, 100% { transform: translateX(0); } }
+@keyframes rescue-screen { 0%, 48% { opacity: 1; } 58%, 76% { opacity: .08; } 90%, 100% { opacity: 1; } }
 @keyframes rescue-sun { 0%, 58% { opacity: .25; } 68%, 100% { opacity: .9; } }
 @keyframes rescue-stage-sad { 0%, 9% { opacity: 0; transform: translateY(6px); } 14%, 24% { opacity: 1; transform: translateY(0); } 30%, 100% { opacity: 0; } }
 @keyframes rescue-stage-reply { 0%, 28% { opacity: 0; transform: translateY(6px); } 34%, 45% { opacity: 1; transform: translateY(0); } 52%, 100% { opacity: 0; } }
 @keyframes rescue-stage-window { 0%, 57% { opacity: 0; transform: translateY(6px); } 63%, 74% { opacity: 1; transform: translateY(0); } 82%, 100% { opacity: 0; } }
 @keyframes rescue-stage-happy { 0%, 81% { opacity: 0; transform: translateY(6px); } 87%, 97% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; } }
 @keyframes rescue-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@media (prefers-reduced-motion: reduce) { .window-rescue__stage, .window-rescue__scene *, .window-rescue__progress::after { animation: none !important; } .window-rescue__sick-plant { opacity: 0; } .window-rescue__healthy-plant, .window-rescue__phone-bubble, .window-rescue__reply { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .window-rescue__stage, .window-rescue__scene *, .window-rescue__progress::after { animation: none !important; } .window-rescue__sick-plant { opacity: 0; } .window-rescue__healthy-plant, .window-rescue__phone-bubble, .window-rescue__reply, .window-rescue__sunbeam { opacity: 1; } }
+
+/* Keep the imported interface aligned with the requested brand green. */
+[class~="bg-[#35530e]"], [class~="bg-[#034f3b]"] { background-color: #004132 !important; }
+[class~="text-[#35530e]"], [class~="text-[#034f3b]"] { color: #004132 !important; }
+[class~="hover:bg-[#294108]"]:hover, [class~="hover:bg-[#023c2d]"]:hover { background-color: #003326 !important; }

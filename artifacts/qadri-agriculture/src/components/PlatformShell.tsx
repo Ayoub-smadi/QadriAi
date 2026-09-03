@@ -10,7 +10,6 @@ import {
   DraftingCompass,
   FlaskConical,
   Home as HomeIcon,
-  Leaf,
   LayoutDashboard,
   Menu,
   Phone,
@@ -95,8 +94,8 @@ export function PlatformShell({
             className="group flex min-w-0 items-center gap-3 no-underline"
             aria-label={t.home}
           >
-            <span className="grid size-12 shrink-0 place-items-center rounded-[1.1rem] border border-white/20 bg-white/10 shadow-[0_8px_24px_rgba(15,35,3,.24)] transition-transform duration-200 group-hover:-rotate-6 group-hover:bg-white/15">
-              <Leaf className="size-6 text-[#d7e9a8]" />
+              <span className="grid size-12 shrink-0 place-items-center rounded-[1.1rem] border border-white/20 bg-white/10 p-1.5 shadow-[0_8px_24px_rgba(15,35,3,.24)] transition-transform duration-200 group-hover:-rotate-6 group-hover:bg-white/15">
+              <img src="/assets/qadri-bot-logo.png" alt="" aria-hidden="true" className="size-full rounded-lg object-contain" />
             </span>
               <span className="hidden min-w-0 leading-tight sm:block">
               <strong className="block max-w-[240px] truncate text-base font-bold text-white">
