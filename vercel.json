@@ -1,0 +1,11 @@
+{
+  "buildCommand": "pnpm --filter @workspace/qadri-agriculture run build",
+  "outputDirectory": "artifacts/qadri-agriculture/dist/public",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
