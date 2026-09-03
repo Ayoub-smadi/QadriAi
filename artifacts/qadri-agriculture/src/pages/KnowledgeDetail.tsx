@@ -86,9 +86,14 @@ export default function KnowledgeDetail() {
 
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#35530e]/8 p-6 sm:px-9">
             <p className="text-xs text-[#83907a]">{isArabic ? "المعلومات إرشادية، ويُنصح بالتشخيص المحلي قبل استخدام أي مبيد." : "This guidance is educational; seek local diagnosis before using any pesticide."}</p>
-            <a href={plant.source.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-[#52731f] no-underline hover:underline">
-              <ExternalLink className="size-4" />{plant.source.label}
-            </a>
+            <div className="flex flex-wrap items-center gap-4">
+              {plant.imageCredit && <a href={plant.imageCredit.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-bold text-[#52731f] no-underline hover:underline">
+                <ExternalLink className="size-3.5" />{isArabic ? `صورة: ${plant.imageCredit.label} (${plant.imageCredit.license})` : `Photo: ${plant.imageCredit.label} (${plant.imageCredit.license})`}
+              </a>}
+              <a href={plant.source.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-[#52731f] no-underline hover:underline">
+                <ExternalLink className="size-4" />{plant.source.label}
+              </a>
+            </div>
           </div>
         </article>
       </main>

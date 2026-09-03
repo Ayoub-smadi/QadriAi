@@ -16,6 +16,7 @@ export type PlantKnowledgeEntry = {
   categoryTags: PlantCategory[];
   supportedCountries: SupportedCountry[];
   imagePath: string;
+  imageCredit?: { label: string; url: string; license: string };
   description: { ar: string; en: string };
   plantingGuidance: { ar: string; en: string };
   careGuidance: { ar: string; en: string };
@@ -52,7 +53,8 @@ export const plantKnowledge: PlantKnowledgeEntry[] = [
     scientificName: "Olea europaea",
     categoryTags: ["trees", "fruit"],
     supportedCountries: ["الأردن", "فلسطين", "مصر", "قطر"],
-    imagePath: "/assets/knowledge-olive.svg",
+    imagePath: "/assets/olive.jpg",
+    imageCredit: { label: "Olea europaea Preveli 01", url: "https://commons.wikimedia.org/wiki/File:Olea_europaea_Preveli_01.JPG", license: "CC BY-SA 4.0" },
     description: {
       ar: "شجرة متوسطية معمّرة تتحمل الجفاف بعد استقرار جذورها، وتصلح للبساتين والحدائق المنزلية المشمسة.",
       en: "A long-lived Mediterranean tree that becomes drought-tolerant once established, suited to orchards and sunny home gardens.",
@@ -78,7 +80,8 @@ export const plantKnowledge: PlantKnowledgeEntry[] = [
     scientificName: "Citrus × sinensis",
     categoryTags: ["trees", "fruit", "tropical"],
     supportedCountries: ["الأردن", "فلسطين", "مصر", "قطر"],
-    imagePath: "/assets/knowledge-citrus.svg",
+    imagePath: "/assets/citrus.jpg",
+    imageCredit: { label: "Sapindales - Citrus sinensis - 9", url: "https://commons.wikimedia.org/wiki/File:Sapindales_-_Citrus_sinensis_-_9.jpg", license: "CC BY-SA 4.0" },
     description: {
       ar: "مجموعة أشجار مثمرة محبة للدفء، تمنح رائحة وإنتاجًا جيدًا حين يتوفر صرف ممتاز وحماية من الرياح.",
       en: "A warm-loving fruit tree group with fragrant growth and reliable yields where drainage and wind protection are good.",
@@ -104,7 +107,8 @@ export const plantKnowledge: PlantKnowledgeEntry[] = [
     scientificName: "Phoenix dactylifera",
     categoryTags: ["trees", "fruit", "tropical"],
     supportedCountries: ["الأردن", "فلسطين", "مصر", "قطر"],
-    imagePath: "/assets/knowledge-date.svg",
+    imagePath: "/assets/date-palm.jpg",
+    imageCredit: { label: "Phoenix dactylifera - Date palm", url: "https://commons.wikimedia.org/wiki/File:Phoenix_dactylifera_-_Date_palm_.jpg", license: "CC0" },
     description: {
       ar: "نخلة صحراوية قوية للإنتاج والتنسيق، تحتاج مساحة رأسية وصرفًا عميقًا وخطة ري واضحة.",
       en: "A resilient desert palm for production and landscape use, needing vertical room, deep drainage, and a clear irrigation plan.",
@@ -130,7 +134,8 @@ export const plantKnowledge: PlantKnowledgeEntry[] = [
     scientificName: "Jasminum sambac",
     categoryTags: ["shrubs", "flowers", "ornamental", "tropical"],
     supportedCountries: ["الأردن", "فلسطين", "مصر", "قطر"],
-    imagePath: "/assets/knowledge-jasmine.svg",
+    imagePath: "/assets/jasmine.jpg",
+    imageCredit: { label: "Arabian jasmine buds captured in morning", url: "https://commons.wikimedia.org/wiki/File:Arabian_jasmine_(Jasminum_sambac)_buds_captured_in_morning.jpg", license: "CC BY-SA 4.0" },
     description: {
       ar: "شجيرة عطرية مزهرة تصلح للأحواض والأصص، وتكافئ الضوء الجيد بالتزهير المتكرر.",
       en: "A fragrant flowering shrub for beds and containers that rewards good light with repeated blooms.",
@@ -156,7 +161,8 @@ export const plantKnowledge: PlantKnowledgeEntry[] = [
     scientificName: "Bougainvillea glabra",
     categoryTags: ["shrubs", "flowers", "ornamental", "tropical"],
     supportedCountries: ["الأردن", "فلسطين", "مصر", "قطر"],
-    imagePath: "/assets/knowledge-bougainvillea.svg",
+    imagePath: "/assets/bougainvillea.jpg",
+    imageCredit: { label: "Pink paperflowers (Bougainvillea glabra)", url: "https://commons.wikimedia.org/wiki/File:Pink_paperflowers_(Bougainvillea_glabra).jpg", license: "CC BY-SA 4.0" },
     description: {
       ar: "متسلقة زاهية تناسب الجدران والأسوار المشمسة، وتتحمل العطش بعد تأسيسها.",
       en: "A vivid climber for sunny walls and fences that becomes drought-tolerant after establishment.",
@@ -182,7 +188,8 @@ export const plantKnowledge: PlantKnowledgeEntry[] = [
     scientificName: "Ocimum basilicum",
     categoryTags: ["flowers", "ornamental", "tropical"],
     supportedCountries: ["الأردن", "فلسطين", "مصر", "قطر"],
-    imagePath: "/assets/knowledge-basil.svg",
+    imagePath: "/assets/basil.jpg",
+    imageCredit: { label: "Ocimum basilicum CG NBG LR", url: "https://commons.wikimedia.org/wiki/File:Ocimum_basilicum_CG_NBG_LR.jpg", license: "CC BY-SA 4.0" },
     description: {
       ar: "عشب عطري سريع النمو للمطبخ والحديقة، يمكن حصاده باستمرار إذا لم يترك ليزهر بكثرة.",
       en: "A quick-growing culinary herb for gardens and containers, with continuous harvest when flowering is managed.",
@@ -208,7 +215,8 @@ export const plantKnowledge: PlantKnowledgeEntry[] = [
     scientificName: "Rosa damascena",
     categoryTags: ["shrubs", "flowers", "ornamental"],
     supportedCountries: ["الأردن", "فلسطين", "مصر", "قطر"],
-    imagePath: "/assets/knowledge-rose.svg",
+    imagePath: "/assets/damask-rose.jpg",
+    imageCredit: { label: "Damask rose in Kashmir", url: "https://commons.wikimedia.org/wiki/File:Damask_rose_in_Kashmir.jpg", license: "CC BY-SA 4.0" },
     description: {
       ar: "شجيرة مزهرة معمّرة تتميز بأزهارها العطرية وألوانها المتنوعة، وتناسب الحدائق المنزلية والحدائق العامة وتنسيق المواقع. تفضل الإضاءة الجيدة والتربة الخصبة جيدة التصريف.",
       en: "A perennial flowering shrub known for its fragrant blooms and varied colors. It suits home gardens, public landscapes, and garden design, and prefers good light and fertile, well-drained soil.",
@@ -262,7 +270,8 @@ export const plantKnowledge: PlantKnowledgeEntry[] = [
     scientificName: "Punica granatum",
     categoryTags: ["trees", "fruit", "ornamental"],
     supportedCountries: ["الأردن", "فلسطين", "مصر", "قطر"],
-    imagePath: "/assets/knowledge-pomegranate.svg",
+    imagePath: "/assets/pomegranate.jpg",
+    imageCredit: { label: "Granatäpfel am Baum", url: "https://commons.wikimedia.org/wiki/File:Granatäpfel_am_Baum.jpg", license: "CC BY-SA 4.0" },
     description: {
       ar: "شجرة أو شجيرة مثمرة تتحمل الصيف الجاف، وتجمع بين الزهر الجميل والثمار المفيدة في الحدائق والبساتين.",
       en: "A fruiting tree or shrub that handles dry summers while offering ornamental flowers and useful fruit.",
