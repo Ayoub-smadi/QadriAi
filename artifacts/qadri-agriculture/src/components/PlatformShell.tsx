@@ -21,7 +21,7 @@ import {
   X,
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
-import { Fragment, ReactNode, useState } from "react";
+import { Fragment, ReactNode, useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "./ui/button";
 
@@ -64,9 +64,16 @@ export function PlatformShell({
 
   const closeMobileMenu = () => setMobileMenu(false);
 
+  useEffect(() => {
+    setMobileMenu(false);
+  }, [location]);
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 overflow-hidden border-b border-white/10 bg-primary text-primary-foreground shadow-[0_12px_36px_rgba(53,83,14,.25)]">
+    <div className={cn(
+      "min-h-screen bg-background text-foreground",
+      compact ? "pt-[114px]" : "pt-[114px] xl:pt-[192px]"
+    )}>
+      <header className="fixed inset-x-0 top-0 z-50 overflow-hidden border-b border-white/10 bg-primary text-primary-foreground shadow-[0_12px_36px_rgba(53,83,14,.25)]">
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#b4ce65]/90 to-transparent" />
 
         <div className="border-b border-white/10 bg-[#294108]/80">
