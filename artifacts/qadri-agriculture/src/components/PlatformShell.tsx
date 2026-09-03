@@ -10,7 +10,6 @@ import {
   DraftingCompass,
   FlaskConical,
   Home as HomeIcon,
-  Leaf,
   LayoutDashboard,
   Menu,
   Phone,
@@ -21,7 +20,7 @@ import {
   X,
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
-import { Fragment, ReactNode, useEffect, useState } from "react";
+import { Fragment, ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "./ui/button";
 
@@ -56,6 +55,27 @@ export function PlatformShell({
   const [mobileMenu, setMobileMenu] = useState(false);
   const { itemCount, openCart } = useCart();
   const initials = user?.name?.trim().slice(0, 1) || "ق";
+  const headerRef = useRef<HTMLElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(114);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const updateHeaderHeight = () => {
+      setHeaderHeight(Math.ceil(header.getBoundingClientRect().height));
+    };
+
+    updateHeaderHeight();
+    const observer = new ResizeObserver(updateHeaderHeight);
+    observer.observe(header);
+    window.addEventListener("resize", updateHeaderHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateHeaderHeight);
+    };
+  }, []);
 
   const isActive = (href: string) =>
     href === "/"
@@ -69,28 +89,28 @@ export function PlatformShell({
   }, [location]);
 
   return (
-    <div className={cn(
-      "min-h-screen bg-background text-foreground",
-      compact ? "pt-[114px]" : "pt-[114px] xl:pt-[192px]"
-    )}>
-      <header className="fixed inset-x-0 top-0 z-50 overflow-hidden border-b border-white/10 bg-primary text-primary-foreground shadow-[0_12px_36px_rgba(53,83,14,.25)]">
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#b4ce65]/90 to-transparent" />
+    <div className="min-h-screen bg-background text-foreground">
+      <header
+        ref={headerRef}
+        className="fixed inset-x-0 top-0 z-50 overflow-hidden border-b border-white/10 bg-[#234631] text-white shadow-[0_10px_30px_rgba(20,55,37,.22)]"
+      >
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#b8d86a] to-transparent" />
 
-        <div className="border-b border-white/10 bg-[#294108]/80">
-          <div className="container flex h-9 items-center justify-between gap-4 text-[11px] font-semibold text-[#dce9bd]">
+        <div className="border-b border-white/10 bg-[#183725]">
+          <div className="container flex h-9 items-center justify-between gap-4 text-[11px] font-semibold text-[#dce8c8]">
             <a
               href="tel:0777772211"
               dir="ltr"
               className="inline-flex items-center gap-2 rounded-full px-1.5 py-1 no-underline transition-colors hover:text-white"
               aria-label="Call 0777772211"
             >
-              <span className="grid size-5 place-items-center rounded-full bg-[#b4ce65] text-[#29410d]">
+              <span className="grid size-5 place-items-center rounded-full bg-[#b8d86a] text-[#183725]">
                 <Phone className="size-3" />
               </span>
               <span className="text-sm font-bold tracking-wide">0777772211</span>
             </a>
             <span className="hidden items-center gap-1.5 sm:inline-flex">
-              <BadgeCheck className="size-3.5 text-[#b4ce65]" />
+              <BadgeCheck className="size-3.5 text-[#b8d86a]" />
               {t.safe}
             </span>
           </div>
@@ -102,8 +122,13 @@ export function PlatformShell({
             className="group flex min-w-0 items-center gap-3 no-underline"
             aria-label={t.home}
           >
-            <span className="grid size-12 shrink-0 place-items-center rounded-[1.1rem] border border-white/20 bg-white/10 shadow-[0_8px_24px_rgba(15,35,3,.24)] transition-transform duration-200 group-hover:-rotate-6 group-hover:bg-white/15">
-              <Leaf className="size-6 text-[#d7e9a8]" />
+            <span className="grid size-12 shrink-0 place-items-center rounded-[1.1rem] border border-white/25 bg-[#f3f7ed] p-1 shadow-[0_8px_24px_rgba(15,35,3,.24)] transition-transform duration-200 group-hover:-rotate-6 group-hover:bg-white">
+              <img
+                src="/assets/qadri-bot-logo.png"
+                alt=""
+                aria-hidden="true"
+                className="size-10 rounded-[0.85rem] object-contain"
+              />
             </span>
             <span className="hidden min-w-0 leading-tight sm:block">
               <strong className="block max-w-[240px] truncate text-base font-bold text-white">
@@ -126,14 +151,14 @@ export function PlatformShell({
             <button
               type="button"
               onClick={openCart}
-              className="relative grid size-11 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65]"
+              className="relative grid size-11 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b8d86a]"
               aria-label={
                 language === "ar" ? "فتح سلة المشتريات" : "Open shopping cart"
               }
             >
               <ShoppingBag className="size-5" />
               {itemCount > 0 && (
-                <span className="absolute -end-1 -top-1 grid size-5 place-items-center rounded-full bg-[#b4ce65] text-[10px] font-extrabold text-[#29410d]">
+                <span className="absolute -end-1 -top-1 grid size-5 place-items-center rounded-full bg-[#b8d86a] text-[10px] font-extrabold text-[#183725]">
                   {itemCount}
                 </span>
               )}
@@ -141,7 +166,7 @@ export function PlatformShell({
             <button
               type="button"
               onClick={() => setLanguage(language === "ar" ? "en" : "ar")}
-              className="rounded-xl border border-white/20 bg-white/10 px-3 py-2.5 text-xs font-bold text-white transition-colors hover:bg-white/18 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65]"
+              className="rounded-xl border border-white/20 bg-white/10 px-3 py-2.5 text-xs font-bold text-white transition-colors hover:bg-white/18 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b8d86a]"
               aria-label="Switch language"
             >
               {language === "ar" ? "EN" : "ع"}
@@ -149,7 +174,7 @@ export function PlatformShell({
             {isAuthenticated ? (
               <Link
                 href="/profile"
-                className="grid size-11 place-items-center rounded-xl bg-[#dcebbd] text-base font-extrabold text-primary no-underline transition-transform hover:-translate-y-0.5 hover:bg-white"
+                className="grid size-11 place-items-center rounded-xl bg-[#dcebbd] text-base font-extrabold text-[#234631] no-underline transition-transform hover:-translate-y-0.5 hover:bg-white"
                 aria-label={t.profile}
               >
                 {initials}
@@ -166,7 +191,7 @@ export function PlatformShell({
               <button
                 type="button"
                 onClick={() => setMobileMenu(!mobileMenu)}
-                className="grid size-11 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b4ce65] xl:hidden"
+                className="grid size-11 place-items-center rounded-xl border border-white/20 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b8d86a] xl:hidden"
                 aria-expanded={mobileMenu}
                 aria-label={
                   mobileMenu
@@ -189,7 +214,7 @@ export function PlatformShell({
         </div>
 
         {!compact && (
-          <div className="hidden border-t border-white/10 bg-[#294108]/70 xl:block">
+          <div className="hidden border-t border-white/10 bg-[#183725]/95 xl:block">
             <nav
               className="container flex items-stretch justify-center gap-1 overflow-x-auto py-2"
               aria-label="Primary navigation"
@@ -211,7 +236,7 @@ export function PlatformShell({
                       className={cn(
                         "group relative flex min-w-[74px] shrink-0 flex-col items-center justify-center gap-1 rounded-xl px-3 py-2.5 text-center text-[11px] font-bold no-underline transition-all",
                         active
-                          ? "bg-[#b4ce65] text-[#29410d] shadow-[0_6px_16px_rgba(180,206,101,.2)]"
+                          ? "bg-[#b8d86a] text-[#183725] shadow-[0_6px_16px_rgba(184,216,106,.25)]"
                           : "text-[#e1eccb] hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
                       )}
                     >
@@ -222,7 +247,7 @@ export function PlatformShell({
                           "absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full transition-opacity",
                           active
                             ? "bg-white/80 opacity-100"
-                            : "bg-[#b4ce65] opacity-0 group-hover:opacity-80"
+                            : "bg-[#b8d86a] opacity-0 group-hover:opacity-80"
                         )}
                       />
                     </Link>
@@ -234,7 +259,7 @@ export function PlatformShell({
         )}
 
         {mobileMenu && !compact && (
-          <div className="border-t border-white/10 bg-[#294108]/95 px-4 py-4 backdrop-blur-xl xl:hidden">
+          <div className="border-t border-white/10 bg-[#183725]/95 px-4 py-4 backdrop-blur-xl xl:hidden">
             <nav
               className="container grid grid-cols-2 gap-2 sm:grid-cols-3"
               aria-label="Mobile navigation"
@@ -251,7 +276,7 @@ export function PlatformShell({
                     className={cn(
                       "flex min-h-[66px] items-center gap-3 rounded-xl border px-3 py-3 text-sm font-bold no-underline transition-colors",
                       active
-                        ? "border-[#b4ce65]/50 bg-[#b4ce65] text-[#29410d]"
+                        ? "border-[#b8d86a]/50 bg-[#b8d86a] text-[#183725]"
                         : "border-white/10 bg-white/10 text-white hover:bg-white/16"
                     )}
                   >
@@ -289,6 +314,8 @@ export function PlatformShell({
           </div>
         )}
       </header>
+
+      <div aria-hidden="true" style={{ height: `${headerHeight}px` }} />
 
       {title && (
         <div className="border-b border-primary/8 bg-white">
