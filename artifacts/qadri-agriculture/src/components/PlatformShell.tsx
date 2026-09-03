@@ -8,6 +8,7 @@ import {
   ChevronLeft,
   ClipboardList,
   DraftingCompass,
+  DollarSign,
   Facebook,
   FileText,
   FlaskConical,
@@ -46,6 +47,7 @@ export const navigation = [
   { href: "/diagnosis", label: "diagnosis", icon: ScanSearch },
   { href: "/knowledge", label: "knowledge", icon: BookOpen },
   { href: "/projects", label: "projects", icon: ClipboardList },
+  { href: "/quotes", label: "quotes", icon: DollarSign },
   { href: "/shop", label: "shop", icon: ShoppingBag },
 ] as const;
 

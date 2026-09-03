@@ -15,6 +15,9 @@ import Knowledge from "./pages/Knowledge";
 import KnowledgeDetail from "./pages/KnowledgeDetail";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
+import QuoteAdmin from "./pages/QuoteAdmin";
+import QuoteRequest from "./pages/QuoteRequest";
+import Quotes from "./pages/Quotes";
 import SharedReport from "./pages/SharedReport";
 
 function Router() {
@@ -30,6 +33,9 @@ function Router() {
         <Route path="/diagnosis" component={EmptyPage} />
         <Route path="/knowledge/:id" component={KnowledgeDetail} />
         <Route path="/knowledge" component={Knowledge} />
+        <Route path="/quotes/request" component={QuoteRequest} />
+        <Route path="/quotes-admin" component={QuoteAdmin} />
+        <Route path="/quotes" component={Quotes} />
         <Route path="/projects" component={EmptyPage} />
         <Route path="/shop" component={EmptyPage} />
         <Route path="/reports/:shareToken" component={SharedReport} />
