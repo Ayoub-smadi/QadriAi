@@ -1,4 +1,4 @@
-import { Camera, MessageCircle, SunMedium } from "lucide-react";
+import { Camera, MessageCircle } from "lucide-react";
 
 type SmartPlantRescueProps = {
   language: "ar" | "en";
@@ -128,10 +128,6 @@ export function SmartPlantRescue({ language }: SmartPlantRescueProps) {
       <div className="window-rescue__stage window-rescue__stage--reply">
         <MessageCircle className="size-4" />
         <span>{isArabic ? "تحتاج إضاءة خفيفة" : "It needs soft light"}</span>
-      </div>
-      <div className="window-rescue__stage window-rescue__stage--window">
-        <SunMedium className="size-4" />
-         <span>{isArabic ? "الشباك ينفتح تلقائيًا" : "The window opens automatically"}</span>
       </div>
       <div className="window-rescue__stage window-rescue__stage--happy">
         <span>{isArabic ? "رجعت أفضل" : "It is better now"}</span>
