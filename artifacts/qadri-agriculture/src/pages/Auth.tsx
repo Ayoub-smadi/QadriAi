@@ -24,7 +24,7 @@ export default function Auth() {
     onSuccess: user => {
       utils.auth.me.setData(undefined, user);
       toast.success(language === "ar" ? `أهلًا ${user?.name || "بك"}، تم تسجيل الدخول بنجاح.` : `Welcome ${user?.name || "back"}, you are signed in.`);
-      setLocation(admin ? "/control" : "/dashboard");
+      setLocation(admin ? "/quotes-admin" : "/dashboard");
     },
     onError: error => toast.error(error.message),
   });
