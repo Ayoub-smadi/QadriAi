@@ -19,6 +19,13 @@ export default function Auth() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const switchMode = (nextMode: "login" | "register") => {
+    setMode(nextMode);
+    setAdmin(false);
+    setIdentifier("");
+    setPassword("");
+    setConfirmPassword("");
+  };
 
   const login = trpc.auth.login.useMutation({
     onSuccess: user => {
@@ -110,17 +117,17 @@ export default function Auth() {
 
       <section className="mx-auto w-full max-w-xl rounded-[2rem] border border-[#35530e]/10 bg-white p-6 shadow-[0_18px_50px_rgba(48,67,22,.08)] sm:p-9">
         <div className="flex items-center justify-between gap-3"><div><p className="text-xs font-bold tracking-[.16em] text-[#759244]">{copy.eyebrow}</p><h1 className="mt-2 text-3xl font-bold tracking-tight text-[#293d12]">{copy.title}</h1><p className="mt-3 text-sm leading-6 text-[#68775a]">{copy.subtitle}</p></div><span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[#edf3e6] text-[#35530e]"><LockKeyhole className="size-5" /></span></div>
-        <div className="mt-7 grid grid-cols-2 rounded-2xl bg-[#f4f7f0] p-1"><button type="button" onClick={() => setMode("login")} className={`rounded-xl px-3 py-2.5 text-sm font-bold transition ${mode === "login" ? "bg-white text-[#35530e] shadow-sm" : "text-[#718064]"}`}>{copy.login}</button><button type="button" onClick={() => { setMode("register"); setAdmin(false); }} className={`rounded-xl px-3 py-2.5 text-sm font-bold transition ${mode === "register" ? "bg-white text-[#35530e] shadow-sm" : "text-[#718064]"}`}>{copy.register}</button></div>
+         <div className="mt-7 grid grid-cols-2 rounded-2xl bg-[#f4f7f0] p-1"><button type="button" onClick={() => switchMode("login")} className={`rounded-xl px-3 py-2.5 text-sm font-bold transition ${mode === "login" ? "bg-white text-[#35530e] shadow-sm" : "text-[#718064]"}`}>{copy.login}</button><button type="button" onClick={() => switchMode("register")} className={`rounded-xl px-3 py-2.5 text-sm font-bold transition ${mode === "register" ? "bg-white text-[#35530e] shadow-sm" : "text-[#718064]"}`}>{copy.register}</button></div>
         {mode === "login" && <div className="mt-5 grid grid-cols-2 gap-2"><button type="button" onClick={() => setAdmin(false)} className={`flex items-center justify-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold transition ${!admin ? "border-[#35530e] bg-[#f0f5e9] text-[#35530e]" : "border-[#35530e]/10 text-[#718064]"}`}><UserRound className="size-4" />{copy.user}</button><button type="button" onClick={() => setAdmin(true)} className={`flex items-center justify-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold transition ${admin ? "border-[#35530e] bg-[#f0f5e9] text-[#35530e]" : "border-[#35530e]/10 text-[#718064]"}`}><ShieldCheck className="size-4" />{copy.admin}</button></div>}
         <form onSubmit={submit} className="mt-6 space-y-4">
           {mode === "register" && <div><Label>{copy.name}</Label><Input required value={name} onChange={event => setName(event.target.value)} placeholder={copy.namePlaceholder} className="mt-1.5 h-12 rounded-xl" /></div>}
-          <div><Label>{mode === "login" ? copy.username : copy.phone}</Label><div className="relative mt-1.5"><Input required value={identifier} onChange={event => setIdentifier(event.target.value)} placeholder={mode === "login" ? copy.usernamePlaceholder : copy.phonePlaceholder} className="h-12 rounded-xl pe-11" dir="ltr" autoComplete={mode === "login" ? "username" : "tel"} /><Phone className="pointer-events-none absolute end-3 top-3.5 size-5 text-[#90a17e]" /></div></div>
-          <div><Label>{copy.password}</Label><div className="relative mt-1.5"><Input required minLength={6} type="password" value={password} onChange={event => setPassword(event.target.value)} placeholder={copy.passwordPlaceholder} className="h-12 rounded-xl pe-11" dir="ltr" autoComplete={mode === "login" ? "current-password" : "new-password"} /><LockKeyhole className="pointer-events-none absolute end-3 top-3.5 size-5 text-[#90a17e]" /></div></div>
+           <div><Label>{mode === "login" ? copy.username : copy.phone}</Label><div className="relative mt-1.5" dir="ltr"><Input required value={identifier} onChange={event => setIdentifier(event.target.value)} placeholder={mode === "login" ? copy.usernamePlaceholder : copy.phonePlaceholder} className="h-12 rounded-xl pe-11 text-left" dir="ltr" autoComplete={mode === "login" ? "username" : "tel"} /><Phone className="pointer-events-none absolute end-3 top-3.5 size-5 text-[#90a17e]" /></div></div>
+           <div><Label>{copy.password}</Label><div className="relative mt-1.5" dir="ltr"><Input required minLength={6} type="password" value={password} onChange={event => setPassword(event.target.value)} placeholder={copy.passwordPlaceholder} className="h-12 rounded-xl pe-11 text-left" dir="ltr" autoComplete={mode === "login" ? "current-password" : "new-password"} /><LockKeyhole className="pointer-events-none absolute end-3 top-3.5 size-5 text-[#90a17e]" /></div></div>
           {mode === "register" && <div><Label>{copy.confirm}</Label><Input required minLength={6} type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} className="mt-1.5 h-12 rounded-xl" dir="ltr" autoComplete="new-password" /></div>}
           {admin && mode === "login" && <p className="rounded-xl bg-[#fff8e8] px-4 py-3 text-xs leading-5 text-[#80631e]">{copy.adminNote}</p>}
           <Button disabled={isPending} type="submit" className="h-12 w-full rounded-xl bg-[#35530e] text-white hover:bg-[#294108]">{isPending ? <Loader2 className="size-5 animate-spin" /> : admin ? <ShieldCheck className="size-5" /> : <ArrowLeft className="size-5" />}{mode === "login" ? copy.submitLogin : copy.submitRegister}</Button>
         </form>
-        <button type="button" onClick={() => { setMode(mode === "login" ? "register" : "login"); setAdmin(false); }} className="mt-5 w-full text-center text-sm font-bold text-[#52731f] hover:underline">{mode === "login" ? copy.switchRegister : copy.switchLogin}</button>
+         <button type="button" onClick={() => switchMode(mode === "login" ? "register" : "login")} className="mt-5 w-full text-center text-sm font-bold text-[#52731f] hover:underline">{mode === "login" ? copy.switchRegister : copy.switchLogin}</button>
         <Link href="/" className="mt-6 flex items-center justify-center gap-2 text-xs font-bold text-[#77856d] no-underline hover:text-[#35530e]"><ArrowLeft className="size-4" />{copy.back}</Link>
       </section>
     </main>
