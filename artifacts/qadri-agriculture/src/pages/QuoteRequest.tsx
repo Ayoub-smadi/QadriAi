@@ -25,7 +25,10 @@ export default function QuoteRequest() {
 
   useEffect(() => {
     const draft = readDraft();
-    if (draft?.items?.length) setItems(draft.items);
+    if (draft?.items?.length) {
+      setItems(draft.items);
+      if (draft.fulfillment) setFulfillment(draft.fulfillment);
+    }
     else setLocation("/quotes");
   }, [setLocation]);
 

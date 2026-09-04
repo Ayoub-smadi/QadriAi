@@ -40,7 +40,7 @@ export type QuoteRecord = {
   updatedAt: string;
 };
 
-export type QuoteDraft = { items: QuoteItem[] };
+export type QuoteDraft = { items: QuoteItem[]; fulfillment?: QuoteFulfillment };
 
 const RECORDS_KEY = "al-qadri-quote-records";
 const DRAFT_KEY = "al-qadri-quote-draft";
