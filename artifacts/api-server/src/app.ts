@@ -6,6 +6,15 @@ import { logger } from "./lib/logger";
 
 const app: Express = express();
 
+// tRPC clients expect a JSON body on every response. A browser revalidation
+// can otherwise turn auth.me into a 304 with an empty body, which surfaces as
+// "Unexpected end of JSON input" in the frontend.
+app.disable("etag");
+app.use("/api/trpc", (_req, res, next) => {
+  res.setHeader("Cache-Control", "no-store");
+  next();
+});
+
 app.use(
   pinoHttp({
     logger,
