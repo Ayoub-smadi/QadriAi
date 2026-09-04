@@ -8,6 +8,11 @@ import App from "./App";
 import { startLogin } from "./const";
 import "./index.css";
 
+const languageForApiError = (status: number) =>
+  status === 304 || status === 204
+    ? "انتهت صلاحية استجابة الخادم، يرجى المحاولة مجددًا."
+    : "تعذر الاتصال بخادم الحسابات. يرجى المحاولة مجددًا.";
+
 const queryClient = new QueryClient();
 
 const redirectToLoginIfUnauthorized = (error: unknown) => {
@@ -62,11 +67,24 @@ const trpcClient = trpc.createClient({
         }
         return {};
       },
-      fetch(input, init) {
-        return globalThis.fetch(input, {
+      async fetch(input, init) {
+        const headers = new Headers(init?.headers);
+        headers.set("Cache-Control", "no-cache");
+        const response = await globalThis.fetch(input, {
           ...(init ?? {}),
           credentials: "include",
+          cache: "no-store",
+          headers,
         });
+        const contentType = response.headers.get("content-type") || "";
+        if (response.status === 304 || response.status === 204 || !contentType.includes("application/json")) {
+          const message = languageForApiError(response.status);
+          return new Response(JSON.stringify([{ error: { json: { message, data: { code: "INTERNAL_SERVER_ERROR" } } } }]), {
+            status: 200,
+            headers: { "content-type": "application/json" },
+          });
+        }
+        return response;
       },
     }),
   ],
