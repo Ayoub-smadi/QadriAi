@@ -59,8 +59,25 @@ function sendSuccess(res: Response, data: unknown) {
   return res.json([{ result: { data: { json: data } } }]);
 }
 
+const trpcErrorCodes: Record<string, number> = {
+  BAD_REQUEST: -32600,
+  UNAUTHORIZED: -32001,
+  FORBIDDEN: -32003,
+  NOT_FOUND: -32004,
+  CONFLICT: -32009,
+  INTERNAL_SERVER_ERROR: -32603,
+};
+
 function sendError(res: Response, message: string, code = "BAD_REQUEST") {
-  return res.status(200).json([{ error: { json: { message, data: { code } } } }]);
+  return res.status(200).json([{
+    error: {
+      json: {
+        message,
+        code: trpcErrorCodes[code] ?? trpcErrorCodes.BAD_REQUEST,
+        data: { code },
+      },
+    },
+  }]);
 }
 
 function getSessionUserId(req: Request) {

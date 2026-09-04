@@ -7,4 +7,4 @@ The agriculture frontend sends batched tRPC-shaped requests to `/api/trpc`; the 
 
 **Why:** A Vite-only frontend falls back to its index HTML for missing API routes, which makes the client report misleading JSON parse errors such as Unexpected end of JSON input.
 
-**How to apply:** Keep auth routes mounted under the API artifact's `/api` router, preserve credential cookies for the browser session, disable ETags/cache revalidation on `/api/trpc`, and verify the proxied `auth.me`, `auth.login`, and `auth.register` endpoints after workflow changes.
+**How to apply:** Keep auth routes mounted under the API artifact's `/api` router, preserve credential cookies for the browser session, disable ETags/cache revalidation on `/api/trpc`, return numeric tRPC error codes alongside readable messages, and verify the proxied `auth.me`, `auth.login`, and `auth.register` endpoints after workflow changes.
