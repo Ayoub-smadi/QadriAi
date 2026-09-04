@@ -107,7 +107,7 @@ export default function Quotes() {
                 <h1 className="mt-2 text-2xl font-extrabold text-[#26342c] sm:text-3xl">{isArabic ? "أشجار وشجيرات وسياجات الزينة" : "Ornamental trees, shrubs & hedges"}</h1>
                 <p className="mt-2 text-sm text-[#78847c]">{isArabic ? "اختر النبات المناسب لحديقتك واحصل على عرض سعر مخصص." : "Choose the right plant for your garden and get a tailored quote."}</p>
               </div>
-              <Button onClick={openCatalog} className="h-12 rounded-xl bg-[#e9903d] px-6 font-extrabold text-white shadow-[0_8px_18px_rgba(233,144,61,.2)] hover:bg-[#d97d2e]">
+              <Button onClick={openCatalog} className="h-12 rounded-xl bg-[#004132] px-6 font-extrabold text-white shadow-[0_8px_18px_rgba(0,65,50,.2)] hover:bg-[#003326]">
                 <ShoppingBag className="me-2 size-5" />
                 {isArabic ? "طلب عرض سعر" : "Request a quote"}
               </Button>
@@ -140,7 +140,7 @@ export default function Quotes() {
                   key={plant.id}
                   type="button"
                   onClick={() => openProduct(plant)}
-                  className="group relative aspect-[1.05] overflow-hidden rounded-[1.1rem] bg-[#dce9d4] text-right shadow-[0_8px_22px_rgba(44,60,36,.1)] outline-none transition duration-200 hover:-translate-y-1 hover:shadow-[0_14px_28px_rgba(44,60,36,.18)] focus-visible:ring-2 focus-visible:ring-[#e9903d] focus-visible:ring-offset-2"
+                  className="group relative aspect-[1.05] overflow-hidden rounded-[1.1rem] bg-[#dce9d4] text-right shadow-[0_8px_22px_rgba(44,60,36,.1)] outline-none transition duration-200 hover:-translate-y-1 hover:shadow-[0_14px_28px_rgba(44,60,36,.18)] focus-visible:ring-2 focus-visible:ring-[#5d8d3e] focus-visible:ring-offset-2"
                 >
                   <img src={plant.imagePath} alt={isArabic ? plant.nameAr : plant.nameEn} className="size-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
                   <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
@@ -149,7 +149,7 @@ export default function Quotes() {
                     <span className="mt-0.5 block truncate text-[10px] italic text-white/75 sm:text-xs">{plant.scientificName}</span>
                     <span className="mt-2 block line-clamp-1 text-[10px] text-white/80">{isArabic ? plant.description.ar : plant.description.en}</span>
                   </span>
-                  {selected[plant.id] && <span className="absolute start-3 top-3 rounded-full bg-[#e9903d] px-2.5 py-1 text-[10px] font-extrabold text-white">{isArabic ? "تمت الإضافة" : "Added"}</span>}
+                  {selected[plant.id] && <span className="absolute start-3 top-3 rounded-full bg-[#5d8d3e] px-2.5 py-1 text-[10px] font-extrabold text-white">{isArabic ? "تمت الإضافة" : "Added"}</span>}
                 </button>
               ))}
             </div>
@@ -162,7 +162,7 @@ export default function Quotes() {
           {view === "catalog" ? (
             <>
               <DialogHeader className="border-b border-[#e1e5e0] pb-4">
-                <DialogTitle className="flex items-center gap-2 text-xl font-extrabold text-[#26342c]"><ShoppingBag className="size-5 text-[#e9903d]" />{isArabic ? "طلب عرض سعر" : "Request a quote"}</DialogTitle>
+                <DialogTitle className="flex items-center gap-2 text-xl font-extrabold text-[#26342c]"><ShoppingBag className="size-5 text-[#004132]" />{isArabic ? "طلب عرض سعر" : "Request a quote"}</DialogTitle>
                 <DialogDescription className="text-sm text-[#78847c]">{isArabic ? "اختر النباتات التي ترغب بها لإضافتها إلى طلبك." : "Choose the plants you would like to add to your request."}</DialogDescription>
               </DialogHeader>
               <div className="relative mt-1">
@@ -176,12 +176,12 @@ export default function Quotes() {
               </div>
               <div className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4">
                 {filteredPlants.map(plant => (
-                  <button key={plant.id} type="button" onClick={() => openProduct(plant)} className="group overflow-hidden rounded-xl border border-[#e0e5df] bg-white text-right transition hover:-translate-y-0.5 hover:border-[#a8c18f] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e9903d]">
+                  <button key={plant.id} type="button" onClick={() => openProduct(plant)} className="group overflow-hidden rounded-xl border border-[#e0e5df] bg-white text-right transition hover:-translate-y-0.5 hover:border-[#a8c18f] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5d8d3e]">
                     <div className="aspect-[1.12] overflow-hidden bg-[#edf3e9]"><img src={plant.imagePath} alt="" className="size-full object-cover transition duration-300 group-hover:scale-105" /></div>
                     <div className="p-2.5">
                       <span className="block truncate text-xs font-extrabold text-[#344637]">{isArabic ? plant.nameAr : plant.nameEn}</span>
                       <span className="mt-1 block truncate text-[10px] text-[#8a968b]">{plant.scientificName}</span>
-                      {selected[plant.id] && <span className="mt-1.5 block text-[10px] font-bold text-[#e9903d]">{isArabic ? "تمت الإضافة" : "Added"}</span>}
+                      {selected[plant.id] && <span className="mt-1.5 block text-[10px] font-bold text-[#5d8d3e]">{isArabic ? "تمت الإضافة" : "Added"}</span>}
                     </div>
                   </button>
                 ))}
@@ -211,14 +211,14 @@ export default function Quotes() {
                 </div>
               </div>
               <div className="mt-4">
-                <div className="flex items-center justify-between"><Label className="text-sm font-bold text-[#4c5d51]">{isArabic ? "الحجم" : "Size"}</Label><span className="text-xs font-bold text-[#d87531]">{isArabic ? "(إلزامي)" : "(Required)"}</span></div>
+                <div className="flex items-center justify-between"><Label className="text-sm font-bold text-[#4c5d51]">{isArabic ? "الحجم" : "Size"}</Label><span className="text-xs font-bold text-[#5d8d3e]">{isArabic ? "(إلزامي)" : "(Required)"}</span></div>
                 <div className="mt-2 grid grid-cols-4 gap-2">
-                  {sizeOptions.map(option => <button key={option.value} type="button" onClick={() => setProductSize(option.value)} className={`rounded-full border px-2 py-2 text-xs font-bold transition ${productSize === option.value ? "border-[#e9903d] bg-[#fff0e2] text-[#cb6d29]" : "border-[#dfe4df] bg-white text-[#78847c] hover:border-[#c3d4bb]"}`}>{isArabic ? option.ar : option.en}</button>)}
+                  {sizeOptions.map(option => <button key={option.value} type="button" onClick={() => setProductSize(option.value)} className={`rounded-full border px-2 py-2 text-xs font-bold transition ${productSize === option.value ? "border-[#5d8d3e] bg-[#edf4e5] text-[#35530e]" : "border-[#dfe4df] bg-white text-[#78847c] hover:border-[#c3d4bb]"}`}>{isArabic ? option.ar : option.en}</button>)}
                 </div>
                 {productSize === "custom" && <Input value={customSize} onChange={event => setCustomSize(event.target.value)} placeholder={isArabic ? "اكتب الحجم أو الارتفاع" : "Enter size or height"} className="mt-2 h-10 rounded-xl bg-white" autoFocus />}
               </div>
               <div className="mt-5 flex gap-2">
-                <Button type="button" onClick={addProduct} disabled={!productSize || (productSize === "custom" && !customSize.trim())} className="h-11 flex-1 rounded-xl bg-[#efb07d] font-extrabold text-white hover:bg-[#e99c5e]"><Plus className="me-2 size-4" />{isArabic ? "إضافة" : "Add"}</Button>
+                <Button type="button" onClick={addProduct} disabled={!productSize || (productSize === "custom" && !customSize.trim())} className="h-11 flex-1 rounded-xl bg-[#004132] font-extrabold text-white hover:bg-[#003326]"><Plus className="me-2 size-4" />{isArabic ? "إضافة" : "Add"}</Button>
                 <Button type="button" variant="outline" onClick={() => setView("catalog")} className="h-11 flex-1 rounded-xl border-[#27342c] bg-white font-bold text-[#344637] hover:bg-[#f4f6f3]">{isArabic ? "إلغاء" : "Cancel"}</Button>
               </div>
               <p className="mt-3 text-center text-[11px] text-[#95a097]">{isArabic ? `المقاس المختار: ${productSize ? sizeLabel(productSize === "custom" ? customSize : productSize) : "لم يتم الاختيار بعد"}` : `Selected size: ${productSize ? sizeLabel(productSize === "custom" ? customSize : productSize) : "not selected yet"}`}</p>
