@@ -4,8 +4,10 @@ import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 import { Router, type IRouter, type Request, type Response } from "express";
 
 const router: IRouter = Router();
+// The requested bootstrap credentials are used only on the server. Deployments
+// can (and should) override them with ADMIN_USERNAME / ADMIN_PASSWORD secrets.
 const ADMIN_USERNAME = (process.env.ADMIN_USERNAME || "Ayoub").trim().toLowerCase();
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Ayoub@123";
 const SESSION_COOKIE = "qadri_session";
 const SESSION_MAX_AGE = 1000 * 60 * 60 * 24 * 365;
 const sessions = new Map<string, number>();
