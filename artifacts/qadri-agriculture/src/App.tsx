@@ -20,6 +20,7 @@ import QuoteAdmin from "./pages/QuoteAdmin";
 import QuoteRequest from "./pages/QuoteRequest";
 import Quotes from "./pages/Quotes";
 import SharedReport from "./pages/SharedReport";
+import Selector from "./pages/Selector";
 
 function Router() {
   return (
@@ -30,7 +31,7 @@ function Router() {
         <Route path="/dashboard" component={EmptyPage} />
         <Route path="/designer" component={EmptyPage} />
         <Route path="/engineer" component={Engineer} />
-        <Route path="/selector" component={EmptyPage} />
+        <Route path="/selector" component={Selector} />
         <Route path="/diagnosis" component={EmptyPage} />
         <Route path="/knowledge/:id" component={KnowledgeDetail} />
         <Route path="/knowledge" component={Knowledge} />
