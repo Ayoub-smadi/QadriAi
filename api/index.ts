@@ -2,11 +2,11 @@
 // Vercel type-checks api files with the root frontend tsconfig. Keep this
 // handler independent from that config while reusing the workspace DB pool.
 import { pool } from "../lib/db/src/index";
-import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
+import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 const ADMIN_USERNAME = (process.env.ADMIN_USERNAME || "Ayoub").trim().toLowerCase();
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Ayoub@123";
 const SESSION_COOKIE = "qadri_session";
-const sessions = new Map<string, number>();
+const SESSION_SECRET = process.env.JWT_SECRET || "qadri-session-secret-change-me";
 
 type UserRow = {
   id: number;
@@ -85,9 +85,20 @@ function getCookie(req: any) {
   return token?.slice(SESSION_COOKIE.length + 1);
 }
 
+function sessionSignature(userId: number) {
+  return createHmac("sha256", SESSION_SECRET).update(String(userId)).digest("hex");
+}
+
+function getSessionUserId(req: any) {
+  const token = getCookie(req) || "";
+  const [userIdText, signature] = token.split(".");
+  const userId = Number(userIdText);
+  if (!Number.isInteger(userId) || !signature || signature !== sessionSignature(userId)) return undefined;
+  return userId;
+}
+
 function issueSession(res: any, userId: number) {
-  const token = randomBytes(32).toString("hex");
-  sessions.set(token, userId);
+  const token = `${userId}.${sessionSignature(userId)}`;
   res.setHeader("Set-Cookie", `${SESSION_COOKIE}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000`);
 }
 
@@ -130,18 +141,16 @@ async function handle(req: any, res: any) {
   }
 
   const path = String(req.url || "");
-  const operation = path.match(/(?:^|\/)(me|logout|login|register)(?:[/?]|$)/)?.[1] || String(req.query?.operation || "");
+  const operation = path.match(/(?:^|\/)(?:auth\.)?(me|logout|login|register)(?:[.?/&]|$)/)?.[1] || String(req.query?.operation || "");
   try {
     if (operation === "me") {
-      const userId = sessions.get(getCookie(req) || "");
+      const userId = getSessionUserId(req);
       if (!userId) return sendSuccess(res, null);
       const result = await pool.query<UserRow>('SELECT * FROM "users" WHERE "id" = $1 LIMIT 1', [userId]);
       return sendSuccess(res, result.rows[0] ? publicUser(result.rows[0]) : null);
     }
 
     if (operation === "logout") {
-      const token = getCookie(req);
-      if (token) sessions.delete(token);
       res.setHeader("Set-Cookie", `${SESSION_COOKIE}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`);
       return sendSuccess(res, { success: true });
     }
