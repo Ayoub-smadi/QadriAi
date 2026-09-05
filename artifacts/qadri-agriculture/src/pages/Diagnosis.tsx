@@ -33,7 +33,6 @@ export default function Diagnosis() {
   const cameraInputRef = useRef<HTMLInputElement>(null);
   const uploadInputRef = useRef<HTMLInputElement>(null);
   const [imageDataUrl, setImageDataUrl] = useState("");
-  const [mimeType, setMimeType] = useState<"image/jpeg" | "image/png" | "image/webp">("image/jpeg");
   const [note, setNote] = useState("");
   const [error, setError] = useState("");
   const [analysisRequested, setAnalysisRequested] = useState(false);
@@ -42,6 +41,7 @@ export default function Diagnosis() {
   const helper = isArabic
     ? "التقط صورة واضحة أو ارفعها لنجهّز قراءة أولية حذرة عند ربط خدمة التحليل."
     : "Take a clear photo or upload one so we can prepare a cautious first reading when the analysis service is connected.";
+  const temporaryResponse = "تعذر الحصول على الرد الآن. Unable to transform response from server";
 
   const selectFile = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -52,14 +52,9 @@ export default function Diagnosis() {
       setError(isArabic ? "يرجى اختيار صورة JPG أو PNG أو WebP." : "Please choose a JPG, PNG, or WebP image.");
       return;
     }
-    if (file.size > 4_000_000) {
-      setError(isArabic ? "يجب ألا يزيد حجم الصورة عن 4 ميغابايت." : "Image size must be 4 MB or less.");
-      return;
-    }
     const reader = new FileReader();
     reader.onload = () => {
       setImageDataUrl(String(reader.result));
-      setMimeType(file.type as typeof mimeType);
     };
     reader.readAsDataURL(file);
   };
@@ -101,7 +96,7 @@ export default function Diagnosis() {
               <p className="mt-5 max-w-xl text-sm leading-7 text-[#d6e6d2] sm:text-base">{helper}</p>
               <div className="mt-6 flex flex-wrap gap-2 text-xs font-bold text-[#e7efcd]">
                 <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2">{isArabic ? "كاميرا أو تحميل" : "Camera or upload"}</span>
-                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2">{isArabic ? "حتى 4 ميغابايت" : "Up to 4 MB"}</span>
+                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2">{isArabic ? "بدون حد لحجم الصورة" : "No image size limit"}</span>
                 <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2">{isArabic ? "قراءة أولية حذرة" : "Cautious first reading"}</span>
               </div>
             </div>
@@ -167,7 +162,7 @@ export default function Diagnosis() {
               </div>
             ) : (
               <div className="rounded-[1.6rem] border border-[#e7cf9e] bg-[#fffaf1] p-6 shadow-[0_14px_32px_rgba(120,91,37,.06)] sm:p-8" role="status" aria-live="polite">
-                <div className="flex items-start gap-3 text-[#806536]"><CircleAlert className="mt-1 size-6 shrink-0" /><div><p className="text-xs font-bold tracking-[.14em]">{isArabic ? "الرد المؤقت" : "TEMPORARY RESPONSE"}</p><h2 className="mt-2 text-2xl font-black text-[#5e4927]">{isArabic ? "تعذر الحصول على الرد الآن." : "The response is not available yet."}</h2><p className="mt-3 text-sm leading-7">{isArabic ? "Unable to transform response from server" : "Unable to transform response from server"}</p></div></div>
+                <div className="flex items-start gap-3 text-[#806536]"><CircleAlert className="mt-1 size-6 shrink-0" /><div><p className="text-xs font-bold tracking-[.14em]">{isArabic ? "الرد المؤقت" : "TEMPORARY RESPONSE"}</p><h2 className="mt-2 text-xl font-black leading-8 text-[#5e4927]">{temporaryResponse}</h2></div></div>
                 <div className="mt-6 border-t border-[#eadcbf] pt-5 text-sm leading-7 text-[#90784e]">{isArabic ? "تم تجهيز الصورة والملاحظة محليًا، وسيظهر التحليل الحقيقي هنا بعد ربط الـ API." : "The image and note are prepared locally. The real analysis will appear here after the API is connected."}</div>
               </div>
             )}
