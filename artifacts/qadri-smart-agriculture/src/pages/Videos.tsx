@@ -1,0 +1,1 @@
+export { default } from "../../../qadri-agriculture/src/pages/Videos";

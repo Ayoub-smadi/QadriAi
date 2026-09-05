@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import SharedReport from "./pages/SharedReport";
+import Videos from "./pages/Videos";
 
 function Router() {
   return (
@@ -27,6 +28,7 @@ function Router() {
         <Route path="/selector" component={EmptyPage} />
         <Route path="/diagnosis" component={EmptyPage} />
         <Route path="/knowledge" component={EmptyPage} />
+        <Route path="/videos" component={Videos} />
         <Route path="/projects" component={EmptyPage} />
         <Route path="/shop" component={EmptyPage} />
         <Route path="/reports/:shareToken" component={SharedReport} />

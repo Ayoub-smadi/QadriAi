@@ -13,6 +13,7 @@ import Engineer from "./pages/Engineer";
 import Home from "./pages/Home";
 import Knowledge from "./pages/Knowledge";
 import KnowledgeDetail from "./pages/KnowledgeDetail";
+import Videos from "./pages/Videos";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import QuoteAdmin from "./pages/QuoteAdmin";
@@ -33,6 +34,7 @@ function Router() {
         <Route path="/diagnosis" component={EmptyPage} />
         <Route path="/knowledge/:id" component={KnowledgeDetail} />
         <Route path="/knowledge" component={Knowledge} />
+        <Route path="/videos" component={Videos} />
         <Route path="/quotes/request" component={QuoteRequest} />
         <Route path="/quotes-admin" component={QuoteAdmin} />
         <Route path="/quotes" component={Quotes} />

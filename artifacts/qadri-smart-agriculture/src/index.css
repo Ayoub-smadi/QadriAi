@@ -43,74 +43,74 @@
 }
 
 :root {
-  --primary: #35530e;
-  --primary-foreground: #ffffff;
-  --sidebar-primary: #35530e;
-  --sidebar-primary-foreground: #ffffff;
+  --primary: hsl(80 71% 19%);
+  --primary-foreground: hsl(0 0% 100%);
+  --sidebar-primary: hsl(80 71% 19%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
   --chart-1: oklch(0.74 0.11 120);
   --chart-2: oklch(0.61 0.13 122);
   --chart-3: oklch(0.48 0.12 123);
   --chart-4: oklch(0.38 0.09 123);
   --chart-5: oklch(0.29 0.07 123);
   --radius: 0.85rem;
-  --background: #f7f8f4;
-  --foreground: #1d2814;
-  --card: #ffffff;
-  --card-foreground: #1d2814;
-  --popover: #ffffff;
-  --popover-foreground: #1d2814;
-  --secondary: #edf2e7;
-  --secondary-foreground: #40552a;
-  --muted: #f2f5ee;
-  --muted-foreground: #68775a;
-  --accent: #edf4e5;
-  --accent-foreground: #29410d;
+  --background: hsl(78 25% 97%);
+  --foreground: hsl(82 35% 12%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(82 35% 12%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(82 35% 12%);
+  --secondary: hsl(78 31% 93%);
+  --secondary-foreground: hsl(82 34% 25%);
+  --muted: hsl(78 23% 95%);
+  --muted-foreground: hsl(84 13% 48%);
+  --accent: hsl(78 47% 92%);
+  --accent-foreground: hsl(80 71% 19%);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: #ffffff;
-  --border: #dfe8d3;
-  --input: #d9e3cc;
-  --ring: #668b30;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #1d2814;
-  --sidebar-accent: #edf4e5;
-  --sidebar-accent-foreground: #29410d;
-  --sidebar-border: #dfe8d3;
-  --sidebar-ring: #668b30;
+  --border: hsl(80 27% 87%);
+  --input: hsl(80 27% 82%);
+  --ring: hsl(83 48% 37%);
+  --sidebar: hsl(0 0% 100%);
+  --sidebar-foreground: hsl(82 35% 12%);
+  --sidebar-accent: hsl(78 47% 92%);
+  --sidebar-accent-foreground: hsl(80 71% 19%);
+  --sidebar-border: hsl(80 27% 87%);
+  --sidebar-ring: hsl(83 48% 37%);
 }
 
 .dark {
-  --primary: #9dbc69;
-  --primary-foreground: #192609;
+  --primary: hsl(82 43% 67%);
+  --primary-foreground: hsl(82 45% 10%);
   --sidebar-primary: #9dbc69;
   --sidebar-primary-foreground: #192609;
-  --background: #172110;
-  --foreground: #eef4e8;
-  --card: #202e17;
-  --card-foreground: #eef4e8;
-  --popover: #202e17;
-  --popover-foreground: #eef4e8;
-  --secondary: #2b3822;
-  --secondary-foreground: #dce8cf;
-  --muted: #293620;
-  --muted-foreground: #b8c6aa;
-  --accent: #2e3d23;
-  --accent-foreground: #edf4e5;
+  --background: hsl(84 32% 10%);
+  --foreground: hsl(80 31% 93%);
+  --card: hsl(84 28% 15%);
+  --card-foreground: hsl(80 31% 93%);
+  --popover: hsl(84 28% 15%);
+  --popover-foreground: hsl(80 31% 93%);
+  --secondary: hsl(84 24% 21%);
+  --secondary-foreground: hsl(80 27% 86%);
+  --muted: hsl(84 22% 19%);
+  --muted-foreground: hsl(82 15% 69%);
+  --accent: hsl(82 24% 23%);
+  --accent-foreground: hsl(80 31% 93%);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: #ffffff;
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
-  --ring: #a6c772;
+  --border: hsl(0 0% 100% / 12%);
+  --input: hsl(0 0% 100% / 16%);
+  --ring: hsl(82 43% 67%);
   --chart-1: oklch(0.74 0.11 120);
   --chart-2: oklch(0.61 0.13 122);
   --chart-3: oklch(0.48 0.12 123);
   --chart-4: oklch(0.38 0.09 123);
   --chart-5: oklch(0.29 0.07 123);
-  --sidebar: #202e17;
-  --sidebar-foreground: #eef4e8;
-  --sidebar-accent: #2e3d23;
-  --sidebar-accent-foreground: #edf4e5;
-  --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: #a6c772;
+  --sidebar: hsl(84 28% 15%);
+  --sidebar-foreground: hsl(80 31% 93%);
+  --sidebar-accent: hsl(82 24% 23%);
+  --sidebar-accent-foreground: hsl(80 31% 93%);
+  --sidebar-border: hsl(0 0% 100% / 12%);
+  --sidebar-ring: hsl(82 43% 67%);
 }
 
 @layer base {
@@ -135,3 +135,11 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 }
 
 @media (prefers-reduced-motion: no-preference) { a, button { transition-duration: 180ms; transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1); } button:active { transform: scale(.97); } }
+
+@keyframes video-library-reveal {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.video-library-reveal { animation: video-library-reveal 520ms cubic-bezier(.23,1,.32,1) both; }
+@media (prefers-reduced-motion: reduce) { .video-library-reveal { animation: none; } }

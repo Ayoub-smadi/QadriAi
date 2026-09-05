@@ -18,6 +18,7 @@ import {
   ShoppingBag,
   Sprout,
   UserRound,
+  Video,
   X,
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
@@ -40,6 +41,7 @@ export const navigation = [
   { href: "/selector", label: "selector", icon: Sprout },
   { href: "/diagnosis", label: "diagnosis", icon: ScanSearch },
   { href: "/knowledge", label: "knowledge", icon: BookOpen },
+  { href: "/videos", label: "videos", icon: Video },
   { href: "/projects", label: "projects", icon: ClipboardList },
   { href: "/shop", label: "shop", icon: ShoppingBag },
 ] as const;
