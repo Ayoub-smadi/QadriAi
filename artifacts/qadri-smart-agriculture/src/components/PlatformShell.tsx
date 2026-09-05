@@ -22,6 +22,7 @@ import {
   X,
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { VideoLessons } from "@/components/VideoLessons";
 import { Fragment, ReactNode, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "./ui/button";
@@ -299,6 +300,7 @@ export function PlatformShell({
         </div>
       )}
       {children}
+      {location === "/knowledge" && <div className="container pb-8"><VideoLessons /></div>}
       <footer className="mt-16 border-t border-primary/10 bg-white">
         <div className="container flex flex-col items-center justify-between gap-3 py-7 text-center text-xs text-[#6b775e] sm:flex-row sm:text-start">
           <span>

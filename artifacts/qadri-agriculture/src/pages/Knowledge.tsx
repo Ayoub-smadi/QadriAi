@@ -1,4 +1,5 @@
 import { PlatformShell } from "@/components/PlatformShell";
+import { VideoLessons } from "@/components/VideoLessons";
 import { plantKnowledge } from "@/data/plantKnowledge";
 import { useLanguage } from "@/lib/i18n";
 import { BookOpen } from "lucide-react";
@@ -75,6 +76,7 @@ export default function Knowledge() {
             ))}
           </div>
         </section>
+        <VideoLessons />
       </main>
     </PlatformShell>
   );
