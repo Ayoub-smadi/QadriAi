@@ -95,6 +95,7 @@ function LessonMeta({ lesson, isArabic }: { lesson: VideoLesson; isArabic: boole
       <span className="inline-flex items-center gap-1.5"><Clock3 className="size-3.5 text-[#779a52]" />{lesson.duration}</span>
       <span className="size-1 rounded-full bg-[#b9c9a1]" aria-hidden="true" />
       <span>{isArabic ? levelLabels[lesson.level].ar : levelLabels[lesson.level].en}</span>
+      <span className="rounded-full bg-[#eaf1df] px-2.5 py-1 text-[10px] font-bold text-[#5f793e]">{isArabic ? "فيديو عربي" : "Arabic video"}</span>
     </div>
   );
 }
@@ -154,7 +155,7 @@ export default function Videos() {
               </p>
               <div className="mt-7 flex flex-wrap gap-2.5 text-xs font-bold text-[#e7efcd]">
                 <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2">{videoLessons.length} {isArabic ? "درسًا محليًا" : "local lessons"}</span>
-                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2">{isArabic ? "محتوى عربي مع ترجمة إنجليزية" : "Arabic content with English fallback"}</span>
+                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2">{isArabic ? "فيديوهات عربية تعليمية" : "Arabic educational videos"}</span>
               </div>
             </div>
             <button type="button" data-testid="button-featured-lesson" onClick={() => setSelected(featured)} className="group relative overflow-hidden rounded-[1.5rem] border border-white/20 bg-[#0e352d] text-start shadow-2xl transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#dbeaa9]">
@@ -213,7 +214,7 @@ export default function Videos() {
                   </div>
                   <h3 data-testid={`text-video-title-${lesson.id}`} className="mt-3 min-h-[3.5rem] text-lg font-extrabold leading-7 text-[#294a2e]">{isArabic ? lesson.titleAr : lesson.titleEn}</h3>
                   <p className="mt-2 line-clamp-2 min-h-12 text-sm leading-6 text-[#71806c]">{isArabic ? lesson.descriptionAr : lesson.descriptionEn}</p>
-                  <p className="mt-3 truncate text-[11px] font-semibold text-[#8a987f]">{isArabic ? "المصدر: " : "Source: "}{lesson.sourceLabel}</p>
+                  <p className="mt-3 truncate text-[11px] font-semibold text-[#8a987f]">{isArabic ? "المصدر العربي: " : "Arabic source: "}{lesson.sourceLabel}</p>
                   <div className="mt-4 flex items-center justify-between border-t border-[#eef1e8] pt-4">
                     <LessonMeta lesson={lesson} isArabic={isArabic} />
                     <span className="inline-flex items-center gap-1 text-xs font-extrabold text-[#557e45]">{isArabic ? "شاهد الدرس" : "View lesson"}<ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
@@ -262,11 +263,11 @@ export default function Videos() {
                 />
               </div>
               <div className="mt-6">
-                <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-[#789553]"><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? categoryLabels[selected.category].ar : categoryLabels[selected.category].en}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{selected.duration}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? levelLabels[selected.level].ar : levelLabels[selected.level].en}</span></div>
+                <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-[#789553]"><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? categoryLabels[selected.category].ar : categoryLabels[selected.category].en}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{selected.duration}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? levelLabels[selected.level].ar : levelLabels[selected.level].en}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? "فيديو عربي" : "Arabic video"}</span></div>
                 <h2 id="video-viewer-title" className="mt-4 text-2xl font-black leading-tight text-[#294a2e] sm:text-3xl">{isArabic ? selected.titleAr : selected.titleEn}</h2>
                 <p className="mt-3 text-sm leading-7 text-[#667767]">{isArabic ? selected.descriptionAr : selected.descriptionEn}</p>
                 <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#d7e3c7] bg-[#f0f5e8] p-4 text-sm leading-6 text-[#55704b]">
-                  <span className="inline-flex items-center gap-2"><ShieldCheck className="size-5 shrink-0 text-[#6e9149]" />{isArabic ? `المصدر: ${selected.sourceLabel}` : `Source: ${selected.sourceLabel}`}</span>
+                  <span className="inline-flex items-center gap-2"><ShieldCheck className="size-5 shrink-0 text-[#6e9149]" />{isArabic ? `المصدر العربي: ${selected.sourceLabel}` : `Arabic source: ${selected.sourceLabel}`}</span>
                   <a href={`https://www.youtube.com/watch?v=${selected.youtubeId}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#17483b] px-4 py-2.5 text-xs font-extrabold text-white transition-colors hover:bg-[#0f392e]">
                     <ExternalLink className="size-4" />{isArabic ? "فتح الفيديو على YouTube" : "Open on YouTube"}
                   </a>
