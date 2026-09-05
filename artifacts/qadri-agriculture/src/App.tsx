@@ -7,6 +7,7 @@ import { CartProvider } from "./contexts/CartContext";
 import { CartDrawer } from "./components/CartDrawer";
 import { LanguageProvider } from "./lib/i18n";
 import Control from "./pages/Control";
+import Diagnosis from "./pages/Diagnosis";
 import EmptyPage from "./pages/EmptyPage";
 import Auth from "./pages/Auth";
 import Engineer from "./pages/Engineer";
@@ -32,7 +33,7 @@ function Router() {
         <Route path="/designer" component={EmptyPage} />
         <Route path="/engineer" component={Engineer} />
         <Route path="/selector" component={Selector} />
-        <Route path="/diagnosis" component={EmptyPage} />
+        <Route path="/diagnosis" component={Diagnosis} />
         <Route path="/knowledge/:id" component={KnowledgeDetail} />
         <Route path="/knowledge" component={Knowledge} />
         <Route path="/videos" component={Videos} />
