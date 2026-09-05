@@ -10,6 +10,7 @@ import {
   ChevronDown,
   Clock3,
   Droplets,
+  ExternalLink,
   Fence,
   Filter,
   FlaskConical,
@@ -68,7 +69,9 @@ const visualThemes = {
 function ThumbnailVisual({ lesson, large = false }: { lesson: VideoLesson; large?: boolean }) {
   const Icon = visualIcons[lesson.visual];
   return (
-    <div className={cn("relative isolate overflow-hidden bg-gradient-to-br", visualThemes[lesson.visual], large ? "h-56 sm:h-full" : "h-44")} aria-hidden="true">
+      <div className={cn("relative isolate overflow-hidden bg-gradient-to-br", visualThemes[lesson.visual], large ? "h-56 sm:h-full" : "h-44")} aria-hidden="true">
+      <img src={`https://i.ytimg.com/vi/${lesson.youtubeId}/hqdefault.jpg`} alt="" className="absolute inset-0 size-full object-cover opacity-75 transition duration-500 group-hover:scale-105" loading="lazy" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#173b32]/35 via-transparent to-[#102c24]/55" />
       <div className="absolute -end-8 -top-10 size-40 rounded-full border border-white/20 bg-white/10" />
       <div className="absolute -bottom-16 -start-10 size-44 rounded-full border border-white/15 bg-black/10" />
       <div className="absolute inset-x-5 bottom-5 flex items-end justify-between">
@@ -210,6 +213,7 @@ export default function Videos() {
                   </div>
                   <h3 data-testid={`text-video-title-${lesson.id}`} className="mt-3 min-h-[3.5rem] text-lg font-extrabold leading-7 text-[#294a2e]">{isArabic ? lesson.titleAr : lesson.titleEn}</h3>
                   <p className="mt-2 line-clamp-2 min-h-12 text-sm leading-6 text-[#71806c]">{isArabic ? lesson.descriptionAr : lesson.descriptionEn}</p>
+                  <p className="mt-3 truncate text-[11px] font-semibold text-[#8a987f]">{isArabic ? "المصدر: " : "Source: "}{lesson.sourceLabel}</p>
                   <div className="mt-4 flex items-center justify-between border-t border-[#eef1e8] pt-4">
                     <LessonMeta lesson={lesson} isArabic={isArabic} />
                     <span className="inline-flex items-center gap-1 text-xs font-extrabold text-[#557e45]">{isArabic ? "شاهد الدرس" : "View lesson"}<ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
@@ -247,19 +251,26 @@ export default function Videos() {
               <button type="button" data-testid="button-close-video-viewer" onClick={() => setSelected(null)} className="grid size-10 place-items-center rounded-xl text-[#57705b] transition-colors hover:bg-[#eaf1e2] hover:text-[#21492e]" aria-label={isArabic ? "إغلاق العارض" : "Close viewer"}><X className="size-5" /></button>
             </div>
             <div className="p-5 sm:p-7">
-              <div className="relative grid min-h-56 place-items-center overflow-hidden rounded-[1.5rem] bg-[#14372f] p-8 text-center text-white sm:min-h-72">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(183,213,116,.25),transparent_36%),radial-gradient(circle_at_80%_90%,rgba(206,156,93,.2),transparent_40%)]" />
-                <div className="relative">
-                  <span className="mx-auto grid size-16 place-items-center rounded-full border border-white/30 bg-white/10 text-[#dbeaa9]"><PlayCircle className="size-9" strokeWidth={1.4} /></span>
-                  <p className="mt-4 text-sm font-extrabold">{isArabic ? "مساحة المشغل التجريبي" : "Demo player space"}</p>
-                  <p className="mt-1 text-xs text-[#c4d9c0]">{isArabic ? "لا يوجد مصدر فيديو موصول حاليًا" : "No video source is connected yet"}</p>
-                </div>
+              <div className="relative aspect-video overflow-hidden rounded-[1.5rem] bg-black shadow-inner">
+                <iframe
+                  className="size-full"
+                  src={`https://www.youtube-nocookie.com/embed/${selected.youtubeId}?rel=0`}
+                  title={isArabic ? selected.titleAr : selected.titleEn}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
               </div>
               <div className="mt-6">
                 <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-[#789553]"><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? categoryLabels[selected.category].ar : categoryLabels[selected.category].en}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{selected.duration}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? levelLabels[selected.level].ar : levelLabels[selected.level].en}</span></div>
                 <h2 id="video-viewer-title" className="mt-4 text-2xl font-black leading-tight text-[#294a2e] sm:text-3xl">{isArabic ? selected.titleAr : selected.titleEn}</h2>
                 <p className="mt-3 text-sm leading-7 text-[#667767]">{isArabic ? selected.descriptionAr : selected.descriptionEn}</p>
-                <div className="mt-5 flex gap-3 rounded-2xl border border-[#d7e3c7] bg-[#f0f5e8] p-4 text-sm leading-6 text-[#55704b]"><ShieldCheck className="mt-0.5 size-5 shrink-0 text-[#6e9149]" /><span>{isArabic ? "هذا محتوى محلي صادق للاختبار. يمكن ربط الدرس لاحقًا بمصدر فيديو مستضاف مع إبقاء معلومات الدرس وسياق السلامة واضحين." : "This is honest local placeholder content for the library. A hosted video source can be connected later while keeping lesson information and safety context clear."}</span></div>
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#d7e3c7] bg-[#f0f5e8] p-4 text-sm leading-6 text-[#55704b]">
+                  <span className="inline-flex items-center gap-2"><ShieldCheck className="size-5 shrink-0 text-[#6e9149]" />{isArabic ? `المصدر: ${selected.sourceLabel}` : `Source: ${selected.sourceLabel}`}</span>
+                  <a href={`https://www.youtube.com/watch?v=${selected.youtubeId}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#17483b] px-4 py-2.5 text-xs font-extrabold text-white transition-colors hover:bg-[#0f392e]">
+                    <ExternalLink className="size-4" />{isArabic ? "فتح الفيديو على YouTube" : "Open on YouTube"}
+                  </a>
+                </div>
               </div>
             </div>
           </section>
