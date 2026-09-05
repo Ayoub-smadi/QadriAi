@@ -4,8 +4,8 @@
   "framework": "vite",
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "/api/index.ts"
+      "source": "/api/trpc/:operation",
+      "destination": "/api/index.ts?operation=:operation"
     },
     {
       "source": "/(.*)",

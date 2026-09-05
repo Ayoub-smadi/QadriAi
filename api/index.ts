@@ -141,7 +141,9 @@ async function handle(req: any, res: any) {
   }
 
   const path = String(req.url || "");
-  const operation = path.match(/(?:^|\/)(?:auth\.)?(me|logout|login|register)(?:[.?/&]|$)/)?.[1] || String(req.query?.operation || "");
+  const pathOperation = path.match(/(?:^|\/)(?:auth\.)?(me|logout|login|register)(?:[.?/&]|$)/)?.[1];
+  const queryOperation = String(req.query?.operation || "").split(".").pop();
+  const operation = pathOperation || queryOperation || "";
   try {
     if (operation === "me") {
       const userId = getSessionUserId(req);
