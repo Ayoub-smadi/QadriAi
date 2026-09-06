@@ -76,7 +76,6 @@ export default function Auth() {
     submitRegister: "إنشاء الحساب والدخول",
     switchLogin: "لديك حساب؟ سجّل الدخول",
     switchRegister: "ليس لديك حساب؟ أنشئ حسابًا",
-     adminNote: "اكتب Ayoub للدخول إلى الحساب الإداري.",
     back: "العودة للرئيسية",
   } : {
     eyebrow: "Your Al-Qadri account",
@@ -97,7 +96,6 @@ export default function Auth() {
     submitRegister: "Create account and sign in",
     switchLogin: "Already have an account? Sign in",
     switchRegister: "New here? Create an account",
-     adminNote: "Enter Ayoub to sign in to the administrator account.",
     back: "Back home",
   };
 
@@ -118,7 +116,6 @@ export default function Auth() {
            <div><Label>{mode === "login" ? copy.username : copy.phone}</Label><div className="relative mt-1.5" dir="ltr"><Input required value={identifier} onChange={event => setIdentifier(event.target.value)} placeholder={mode === "login" ? copy.usernamePlaceholder : copy.phonePlaceholder} className="h-12 rounded-xl pe-11 text-left" dir="ltr" autoComplete={mode === "login" ? "username" : "tel"} /><Phone className="pointer-events-none absolute end-3 top-3.5 size-5 text-[#90a17e]" /></div></div>
            <div><Label>{copy.password}</Label><div className="relative mt-1.5" dir="ltr"><Input required minLength={6} type="password" value={password} onChange={event => setPassword(event.target.value)} placeholder={copy.passwordPlaceholder} className="h-12 rounded-xl pe-11 text-left" dir="ltr" autoComplete={mode === "login" ? "current-password" : "new-password"} /><LockKeyhole className="pointer-events-none absolute end-3 top-3.5 size-5 text-[#90a17e]" /></div></div>
           {mode === "register" && <div><Label>{copy.confirm}</Label><Input required minLength={6} type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} className="mt-1.5 h-12 rounded-xl" dir="ltr" autoComplete="new-password" /></div>}
-          {isAdminLogin && <p className="rounded-xl bg-[#fff8e8] px-4 py-3 text-xs leading-5 text-[#80631e]">{copy.adminNote}</p>}
           <Button disabled={isPending} type="submit" className="h-12 w-full rounded-xl bg-[#35530e] text-white hover:bg-[#294108]">{isPending ? <Loader2 className="size-5 animate-spin" /> : isAdminLogin ? <ShieldCheck className="size-5" /> : <ArrowLeft className="size-5" />}{mode === "login" ? copy.submitLogin : copy.submitRegister}</Button>
         </form>
          <button type="button" onClick={() => switchMode(mode === "login" ? "register" : "login")} className="mt-5 w-full text-center text-sm font-bold text-[#52731f] hover:underline">{mode === "login" ? copy.switchRegister : copy.switchLogin}</button>
