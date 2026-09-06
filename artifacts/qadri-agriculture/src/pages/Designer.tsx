@@ -12,12 +12,12 @@ type Mode = "courtyard" | "farm" | "irrigation";
 type Style = "simple" | "modern" | "arabic" | "productive" | "natural" | "traditional";
 type Card = { id: Style; ar: string; en: string; image: string };
 const styleCards: Card[] = [
-  { id: "simple", ar: "فناء زراعي بسيط", en: "Simple farm courtyard", image: "/assets/olive.jpg" },
-  { id: "modern", ar: "فناء زراعي عصري", en: "Modern farm courtyard", image: "/assets/citrus.jpg" },
-  { id: "arabic", ar: "فناء عربي زراعي", en: "Arabic farm courtyard", image: "/assets/date-palm.jpg" },
-  { id: "productive", ar: "حديقة إنتاجية", en: "Productive garden", image: "/assets/basil.jpg" },
-  { id: "natural", ar: "زراعة طبيعية", en: "Natural agriculture", image: "/assets/pomegranate.jpg" },
-  { id: "traditional", ar: "ريفي تقليدي", en: "Traditional rural", image: "/assets/olive.jpg" },
+  { id: "simple", ar: "فناء زراعي بسيط", en: "Simple farm courtyard", image: "/assets/qadri-simple-courtyard.jpg" },
+  { id: "modern", ar: "فناء زراعي عصري", en: "Modern farm courtyard", image: "/assets/qadri-modern-courtyard.jpg" },
+  { id: "arabic", ar: "فناء عربي زراعي", en: "Arabic farm courtyard", image: "/assets/qadri-arabic-courtyard.jpg" },
+  { id: "productive", ar: "حديقة إنتاجية", en: "Productive garden", image: "/assets/qadri-productive-garden.jpg" },
+  { id: "natural", ar: "زراعة طبيعية", en: "Natural agriculture", image: "/assets/qadri-natural-agriculture.jpg" },
+  { id: "traditional", ar: "ريفي تقليدي", en: "Traditional rural", image: "/assets/qadri-traditional-rural.jpg" },
 ];
 const modeLabels = { courtyard: ["فناء مزرعة", "Farm courtyard"], farm: ["أرض زراعية", "Agricultural land"], irrigation: ["شبكة ري", "Irrigation network"] } as const;
 
