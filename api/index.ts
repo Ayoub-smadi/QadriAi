@@ -1,7 +1,7 @@
 // @ts-nocheck
 // Vercel type-checks api files with the root frontend tsconfig. Keep this
 // handler independent from that config while reusing the workspace DB pool.
-import { pool } from "../lib/db/src/index";
+import { pool } from "../lib/db/src/pool";
 import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 const ADMIN_USERNAME = (process.env.ADMIN_USERNAME || "Ayoub").trim().toLowerCase();
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Ayoub@123";
