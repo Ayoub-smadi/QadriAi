@@ -17,6 +17,7 @@ import KnowledgeDetail from "./pages/KnowledgeDetail";
 import Videos from "./pages/Videos";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
+import Projects from "./pages/Projects";
 import QuoteAdmin from "./pages/QuoteAdmin";
 import QuoteRequest from "./pages/QuoteRequest";
 import Quotes from "./pages/Quotes";
@@ -40,7 +41,7 @@ function Router() {
         <Route path="/quotes/request" component={QuoteRequest} />
         <Route path="/quotes-admin" component={QuoteAdmin} />
         <Route path="/quotes" component={Quotes} />
-        <Route path="/projects" component={EmptyPage} />
+        <Route path="/projects" component={Projects} />
         <Route path="/shop" component={EmptyPage} />
         <Route path="/reports/:shareToken" component={SharedReport} />
         <Route path="/profile" component={Profile} />
