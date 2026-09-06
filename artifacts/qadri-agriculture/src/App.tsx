@@ -10,6 +10,7 @@ import Control from "./pages/Control";
 import Diagnosis from "./pages/Diagnosis";
 import EmptyPage from "./pages/EmptyPage";
 import Auth from "./pages/Auth";
+import Designer from "./pages/Designer";
 import Engineer from "./pages/Engineer";
 import Home from "./pages/Home";
 import Knowledge from "./pages/Knowledge";
@@ -31,7 +32,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/auth" component={Auth} />
         <Route path="/dashboard" component={EmptyPage} />
-        <Route path="/designer" component={EmptyPage} />
+        <Route path="/designer" component={Designer} />
         <Route path="/engineer" component={Engineer} />
         <Route path="/selector" component={Selector} />
         <Route path="/diagnosis" component={Diagnosis} />
