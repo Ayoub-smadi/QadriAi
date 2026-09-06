@@ -4,6 +4,10 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/api/auth/:operation",
+      "destination": "/api/auth.ts?operation=:operation&format=rest"
+    },
+    {
       "source": "/api/trpc/:operation",
       "destination": "/api/index.ts?operation=:operation"
     },
