@@ -20,6 +20,16 @@ type AuthEnvelope = {
 
 type RestResponse = { user?: AuthUser | null | { success: boolean }; error?: string; code?: string };
 
+function readableError(value: unknown) {
+  if (typeof value === "string" && value.trim()) return value;
+  if (value && typeof value === "object") {
+    const item = value as { message?: unknown; json?: { message?: unknown } };
+    if (typeof item.message === "string" && item.message.trim()) return item.message;
+    if (typeof item.json?.message === "string" && item.json.message.trim()) return item.json.message;
+  }
+  return "تعذر تنفيذ طلب الحساب حاليًا.";
+}
+
 async function request(operation: string, input?: AuthInput) {
   const response = await fetch(`/api/auth/${operation}`, {
     method: operation === "me" ? "GET" : "POST",
@@ -36,13 +46,13 @@ async function request(operation: string, input?: AuthInput) {
 
   const payload = await response.json() as AuthEnvelope[] | RestResponse;
   if (!Array.isArray(payload)) {
-    if (payload.error) throw new Error(payload.error);
+    if (payload.error) throw new Error(readableError(payload.error));
     if (Object.prototype.hasOwnProperty.call(payload, "user")) return payload.user ?? null;
     throw new Error("استجابة الحساب غير صالحة.");
   }
   const item = payload[0];
   if (!item) throw new Error("استجابة الحساب غير صالحة.");
-  if (item.error) throw new Error(item.error.json?.message || "تعذر تنفيذ طلب الحساب.");
+  if (item.error) throw new Error(readableError(item.error));
   return item.result?.data?.json ?? null;
 }
 
