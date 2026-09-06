@@ -57,6 +57,7 @@ function readInput(req: any) {
 }
 
 function sendSuccess(res: any, data: unknown) {
+  if (res.locals?.authRest) return res.status(200).json({ user: data });
   return res.status(200).json([{ result: { data: { json: data } } }]);
 }
 
@@ -68,6 +69,7 @@ function sendError(res: any, message: string, code = "BAD_REQUEST") {
     CONFLICT: -32009,
     INTERNAL_SERVER_ERROR: -32603,
   };
+  if (res.locals?.authRest) return res.status(200).json({ error: message, code });
   return res.status(200).json([{
     error: {
       json: {
@@ -131,6 +133,8 @@ async function ensureAdmin() {
 }
 
 async function handle(req: any, res: any) {
+  res.locals = res.locals || {};
+  res.locals.authRest = String(req.query?.format || "") === "rest";
   res.setHeader("Cache-Control", "no-store");
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Access-Control-Allow-Credentials", "true");

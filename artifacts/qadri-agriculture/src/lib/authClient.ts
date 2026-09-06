@@ -18,6 +18,8 @@ type AuthEnvelope = {
   error?: { json?: { message?: string; data?: { code?: string } } };
 };
 
+type RestResponse = { user?: AuthUser | null | { success: boolean }; error?: string; code?: string };
+
 async function request(operation: string, input?: AuthInput) {
   const response = await fetch(`/api/auth/${operation}`, {
     method: operation === "me" ? "GET" : "POST",
@@ -32,8 +34,13 @@ async function request(operation: string, input?: AuthInput) {
     throw new Error("تعذر الاتصال بخادم الحسابات. يرجى المحاولة مجددًا.");
   }
 
-  const payload = (await response.json()) as AuthEnvelope[];
-  const item = payload?.[0];
+  const payload = await response.json() as AuthEnvelope[] | RestResponse;
+  if (!Array.isArray(payload)) {
+    if (payload.error) throw new Error(payload.error);
+    if (Object.prototype.hasOwnProperty.call(payload, "user")) return payload.user ?? null;
+    throw new Error("استجابة الحساب غير صالحة.");
+  }
+  const item = payload[0];
   if (!item) throw new Error("استجابة الحساب غير صالحة.");
   if (item.error) throw new Error(item.error.json?.message || "تعذر تنفيذ طلب الحساب.");
   return item.result?.data?.json ?? null;
