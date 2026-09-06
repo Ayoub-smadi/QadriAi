@@ -6,7 +6,7 @@ import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypt
 const ADMIN_USERNAME = (process.env.ADMIN_USERNAME || "Ayoub").trim().toLowerCase();
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Ayoub@123";
 const SESSION_COOKIE = "qadri_session";
-const SESSION_SECRET = process.env.JWT_SECRET || "qadri-session-secret-change-me";
+const SESSION_SECRET = process.env.SESSION_SECRET || process.env.JWT_SECRET || "qadri-session-secret-change-me";
 
 type UserRow = {
   id: number;
@@ -114,6 +114,33 @@ async function findUser(identifier: string) {
   return result.rows[0];
 }
 
+let usersSchemaReady: Promise<void> | undefined;
+
+async function ensureUsersSchema() {
+  if (!usersSchemaReady) {
+    usersSchemaReady = pool.query(`
+      CREATE TABLE IF NOT EXISTS "users" (
+        "id" SERIAL PRIMARY KEY,
+        "openId" VARCHAR(64) NOT NULL UNIQUE,
+        "username" VARCHAR(80) UNIQUE,
+        "phone" VARCHAR(32) UNIQUE,
+        "passwordHash" VARCHAR(255),
+        "name" TEXT,
+        "email" VARCHAR(320),
+        "loginMethod" VARCHAR(64),
+        "role" TEXT NOT NULL DEFAULT 'user',
+        "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+        "updatedAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+        "lastSignedIn" TIMESTAMP NOT NULL DEFAULT NOW()
+      )
+    `).then(() => undefined).catch(error => {
+      usersSchemaReady = undefined;
+      throw error;
+    });
+  }
+  await usersSchemaReady;
+}
+
 async function ensureAdmin() {
   let user = await findUser(ADMIN_USERNAME);
   if (!user) {
@@ -149,6 +176,8 @@ async function handle(req: any, res: any) {
   const queryOperation = String(req.query?.operation || "").split(".").pop();
   const operation = pathOperation || queryOperation || "";
   try {
+    await ensureUsersSchema();
+
     if (operation === "me") {
       const userId = getSessionUserId(req);
       if (!userId) return sendSuccess(res, null);
