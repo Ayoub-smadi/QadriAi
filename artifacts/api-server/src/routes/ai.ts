@@ -4,11 +4,10 @@ const router: IRouter = Router();
 
 type ChatMessage = { role: "user" | "assistant" | "system"; content: string };
 type Attachment = { type: "image" | "audio"; dataUrl: string; mimeType?: string; name?: string };
+type GeminiPart = { text?: string; inlineData?: { mimeType: string; data: string } };
 
-const errorCodes: Record<string, number> = {
-  BAD_REQUEST: -32600,
-  INTERNAL_SERVER_ERROR: -32603,
-};
+const errorCodes: Record<string, number> = { BAD_REQUEST: -32600, INTERNAL_SERVER_ERROR: -32603 };
+const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models";
 
 function inputFromRequest(req: Request) {
   const body = req.body && typeof req.body === "object" ? req.body : {};
@@ -23,103 +22,70 @@ function sendError(res: Response, message: string, code = "INTERNAL_SERVER_ERROR
   return res.status(200).json([{ error: { json: { message, code: errorCodes[code] ?? -32603, data: { code } } } }]);
 }
 
-function openAiBase() {
-  const configured = (process.env.OPENAI_API_BASE?.trim() || process.env.BUILT_IN_FORGE_API_URL?.trim() || "https://api.openai.com/v1").replace(/\/+$/, "");
-  return configured.endsWith("/v1") ? configured : `${configured}/v1`;
+function systemInstruction(language: "ar" | "en") {
+  return language === "ar"
+    ? "أنت القادري الزراعي الذكي، مساعد زراعي متخصص مثل ChatGPT لكن في مجال الزراعة فقط. أجب بالعربية غالبًا وبأسلوب واضح وعملي. ساعد في المحاصيل، البستنة، الري، التربة، الأشجار، الآفات، الأمراض النباتية، التقليم، البيوت البلاستيكية وتخطيط المزارع. إذا كان السؤال خارج الزراعة فاعتذر بلطف واطلب سؤالًا زراعيًا. عند تحليل صورة، فرّق بين الملاحظة والاحتمال ولا تجزم بمرض من صورة واحدة. لا تعطِ خلطات مبيدات أو جرعات كيميائية دقيقة، واذكر الرجوع إلى مهندس زراعي محلي عند الخطر أو الشك. اسأل عن المعلومات الناقصة، وقدّم خطوات آمنة قابلة للتطبيق."
+    : "You are Al-Qadri Smart Agriculture, a ChatGPT-like assistant specialized only in agriculture. Answer mostly in English when the user writes English, clearly and practically. Help with crops, horticulture, irrigation, soil, trees, pests, plant diseases, pruning, greenhouses, and farm planning. If the request is outside agriculture, politely refuse and invite an agricultural question. For images, separate observations from possibilities and never claim a confirmed disease from one image. Do not provide pesticide mixtures or exact chemical doses; recommend a licensed local agronomist when risk or uncertainty is high. Ask for missing context and give safe actionable steps.";
 }
 
-function openAiKey() {
-  return process.env.OPENAI_API_KEY?.trim() || process.env.BUILT_IN_FORGE_API_KEY?.trim() || "";
+function extractInlineData(dataUrl: string, fallbackMimeType?: string) {
+  const match = /^data:([^;,]+);base64,(.+)$/s.exec(dataUrl || "");
+  if (!match) return null;
+  const mimeType = match[1] || fallbackMimeType || "application/octet-stream";
+  if (!/^image\/(jpeg|png|webp)$/i.test(mimeType)) return null;
+  return { mimeType, data: match[2] };
 }
 
-function modelName() {
-  return process.env.OPENAI_MODEL?.trim() || "gpt-5-mini";
-}
-
-function extractText(content: unknown): string {
-  if (typeof content === "string") return content.trim();
-  if (!Array.isArray(content)) return "";
-  return content.map(part => {
-    if (typeof part === "string") return part;
-    if (part && typeof part === "object" && "text" in part && typeof part.text === "string") return part.text;
-    return "";
-  }).filter(Boolean).join("\n").trim();
-}
-
-function buildSystemPrompt(language: string) {
-  return language === "en"
-    ? "You are Al-Qadri Smart Agriculture, a practical agricultural advisor. Answer in English unless the user clearly writes Arabic. Give useful, context-aware guidance about crops, irrigation, soil, trees, pruning, pests, and farm planning. Distinguish observations from possibilities, state missing information, and never claim certainty from a single image. Do not prescribe pesticide brands, exact chemical doses, or unsafe mixtures. For critical cases recommend a licensed local agricultural professional. Keep answers clear and actionable."
-    : "أنت مستشار القادري الزراعي الذكي. أجب بالعربية ما لم يكتب المستخدم بالإنجليزية بوضوح. قدّم إرشادًا عمليًا ومناسبًا للسياق حول المحاصيل والري والتربة والأشجار والتقليم والآفات وتخطيط المزارع. ميّز بين الملاحظة والاحتمال، واذكر المعلومات الناقصة، ولا تدّعِ اليقين من صورة واحدة. لا تصف مبيدات تجارية أو جرعات كيميائية دقيقة أو خلطات غير آمنة. في الحالات الحرجة أو التي قد تسبب خسارة كبيرة أو خطرًا على الإنسان والحيوان، أوصِ بمهندس زراعي محلي مرخّص. اجعل الإجابة واضحة وقابلة للتطبيق.";
-}
-
-function normalizeMessages(messages: unknown, attachments: Attachment[], language: string): ChatMessage[] {
+function geminiContents(messages: unknown, attachments: Attachment[]): Array<{ role: "user" | "model"; parts: GeminiPart[] }> {
   const safeMessages = Array.isArray(messages) ? messages : [];
-  const normalized: ChatMessage[] = safeMessages
-    .filter(item => item && typeof item === "object" && (item as { role?: unknown }).role && typeof (item as { content?: unknown }).content === "string")
-    .slice(-8)
+  const contents = safeMessages
+    .filter(item => item && typeof item === "object" && (item as { role?: unknown }).role !== "system" && typeof (item as { content?: unknown }).content === "string")
+    .slice(-10)
     .map(item => ({
-      role: (item as { role: "user" | "assistant" | "system" }).role,
-      content: String((item as { content: string }).content).slice(0, 12000),
+      role: (item as { role: "user" | "assistant" }).role === "assistant" ? "model" as const : "user" as const,
+      parts: [{ text: String((item as { content: string }).content).slice(0, 12000) }] as GeminiPart[],
     }));
-  const last = normalized[normalized.length - 1];
-  const imageParts = attachments.filter(item => item.type === "image" && /^data:image\/(jpeg|png|webp);base64,/i.test(item.dataUrl)).slice(0, 3);
-  if (imageParts.length && last?.role === "user") {
-    const text = last.content || (language === "en" ? "Analyze the attached agricultural image." : "حلّل الصورة الزراعية المرفقة.");
-    normalized[normalized.length - 1] = {
-      role: "user",
-      content: JSON.stringify([
-        { type: "text", text },
-        ...imageParts.map(image => ({ type: "image_url", image_url: { url: image.dataUrl, detail: "high" } })),
-      ]),
-    };
+
+  const last = contents[contents.length - 1];
+  const images = attachments
+    .filter(item => item?.type === "image")
+    .slice(0, 3)
+    .map(item => extractInlineData(item.dataUrl, item.mimeType))
+    .filter((item): item is { mimeType: string; data: string } => Boolean(item));
+  if (last?.role === "user" && images.length) {
+    last.parts.push(...images.map(image => ({ inlineData: image })));
   }
-  return normalized;
+  return contents;
 }
 
-async function callOpenAI(messages: ChatMessage[], language: string) {
-  const key = openAiKey();
-  if (!key) throw new Error("لم يتم ضبط OPENAI_API_KEY على الخادم.");
-  const url = `${openAiBase()}/chat/completions`;
-  const model = modelName();
-  const payload = {
-    model,
-    messages: [
-      { role: "system", content: buildSystemPrompt(language) },
-      ...messages.map(message => {
-        if (message.role !== "user" || !message.content.startsWith("[")) return message;
-        try { return { role: "user", content: JSON.parse(message.content) }; } catch { return message; }
-      }),
-    ],
-    ...(model.startsWith("gpt-5") ? { max_completion_tokens: 1800 } : { temperature: 0.2, max_tokens: 1800 }),
-  };
-  let response = await fetch(url, {
+function responseText(data: unknown): string {
+  const candidates = (data as { candidates?: Array<{ content?: { parts?: Array<{ text?: unknown }> } }> })?.candidates;
+  return candidates?.[0]?.content?.parts?.map(part => typeof part.text === "string" ? part.text : "").filter(Boolean).join("\n").trim() || "";
+}
+
+async function callGemini(messages: unknown, attachments: Attachment[], language: "ar" | "en") {
+  const apiKey = process.env.GEMINI_API_KEY?.trim();
+  if (!apiKey) throw new Error("لم يتم ضبط GEMINI_API_KEY على الخادم.");
+  const model = process.env.GEMINI_MODEL?.trim() || "gemini-3.5-flash-lite";
+  const url = `${GEMINI_API_URL}/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const response = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json", Authorization: `Bearer ${key}` },
-    body: JSON.stringify(payload),
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      systemInstruction: { parts: [{ text: systemInstruction(language) }] },
+      contents: geminiContents(messages, attachments),
+      generationConfig: { temperature: 0.25, maxOutputTokens: 1400 },
+    }),
   });
-  if (!response.ok && response.status === 400) {
-    const firstError = await response.clone().text().catch(() => "");
-    if (/max_tokens|max_completion_tokens|temperature|unsupported/i.test(firstError)) {
-      const fallback = { ...payload } as Record<string, unknown>;
-      delete fallback.temperature;
-      delete fallback.max_tokens;
-      fallback.max_completion_tokens = 1800;
-      response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json", Authorization: `Bearer ${key}` },
-        body: JSON.stringify(fallback),
-      });
-    }
-  }
   const raw = await response.text();
-  let data: { choices?: Array<{ message?: { content?: unknown } }>; error?: { message?: string } } = {};
-  try { data = JSON.parse(raw) as typeof data; } catch { /* handled below */ }
+  let data: unknown = {};
+  try { data = JSON.parse(raw); } catch { /* handled below */ }
   if (!response.ok) {
-    const upstream = data.error?.message || raw.slice(0, 240) || response.statusText;
-    throw new Error(`فشل مزود الذكاء الاصطناعي (${response.status}): ${upstream}`);
+    const message = (data as { error?: { message?: string } })?.error?.message || raw.slice(0, 240) || response.statusText;
+    throw new Error(`فشل اتصال Gemini (${response.status}): ${message}`);
   }
-  const content = extractText(data.choices?.[0]?.message?.content);
-  if (!content) throw new Error("أعاد مزود الذكاء الاصطناعي استجابة بلا نص.");
+  const content = responseText(data);
+  if (!content) throw new Error("أعاد Gemini استجابة بلا نص.");
   return content;
 }
 
@@ -129,11 +95,12 @@ router.post("/trpc/ai.consult", async (req, res) => {
     const messages = Array.isArray(input?.messages) ? input.messages : [];
     if (!messages.length) return sendError(res, "أرسل سؤالًا زراعيًا أولًا.", "BAD_REQUEST");
     const language = input?.language === "en" ? "en" : "ar";
-    const content = await callOpenAI(normalizeMessages(messages, Array.isArray(input?.attachments) ? input.attachments : [], language), language);
+    const attachments = Array.isArray(input?.attachments) ? input.attachments : [];
+    const content = await callGemini(messages, attachments, language);
     return sendSuccess(res, { content });
   } catch (error) {
-    console.error("[AI] consultation failed", error);
-    const message = error instanceof Error ? error.message : "تعذر الحصول على رد من خدمة الذكاء الاصطناعي.";
+    console.error("[AI] Gemini agricultural consultation failed", error);
+    const message = error instanceof Error ? error.message : "تعذر الحصول على رد من Gemini.";
     return sendError(res, message);
   }
 });

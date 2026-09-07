@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLanguage } from "@/lib/i18n";
+import { trpc } from "@/lib/trpc";
 import { CircleAlert, ClipboardCheck, Droplets, MapPin, Sprout } from "lucide-react";
 import { type FormEvent, useState } from "react";
 
@@ -29,7 +30,12 @@ export default function Selector() {
   const { language } = useLanguage();
   const [form, setForm] = useState<PlannerInput>(initial);
   const [submitted, setSubmitted] = useState(false);
+  const [recommendation, setRecommendation] = useState("");
   const isArabic = language === "ar";
+  const consultation = trpc.ai.consult.useMutation({
+    onSuccess: result => setRecommendation(result.content),
+    onError: error => setRecommendation(error.message),
+  });
 
   const labels = isArabic
     ? {
@@ -41,7 +47,7 @@ export default function Selector() {
         area: "حجم الأرض",
         submit: "إرسال البيانات",
         heading: "ماذا أزرع؟",
-        sub: "أدخل بيانات أرضك حتى نجهّز لك ترشيحًا مناسبًا عند ربط خدمة التوصيات.",
+        sub: "أدخل بيانات أرضك لتحصل على ترشيح زراعي سريع بدون مفاتيح API.",
       }
     : {
         country: "Country",
@@ -52,7 +58,7 @@ export default function Selector() {
         area: "Land size",
         submit: "Send details",
         heading: "What should I grow?",
-        sub: "Enter your land details so we can prepare suitable recommendations when the recommendation service is connected.",
+        sub: "Enter your land details for fast agricultural recommendations without API keys.",
       };
 
   const update = (field: keyof PlannerInput, value: string) => {
@@ -63,14 +69,15 @@ export default function Selector() {
   const submit = (event: FormEvent) => {
     event.preventDefault();
     setSubmitted(true);
+    setRecommendation("");
+    const prompt = isArabic
+      ? `اقترح محاصيل مناسبة لهذه الأرض: الدولة ${form.country}، المنطقة ${form.region}، التربة ${form.soilType}، الهدف ${form.goal}، مصدر المياه ${form.waterSource}، المساحة ${form.area}. أجب بإرشاد زراعي عملي وآمن.`
+      : `Recommend suitable crops for this land: country ${form.country}, region ${form.region}, soil ${form.soilType}, goal ${form.goal}, water source ${form.waterSource}, area ${form.area}. Give practical and safe agricultural guidance.`;
+    consultation.mutate({ messages: [{ role: "user", content: prompt }], language });
   };
 
   const missing = Object.values(form).filter(value => !value.trim()).length;
   const completion = Math.round(((Object.keys(form).length - missing) / Object.keys(form).length) * 100);
-  const temporaryResponse = isArabic
-    ? "تعذر الحصول على الرد الآن. Unable to transform response from server"
-    : "Unable to transform response from server";
-
   return (
     <PlatformShell
       title={labels.heading}
@@ -146,7 +153,7 @@ export default function Selector() {
           <div className="rounded-[1.6rem] border border-[#35530e]/10 bg-[#f2f6ec] p-5 sm:p-7">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs font-bold tracking-[.14em] text-[#78924a]">{isArabic ? "الرد المؤقت" : "TEMPORARY RESPONSE"}</p>
+                <p className="text-xs font-bold tracking-[.14em] text-[#78924a]">{isArabic ? "ترشيح زراعي سريع" : "FAST AGRICULTURAL RECOMMENDATION"}</p>
                 <h2 className="mt-2 text-xl font-bold text-[#314617]">{isArabic ? "نتيجة ماذا أزرع؟" : "What should I grow? result"}</h2>
               </div>
               <span className="grid size-11 place-items-center rounded-xl bg-white text-[#35530e]"><MapPin className="size-5" /></span>
@@ -155,16 +162,16 @@ export default function Selector() {
             {!submitted ? (
               <div className="mt-8 rounded-2xl border border-dashed border-[#b8cca0] bg-white/60 p-7 text-center">
                 <Droplets className="mx-auto size-8 text-[#7f9d4d]" />
-                <p className="mt-3 text-sm leading-6 text-[#68775a]">{isArabic ? "أدخل البيانات الستة ثم اضغط إرسال البيانات لعرض الرد المؤقت." : "Enter the six details and send them to display the temporary response."}</p>
+                <p className="mt-3 text-sm leading-6 text-[#68775a]">{isArabic ? "أدخل البيانات الستة ثم اضغط إرسال البيانات لعرض الترشيح." : "Enter the six details and send them to display the recommendation."}</p>
               </div>
             ) : (
-              <div className="mt-8 rounded-2xl border border-[#e7cf9e] bg-[#fffaf0] p-6" role="status" aria-live="polite">
+              <div className="mt-8 rounded-2xl border border-[#d8e5c7] bg-[#f8fbf4] p-6" role="status" aria-live="polite">
                 <div className="flex items-start gap-3 text-[#806536]">
                   <CircleAlert className="mt-0.5 size-5 shrink-0" />
-                  <p className="text-sm font-semibold leading-7">{temporaryResponse}</p>
+                  <p className="whitespace-pre-line text-sm font-semibold leading-7 text-[#526747]">{consultation.isPending ? (isArabic ? "جاري تجهيز الترشيح…" : "Preparing recommendations…") : (recommendation || (isArabic ? "لا توجد نتيجة بعد." : "No result yet."))}</p>
                 </div>
-                <p className="mt-4 border-t border-[#eadcbf] pt-4 text-xs leading-6 text-[#90784e]">
-                  {isArabic ? "تم حفظ البيانات في النموذج مؤقتًا، وسيتم استخدام هذه الحقول عند ربط الـ API." : "The details remain in the form temporarily and will be used when the API is connected."}
+                <p className="mt-4 border-t border-[#dce8cf] pt-4 text-xs leading-6 text-[#68775a]">
+                  {isArabic ? "الترشيح إرشادي؛ راجع الموسم وتحليل التربة والمياه قبل الزراعة التجارية." : "This is guidance; confirm season, soil, and water tests before commercial planting."}
                 </p>
               </div>
             )}

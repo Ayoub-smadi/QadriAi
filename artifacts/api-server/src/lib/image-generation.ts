@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 
-const forgeUrl = (process.env.BUILT_IN_FORGE_API_URL?.trim() || process.env.OPENAI_API_BASE?.trim() || "").replace(/\/v1\/?$/, "").replace(/\/+$/, "");
-const forgeKey = process.env.BUILT_IN_FORGE_API_KEY?.trim() || process.env.OPENAI_API_KEY?.trim() || "";
+const forgeUrl = (process.env.BUILT_IN_FORGE_API_URL?.trim() || "").replace(/\/v1\/?$/, "").replace(/\/+$/, "");
+const forgeKey = process.env.BUILT_IN_FORGE_API_KEY?.trim() || "";
 
 function requireForgeConfig() {
   if (!forgeUrl || !forgeKey) {

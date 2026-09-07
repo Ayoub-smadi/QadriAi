@@ -1,7 +1,9 @@
 import { PlatformShell } from "@/components/PlatformShell";
+import { type ChatAttachment } from "@/components/AIChatBox";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from "@/lib/i18n";
+import { trpc } from "@/lib/trpc";
 import {
   Bug,
   Camera,
@@ -36,12 +38,17 @@ export default function Diagnosis() {
   const [note, setNote] = useState("");
   const [error, setError] = useState("");
   const [analysisRequested, setAnalysisRequested] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState("");
+
+  const consultation = trpc.ai.consult.useMutation({
+    onSuccess: result => setAnalysisResult(result.content),
+    onError: consultationError => setError(consultationError.message || (isArabic ? "تعذر تجهيز التحليل الآن." : "The analysis could not be prepared right now.")),
+  });
 
   const heading = isArabic ? "تحليل نبات" : "Plant analysis";
   const helper = isArabic
-    ? "التقط صورة واضحة أو ارفعها لنجهّز قراءة أولية حذرة عند ربط خدمة التحليل."
-    : "Take a clear photo or upload one so we can prepare a cautious first reading when the analysis service is connected.";
-  const temporaryResponse = "تعذر الحصول على الرد الآن. Unable to transform response from server";
+    ? "التقط صورة واضحة أو ارفعها لتحصل على إرشاد زراعي أولي سريع، بدون مفاتيح API أو إرسال لمزود خارجي."
+    : "Take a clear photo or upload one for fast initial agricultural guidance, with no API keys or external AI provider.";
 
   const selectFile = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -62,6 +69,7 @@ export default function Diagnosis() {
   const clearImage = () => {
     setImageDataUrl("");
     setAnalysisRequested(false);
+    setAnalysisResult("");
     setError("");
     if (cameraInputRef.current) cameraInputRef.current.value = "";
     if (uploadInputRef.current) uploadInputRef.current.value = "";
@@ -73,6 +81,17 @@ export default function Diagnosis() {
       return;
     }
     setAnalysisRequested(true);
+    setAnalysisResult("");
+    const attachment: ChatAttachment = {
+      type: "image",
+      dataUrl: imageDataUrl,
+      mimeType: imageDataUrl.match(/^data:([^;]+);/)?.[1] || "image/jpeg",
+      name: "plant-diagnosis.jpg",
+    };
+    const prompt = note.trim()
+      ? `${isArabic ? "حلل هذه الحالة الزراعية بناءً على الصورة والملاحظة التالية:" : "Analyze this agricultural case from the image and note:"} ${note.trim()}`
+      : (isArabic ? "حلل صورة النبات تحليلًا زراعيًا أوليًا حذرًا، واذكر الملاحظات والخطوات الآمنة." : "Give a cautious initial agricultural reading of this plant image, with observations and safe next steps.");
+    consultation.mutate({ messages: [{ role: "user", content: prompt }], attachments: [attachment], language });
   };
 
   return (
@@ -146,7 +165,7 @@ export default function Diagnosis() {
 
             <Textarea value={note} onChange={event => { setNote(event.target.value); setAnalysisRequested(false); }} placeholder={isArabic ? "ملاحظة اختيارية: متى بدأت الأعراض؟ هل انتشرت؟" : "Optional note: when did the symptoms start? Did they spread?"} className="mt-4 min-h-24 rounded-xl border-[#dfe8d3]" />
             {error && <p className="mt-3 flex items-center gap-2 text-xs font-semibold text-[#a64f37]" role="alert"><CircleAlert className="size-4 shrink-0" />{error}</p>}
-            <Button type="button" onClick={analyze} disabled={!imageDataUrl} className="mt-4 h-12 w-full rounded-xl bg-[#73973a] text-white hover:bg-[#5d7e31]"><ScanSearch className="size-5" />{isArabic ? "ابدأ التحليل" : "Start analysis"}</Button>
+            <Button type="button" onClick={analyze} disabled={!imageDataUrl || consultation.isPending} className="mt-4 h-12 w-full rounded-xl bg-[#73973a] text-white hover:bg-[#5d7e31]"><ScanSearch className="size-5" />{consultation.isPending ? (isArabic ? "جاري تجهيز الإرشاد…" : "Preparing guidance…") : (isArabic ? "ابدأ التحليل" : "Start analysis")}</Button>
             <div className="mt-4 flex gap-2 rounded-xl border border-[#ead0a8] bg-[#fffaf1] p-3 text-xs leading-5 text-[#806436]"><ShieldCheck className="mt-0.5 size-4 shrink-0" />{isArabic ? "التحليل مساعد وليس بديلًا عن المعاينة الميدانية أو استشارة المهندس الزراعي." : "This tool assists but does not replace field inspection or agricultural expert advice."}</div>
           </section>
 
@@ -155,15 +174,15 @@ export default function Diagnosis() {
               <div className="flex min-h-[540px] flex-col items-center justify-center rounded-[1.6rem] border border-dashed border-[#b7cba0] bg-[#f2f6ec] p-8 text-center">
                 <span className="grid size-20 place-items-center rounded-[1.8rem] bg-white text-[#78984a] shadow-sm"><ScanSearch className="size-10" /></span>
                 <h2 className="mt-5 text-2xl font-black text-[#38501b]">{isArabic ? "منطقة نتيجة التحليل" : "Analysis result area"}</h2>
-                <p className="mt-3 max-w-md text-sm leading-7 text-[#68775a]">{isArabic ? "بعد اختيار الصورة، اضغط «ابدأ التحليل». ستظهر النتيجة هنا عند ربط خدمة الذكاء الاصطناعي." : "Choose an image and press “Start analysis”. Results will appear here when the AI service is connected."}</p>
+                <p className="mt-3 max-w-md text-sm leading-7 text-[#68775a]">{isArabic ? "بعد اختيار الصورة، اضغط «ابدأ التحليل» لتظهر قراءة زراعية أولية سريعة." : "Choose an image and press “Start analysis” for a fast initial agricultural reading."}</p>
                 <div className="mt-6 grid w-full max-w-md gap-3 sm:grid-cols-3">
                   {[{ icon: Leaf, ar: "النبات", en: "Plant" }, { icon: Bug, ar: "الأعراض", en: "Symptoms" }, { icon: ShieldCheck, ar: "الخطوات الآمنة", en: "Safe steps" }].map(({ icon: Icon, ar, en }) => <div key={ar} className="rounded-2xl bg-white/75 p-4 text-center"><Icon className="mx-auto size-5 text-[#73973a]" /><p className="mt-2 text-xs font-bold text-[#60714d]">{isArabic ? ar : en}</p></div>)}
                 </div>
               </div>
             ) : (
-              <div className="rounded-[1.6rem] border border-[#e7cf9e] bg-[#fffaf1] p-6 shadow-[0_14px_32px_rgba(120,91,37,.06)] sm:p-8" role="status" aria-live="polite">
-                <div className="flex items-start gap-3 text-[#806536]"><CircleAlert className="mt-1 size-6 shrink-0" /><div><p className="text-xs font-bold tracking-[.14em]">{isArabic ? "الرد المؤقت" : "TEMPORARY RESPONSE"}</p><h2 className="mt-2 text-xl font-black leading-8 text-[#5e4927]">{temporaryResponse}</h2></div></div>
-                <div className="mt-6 border-t border-[#eadcbf] pt-5 text-sm leading-7 text-[#90784e]">{isArabic ? "تم تجهيز الصورة والملاحظة محليًا، وسيظهر التحليل الحقيقي هنا بعد ربط الـ API." : "The image and note are prepared locally. The real analysis will appear here after the API is connected."}</div>
+              <div className="rounded-[1.6rem] border border-[#d8e5c7] bg-[#f8fbf4] p-6 shadow-[0_14px_32px_rgba(48,67,22,.06)] sm:p-8" role="status" aria-live="polite">
+                <div className="flex items-start gap-3 text-[#4e6d2b]"><CheckCircle2 className="mt-1 size-6 shrink-0" /><div><p className="text-xs font-bold tracking-[.14em]">{isArabic ? "إرشاد زراعي أولي" : "INITIAL AGRICULTURAL GUIDANCE"}</p><h2 className="mt-2 text-xl font-black leading-8 text-[#38501b]">{consultation.isPending ? (isArabic ? "جاري تحليل الملاحظة والصورة…" : "Reading the note and image…") : (isArabic ? "النتيجة جاهزة" : "Your result is ready")}</h2></div></div>
+                <div className="mt-6 whitespace-pre-line border-t border-[#dce8cf] pt-5 text-sm leading-7 text-[#526747]">{analysisResult || (isArabic ? "جاري تجهيز إرشاد زراعي سريع…" : "Preparing fast agricultural guidance…")}</div>
               </div>
             )}
           </section>
