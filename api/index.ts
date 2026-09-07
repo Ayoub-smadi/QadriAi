@@ -6,6 +6,19 @@ export const config = { runtime: "nodejs" };
 // ESM. Keep the database import lazy so the CJS wrapper never calls require() on
 // the ESM pool module during cold start.
 let poolPromise: Promise<any> | undefined;
+function normalizeDatabaseUrl(value: string) {
+  try {
+    const url = new URL(value);
+    if (url.protocol === "postgres:" || url.protocol === "postgresql:") {
+      url.searchParams.set("sslmode", "verify-full");
+      return url.toString();
+    }
+  } catch {
+    // Keep the original value; pg will report a useful connection error.
+  }
+  return value;
+}
+
 function getPool() {
   if (!poolPromise) {
     poolPromise = import("pg").then(pgModule => {
@@ -18,7 +31,7 @@ function getPool() {
       )?.trim();
       if (!databaseUrl) throw new Error("DATABASE_URL is not configured");
       return new pg.Pool({
-        connectionString: databaseUrl,
+        connectionString: normalizeDatabaseUrl(databaseUrl),
         max: 5,
         idleTimeoutMillis: 10_000,
         connectionTimeoutMillis: 10_000,
