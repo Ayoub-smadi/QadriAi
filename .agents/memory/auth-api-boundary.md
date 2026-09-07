@@ -14,3 +14,9 @@ The Vercel credentials handler also needs a production Postgres/Neon URL at requ
 **Why:** Vercel serverless functions may load the module before database configuration is available, and imported deployments do not automatically run the workspace's local Drizzle schema push.
 
 **How to apply:** Set `DATABASE_URL` (or a supported Neon/Postgres URL variable) in Vercel Production, then redeploy; set `SESSION_SECRET` as well so browser cookies remain signed by a stable secret.
+
+For the Vercel deployment, `/api/trpc/*` is rewritten directly to the root `api/index.ts` function; adding a route only to `artifacts/api-server` fixes local API-server workflows but not production.
+
+**Why:** The workspace contains both a local API artifact and a separate Vercel serverless entrypoint, and the frontend path can otherwise reach a handler that does not know the requested operation.
+
+**How to apply:** Keep production operations implemented in `api/index.ts` (or imported by it), and mirror them in `artifacts/api-server` only when local API-server preview support is also needed.
