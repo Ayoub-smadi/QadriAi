@@ -7,9 +7,9 @@ import { useState } from "react";
 
 export default function Engineer() {
   const { language } = useLanguage();
-  const [messages, setMessages] = useState<Array<{ role: "user" | "assistant"; content: string; attachments?: ChatAttachment[] }>>([]);
+  const [messages, setMessages] = useState<Array<{ role: "user" | "assistant"; content: string; attachments?: ChatAttachment[]; images?: string[] }>>([]);
   const consultation = trpc.ai.consult.useMutation({
-    onSuccess: result => setMessages(previous => [...previous, { role: "assistant", content: result.content }]),
+    onSuccess: result => setMessages(previous => [...previous, { role: "assistant", content: result.content, ...(result.images?.length ? { images: result.images } : {}) }]),
     onError: error => {
       console.error("Agricultural consultation failed", error);
       setMessages(previous => [...previous, { role: "assistant", content: language === "ar" ? `تعذر الحصول على الرد الآن. ${error.message || "تحقق من الاتصال وحاول مرة أخرى."}` : `I could not get an answer right now. ${error.message || "Check your connection and try again."}` }]);

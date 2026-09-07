@@ -63,6 +63,37 @@ function responseText(data: unknown): string {
   return candidates?.[0]?.content?.parts?.map(part => typeof part.text === "string" ? part.text : "").filter(Boolean).join("\n").trim() || "";
 }
 
+function latestUserText(messages: unknown): string {
+  if (!Array.isArray(messages)) return "";
+  const item = [...messages].reverse().find(value => value && typeof value === "object" && (value as { role?: unknown }).role === "user");
+  return item && typeof (item as { content?: unknown }).content === "string" ? String((item as { content: string }).content).slice(0, 12000) : "";
+}
+
+function isImageRequest(messages: unknown): boolean {
+  const text = latestUserText(messages).toLocaleLowerCase();
+  return ["أعطني صورة", "اعطني صورة", "اعطيني صورة", "أعطيني صورة", "صورة", "صور", "صمّم", "صمم", "أنشئ", "اعمل لي", "ارسم", "image", "images", "generate", "create", "design", "draw"].some(term => text.includes(term));
+}
+
+async function generateGeminiImage(prompt: string, language: "ar" | "en") {
+  const apiKey = process.env.GEMINI_API_KEY?.trim();
+  if (!apiKey) throw new Error("لم يتم ضبط GEMINI_API_KEY على الخادم.");
+  const model = process.env.GEMINI_IMAGE_MODEL?.trim() || "gemini-3.1-flash-image";
+  const url = `${GEMINI_API_URL}/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const response = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify({
+    contents: [{ role: "user", parts: [{ text: `${language === "ar" ? "أنشئ صورة زراعية واقعية بناءً على الطلب التالي. لا تضف نصوصًا أو شعارات:" : "Generate a realistic agricultural image from this request. Do not add text or logos:"} ${prompt}` }] }],
+    generationConfig: { responseModalities: ["TEXT", "IMAGE"], imageConfig: { aspectRatio: "1:1" } },
+  }) });
+  const raw = await response.text();
+  let data: any = {};
+  try { data = JSON.parse(raw); } catch { /* handled below */ }
+  if (!response.ok) throw new Error(`فشل توليد الصورة (${response.status}): ${data?.error?.message || raw.slice(0, 240)}`);
+  const parts = data?.candidates?.[0]?.content?.parts || [];
+  const images = parts.map((part: any) => part?.inlineData?.data && part?.inlineData?.mimeType ? `data:${part.inlineData.mimeType};base64,${part.inlineData.data}` : "").filter(Boolean).slice(0, 2);
+  const content = parts.map((part: any) => typeof part?.text === "string" ? part.text : "").filter(Boolean).join("\n").trim();
+  if (!images.length) throw new Error("لم يُرجع Gemini صورة. جرّب وصفًا زراعيًا أكثر تحديدًا.");
+  return { content: content || (language === "ar" ? "هذه صورة زراعية مولدة بناءً على طلبك." : "Here is an agricultural image generated from your request."), images };
+}
+
 async function callGemini(messages: unknown, attachments: Attachment[], language: "ar" | "en") {
   const apiKey = process.env.GEMINI_API_KEY?.trim();
   if (!apiKey) throw new Error("لم يتم ضبط GEMINI_API_KEY على الخادم.");
@@ -96,8 +127,10 @@ router.post("/trpc/ai.consult", async (req, res) => {
     if (!messages.length) return sendError(res, "أرسل سؤالًا زراعيًا أولًا.", "BAD_REQUEST");
     const language = input?.language === "en" ? "en" : "ar";
     const attachments = Array.isArray(input?.attachments) ? input.attachments : [];
-    const content = await callGemini(messages, attachments, language);
-    return sendSuccess(res, { content });
+    const result = isImageRequest(messages)
+      ? await generateGeminiImage(latestUserText(messages), language)
+      : { content: await callGemini(messages, attachments, language), images: [] };
+    return sendSuccess(res, result);
   } catch (error) {
     console.error("[AI] Gemini agricultural consultation failed", error);
     const message = error instanceof Error ? error.message : "تعذر الحصول على رد من Gemini.";

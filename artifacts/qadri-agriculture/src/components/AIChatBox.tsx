@@ -17,6 +17,7 @@ export type Message = {
   role: "system" | "user" | "assistant";
   content: string;
   attachments?: ChatAttachment[];
+  images?: string[];
 };
 
 export type AIChatBoxProps = {
@@ -181,6 +182,7 @@ export function AIChatBox({
           {message.role === "assistant" && <div className="mt-1 grid size-8 shrink-0 place-items-center rounded-full bg-primary/10 p-1"><AssistantLogo className="size-full" /></div>}
           <div className={cn("max-w-[84%] rounded-2xl px-4 py-3", message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted text-foreground")}>
             {message.attachments?.length ? <div className="mb-2 grid gap-2">{message.attachments.map(attachment => attachment.type === "image" ? <img key={attachment.name} src={attachment.dataUrl} alt={attachment.name} className="max-h-52 max-w-full rounded-xl object-contain" /> : <audio key={attachment.name} controls src={attachment.dataUrl} className="max-w-full" />)}</div> : null}
+            {message.images?.length ? <div className="mb-2 grid gap-2">{message.images.map((image, imageIndex) => <img key={`${imageIndex}-${image.slice(0, 24)}`} src={image} alt="صورة زراعية مولدة" className="max-h-80 w-full rounded-xl object-contain" />)}</div> : null}
             {message.role === "assistant" ? <><div className="prose prose-sm max-w-none dark:prose-invert"><Streamdown>{message.content}</Streamdown></div><button type="button" onClick={() => speakMessage(message.content, /[\u0600-\u06ff]/.test(message.content) ? "ar" : "en")} className="mt-2 inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs text-muted-foreground transition hover:bg-background hover:text-foreground" title="استمع إلى الرد"><Volume2 className="size-3.5" />استمع</button></> : <p className="whitespace-pre-wrap text-sm">{message.content}</p>}
           </div>
           {message.role === "user" && <div className="mt-1 grid size-8 shrink-0 place-items-center rounded-full bg-secondary"><User className="size-4 text-secondary-foreground" /></div>}

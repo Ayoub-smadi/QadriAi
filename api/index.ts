@@ -136,6 +136,36 @@ function geminiSystem(language: string) {
     : "أنت القادري الزراعي الذكي، مساعد مثل ChatGPT متخصص بالزراعة فقط. أجب بالعربية بوضوح وعمليًا عن المحاصيل والري والتربة والأشجار والآفات والأمراض النباتية والتقليم والبيوت البلاستيكية وتخطيط المزارع. اعتذر بلطف عن الأسئلة غير الزراعية. عند الصور ميّز بين الملاحظة والاحتمال ولا تؤكد مرضًا من صورة واحدة. لا تعطِ خلطات مبيدات أو جرعات كيميائية دقيقة، وأوصِ بمهندس زراعي محلي عند الحاجة.";
 }
 
+function latestUserText(messages: any[]) {
+  const item = [...messages].reverse().find(value => value && value.role === "user" && typeof value.content === "string");
+  return item ? String(item.content).slice(0, 12000) : "";
+}
+
+function isImageRequest(messages: any[]) {
+  const text = latestUserText(messages).toLocaleLowerCase();
+  return ["أعطني صورة", "اعطني صورة", "اعطيني صورة", "أعطيني صورة", "صورة", "صور", "صمّم", "صمم", "أنشئ", "اعمل لي", "ارسم", "image", "images", "generate", "create", "design", "draw"].some(term => text.includes(term));
+}
+
+async function generateGeminiImage(prompt: string, language: string) {
+  const key = String(process.env.GEMINI_API_KEY || "").trim();
+  if (!key) throw new Error("لم يتم ضبط GEMINI_API_KEY على الخادم.");
+  const model = String(process.env.GEMINI_IMAGE_MODEL || "gemini-3.1-flash-image").trim();
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;
+  const response = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
+    contents: [{ role: "user", parts: [{ text: `${language === "en" ? "Generate a realistic agricultural image from this request. Do not add text or logos:" : "أنشئ صورة زراعية واقعية بناءً على الطلب التالي. لا تضف نصوصًا أو شعارات:"} ${prompt}` }] }],
+    generationConfig: { responseModalities: ["TEXT", "IMAGE"], imageConfig: { aspectRatio: "1:1" } },
+  }) });
+  const raw = await response.text();
+  let data: any = {};
+  try { data = JSON.parse(raw); } catch { /* handled below */ }
+  if (!response.ok) throw new Error(`فشل توليد الصورة (${response.status}): ${data?.error?.message || raw.slice(0, 240)}`);
+  const parts = data?.candidates?.[0]?.content?.parts || [];
+  const images = parts.map((part: any) => part?.inlineData?.data && part?.inlineData?.mimeType ? `data:${part.inlineData.mimeType};base64,${part.inlineData.data}` : "").filter(Boolean).slice(0, 2);
+  const content = parts.map((part: any) => typeof part?.text === "string" ? part.text : "").filter(Boolean).join("\n").trim();
+  if (!images.length) throw new Error("لم يُرجع Gemini صورة. جرّب وصفًا زراعيًا أكثر تحديدًا.");
+  return { content: content || (language === "en" ? "Here is an agricultural image generated from your request." : "هذه صورة زراعية مولدة بناءً على طلبك."), images };
+}
+
 function geminiParts(messages: any[], attachments: any[]) {
   const contents = messages.filter(item => item && typeof item.content === "string" && item.role !== "system").slice(-10).map(item => ({
     role: item.role === "assistant" ? "model" : "user",
@@ -157,6 +187,7 @@ async function handleGemini(req: any, res: any) {
   const key = String(process.env.GEMINI_API_KEY || "").trim();
   if (!key) return sendError(res, "لم يتم ضبط GEMINI_API_KEY على الخادم.", "INTERNAL_SERVER_ERROR");
   const language = input.language === "en" ? "en" : "ar";
+  if (isImageRequest(messages)) return sendSuccess(res, await generateGeminiImage(latestUserText(messages), language));
   const model = String(process.env.GEMINI_MODEL || "gemini-3.5-flash-lite").trim();
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;
   const response = await fetch(url, {
