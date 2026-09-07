@@ -32,7 +32,7 @@ function extractInlineData(dataUrl: string, fallbackMimeType?: string) {
   const match = /^data:([^;,]+);base64,(.+)$/s.exec(dataUrl || "");
   if (!match) return null;
   const mimeType = match[1] || fallbackMimeType || "application/octet-stream";
-  if (!/^image\/(jpeg|png|webp)$/i.test(mimeType)) return null;
+  if (!/^(image\/(jpeg|png|webp)|audio\/(webm|mpeg|mp3|wav|ogg|mp4|m4a))$/i.test(mimeType)) return null;
   return { mimeType, data: match[2] };
 }
 

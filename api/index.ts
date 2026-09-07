@@ -142,8 +142,8 @@ function geminiParts(messages: any[], attachments: any[]) {
     parts: [{ text: String(item.content).slice(0, 12000) }] as any[],
   }));
   const last = contents[contents.length - 1];
-  const images = attachments.filter(item => item?.type === "image").slice(0, 3).map(item => {
-    const match = /^data:(image\/(?:jpeg|png|webp));base64,(.+)$/s.exec(String(item.dataUrl || ""));
+  const images = attachments.filter(item => item?.type === "image" || item?.type === "audio").slice(0, 3).map(item => {
+    const match = /^data:((?:image\/(?:jpeg|png|webp)|audio\/(?:webm|mpeg|mp3|wav|ogg|mp4|m4a)));base64,(.+)$/s.exec(String(item.dataUrl || ""));
     return match ? { mimeType: match[1], data: match[2] } : null;
   }).filter(Boolean);
   if (last?.role === "user") last.parts.push(...images.map(image => ({ inlineData: image })));
