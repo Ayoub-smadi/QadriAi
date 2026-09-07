@@ -48,7 +48,7 @@ function readFileAsDataUrl(file: File) {
   });
 }
 
-function speakMessage(content: string, language: "ar" | "en") {
+export function speakMessage(content: string, language: "ar" | "en") {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(content.replace(/[*_#`]/g, ""));
@@ -75,12 +75,21 @@ export function AIChatBox({
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const recordingStreamRef = useRef<MediaStream | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const lastSpokenAssistantRef = useRef("");
   const displayMessages = messages.filter(message => message.role !== "system");
 
   useEffect(() => {
     const viewport = scrollAreaRef.current?.querySelector("[data-radix-scroll-area-viewport]") as HTMLDivElement | null;
     if (viewport) requestAnimationFrame(() => viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" }));
   }, [messages, isLoading]);
+
+  useEffect(() => {
+    const assistantMessages = messages.filter(message => message.role === "assistant");
+    const latest = assistantMessages[assistantMessages.length - 1];
+    if (!latest?.content || latest.content === lastSpokenAssistantRef.current) return;
+    lastSpokenAssistantRef.current = latest.content;
+    speakMessage(latest.content, /[\u0600-\u06ff]/.test(latest.content) ? "ar" : "en");
+  }, [messages]);
 
   useEffect(() => () => {
     recordingStreamRef.current?.getTracks().forEach(track => track.stop());
