@@ -1,8 +1,37 @@
 // @ts-nocheck
 // Vercel type-checks api files with the root frontend tsconfig. Keep this
-// handler independent from that config while reusing the workspace DB pool.
+// handler independent from that config and keeps its database dependency lazy.
 export const config = { runtime: "nodejs" };
-import { pool } from "../lib/db/src/pool";
+// Vercel may bundle this function as CommonJS while the workspace DB package is
+// ESM. Keep the database import lazy so the CJS wrapper never calls require() on
+// the ESM pool module during cold start.
+let poolPromise: Promise<any> | undefined;
+function getPool() {
+  if (!poolPromise) {
+    poolPromise = import("pg").then(pgModule => {
+      const pg = (pgModule as any).default || pgModule;
+      const databaseUrl = (
+        process.env.DATABASE_URL
+        || process.env.NEON_DATABASE_URL
+        || process.env.POSTGRES_URL
+        || process.env.POSTGRES_PRISMA_URL
+      )?.trim();
+      if (!databaseUrl) throw new Error("DATABASE_URL is not configured");
+      return new pg.Pool({
+        connectionString: databaseUrl,
+        max: 5,
+        idleTimeoutMillis: 10_000,
+        connectionTimeoutMillis: 10_000,
+      });
+    });
+  }
+  return poolPromise;
+}
+
+const pool = {
+  query: (...args: any[]) => getPool().then(database => database.query(...args)),
+};
+
 import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 const ADMIN_USERNAME = (process.env.ADMIN_USERNAME || "Ayoub").trim().toLowerCase();
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Ayoub@123";
