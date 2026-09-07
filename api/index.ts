@@ -46,7 +46,6 @@ const pool = {
 };
 
 import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
-import { consultAgricultural } from "./ai";
 const ADMIN_USERNAME = (process.env.ADMIN_USERNAME || "Ayoub").trim().toLowerCase();
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Ayoub@123";
 const SESSION_COOKIE = "qadri_session";
@@ -272,21 +271,10 @@ async function handle(req: any, res: any) {
   }
 
   const path = String(req.url || "");
-  const pathOperation = path.match(/(?:^|\/)(ai\.consult|(?:auth\.)?(me|logout|login|register))(?:[.?/&]|$)/)?.[1];
-  const queryOperation = String(req.query?.operation || "");
-  const operationRaw = pathOperation || queryOperation || "";
-  const operation = operationRaw.endsWith("ai.consult") ? "ai.consult" : operationRaw.split(".").pop() || "";
+  const pathOperation = path.match(/(?:^|\/)(?:auth\.)?(me|logout|login|register)(?:[.?/&]|$)/)?.[1];
+  const queryOperation = String(req.query?.operation || "").split(".").pop();
+  const operation = pathOperation || queryOperation || "";
   try {
-    if (operation === "ai.consult") {
-      try {
-        const result = await consultAgricultural(readInput(req));
-        return sendSuccess(res, result);
-      } catch (error: any) {
-        console.error("[AI API] consultation failed", error);
-        return sendError(res, error?.message || "تعذر الحصول على رد من خدمة المهندس الذكي الآن.", "INTERNAL_SERVER_ERROR");
-      }
-    }
-
     await ensureUsersSchema();
 
     if (operation === "quotes") return await handleQuoteOperation(req, res, readInput(req));
