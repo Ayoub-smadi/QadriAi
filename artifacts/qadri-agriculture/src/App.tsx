@@ -10,6 +10,7 @@ import Control from "./pages/Control";
 import Diagnosis from "./pages/Diagnosis";
 import EmptyPage from "./pages/EmptyPage";
 import Auth from "./pages/Auth";
+import AdminDashboard from "./pages/AdminDashboard";
 import Designer from "./pages/Designer";
 import Engineer from "./pages/Engineer";
 import Home from "./pages/Home";
@@ -31,7 +32,7 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/auth" component={Auth} />
-        <Route path="/dashboard" component={EmptyPage} />
+        <Route path="/dashboard" component={AdminDashboard} />
         <Route path="/designer" component={Designer} />
         <Route path="/engineer" component={Engineer} />
         <Route path="/selector" component={Selector} />

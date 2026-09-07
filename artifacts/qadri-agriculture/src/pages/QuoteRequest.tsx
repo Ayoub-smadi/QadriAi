@@ -3,7 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { clearDraft, createRequest, defaultVisibleColumns, quoteColumnLabels, readDraft, type QuoteFulfillment, type QuoteItem } from "@/data/quoteStore";
+import { clearDraft, createRequest, defaultVisibleColumns, quoteColumnLabels, readDraft, type QuoteFulfillment, type QuoteItem, type QuoteRecord } from "@/data/quoteStore";
+import { createRemoteQuote } from "@/lib/quoteApi";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/lib/i18n";
 import { ArrowRight, CheckCircle2, Loader2, MapPin, Phone, UserRound } from "lucide-react";
 import { FormEvent, useEffect, useState } from "react";
@@ -12,6 +14,7 @@ import { toast } from "sonner";
 
 export default function QuoteRequest() {
   const { language } = useLanguage();
+  const { user, loading: authLoading } = useAuth({ redirectOnUnauthenticated: true, redirectPath: "/auth" });
   const isArabic = language === "ar";
   const [, setLocation] = useLocation();
   const [items, setItems] = useState<QuoteItem[]>([]);
@@ -32,15 +35,22 @@ export default function QuoteRequest() {
     else setLocation("/quotes");
   }, [setLocation]);
 
-  const submit = (event: FormEvent) => {
+  const submit = async (event: FormEvent) => {
     event.preventDefault();
-    if (!items.length) return;
+    if (!items.length || !user) return;
     const request = createRequest({ customerName: name.trim(), phone: phone.trim(), fulfillment, deliveryRegion: region.trim(), deliveryAddress: address.trim(), notes: notes.trim(), title: "طلب عرض سعر", footerText: "", shippingFee: 0, items, visibleColumns: { ...defaultVisibleColumns }, columnLabels: { ...quoteColumnLabels } });
-    clearDraft();
-    setSent(true);
-    toast.success(isArabic ? "تم إرسال طلب عرض السعر إلى الإدارة." : "Your quote request was sent to the admin.");
-    window.setTimeout(() => setLocation(`/quotes?request=${request.id}`), 900);
+    try {
+      const saved = await createRemoteQuote(request);
+      clearDraft();
+      setSent(true);
+      toast.success(isArabic ? "تم إرسال طلب عرض السعر إلى الإدارة." : "Your quote request was sent to the admin.");
+      window.setTimeout(() => setLocation(`/quotes?request=${saved.id}`), 900);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : (isArabic ? "تعذر إرسال الطلب." : "Could not send the request."));
+    }
   };
+
+  if (authLoading || !user) return <PlatformShell compact><main className="container grid min-h-[55vh] place-items-center py-12"><Loader2 className="size-8 animate-spin text-[#35530e]" /></main></PlatformShell>;
 
   if (sent) return <PlatformShell compact><main className="container grid min-h-[55vh] place-items-center py-12"><section className="max-w-lg rounded-[2rem] border border-[#cfe0bd] bg-white p-8 text-center shadow-[0_18px_50px_rgba(48,67,22,.08)]"><CheckCircle2 className="mx-auto size-14 text-[#5d8d3e]" /><h1 className="mt-5 text-2xl font-bold text-[#314617]">{isArabic ? "تم إرسال طلبك" : "Your request was sent"}</h1><p className="mt-3 leading-7 text-[#68775a]">{isArabic ? "سيقوم فريق القادري بتسعير النباتات والتواصل معك حسب البيانات التي أرسلتها." : "The Al-Qadri team will price the plants and contact you using the details you provided."}</p></section></main></PlatformShell>;
 

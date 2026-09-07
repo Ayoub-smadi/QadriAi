@@ -38,7 +38,7 @@ export default function Auth() {
         ? await authClient.login({ identifier: identifier.trim(), password, admin: isAdminLogin })
         : await authClient.register({ name: name.trim(), phone: identifier.trim(), password });
       toast.success(isArabic ? `أهلًا ${user.name || "بك"}، تم الدخول بنجاح.` : `Welcome ${user.name || "back"}.`);
-      setLocation(user.role === "admin" ? "/quotes-admin" : "/dashboard");
+      setLocation(user.role === "admin" ? "/dashboard" : "/profile");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : (isArabic ? "تعذر تنفيذ الطلب." : "Could not complete the request."));
     } finally { setPending(false); }

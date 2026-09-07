@@ -160,6 +160,62 @@ async function ensureAdmin() {
   return user;
 }
 
+async function ensureQuoteSchema() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS "quote_requests" (
+      "id" BIGSERIAL PRIMARY KEY,
+      "userId" INTEGER NOT NULL REFERENCES "users"("id") ON DELETE CASCADE,
+      "quoteNumber" VARCHAR(40) NOT NULL UNIQUE,
+      "status" VARCHAR(24) NOT NULL DEFAULT 'pending',
+      "payload" JSONB NOT NULL,
+      "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+      "updatedAt" TIMESTAMP NOT NULL DEFAULT NOW()
+    )
+  `);
+}
+
+function requireSessionUser(req: any) {
+  const userId = getSessionUserId(req);
+  if (!userId) throw Object.assign(new Error("يرجى تسجيل الدخول أولًا."), { code: "UNAUTHORIZED" });
+  return userId;
+}
+
+async function handleQuoteOperation(req: any, res: any, input: any) {
+  const userId = requireSessionUser(req);
+  await ensureQuoteSchema();
+  const userResult = await pool.query<UserRow>('SELECT * FROM "users" WHERE "id" = $1 LIMIT 1', [userId]);
+  const user = userResult.rows[0];
+  const isAdmin = user?.role === "admin";
+  const action = String(input?.action || "list");
+  if (action === "create") {
+    if (isAdmin) throw Object.assign(new Error("لا يمكن لحساب الأدمن إنشاء طلب مستخدم."), { code: "FORBIDDEN" });
+    const payload = input?.payload && typeof input.payload === "object" ? input.payload : {};
+    const quoteNumber = `R-${new Date().getFullYear()}-${Math.floor(100000 + Math.random() * 900000)}`;
+    const result = await pool.query(
+      'INSERT INTO "quote_requests" ("userId", "quoteNumber", "status", "payload") VALUES ($1, $2, $3, $4::jsonb) RETURNING *',
+      [userId, quoteNumber, "pending", JSON.stringify(payload)],
+    );
+    return sendSuccess(res, result.rows[0]);
+  }
+  if (!isAdmin && action !== "mine") throw Object.assign(new Error("غير مصرح بهذا الطلب."), { code: "FORBIDDEN" });
+  if (action === "mine") {
+    const result = await pool.query('SELECT * FROM "quote_requests" WHERE "userId" = $1 ORDER BY "createdAt" DESC', [userId]);
+    return sendSuccess(res, result.rows);
+  }
+  if (action === "update" && input?.id) {
+    const payload = input?.payload && typeof input.payload === "object" ? input.payload : {};
+    const status = String(input.status || payload.status || "pending");
+    const result = await pool.query('UPDATE "quote_requests" SET "status" = $1, "payload" = $2::jsonb, "updatedAt" = NOW() WHERE "id" = $3 RETURNING *', [status, JSON.stringify(payload), Number(input.id)]);
+    return sendSuccess(res, result.rows[0] || null);
+  }
+  if (action === "delete" && input?.id) {
+    await pool.query('DELETE FROM "quote_requests" WHERE "id" = $1', [Number(input.id)]);
+    return sendSuccess(res, { success: true });
+  }
+  const result = await pool.query('SELECT qr.*, u."name" AS "userName", u."phone" AS "userPhone" FROM "quote_requests" qr JOIN "users" u ON u."id" = qr."userId" ORDER BY qr."createdAt" DESC');
+  return sendSuccess(res, result.rows);
+}
+
 async function handle(req: any, res: any) {
   res.locals = res.locals || {};
   res.locals.authRest = String(req.query?.format || "") === "rest";
@@ -178,6 +234,8 @@ async function handle(req: any, res: any) {
   const operation = pathOperation || queryOperation || "";
   try {
     await ensureUsersSchema();
+
+    if (operation === "quotes") return await handleQuoteOperation(req, res, readInput(req));
 
     if (operation === "me") {
       const userId = getSessionUserId(req);
@@ -226,10 +284,11 @@ async function handle(req: any, res: any) {
       return sendSuccess(res, publicUser({ ...user, lastSignedIn: new Date() }));
     }
 
-    return sendError(res, "مسار المصادقة غير معروف.", "BAD_REQUEST");
+    return sendError(res, "مسار الطلب غير معروف.", "BAD_REQUEST");
   } catch (error: any) {
-    console.error("[Auth API] request failed", error);
-    return sendError(res, "تعذر تنفيذ طلب الحساب حاليًا.", "INTERNAL_SERVER_ERROR");
+    console.error("[API] request failed", error);
+    const code = error?.code || "INTERNAL_SERVER_ERROR";
+    return sendError(res, error instanceof Error ? error.message : "تعذر تنفيذ الطلب حاليًا.", code);
   }
 }
 

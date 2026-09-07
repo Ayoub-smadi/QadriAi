@@ -15,12 +15,14 @@ import {
   Home as HomeIcon,
   Instagram,
   LayoutDashboard,
+  LogOut,
   Mail,
   Menu,
   MessageCircle,
   Phone,
   ScanSearch,
   ShoppingBag,
+  ShieldCheck,
   Sprout,
   Store,
   UserRound,
@@ -31,6 +33,12 @@ import { useCart } from "@/contexts/CartContext";
 import { Fragment, ReactNode, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "./ui/button";
+
+const adminNavigation = [
+  { href: "/dashboard", label: "dashboard", icon: LayoutDashboard },
+  { href: "/quotes-admin", label: "quoteRequests", icon: DollarSign },
+  { href: "/control", label: "control", icon: ShieldCheck },
+] as const;
 
 type PlatformShellProps = {
   children: ReactNode;
@@ -60,7 +68,7 @@ export function PlatformShell({
   compact = false,
 }: PlatformShellProps) {
   const { language, setLanguage, t } = useLanguage();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const [location, setLocation] = useLocation();
   const [mobileMenu, setMobileMenu] = useState(false);
   const { itemCount, openCart } = useCart();
@@ -72,6 +80,8 @@ export function PlatformShell({
       : location === href || location.startsWith(`${href}/`);
 
   const closeMobileMenu = () => setMobileMenu(false);
+  const visibleNavigation = user?.role === "admin" ? [...adminNavigation, ...navigation.filter(item => item.href !== "/dashboard")] : navigation.filter(item => item.href !== "/dashboard");
+  const handleLogout = async () => { await logout(); setLocation("/"); };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -149,13 +159,16 @@ export function PlatformShell({
               {language === "ar" ? "EN" : "ع"}
             </button>
             {isAuthenticated ? (
-              <Link
-                href="/profile"
+              <div className="flex items-center gap-2">
+                <Link
+                  href={user?.role === "admin" ? "/dashboard" : "/profile"}
                 className="grid size-11 place-items-center rounded-xl bg-[#d4eee3] text-base font-extrabold text-primary no-underline transition-transform hover:-translate-y-0.5 hover:bg-white"
                 aria-label={t.profile}
               >
-                {initials}
-              </Link>
+                  {initials}
+                </Link>
+                <button type="button" onClick={handleLogout} className="hidden h-10 rounded-xl border border-white/20 px-3 text-xs font-bold text-white transition-colors hover:bg-white/10 sm:inline-flex sm:items-center" aria-label={language === "ar" ? "تسجيل الخروج" : "Log out"}>{language === "ar" ? "خروج" : "Log out"}</button>
+              </div>
             ) : (
               <Button
                 onClick={() => setLocation("/auth")}
@@ -196,7 +209,7 @@ export function PlatformShell({
               className="container flex items-stretch justify-center gap-1 overflow-x-auto py-2"
               aria-label="Primary navigation"
             >
-              {navigation.map((item, index) => {
+              {visibleNavigation.map((item, index) => {
                 const Icon = item.icon;
                 const active = isActive(item.href);
                 return (
@@ -266,7 +279,7 @@ export function PlatformShell({
               })}
               {isAuthenticated ? (
                 <Link
-                  href="/profile"
+                  href={user?.role === "admin" ? "/dashboard" : "/profile"}
                   onClick={closeMobileMenu}
                   className="flex min-h-[66px] items-center gap-3 rounded-xl border border-white/10 bg-white/10 px-3 py-3 text-sm font-bold text-white no-underline transition-colors hover:bg-white/16"
                 >
@@ -287,6 +300,7 @@ export function PlatformShell({
                   <span className="truncate">{t.signIn}</span>
                 </Link>
               )}
+              {isAuthenticated && <button type="button" onClick={() => { closeMobileMenu(); void handleLogout(); }} className="flex min-h-[66px] items-center gap-3 rounded-xl border border-[#f0c8ba]/30 bg-[#7d382b]/30 px-3 py-3 text-sm font-bold text-white"><span className="grid size-10 place-items-center rounded-lg bg-black/10"><LogOut className="size-5" /></span><span>{language === "ar" ? "تسجيل الخروج" : "Log out"}</span></button>}
             </nav>
           </div>
         )}

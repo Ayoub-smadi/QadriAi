@@ -8,6 +8,7 @@ import { categoryLabels, plantKnowledge } from "@/data/plantKnowledge";
 import { createEmptyQuote, findPlant, getRecords, getTotals, removeRecord, saveRecord, subscribeToRecords, type QuoteColumnKey, type QuoteItem, type QuoteRecord } from "@/data/quoteStore";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/lib/i18n";
+import { deleteRemoteQuote, fetchRemoteQuotes, updateRemoteQuote } from "@/lib/quoteApi";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { ArrowRight, Download, FilePlus2, ImagePlus, Minus, Pencil, Plus, ReceiptText, Save, Trash2, X } from "lucide-react";
@@ -31,7 +32,11 @@ export default function QuoteAdmin() {
   const [downloading, setDownloading] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => { setRecords(getRecords()); return subscribeToRecords(() => setRecords(getRecords())); }, []);
+  useEffect(() => {
+    let active = true;
+    fetchRemoteQuotes("admin").then(remote => { if (active) setRecords(remote); }).catch(error => toast.error(error instanceof Error ? error.message : "تعذر تحميل الطلبات."));
+    return () => { active = false; };
+  }, []);
   const requests = records.filter(record => record.kind === "request");
   const savedQuotes = records.filter(record => record.kind === "quote");
   const openEditor = (record: QuoteRecord) => { setSelectedId(record.id); setEditor({ ...record, items: record.items.map(item => ({ ...item })), visibleColumns: { ...record.visibleColumns }, columnLabels: { ...record.columnLabels } }); };
@@ -49,10 +54,12 @@ export default function QuoteAdmin() {
       return;
     }
     const priced = editor.items.some(item => item.price > 0);
-    const saved = saveRecord({ ...editor, kind: editor.kind === "request" && priced ? "quote" : editor.kind, status: priced ? "priced" : "pending" });
-    setRecords(getRecords());
-    setEditor(saved);
-    toast.success(isArabic ? "تم حفظ عرض السعر." : "Quote saved.");
+    const next: QuoteRecord = { ...editor, kind: editor.kind === "request" && priced ? "quote" : editor.kind, status: priced ? "priced" : "pending" };
+    updateRemoteQuote(next).then(saved => {
+      setRecords(previous => previous.map(record => record.id === saved.id ? saved : record));
+      setEditor(saved);
+      toast.success(isArabic ? "تم حفظ عرض السعر." : "Quote saved.");
+    }).catch(error => toast.error(error instanceof Error ? error.message : "تعذر حفظ العرض."));
   };
 
   const downloadPdf = async () => {
@@ -84,8 +91,8 @@ export default function QuoteAdmin() {
 
   return <PlatformShell title={isArabic ? "طلبات عروض" : "Quote requests"} eyebrow={isArabic ? "استقبال الطلبات وتسعيرها وحفظها" : "Receive, price, and save customer quotes"}><AccessGate>{editor ? <Editor record={editor} setRecord={setEditor} onSave={persist} onDownload={downloadPdf} downloading={downloading} sheetRef={sheetRef} onClose={closeEditor} language={language} /> : <main className="container py-8">
     <section className="flex flex-col justify-between gap-5 rounded-[1.6rem] bg-[#003f31] p-6 text-white sm:flex-row sm:items-center sm:p-8"><div><p className="text-xs font-bold tracking-[.16em] text-[#b9dfcf]">{isArabic ? "مكتب الإدارة" : "ADMIN DESK"}</p><h1 className="mt-2 text-2xl font-extrabold">{isArabic ? "طلبات عروض الأسعار" : "Quote requests"}</h1><p className="mt-2 text-sm text-[#d5eee3]">{isArabic ? "افتح أي طلب، ضع الأسعار، أضف الشحن، ثم احفظه أو نزّله PDF." : "Open a request, add pricing and shipping, then save or download it as a PDF."}</p></div><Button onClick={newQuote} className="h-11 rounded-xl bg-[#b9dfcf] font-extrabold text-[#003f31] hover:bg-white"><FilePlus2 className="me-2 size-5" />{isArabic ? "إنشاء عرض سعر" : "Create quote"}</Button></section>
-    <RecordList title={isArabic ? "طلبات العملاء الجديدة" : "New customer requests"} empty={isArabic ? "لا توجد طلبات عروض جديدة." : "No new quote requests."} records={requests} onOpen={openEditor} onDelete={id => { if (window.confirm(isArabic ? "حذف هذا الطلب نهائيًا؟" : "Delete this request permanently?")) { removeRecord(id); setRecords(getRecords()); } }} language={language} />
-    <RecordList title={isArabic ? "سجل عروض الأسعار" : "Saved quotes"} empty={isArabic ? "لم يتم حفظ عروض أسعار بعد." : "No saved quotes yet."} records={savedQuotes} onOpen={openEditor} onDelete={id => { if (window.confirm(isArabic ? "حذف هذا العرض نهائيًا؟" : "Delete this quote permanently?")) { removeRecord(id); setRecords(getRecords()); } }} language={language} />
+    <RecordList title={isArabic ? "طلبات العملاء الجديدة" : "New customer requests"} empty={isArabic ? "لا توجد طلبات عروض جديدة." : "No new quote requests."} records={requests} onOpen={openEditor} onDelete={id => { if (window.confirm(isArabic ? "حذف هذا الطلب نهائيًا؟" : "Delete this request permanently?")) { deleteRemoteQuote(id).then(() => setRecords(previous => previous.filter(record => record.id !== id))).catch(error => toast.error(error instanceof Error ? error.message : "تعذر حذف الطلب.")); } }} language={language} />
+    <RecordList title={isArabic ? "سجل عروض الأسعار" : "Saved quotes"} empty={isArabic ? "لم يتم حفظ عروض أسعار بعد." : "No saved quotes yet."} records={savedQuotes} onOpen={openEditor} onDelete={id => { if (window.confirm(isArabic ? "حذف هذا العرض نهائيًا؟" : "Delete this quote permanently?")) { deleteRemoteQuote(id).then(() => setRecords(previous => previous.filter(record => record.id !== id))).catch(error => toast.error(error instanceof Error ? error.message : "تعذر حذف العرض.")); } }} language={language} />
   </main>}</AccessGate></PlatformShell>;
 }
 
