@@ -124,6 +124,59 @@ function sendError(res: any, message: string, code = "BAD_REQUEST") {
   }]);
 }
 
+function geminiInput(req: any) {
+  const body = req.body && typeof req.body === "object" ? req.body : {};
+  const value = Array.isArray(body) ? body[0] : body;
+  return value?.json ?? value?.["0"]?.json ?? value ?? {};
+}
+
+function geminiSystem(language: string) {
+  return language === "en"
+    ? "You are Al-Qadri Smart Agriculture, a ChatGPT-like assistant specialized only in agriculture. Answer clearly and practically about crops, irrigation, soil, trees, pests, plant diseases, pruning, greenhouses, and farm planning. Politely refuse non-agricultural requests. For images, separate observations from possibilities and never confirm a disease from one image. Do not provide pesticide mixtures or exact chemical doses; recommend a local agronomist when needed."
+    : "أنت القادري الزراعي الذكي، مساعد مثل ChatGPT متخصص بالزراعة فقط. أجب بالعربية بوضوح وعمليًا عن المحاصيل والري والتربة والأشجار والآفات والأمراض النباتية والتقليم والبيوت البلاستيكية وتخطيط المزارع. اعتذر بلطف عن الأسئلة غير الزراعية. عند الصور ميّز بين الملاحظة والاحتمال ولا تؤكد مرضًا من صورة واحدة. لا تعطِ خلطات مبيدات أو جرعات كيميائية دقيقة، وأوصِ بمهندس زراعي محلي عند الحاجة.";
+}
+
+function geminiParts(messages: any[], attachments: any[]) {
+  const contents = messages.filter(item => item && typeof item.content === "string" && item.role !== "system").slice(-10).map(item => ({
+    role: item.role === "assistant" ? "model" : "user",
+    parts: [{ text: String(item.content).slice(0, 12000) }] as any[],
+  }));
+  const last = contents[contents.length - 1];
+  const images = attachments.filter(item => item?.type === "image").slice(0, 3).map(item => {
+    const match = /^data:(image\/(?:jpeg|png|webp));base64,(.+)$/s.exec(String(item.dataUrl || ""));
+    return match ? { mimeType: match[1], data: match[2] } : null;
+  }).filter(Boolean);
+  if (last?.role === "user") last.parts.push(...images.map(image => ({ inlineData: image })));
+  return contents;
+}
+
+async function handleGemini(req: any, res: any) {
+  const input = geminiInput(req);
+  const messages = Array.isArray(input.messages) ? input.messages : [];
+  if (!messages.length) return sendError(res, "أرسل سؤالًا زراعيًا أولًا.");
+  const key = String(process.env.GEMINI_API_KEY || "").trim();
+  if (!key) return sendError(res, "لم يتم ضبط GEMINI_API_KEY على الخادم.", "INTERNAL_SERVER_ERROR");
+  const language = input.language === "en" ? "en" : "ar";
+  const model = String(process.env.GEMINI_MODEL || "gemini-3.5-flash-lite").trim();
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "content-type": "application/json", accept: "application/json" },
+    body: JSON.stringify({
+      systemInstruction: { parts: [{ text: geminiSystem(language) }] },
+      contents: geminiParts(messages, Array.isArray(input.attachments) ? input.attachments : []),
+      generationConfig: { temperature: 0.25, maxOutputTokens: 1400 },
+    }),
+  });
+  const raw = await response.text();
+  let data: any = {};
+  try { data = JSON.parse(raw); } catch { /* handled below */ }
+  if (!response.ok) throw new Error(`فشل اتصال Gemini (${response.status}): ${data?.error?.message || raw.slice(0, 240)}`);
+  const content = data?.candidates?.[0]?.content?.parts?.map((part: any) => typeof part.text === "string" ? part.text : "").filter(Boolean).join("\n").trim();
+  if (!content) throw new Error("أعاد Gemini استجابة بلا نص.");
+  return sendSuccess(res, { content });
+}
+
 function getCookie(req: any) {
   const header = String(req.headers?.cookie || "");
   const token = header.split(";").map((part: string) => part.trim()).find((part: string) => part.startsWith(`${SESSION_COOKIE}=`));
@@ -275,6 +328,7 @@ async function handle(req: any, res: any) {
   const queryOperation = String(req.query?.operation || "").split(".").pop();
   const operation = pathOperation || queryOperation || "";
   try {
+    if (path.includes("ai.consult") || queryOperation === "ai.consult") return await handleGemini(req, res);
     await ensureUsersSchema();
 
     if (operation === "quotes") return await handleQuoteOperation(req, res, readInput(req));
