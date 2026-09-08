@@ -173,9 +173,9 @@ export function createRequest(input: Omit<QuoteRecord, "id" | "quoteNumber" | "k
   });
 }
 
-export function getTotals(record: Pick<QuoteRecord, "items" | "shippingFee">) {
+export function getTotals(record: Pick<QuoteRecord, "items" | "shippingFee"> & Partial<Pick<QuoteRecord, "fulfillment">>) {
   const subtotal = record.items.reduce((sum, item) => sum + Math.max(0, Number(item.quantity) || 0) * Math.max(0, Number(item.price) || 0), 0);
-  const shipping = Math.max(0, Number(record.shippingFee) || 0);
+  const shipping = record.fulfillment === "pickup" ? 0 : Math.max(0, Number(record.shippingFee) || 0);
   return { subtotal, shipping, total: subtotal + shipping };
 }
 
