@@ -23,29 +23,42 @@ function downloadName(record: QuoteRecord) {
   return `${record.quoteNumber || "quote"}.pdf`;
 }
 
-function downloadFallbackPdf(record: QuoteRecord, isArabic: boolean) {
-  const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-  const lines = [
-    record.companyNameEn || record.companyNameAr || "Al-Qadri Agricultural Establishment",
-    `${isArabic ? "Quote" : "Quote"}: ${record.quoteNumber}`,
-    `${isArabic ? "Customer" : "Customer"}: ${record.customerName || "—"}`,
-    `${isArabic ? "Phone" : "Phone"}: ${record.phone || "—"}`,
-    `${isArabic ? "Fulfillment" : "Fulfillment"}: ${record.fulfillmentLabel || (record.fulfillment === "delivery" ? "Delivery" : "Pickup")}`,
-    "",
-    ...record.items.map((item, index) => `${index + 1}. ${item.nameEn || item.nameAr} | ${item.quantity} x ${item.price.toFixed(2)} = ${(item.quantity * item.price).toFixed(2)} JOD`),
-    "",
-    `Subtotal: ${getTotals(record).subtotal.toFixed(2)} JOD`,
-    `Shipping: ${getTotals(record).shipping.toFixed(2)} JOD`,
-    `Total: ${getTotals(record).total.toFixed(2)} JOD`,
-  ];
-  let y = 18;
-  for (const line of lines) {
-    const wrapped = pdf.splitTextToSize(line, 180);
-    if (y + wrapped.length * 6 > 285) { pdf.addPage(); y = 18; }
-    pdf.text(wrapped, 15, y);
-    y += wrapped.length * 6;
+async function downloadFallbackPdf(record: QuoteRecord, isArabic: boolean) {
+  const root = document.createElement("div");
+  root.dir = isArabic ? "rtl" : "ltr";
+  root.style.cssText = "position:fixed;left:-10000px;top:0;width:1120px;min-height:790px;padding:56px;background:#fff;color:#172319;font-family:Arial,Tahoma,sans-serif;font-size:22px;line-height:1.65;";
+  const add = (text: string, className = "") => { const node = document.createElement("div"); node.textContent = text; node.className = className; root.appendChild(node); };
+  add(record.companyNameAr || record.companyNameEn || "مؤسسة القادري الزراعية", "company");
+  add(`${isArabic ? "رقم العرض" : "Quote number"}: ${record.quoteNumber}`);
+  add(`${isArabic ? "العميل" : "Customer"}: ${record.customerName || "—"}`);
+  add(`${isArabic ? "الهاتف" : "Phone"}: ${record.phone || "—"}`);
+  add(`${isArabic ? "طريقة الاستلام" : "Fulfillment method"}: ${record.fulfillmentLabel || (record.fulfillment === "delivery" ? (isArabic ? "توصيل" : "Delivery") : (isArabic ? "استلام من المشتل" : "Pickup") )}`);
+  add(" ");
+  record.items.forEach((item, index) => add(`${index + 1}. ${isArabic ? item.nameAr : item.nameEn || item.nameAr} — ${isArabic ? "الكمية" : "Qty"}: ${item.quantity} × ${item.price.toFixed(2)} = ${(item.quantity * item.price).toFixed(2)} JOD`));
+  const totals = getTotals(record);
+  add(" ");
+  add(`${isArabic ? "المجموع الفرعي" : "Subtotal"}: ${totals.subtotal.toFixed(2)} JOD`);
+  add(`${isArabic ? "رسوم الشحن" : "Shipping"}: ${totals.shipping.toFixed(2)} JOD`);
+  add(`${isArabic ? "المجموع الكلي" : "Total"}: ${totals.total.toFixed(2)} JOD`, "total");
+  document.body.appendChild(root);
+  try {
+    await document.fonts?.ready;
+    const canvas = await html2canvas(root, { scale: 1, backgroundColor: "#ffffff", logging: false });
+    const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+    const margin = 8;
+    const pageWidth = pdf.internal.pageSize.getWidth() - margin * 2;
+    const pageHeight = pdf.internal.pageSize.getHeight() - margin * 2;
+    const imageHeight = canvas.height * pageWidth / canvas.width;
+    const imageData = canvas.toDataURL("image/jpeg", 0.92);
+    const pages = Math.max(1, Math.ceil(imageHeight / pageHeight));
+    for (let page = 0; page < pages; page += 1) {
+      if (page) pdf.addPage();
+      pdf.addImage(imageData, "JPEG", margin, margin - page * pageHeight, pageWidth, imageHeight);
+    }
+    pdf.save(downloadName(record));
+  } finally {
+    root.remove();
   }
-  pdf.save(downloadName(record));
 }
 
 export default function QuoteAdmin() {
@@ -113,7 +126,7 @@ export default function QuoteAdmin() {
     } catch (error) {
       console.error("[Quote PDF] visual export failed, using fallback", error);
       try {
-        downloadFallbackPdf(editor, isArabic);
+        await downloadFallbackPdf(editor, isArabic);
         toast.success(isArabic ? "تم تنزيل PDF نصي احتياطي." : "Fallback PDF downloaded.");
       } catch (fallbackError) {
         console.error("[Quote PDF] fallback export failed", fallbackError);
