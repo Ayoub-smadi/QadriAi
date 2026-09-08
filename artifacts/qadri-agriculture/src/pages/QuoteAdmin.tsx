@@ -23,6 +23,31 @@ function downloadName(record: QuoteRecord) {
   return `${record.quoteNumber || "quote"}.pdf`;
 }
 
+function downloadFallbackPdf(record: QuoteRecord, isArabic: boolean) {
+  const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+  const lines = [
+    record.companyNameEn || record.companyNameAr || "Al-Qadri Agricultural Establishment",
+    `${isArabic ? "Quote" : "Quote"}: ${record.quoteNumber}`,
+    `${isArabic ? "Customer" : "Customer"}: ${record.customerName || "—"}`,
+    `${isArabic ? "Phone" : "Phone"}: ${record.phone || "—"}`,
+    `${isArabic ? "Fulfillment" : "Fulfillment"}: ${record.fulfillmentLabel || (record.fulfillment === "delivery" ? "Delivery" : "Pickup")}`,
+    "",
+    ...record.items.map((item, index) => `${index + 1}. ${item.nameEn || item.nameAr} | ${item.quantity} x ${item.price.toFixed(2)} = ${(item.quantity * item.price).toFixed(2)} JOD`),
+    "",
+    `Subtotal: ${getTotals(record).subtotal.toFixed(2)} JOD`,
+    `Shipping: ${getTotals(record).shipping.toFixed(2)} JOD`,
+    `Total: ${getTotals(record).total.toFixed(2)} JOD`,
+  ];
+  let y = 18;
+  for (const line of lines) {
+    const wrapped = pdf.splitTextToSize(line, 180);
+    if (y + wrapped.length * 6 > 285) { pdf.addPage(); y = 18; }
+    pdf.text(wrapped, 15, y);
+    y += wrapped.length * 6;
+  }
+  pdf.save(downloadName(record));
+}
+
 export default function QuoteAdmin() {
   const { user } = useAuth();
   const { language } = useLanguage();
@@ -85,8 +110,15 @@ export default function QuoteAdmin() {
       }
       pdf.save(downloadName(editor));
       toast.success(isArabic ? "تم تنزيل ملف PDF." : "PDF downloaded.");
-    } catch {
-      toast.error(isArabic ? "تعذر إنشاء ملف PDF." : "Could not create the PDF.");
+    } catch (error) {
+      console.error("[Quote PDF] visual export failed, using fallback", error);
+      try {
+        downloadFallbackPdf(editor, isArabic);
+        toast.success(isArabic ? "تم تنزيل PDF نصي احتياطي." : "Fallback PDF downloaded.");
+      } catch (fallbackError) {
+        console.error("[Quote PDF] fallback export failed", fallbackError);
+        toast.error(isArabic ? "تعذر إنشاء ملف PDF. حاول تحديث الصفحة." : "Could not create the PDF. Please refresh and try again.");
+      }
     } finally {
       setDownloading(false);
     }
