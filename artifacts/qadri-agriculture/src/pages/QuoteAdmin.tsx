@@ -63,11 +63,11 @@ async function downloadFallbackPdf(record: QuoteRecord, isArabic: boolean) {
 
 async function captureQuoteSheet(source: HTMLDivElement) {
   const exportRoot = document.createElement("div");
-  exportRoot.style.cssText = "position:fixed;left:-10000px;top:0;width:1122px;background:#fff;overflow:visible;padding:0;margin:0;";
+  exportRoot.style.cssText = "position:fixed;left:-10000px;top:0;width:794px;background:#fff;overflow:visible;padding:0;margin:0;";
   const clone = source.cloneNode(true) as HTMLDivElement;
-  clone.style.width = "1122px";
-  clone.style.minWidth = "1122px";
-  clone.style.minHeight = "794px";
+  clone.style.width = "794px";
+  clone.style.minWidth = "794px";
+  clone.style.minHeight = "1122px";
   clone.style.height = "auto";
   clone.style.background = "#fff";
   clone.style.margin = "0";
@@ -137,19 +137,17 @@ export default function QuoteAdmin() {
     if (!editor || !sheetRef.current) return;
     setDownloading(true);
     try {
-      const canvas = await captureQuoteSheet(sheetRef.current);
-      const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+      const pageNodes = Array.from(sheetRef.current.querySelectorAll<HTMLElement>(".quote-page"));
+      const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
-      const imageHeight = canvas.height * pageWidth / canvas.width;
-      const imageData = canvas.toDataURL("image/jpeg", 0.9);
-      const pages = Math.max(1, Math.ceil(imageHeight / pageHeight));
-      for (let page = 0; page < pages; page += 1) {
+      for (let page = 0; page < pageNodes.length; page += 1) {
+        const canvas = await captureQuoteSheet(pageNodes[page]);
         if (page) pdf.addPage();
         pdf.setFillColor(255, 255, 255);
         pdf.rect(0, 0, pageWidth, pageHeight, "F");
-        const imageY = -page * pageHeight;
-        pdf.addImage(imageData, "JPEG", 0, imageY, pageWidth, imageHeight);
+        const imageHeight = canvas.height * pageWidth / canvas.width;
+        pdf.addImage(canvas.toDataURL("image/jpeg", 0.9), "JPEG", 0, 0, pageWidth, Math.min(pageHeight, imageHeight));
       }
       pdf.save(downloadName(editor));
       toast.success(isArabic ? "تم تنزيل ملف PDF." : "PDF downloaded.");
@@ -197,7 +195,7 @@ function Editor({ record, setRecord, onSave, onDownload, downloading, sheetRef, 
 
   return <main className="quote-editor container py-8 [&_input]:text-center [&_textarea]:text-center">
     <div className="mb-5 flex flex-wrap items-center justify-between gap-3"><button onClick={onClose} className="inline-flex items-center gap-2 text-sm font-bold text-[#52731f] hover:underline"><ArrowRight className="size-4" />{isArabic ? "العودة للسجل" : "Back to register"}</button><div className="flex flex-wrap gap-2"><Button onClick={() => setSmartOpen(true)} className="h-10 rounded-xl bg-[#f2a007] font-black text-white hover:bg-[#d88900]"><Sparkles className="me-2 size-4" />{isArabic ? "تحليل ذكي" : "Smart analysis"}</Button><Button onClick={onSave} className="h-10 rounded-xl bg-[#35530e] text-white hover:bg-[#294108]"><Save className="me-2 size-4" />{isArabic ? "حفظ العرض" : "Save quote"}</Button><Button onClick={onDownload} disabled={downloading} variant="outline" className="h-10 rounded-xl border-[#9dbb82] text-[#35530e]"><Download className="me-2 size-4" />{downloading ? (isArabic ? "جاري التجهيز" : "Preparing") : (isArabic ? "تنزيل PDF" : "Download PDF")}</Button></div></div>
-    <div className="rounded-[1.5rem] border border-[#35530e]/10 bg-[#e9eee2] p-3 shadow-[0_14px_35px_rgba(48,67,22,.08)]"><div className="mb-3 px-2 text-sm font-bold text-[#405525]">{isArabic ? "عدّل البيانات مباشرة داخل صفحة العرض" : "Edit the quote directly on the page"}</div><div className="overflow-auto rounded-xl shadow-sm"><QuoteDocument ref={sheetRef} className="min-h-[210mm] w-[297mm]" record={record} editable onChange={patch => setRecord({ ...record, ...patch })} onItemChange={(itemId, patch) => update("items", record.items.map(item => item.id === itemId ? { ...item, ...patch } : item))} onImageChange={(itemId, dataUrl) => update("items", record.items.map(item => item.id === itemId ? { ...item, imagePath: dataUrl } : item))} onAddItem={addItem} onRemoveItem={removeItem} onLogoChange={dataUrl => update("logoPath", dataUrl)} onStampChange={dataUrl => update("stampPath", dataUrl)} /></div></div>
+    <div className="rounded-[1.5rem] border border-[#35530e]/10 bg-[#e9eee2] p-3 shadow-[0_14px_35px_rgba(48,67,22,.08)]"><div className="mb-3 px-2 text-sm font-bold text-[#405525]">{isArabic ? "عدّل البيانات مباشرة داخل صفحة العرض" : "Edit the quote directly on the page"}</div><div ref={sheetRef} className="quote-pages overflow-auto rounded-xl bg-[#dfe7d8] p-4"><div className="grid justify-center gap-5">{Array.from({ length: Math.max(1, Math.ceil(record.items.length / 5)) }, (_, pageIndex) => { const pageItems = record.items.slice(pageIndex * 5, pageIndex * 5 + 5); const pageRecord = { ...record, items: pageItems }; return <QuoteDocument key={pageIndex} className="quote-page min-h-[297mm] w-[210mm] bg-white p-[12mm] shadow-[0_8px_24px_rgba(30,60,35,.12)]" record={pageRecord} showFooter={pageIndex === Math.ceil(record.items.length / 5) - 1} editable onChange={patch => setRecord({ ...record, ...patch })} onItemChange={(itemId, patch) => update("items", record.items.map(item => item.id === itemId ? { ...item, ...patch } : item))} onImageChange={(itemId, dataUrl) => update("items", record.items.map(item => item.id === itemId ? { ...item, imagePath: dataUrl } : item))} onAddItem={addItem} onRemoveItem={removeItem} onLogoChange={dataUrl => update("logoPath", dataUrl)} onStampChange={dataUrl => update("stampPath", dataUrl)} />; })}</div></div></div>
     {smartOpen && <SmartAnalysis language={language} onClose={() => setSmartOpen(false)} onApply={items => { setRecord({ ...record, items: [...record.items, ...items] }); setSmartOpen(false); toast.success(isArabic ? "تمت إضافة الأصناف إلى الجدول." : "Items added to the table."); }} />}
   </main>;
 }
