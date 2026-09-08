@@ -33,6 +33,11 @@ export type QuoteRecord = {
   notes: string;
   title: string;
   footerText: string;
+  establishmentAr?: string;
+  establishmentEn?: string;
+  contactPhone?: string;
+  contactEmail?: string;
+  contactWebsite?: string;
   closingText?: string;
   logoPath?: string;
   stampPath?: string;
@@ -121,6 +126,11 @@ export function createEmptyQuote(items: QuoteItem[] = [itemFromPlant(plantKnowle
     notes: "",
     title: "عرض سعر نباتات",
     footerText: "شكرًا لاختياركم القادري الزراعي.",
+    establishmentAr: "مؤسسة القادري الزراعية",
+    establishmentEn: "Al-Qadri Agricultural Establishment",
+    contactPhone: "00962777772211",
+    contactEmail: "tamerqadri@gmail.com",
+    contactWebsite: "https://www.alqadrioffers.online",
     closingText: "واقبلوا فائق الاحترام والتقدير،،،",
     logoPath: "/assets/qadri-logo.png",
     stampPath: "/assets/qadri-stamp.png",
