@@ -37,9 +37,9 @@ export const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(func
             quantity: item.quantity,
             price: money(item.price),
             total: money(item.quantity * item.price),
-            image: item.imagePath ? <img src={item.imagePath} alt={isArabic ? item.nameAr : item.nameEn} className="mx-auto size-28 rounded-xl object-cover ring-1 ring-[#d9e3d1]" /> : "—",
+            image: item.imagePath ? <img src={item.imagePath} alt={isArabic ? item.nameAr : item.nameEn} className="mx-auto h-40 w-40 min-w-40 rounded-xl object-cover ring-1 ring-[#d9e3d1]" /> : "—",
           };
-          return <td key={column} className="border border-[#d9e3d1] px-2 py-3">{content[column]}</td>;
+          return <td key={column} className={`border border-[#d9e3d1] px-2 py-3 ${column === "image" ? "w-44 min-w-44 p-4" : ""}`}>{content[column]}</td>;
         })}</tr>)}</tbody>
       </table>
       <div className="mt-6 ms-auto max-w-xs space-y-2 text-sm"><div className="flex justify-between border-b border-[#d9e3d1] pb-2"><span>{isArabic ? "المجموع الفرعي" : "Subtotal"}</span><strong>{money(totals.subtotal)}</strong></div>{record.fulfillment === "delivery" && <div className="flex justify-between border-b border-[#d9e3d1] pb-2"><span>{isArabic ? "رسوم الشحن" : "Shipping"}</span><strong>{money(totals.shipping)}</strong></div>}<div className="flex justify-between pt-1 text-base font-extrabold text-[#35530e]"><span>{isArabic ? "المجموع الكلي" : "Grand total"}</span><strong>{money(record.fulfillment === "delivery" ? totals.total : totals.subtotal)}</strong></div></div>
