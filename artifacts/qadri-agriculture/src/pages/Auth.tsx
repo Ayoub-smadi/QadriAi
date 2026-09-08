@@ -8,11 +8,13 @@ import { ArrowLeft, ArrowRight, Check, Leaf, Loader2, LockKeyhole, ShieldCheck, 
 import { FormEvent, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function Auth() {
   const { language } = useLanguage();
   const isArabic = language === "ar";
   const [, setLocation] = useLocation();
+  const queryClient = useQueryClient();
   const [mode, setMode] = useState<"login" | "register">("login");
   const [name, setName] = useState("");
   const [identifier, setIdentifier] = useState("");
@@ -37,6 +39,7 @@ export default function Auth() {
       const user = mode === "login"
         ? await authClient.login({ identifier: identifier.trim(), password, admin: isAdminLogin })
         : await authClient.register({ name: name.trim(), phone: identifier.trim(), password });
+      queryClient.setQueryData(["auth", "me"], user);
       toast.success(isArabic ? `أهلًا ${user.name || "بك"}، تم الدخول بنجاح.` : `Welcome ${user.name || "back"}.`);
       setLocation(user.role === "admin" ? "/dashboard" : "/profile");
     } catch (error) {
