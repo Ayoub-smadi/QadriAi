@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { categoryLabels, plantKnowledge, type PlantCategory, type PlantKnowledgeEntry } from "@/data/plantKnowledge";
+import { categoryLabels, type PlantCategory, type PlantKnowledgeEntry } from "@/data/plantKnowledge";
+import { getCatalog, subscribeToCatalog } from "@/data/plantCatalog";
 import { itemFromPlant, saveDraft } from "@/data/quoteStore";
 import { useLanguage } from "@/lib/i18n";
 import { ArrowLeft, ArrowRight, Check, ChevronRight, Droplets, Leaf, Minus, Plus, Search, ShoppingBag, Sparkles, Sun, X } from "lucide-react";
@@ -35,21 +36,24 @@ export default function Quotes() {
   const [productSize, setProductSize] = useState("");
   const [customSize, setCustomSize] = useState("");
   const [requestMethod] = useState<Fulfillment>("pickup");
+  const [catalog, setCatalog] = useState<PlantKnowledgeEntry[]>(() => getCatalog());
+
+  useEffect(() => subscribeToCatalog(() => setCatalog(getCatalog())), []);
 
   const selectedItems = useMemo(() => Object.entries(selected).map(([plantId, values]) => {
-    const plant = plantKnowledge.find(item => item.id === plantId);
+    const plant = catalog.find(item => item.id === plantId);
     return plant ? itemFromPlant(plant, Number(values.quantity), values.size) : null;
-  }).filter((item): item is ReturnType<typeof itemFromPlant> => Boolean(item)), [selected]);
+  }).filter((item): item is ReturnType<typeof itemFromPlant> => Boolean(item)), [catalog, selected]);
   const selectedTotal = selectedItems.reduce((total, item) => total + item.quantity, 0);
 
   const filteredPlants = useMemo(() => {
     const term = search.trim().toLocaleLowerCase();
-    return plantKnowledge.filter(plant => {
+    return catalog.filter(plant => {
       const categoryMatch = activeCategory === "all" || plant.categoryTags.includes(activeCategory);
       const textMatch = !term || [plant.nameAr, plant.nameEn, plant.scientificName, ...plant.categoryTags].join(" ").toLocaleLowerCase().includes(term);
       return categoryMatch && textMatch;
     });
-  }, [activeCategory, search]);
+  }, [activeCategory, catalog, search]);
 
   useEffect(() => {
     if (!activePlant) return;
@@ -103,7 +107,7 @@ export default function Quotes() {
             </div>
 
             <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {plantKnowledge.map((plant, index) => <article key={plant.id} onClick={() => openInfo(plant)} className="group cursor-pointer overflow-hidden rounded-[1.35rem] border border-[#dce8df] bg-white shadow-[0_8px_24px_rgba(26,73,54,.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(26,73,54,.12)]" style={{ animationDelay: `${index * 45}ms` }}>
+              {catalog.map((plant, index) => <article key={plant.id} onClick={() => openInfo(plant)} className="group cursor-pointer overflow-hidden rounded-[1.35rem] border border-[#dce8df] bg-white shadow-[0_8px_24px_rgba(26,73,54,.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(26,73,54,.12)]" style={{ animationDelay: `${index * 45}ms` }}>
                 <div className="relative aspect-[1.12] overflow-hidden bg-[#e7f0e9]"><img src={plant.imagePath} alt={isArabic ? plant.nameAr : plant.nameEn} loading="lazy" className="size-full object-cover transition duration-700 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-[#0a3e31]/45 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" /><span className="absolute end-3 top-3 grid size-9 place-items-center rounded-full bg-white/90 text-[#0a5440] opacity-0 shadow-sm transition group-hover:opacity-100"><ArrowLeft className="size-4 rtl:rotate-180" /></span></div>
                 <div className="p-5"><h3 className="text-xl font-black text-[#153d31]">{isArabic ? plant.nameAr : plant.nameEn}</h3><p className="mt-1 text-xs italic text-[#91a49a]">{plant.scientificName}</p><p className="mt-3 text-sm leading-6 text-[#70877c]">{isArabic ? plant.description.ar : plant.description.en}</p></div>
               </article>)}
