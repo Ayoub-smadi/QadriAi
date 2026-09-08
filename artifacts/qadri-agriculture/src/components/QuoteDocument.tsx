@@ -26,20 +26,21 @@ export const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(func
         <p><strong>{isArabic ? "الطريقة" : "Method"}:</strong> {record.fulfillment === "delivery" ? (isArabic ? "توصيل" : "Delivery") : (isArabic ? "استلام من المشتل" : "Nursery pickup")}</p>
         {record.fulfillment === "delivery" && <p><strong>{isArabic ? "العنوان" : "Address"}:</strong> {[record.deliveryRegion, record.deliveryAddress].filter(Boolean).join("، ") || "—"}</p>}
       </div>
-      <table className="mt-6 w-full border-collapse text-xs [word-break:normal] [overflow-wrap:break-word]">
+      <table className="mt-6 w-full min-w-[980px] table-fixed border-collapse text-xs [word-break:normal] [overflow-wrap:break-word]">
+        <colgroup>{columns.filter(visible).map(column => <col key={column} className={column === "number" ? "w-10" : column === "name" ? "w-32" : column === "description" ? "w-[310px]" : column === "category" ? "w-28" : column === "quantity" ? "w-20" : column === "price" || column === "total" ? "w-24" : "w-[229px]"} />)}</colgroup>
         <thead><tr className="bg-[#35530e] text-white">{columns.filter(visible).map(column => <th key={column} className="border border-[#274c3c] px-2 py-3 text-center font-bold">{label(column)}</th>)}</tr></thead>
         <tbody>{record.items.map((item, index) => <tr key={item.id} className="align-top even:bg-[#f8faf5]">{columns.filter(visible).map(column => {
           const content: Record<QuoteColumnKey, ReactNode> = {
             number: index + 1,
             name: <span className="font-bold">{isArabic ? item.nameAr : item.nameEn}<small className="mt-1 block font-normal text-[#718062]">{item.size}</small></span>,
-            description: isArabic ? item.descriptionAr : item.descriptionEn,
-            category: isArabic ? item.categoryAr : item.categoryEn,
+            description: <span className="block whitespace-normal break-words text-start leading-6">{isArabic ? item.descriptionAr : item.descriptionEn}</span>,
+            category: <span className="block whitespace-normal break-words text-start leading-6">{isArabic ? item.categoryAr : item.categoryEn}</span>,
             quantity: item.quantity,
             price: money(item.price),
             total: money(item.quantity * item.price),
             image: item.imagePath ? <img src={item.imagePath} alt={isArabic ? item.nameAr : item.nameEn} className="mx-auto h-[191px] w-[213px] min-w-[213px] rounded-xl object-cover ring-1 ring-[#d9e3d1]" /> : "—",
           };
-          return <td key={column} className={`align-top border border-[#d9e3d1] px-2 py-3 leading-6 whitespace-normal [word-break:normal] [overflow-wrap:break-word] ${column === "image" ? "w-[229px] min-w-[229px] p-2 align-top" : ""}`}>{content[column]}</td>;
+          return <td key={column} className={`align-top border border-[#d9e3d1] px-2 py-3 leading-6 whitespace-normal [word-break:normal] [overflow-wrap:break-word] ${column === "image" ? "w-[229px] min-w-[229px] p-0 align-top" : ""}`}>{content[column]}</td>;
         })}</tr>)}</tbody>
       </table>
       <div className="mt-6 ms-auto max-w-xs space-y-2 text-sm"><div className="flex justify-between border-b border-[#d9e3d1] pb-2"><span>{isArabic ? "المجموع الفرعي" : "Subtotal"}</span><strong>{money(totals.subtotal)}</strong></div>{record.fulfillment === "delivery" && <div className="flex justify-between border-b border-[#d9e3d1] pb-2"><span>{isArabic ? "رسوم الشحن" : "Shipping"}</span><strong>{money(totals.shipping)}</strong></div>}<div className="flex justify-between pt-1 text-base font-extrabold text-[#35530e]"><span>{isArabic ? "المجموع الكلي" : "Grand total"}</span><strong>{money(record.fulfillment === "delivery" ? totals.total : totals.subtotal)}</strong></div></div>
