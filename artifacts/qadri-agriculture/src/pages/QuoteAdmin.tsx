@@ -74,15 +74,6 @@ export default function QuoteAdmin() {
       const pageHeight = pdf.internal.pageSize.getHeight() - margin * 2;
       const imageHeight = canvas.height * pageWidth / canvas.width;
       const imageData = canvas.toDataURL("image/png");
-      if (editor.items.length <= 5) {
-        const fitScale = Math.min(1, pageHeight / imageHeight);
-        const fittedWidth = pageWidth * fitScale;
-        const fittedHeight = imageHeight * fitScale;
-        pdf.addImage(imageData, "PNG", margin + (pageWidth - fittedWidth) / 2, margin + (pageHeight - fittedHeight) / 2, fittedWidth, fittedHeight, undefined, "FAST");
-        pdf.save(downloadName(editor));
-        toast.success(isArabic ? "تم تنزيل ملف PDF." : "PDF downloaded.");
-        return;
-      }
       const pages = Math.max(1, Math.ceil(imageHeight / pageHeight));
       for (let page = 0; page < pages; page += 1) {
         if (page) pdf.addPage();
