@@ -32,6 +32,9 @@ export type QuoteRecord = {
   notes: string;
   title: string;
   footerText: string;
+  closingText?: string;
+  logoPath?: string;
+  stampPath?: string;
   shippingFee: number;
   items: QuoteItem[];
   visibleColumns: Record<QuoteColumnKey, boolean>;
@@ -108,6 +111,9 @@ export function createEmptyQuote(items: QuoteItem[] = [itemFromPlant(plantKnowle
     notes: "",
     title: "عرض سعر نباتات",
     footerText: "شكرًا لاختياركم القادري الزراعي.",
+    closingText: "واقبلوا فائق الاحترام والتقدير،،،",
+    logoPath: "/assets/qadri-logo.png",
+    stampPath: "/assets/qadri-stamp.png",
     shippingFee: 0,
     items,
     visibleColumns: { ...defaultVisibleColumns },
