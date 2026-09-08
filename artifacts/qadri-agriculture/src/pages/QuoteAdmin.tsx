@@ -61,6 +61,27 @@ async function downloadFallbackPdf(record: QuoteRecord, isArabic: boolean) {
   }
 }
 
+async function captureQuoteSheet(source: HTMLDivElement) {
+  const exportRoot = document.createElement("div");
+  exportRoot.style.cssText = "position:fixed;left:-10000px;top:0;width:1122px;background:#fff;overflow:visible;padding:0;margin:0;";
+  const clone = source.cloneNode(true) as HTMLDivElement;
+  clone.style.width = "1122px";
+  clone.style.minWidth = "1122px";
+  clone.style.minHeight = "794px";
+  clone.style.height = "auto";
+  clone.style.background = "#fff";
+  clone.style.margin = "0";
+  clone.style.boxShadow = "none";
+  exportRoot.appendChild(clone);
+  document.body.appendChild(exportRoot);
+  try {
+    await document.fonts?.ready;
+    return await html2canvas(exportRoot, { scale: 1, backgroundColor: "#ffffff", useCORS: true, allowTaint: false, imageTimeout: 15000, logging: false, scrollX: 0, scrollY: 0 });
+  } finally {
+    exportRoot.remove();
+  }
+}
+
 export default function QuoteAdmin() {
   const { user } = useAuth();
   const { language } = useLanguage();
@@ -105,21 +126,19 @@ export default function QuoteAdmin() {
     if (!editor || !sheetRef.current) return;
     setDownloading(true);
     try {
-      await document.fonts?.ready;
-      const canvas = await html2canvas(sheetRef.current, { scale: 1, backgroundColor: "#ffffff", useCORS: true, allowTaint: false, imageTimeout: 15000, logging: false });
+      const canvas = await captureQuoteSheet(sheetRef.current);
       const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
-      const margin = 8;
-      const pageWidth = pdf.internal.pageSize.getWidth() - margin * 2;
-      const pageHeight = pdf.internal.pageSize.getHeight() - margin * 2;
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
       const imageHeight = canvas.height * pageWidth / canvas.width;
       const imageData = canvas.toDataURL("image/jpeg", 0.9);
       const pages = Math.max(1, Math.ceil(imageHeight / pageHeight));
       for (let page = 0; page < pages; page += 1) {
         if (page) pdf.addPage();
         pdf.setFillColor(255, 255, 255);
-        pdf.rect(0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight(), "F");
-        const imageY = margin - page * pageHeight;
-        pdf.addImage(imageData, "JPEG", margin, imageY, pageWidth, imageHeight);
+        pdf.rect(0, 0, pageWidth, pageHeight, "F");
+        const imageY = -page * pageHeight;
+        pdf.addImage(imageData, "JPEG", 0, imageY, pageWidth, imageHeight);
       }
       pdf.save(downloadName(editor));
       toast.success(isArabic ? "تم تنزيل ملف PDF." : "PDF downloaded.");
