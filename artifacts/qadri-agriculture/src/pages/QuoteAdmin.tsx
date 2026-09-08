@@ -12,7 +12,7 @@ import { useLanguage } from "@/lib/i18n";
 import { deleteRemoteQuote, fetchRemoteQuotes, updateRemoteQuote } from "@/lib/quoteApi";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
-import { ArrowRight, Download, FilePlus2, ImagePlus, Minus, Pencil, Plus, ReceiptText, Save, Trash2, X } from "lucide-react";
+import { ArrowRight, Download, FilePlus2, ImagePlus, Minus, Pencil, Plus, ReceiptText, Save, Sparkles, Trash2, X } from "lucide-react";
 import { ChangeEvent, RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
 import { toast } from "sonner";
@@ -104,6 +104,7 @@ function RecordList({ title, empty, records, onOpen, onDelete, language }: { tit
 
 function Editor({ record, setRecord, onSave, onDownload, downloading, sheetRef, onClose, language }: { record: QuoteRecord; setRecord: (record: QuoteRecord) => void; onSave: () => void; onDownload: () => void; downloading: boolean; sheetRef: RefObject<HTMLDivElement | null>; onClose: () => void; language: "ar" | "en" }) {
   const isArabic = language === "ar";
+  const [smartOpen, setSmartOpen] = useState(false);
   const totals = useMemo(() => getTotals(record), [record]);
   const update = <K extends keyof QuoteRecord>(key: K, value: QuoteRecord[K]) => setRecord({ ...record, [key]: value });
   const updateItem = (itemId: string, patch: Partial<QuoteItem>) => update("items", record.items.map(item => item.id === itemId ? { ...item, ...patch } : item));
@@ -117,7 +118,7 @@ function Editor({ record, setRecord, onSave, onDownload, downloading, sheetRef, 
   const catalog = getCatalog();
 
   return <main className="container py-8">
-    <div className="mb-5 flex flex-wrap items-center justify-between gap-3"><button onClick={onClose} className="inline-flex items-center gap-2 text-sm font-bold text-[#52731f] hover:underline"><ArrowRight className="size-4" />{isArabic ? "العودة للسجل" : "Back to register"}</button><div className="flex gap-2"><Button onClick={onSave} className="h-10 rounded-xl bg-[#35530e] text-white hover:bg-[#294108]"><Save className="me-2 size-4" />{isArabic ? "حفظ العرض" : "Save quote"}</Button><Button onClick={onDownload} disabled={downloading} variant="outline" className="h-10 rounded-xl border-[#9dbb82] text-[#35530e]"><Download className="me-2 size-4" />{downloading ? (isArabic ? "جاري التجهيز" : "Preparing") : (isArabic ? "تنزيل PDF" : "Download PDF")}</Button></div></div>
+    <div className="mb-5 flex flex-wrap items-center justify-between gap-3"><button onClick={onClose} className="inline-flex items-center gap-2 text-sm font-bold text-[#52731f] hover:underline"><ArrowRight className="size-4" />{isArabic ? "العودة للسجل" : "Back to register"}</button><div className="flex flex-wrap gap-2"><Button onClick={() => setSmartOpen(true)} className="h-10 rounded-xl bg-[#f2a007] font-black text-white hover:bg-[#d88900]"><Sparkles className="me-2 size-4" />{isArabic ? "تحليل ذكي" : "Smart analysis"}</Button><Button onClick={onSave} className="h-10 rounded-xl bg-[#35530e] text-white hover:bg-[#294108]"><Save className="me-2 size-4" />{isArabic ? "حفظ العرض" : "Save quote"}</Button><Button onClick={onDownload} disabled={downloading} variant="outline" className="h-10 rounded-xl border-[#9dbb82] text-[#35530e]"><Download className="me-2 size-4" />{downloading ? (isArabic ? "جاري التجهيز" : "Preparing") : (isArabic ? "تنزيل PDF" : "Download PDF")}</Button></div></div>
     <div className="grid gap-6 xl:grid-cols-[.95fr_1.05fr]">
       <section className="space-y-5">
         <article className="rounded-[1.5rem] border border-[#35530e]/10 bg-white p-5"><div className="flex items-center justify-between"><div><p className="text-xs font-bold tracking-[.14em] text-[#78924a]">{record.kind === "request" ? (isArabic ? "طلب وارد" : "INCOMING REQUEST") : (isArabic ? "عرض يدوي" : "MANUAL QUOTE")}</p><h2 className="mt-1 text-xl font-bold text-[#314617]">{record.quoteNumber}</h2></div><button onClick={onClose} className="grid size-9 place-items-center rounded-lg text-[#718062] hover:bg-[#f2f6ec]"><X className="size-5" /></button></div><div className="mt-5 grid gap-3 sm:grid-cols-2"><div><Label>{isArabic ? "عنوان العرض" : "Quote title"}</Label><Input value={record.title} onChange={event => update("title", event.target.value)} className="mt-1.5 h-10 rounded-xl" /></div><div><Label>{isArabic ? "اسم العميل" : "Customer name"} *</Label><Input required value={record.customerName} onChange={event => update("customerName", event.target.value)} className="mt-1.5 h-10 rounded-xl" /></div><div><Label>{isArabic ? "رقم الهاتف" : "Phone"} *</Label><Input required dir="ltr" value={record.phone} onChange={event => update("phone", event.target.value)} className="mt-1.5 h-10 rounded-xl" /></div><div><Label>{isArabic ? "طريقة الطلب" : "Method"}</Label><select value={record.fulfillment} onChange={event => update("fulfillment", event.target.value as QuoteRecord["fulfillment"])} className="mt-1.5 h-10 w-full rounded-xl border border-[#dce6d2] bg-white px-3 text-sm"><option value="pickup">{isArabic ? "استلام من المشتل" : "Nursery pickup"}</option><option value="delivery">{isArabic ? "توصيل" : "Delivery"}</option></select></div>{record.fulfillment === "delivery" && <><div><Label>{isArabic ? "منطقة التوصيل" : "Delivery region"} *</Label><Input required value={record.deliveryRegion} onChange={event => update("deliveryRegion", event.target.value)} className="mt-1.5 h-10 rounded-xl" /></div><div><Label>{isArabic ? "العنوان" : "Address"} *</Label><Input required value={record.deliveryAddress} onChange={event => update("deliveryAddress", event.target.value)} className="mt-1.5 h-10 rounded-xl" /></div></>}<div className="sm:col-span-2"><Label>{isArabic ? "ملاحظات العميل" : "Customer notes"}</Label><Textarea value={record.notes} onChange={event => update("notes", event.target.value)} className="mt-1.5 min-h-20 rounded-xl" /></div></div></article>
@@ -126,5 +127,30 @@ function Editor({ record, setRecord, onSave, onDownload, downloading, sheetRef, 
       </section>
       <section><div className="sticky top-4 overflow-hidden rounded-[1.5rem] border border-[#35530e]/10 bg-[#e9eee2] p-3 shadow-[0_14px_35px_rgba(48,67,22,.08)]"><div className="mb-3 flex items-center justify-between gap-2 px-2"><h2 className="text-sm font-bold text-[#405525]">{isArabic ? "معاينة العرض" : "Quote preview"}</h2><div className="flex items-center gap-2 text-xs font-bold text-[#648534]"><span>{isArabic ? "المجموع الفرعي" : "Subtotal"}: {totals.subtotal.toFixed(2)}</span>{record.fulfillment === "delivery" && <><span className="flex items-center gap-1"><Minus className="size-3" />{isArabic ? "شحن" : "Shipping"}</span><Input type="number" min="0" step="0.01" value={record.shippingFee} onChange={event => update("shippingFee", Math.max(0, Number(event.target.value) || 0))} className="h-8 w-20 rounded-lg bg-white text-xs" /></>}</div></div><div className="max-h-[calc(100vh-170px)] overflow-auto rounded-xl shadow-sm"><QuoteDocument ref={sheetRef} record={record} /></div></div></section>
     </div>
+    {smartOpen && <SmartAnalysis language={language} onClose={() => setSmartOpen(false)} onApply={items => { setRecord({ ...record, items: [...record.items, ...items] }); setSmartOpen(false); toast.success(isArabic ? "تمت إضافة الأصناف إلى الجدول." : "Items added to the table."); }} />}
   </main>;
+}
+
+function SmartAnalysis({ language, onClose, onApply }: { language: "ar" | "en"; onClose: () => void; onApply: (items: QuoteItem[]) => void }) {
+  const isArabic = language === "ar";
+  const [raw, setRaw] = useState("");
+  const parse = () => {
+    const items = raw.split(/\n+/).map(line => line.trim()).filter(Boolean).map((line, index): QuoteItem | null => {
+      const parts = line.split(/[|/،]+/).map(part => part.trim()).filter(Boolean);
+      if (parts.length < 2) return null;
+      const quantityMatch = parts[0].match(/\d+(?:\.\d+)?/);
+      const quantity = Math.max(1, Number(quantityMatch?.[0] || 1));
+      const priceIndex = parts.findIndex((part, partIndex) => partIndex > 0 && /^\d+(?:\.\d+)?$/.test(part));
+      const price = priceIndex >= 0 ? Number(parts[priceIndex]) : 0;
+      const name = parts[1] || `نبات ${index + 1}`;
+      const plant = getCatalog().find(item => item.nameAr === name || item.nameEn.toLowerCase() === name.toLowerCase() || item.nameAr.includes(name) || name.includes(item.nameAr));
+      const description = parts[2] || (plant ? plant.description.ar : "");
+      const category = parts[3] || (plant ? plant.categoryTags.map(tag => categoryLabels[tag].ar).join("، ") : "");
+      const size = parts.find((part, partIndex) => partIndex > 1 && !/^\d+(?:\.\d+)?$/.test(part) && part !== description && part !== category) || "small";
+      return { id: `smart-${Date.now()}-${index}`, plantId: plant?.id || "", nameAr: plant?.nameAr || name, nameEn: plant?.nameEn || name, descriptionAr: plant?.description.ar || description, descriptionEn: plant?.description.en || description, categoryAr: plant ? plant.categoryTags.map(tag => categoryLabels[tag].ar).join("، ") : category, categoryEn: plant ? plant.categoryTags.map(tag => categoryLabels[tag].en).join(", ") : category, quantity, size, price, imagePath: plant?.imagePath || "" };
+    }).filter((item): item is QuoteItem => Boolean(item));
+    if (!items.length) { toast.error(isArabic ? "اكتب كل صنف في سطر منفصل باستخدام / بين البيانات." : "Write each item on a separate line using / between fields."); return; }
+    onApply(items);
+  };
+  return <div className="fixed inset-0 z-[70] grid place-items-center bg-[#17352d]/45 p-4 backdrop-blur-sm"><section dir={isArabic ? "rtl" : "ltr"} className="w-full max-w-md rounded-2xl border border-[#e5c24d] bg-[#fffdf0] p-4 shadow-2xl"><div className="flex items-center justify-between"><h2 className="flex items-center gap-2 text-lg font-black text-[#734d08]"><Sparkles className="size-5" />{isArabic ? "تحليل ذكي" : "Smart analysis"}</h2><button type="button" onClick={onClose} className="text-[#734d08]" aria-label={isArabic ? "إغلاق" : "Close"}>×</button></div><p className="mt-2 text-xs leading-5 text-[#8b7440]">{isArabic ? "اكتب كل صنف بسطر: الكمية / الاسم / الوصف / القسم / الحجم / السعر" : "One item per line: quantity / name / description / category / size / price"}</p><textarea value={raw} onChange={event => setRaw(event.target.value)} className="mt-3 min-h-40 w-full resize-y rounded-xl border border-[#e5c24d] bg-white p-3 text-sm leading-7 outline-none focus:ring-2 focus:ring-[#f2a007]" placeholder={isArabic ? "3 / نخيل تمري / وصف النبات / أشجار / small / 150\n5 / زيتون / وصف النبات / أشجار / medium / 80" : "3 / Date palm / description / Trees / small / 150"} /><Button type="button" onClick={parse} className="mt-3 h-11 w-full rounded-xl bg-[#f2a007] font-black text-white hover:bg-[#d88900]"><Sparkles className="me-2 size-4" />{isArabic ? "تحليل وتعبئة الجدول" : "Analyze and fill table"}</Button></section></div>;
 }
