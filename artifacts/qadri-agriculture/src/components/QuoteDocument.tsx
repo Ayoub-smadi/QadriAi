@@ -37,7 +37,7 @@ export const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(func
             quantity: item.quantity,
             price: money(item.price),
             total: money(item.quantity * item.price),
-            image: item.imagePath ? <img src={item.imagePath} alt="" className="mx-auto size-12 rounded-lg object-cover" /> : "—",
+            image: item.imagePath ? <img src={item.imagePath} alt={isArabic ? item.nameAr : item.nameEn} className="mx-auto size-28 rounded-xl object-cover ring-1 ring-[#d9e3d1]" /> : "—",
           };
           return <td key={column} className="border border-[#d9e3d1] px-2 py-3">{content[column]}</td>;
         })}</tr>)}</tbody>
