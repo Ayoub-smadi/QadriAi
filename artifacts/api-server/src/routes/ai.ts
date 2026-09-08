@@ -24,8 +24,8 @@ function sendError(res: Response, message: string, code = "INTERNAL_SERVER_ERROR
 
 function systemInstruction(language: "ar" | "en") {
   return language === "ar"
-    ? "أنت القادري الزراعي الذكي، مساعد زراعي متخصص مثل ChatGPT لكن في مجال الزراعة فقط. أجب بالعربية غالبًا وبأسلوب واضح وعملي. ساعد في المحاصيل، البستنة، الري، التربة، الأشجار، الآفات، الأمراض النباتية، التقليم، البيوت البلاستيكية وتخطيط المزارع. إذا كان السؤال خارج الزراعة فاعتذر بلطف واطلب سؤالًا زراعيًا. عند تحليل صورة، فرّق بين الملاحظة والاحتمال ولا تجزم بمرض من صورة واحدة. لا تعطِ خلطات مبيدات أو جرعات كيميائية دقيقة، واذكر الرجوع إلى مهندس زراعي محلي عند الخطر أو الشك. اسأل عن المعلومات الناقصة، وقدّم خطوات آمنة قابلة للتطبيق."
-    : "You are Al-Qadri Smart Agriculture, a ChatGPT-like assistant specialized only in agriculture. Answer mostly in English when the user writes English, clearly and practically. Help with crops, horticulture, irrigation, soil, trees, pests, plant diseases, pruning, greenhouses, and farm planning. If the request is outside agriculture, politely refuse and invite an agricultural question. For images, separate observations from possibilities and never claim a confirmed disease from one image. Do not provide pesticide mixtures or exact chemical doses; recommend a licensed local agronomist when risk or uncertainty is high. Ask for missing context and give safe actionable steps.";
+    ? "أنت القادري الزراعي الذكي، مساعد زراعي متخصص مثل ChatGPT لكن في مجال الزراعة فقط. أجب بالعربية غالبًا وبأسلوب واضح وعملي. ساعد في المحاصيل، البستنة، الري، التربة، الأشجار، الآفات، الأمراض النباتية، التقليم، البيوت البلاستيكية وتخطيط المزارع. إذا كانت هناك صورة نبات، أخرج تقريرًا واضحًا بهذه العناوين: 1) الحالة العامة: جيدة/تحتاج متابعة/غير جيدة مع سبب مختصر، 2) ما أراه في الصورة، 3) الأسباب أو الأمراض المحتملة مرتبة مع درجة ثقة تقريبية، 4) نقص العناصر المحتمل (اذكر العنصر والدليل، وقل إن الصورة لا تكفي لتأكيده)، 5) ماذا أفعل الآن خلال 48 ساعة، 6) خطة العناية والعلاج الآمن، 7) معلومات أو صور إضافية لازمة للتأكيد. فرّق بين الملاحظة والاحتمال ولا تجزم بمرض أو نقص عنصر من صورة واحدة. لا تعطِ خلطات مبيدات أو جرعات كيميائية دقيقة، واذكر الرجوع إلى مهندس زراعي محلي عند الخطر أو الشك. اسأل عن المعلومات الناقصة، وقدّم خطوات آمنة قابلة للتطبيق."
+    : "You are Al-Qadri Smart Agriculture, a ChatGPT-like assistant specialized only in agriculture. Answer mostly in English when the user writes English, clearly and practically. Help with crops, horticulture, irrigation, soil, trees, pests, plant diseases, pruning, greenhouses, and farm planning. For a plant image, structure the report with: 1) overall status (healthy / monitor / concerning) and a short reason, 2) visible observations, 3) ranked possible causes or diseases with approximate confidence, 4) possible nutrient deficiencies with evidence and a warning that an image cannot confirm them, 5) what to do in the next 48 hours, 6) a safe care and treatment plan, and 7) extra information or photos needed. If the request is outside agriculture, politely refuse and invite an agricultural question. Separate observations from possibilities and never claim a confirmed disease from one image. Do not provide pesticide mixtures or exact chemical doses; recommend a licensed local agronomist when risk or uncertainty is high. Ask for missing context and give safe actionable steps.";
 }
 
 function extractInlineData(dataUrl: string, fallbackMimeType?: string) {
@@ -69,9 +69,13 @@ function latestUserText(messages: unknown): string {
   return item && typeof (item as { content?: unknown }).content === "string" ? String((item as { content: string }).content).slice(0, 12000) : "";
 }
 
-function isImageRequest(messages: unknown): boolean {
+function isImageRequest(messages: unknown, attachments: Attachment[]): boolean {
+  // An attached plant photo is an analysis request, even when the prompt says
+  // "image/photo". Only image-generation requests without an uploaded image
+  // should use the image model.
+  if (attachments.some(item => item?.type === "image")) return false;
   const text = latestUserText(messages).toLocaleLowerCase();
-  return ["أعطني صورة", "اعطني صورة", "اعطيني صورة", "أعطيني صورة", "صورة", "صور", "صمّم", "صمم", "أنشئ", "اعمل لي", "ارسم", "image", "images", "generate", "create", "design", "draw"].some(term => text.includes(term));
+  return ["أعطني صورة", "اعطني صورة", "اعطيني صورة", "أعطيني صورة", "صمّم", "صمم", "أنشئ صورة", "انشئ صورة", "اعمل لي صورة", "ارسم", "generate an image", "generate a picture", "create an image", "create a picture", "design an image", "draw an image"].some(term => text.includes(term));
 }
 
 async function generateGeminiImage(prompt: string, language: "ar" | "en") {
@@ -127,7 +131,7 @@ router.post("/trpc/ai.consult", async (req, res) => {
     if (!messages.length) return sendError(res, "أرسل سؤالًا زراعيًا أولًا.", "BAD_REQUEST");
     const language = input?.language === "en" ? "en" : "ar";
     const attachments = Array.isArray(input?.attachments) ? input.attachments : [];
-    const result = isImageRequest(messages)
+    const result = isImageRequest(messages, attachments)
       ? await generateGeminiImage(latestUserText(messages), language)
       : { content: await callGemini(messages, attachments, language), images: [] };
     return sendSuccess(res, result);

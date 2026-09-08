@@ -42,7 +42,10 @@ export default function Diagnosis() {
 
   const consultation = trpc.ai.consult.useMutation({
     onSuccess: result => setAnalysisResult(result.content),
-    onError: consultationError => setError(consultationError.message || (isArabic ? "تعذر تجهيز التحليل الآن." : "The analysis could not be prepared right now.")),
+    onError: consultationError => {
+      setAnalysisRequested(false);
+      setError(consultationError.message || (isArabic ? "تعذر تجهيز التحليل الآن." : "The analysis could not be prepared right now."));
+    },
   });
 
   const heading = isArabic ? "تحليل نبات" : "Plant analysis";
@@ -89,8 +92,8 @@ export default function Diagnosis() {
       name: "plant-diagnosis.jpg",
     };
     const prompt = note.trim()
-      ? `${isArabic ? "حلل هذه الحالة الزراعية بناءً على الصورة والملاحظة التالية:" : "Analyze this agricultural case from the image and note:"} ${note.trim()}`
-      : (isArabic ? "حلل صورة النبات تحليلًا زراعيًا أوليًا حذرًا، واذكر الملاحظات والخطوات الآمنة." : "Give a cautious initial agricultural reading of this plant image, with observations and safe next steps.");
+      ? `${isArabic ? "حلل هذه الحالة الزراعية بناءً على الصورة والملاحظة التالية. أريد تقريرًا بعناوين: الحالة العامة، ما تراه، الأسباب المحتملة، نقص العناصر المحتمل، ماذا أفعل الآن، وخطة العلاج والعناية الآمنة. لا تجزم من صورة واحدة:" : "Analyze this agricultural case from the image and note. Return a report with: overall status, visible observations, possible causes, possible nutrient deficiencies, what to do now, and a safe treatment and care plan. Do not claim certainty from one image:"} ${note.trim()}`
+      : (isArabic ? "حلل صورة النبات تحليلًا زراعيًا أوليًا حذرًا. أريد تقريرًا يوضح هل النبات بحالة جيدة، وما الأعراض الظاهرة، ونقص العناصر المحتمل، وما الذي أفعله لعلاجه والعناية به. استخدم عناوين واضحة ولا تجزم بمرض أو نقص من صورة واحدة." : "Give a cautious initial agricultural reading of this plant image. Report whether the plant looks healthy, visible symptoms, possible nutrient deficiencies, and exactly what I should do to care for and treat it. Use clear headings and do not claim a confirmed disease or deficiency from one image.");
     consultation.mutate({ messages: [{ role: "user", content: prompt }], attachments: [attachment], language });
   };
 
