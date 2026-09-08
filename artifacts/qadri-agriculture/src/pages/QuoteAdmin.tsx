@@ -17,7 +17,7 @@ import { ChangeEvent, RefObject, useEffect, useMemo, useRef, useState } from "re
 import { Link } from "wouter";
 import { toast } from "sonner";
 
-const columnKeys: QuoteColumnKey[] = ["number", "name", "description", "category", "quantity", "price", "total", "image"];
+const columnKeys: QuoteColumnKey[] = ["number", "name", "description", "category", "quantity", "image"];
 
 function downloadName(record: QuoteRecord) {
   return `${record.quoteNumber || "quote"}.pdf`;

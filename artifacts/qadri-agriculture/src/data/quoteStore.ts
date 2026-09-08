@@ -63,8 +63,8 @@ export const defaultVisibleColumns: Record<QuoteColumnKey, boolean> = {
   description: true,
   category: true,
   quantity: true,
-  price: true,
-  total: true,
+  price: false,
+  total: false,
   image: true,
 };
 
