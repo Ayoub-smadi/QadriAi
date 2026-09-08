@@ -137,7 +137,7 @@ export default function QuoteAdmin() {
     if (!editor || !sheetRef.current) return;
     setDownloading(true);
     try {
-      const pageNodes = Array.from(sheetRef.current.querySelectorAll<HTMLElement>(".quote-page"));
+      const pageNodes = Array.from(sheetRef.current.querySelectorAll<HTMLDivElement>(".quote-page"));
       const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
