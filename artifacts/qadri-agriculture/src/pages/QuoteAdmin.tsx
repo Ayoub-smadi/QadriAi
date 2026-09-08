@@ -70,8 +70,8 @@ export default function QuoteAdmin() {
       const canvas = await html2canvas(sheetRef.current, { scale: 2, backgroundColor: "#ffffff", useCORS: true, logging: false });
       const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
       const margin = 8;
-      const pageWidth = 297 - margin * 2;
-      const pageHeight = 210 - margin * 2;
+      const pageWidth = pdf.internal.pageSize.getWidth() - margin * 2;
+      const pageHeight = pdf.internal.pageSize.getHeight() - margin * 2;
       const imageHeight = canvas.height * pageWidth / canvas.width;
       const imageData = canvas.toDataURL("image/png");
       if (editor.items.length <= 5) {
@@ -87,8 +87,9 @@ export default function QuoteAdmin() {
       for (let page = 0; page < pages; page += 1) {
         if (page) pdf.addPage();
         pdf.setFillColor(255, 255, 255);
-        pdf.rect(0, 0, 297, 210, "F");
-        pdf.addImage(imageData, "PNG", margin, margin - page * pageHeight, pageWidth, imageHeight, undefined, "FAST");
+        pdf.rect(0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight(), "F");
+        const imageY = margin - page * pageHeight;
+        pdf.addImage(imageData, "PNG", margin, imageY, pageWidth, imageHeight, undefined, "FAST");
       }
       pdf.save(downloadName(editor));
       toast.success(isArabic ? "تم تنزيل ملف PDF." : "PDF downloaded.");
