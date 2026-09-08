@@ -24,7 +24,7 @@ export const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(func
       </div>
       <div className="mt-5 grid gap-2 rounded-xl bg-[#f3f7ed] p-4 text-sm sm:grid-cols-2">
         <p><strong>{isArabic ? "العميل" : "Customer"}:</strong> {edit(record.customerName, value => onChange?.({ customerName: value }))}</p><p dir="ltr"><strong>{isArabic ? "الهاتف" : "Phone"}:</strong> {edit(record.phone, value => onChange?.({ phone: value }))}</p>
-        <p><strong>{isArabic ? "الطريقة" : "Method"}:</strong> {record.fulfillment === "delivery" ? (isArabic ? "توصيل" : "Delivery") : (isArabic ? "استلام من المشتل" : "Nursery pickup")}</p>
+        <p><strong>{isArabic ? "طريقة الاستلام" : "Fulfillment method"}:</strong> {edit(record.fulfillmentLabel || (record.fulfillment === "delivery" ? (isArabic ? "توصيل" : "Delivery") : (isArabic ? "استلام من المشتل" : "Nursery pickup")), value => onChange?.({ fulfillmentLabel: value }))}</p>
         {record.fulfillment === "delivery" && <p><strong>{isArabic ? "العنوان" : "Address"}:</strong> {[record.deliveryRegion, record.deliveryAddress].filter(Boolean).join("، ") || "—"}</p>}
       </div>
       <table className="mt-6 w-full min-w-[980px] table-fixed border-collapse text-xs [word-break:normal] [overflow-wrap:break-word]">

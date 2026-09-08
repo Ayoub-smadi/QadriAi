@@ -28,6 +28,7 @@ export type QuoteRecord = {
   customerName: string;
   phone: string;
   fulfillment: QuoteFulfillment;
+  fulfillmentLabel?: string;
   deliveryRegion: string;
   deliveryAddress: string;
   notes: string;
@@ -121,6 +122,7 @@ export function createEmptyQuote(items: QuoteItem[] = [itemFromPlant(plantKnowle
     customerName: "",
     phone: "",
     fulfillment: "pickup",
+    fulfillmentLabel: "استلام من المشتل",
     deliveryRegion: "",
     deliveryAddress: "",
     notes: "",
