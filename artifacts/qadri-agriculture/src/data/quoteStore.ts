@@ -98,9 +98,12 @@ export function findPlant(plantId: string) {
 
 export function createEmptyQuote(items: QuoteItem[] = [itemFromPlant(plantKnowledge[0])]): QuoteRecord {
   const now = new Date().toISOString();
+  const date = new Date();
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
   return {
     id: makeId("quote"),
-    quoteNumber: `Q-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
+    quoteNumber: `Q-${date.getFullYear()}-${day}${month}`,
     kind: "quote",
     status: "pending",
     customerName: "",
