@@ -3,11 +3,11 @@ import { useLanguage } from "@/lib/i18n";
 import { Globe, Mail, Phone } from "lucide-react";
 import { forwardRef, type ReactNode } from "react";
 
-type QuoteDocumentProps = { record: QuoteRecord; className?: string; editable?: boolean; onChange?: (patch: Partial<QuoteRecord>) => void; onItemChange?: (itemId: string, patch: Partial<QuoteRecord["items"][number]>) => void };
+type QuoteDocumentProps = { record: QuoteRecord; className?: string; editable?: boolean; onChange?: (patch: Partial<QuoteRecord>) => void; onItemChange?: (itemId: string, patch: Partial<QuoteRecord["items"][number]>) => void; onImageChange?: (itemId: string, dataUrl: string) => void };
 
 const money = (value: number) => value.toFixed(2);
 
-export const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(function QuoteDocument({ record, className = "", editable = false, onChange, onItemChange }, ref) {
+export const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(function QuoteDocument({ record, className = "", editable = false, onChange, onItemChange, onImageChange }, ref) {
   const { language } = useLanguage();
   const isArabic = language === "ar";
   const totals = getTotals(record);
@@ -39,7 +39,7 @@ export const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(func
             quantity: editable ? <input type="number" min="1" defaultValue={item.quantity} onBlur={event => onItemChange?.(item.id, { quantity: Math.max(1, Number(event.target.value) || 1) })} className="w-16 rounded border border-[#c9d9bf] p-1 text-center" /> : item.quantity,
             price: editable ? <input type="number" min="0" step="0.01" defaultValue={item.price} onBlur={event => onItemChange?.(item.id, { price: Math.max(0, Number(event.target.value) || 0) })} className="w-24 rounded border border-[#c9d9bf] p-1 text-center" /> : money(item.price),
             total: money(item.quantity * item.price),
-            image: item.imagePath ? <img src={item.imagePath} alt={isArabic ? item.nameAr : item.nameEn} className="mx-auto h-[191px] w-[213px] min-w-[213px] rounded-xl object-cover ring-1 ring-[#d9e3d1]" /> : "—",
+            image: editable ? <label className="group relative mx-auto block h-[191px] w-[213px] min-w-[213px] cursor-pointer overflow-hidden rounded-xl ring-1 ring-[#d9e3d1]"><img src={item.imagePath || "/assets/olive.jpg"} alt={isArabic ? item.nameAr : item.nameEn} className="size-full object-cover" /><span className="absolute inset-x-1 bottom-1 rounded bg-[#17352d]/80 px-1 py-1 text-center text-[10px] font-bold text-white opacity-0 transition group-hover:opacity-100">{isArabic ? "اضغط لتغيير الصورة" : "Click to change"}</span><input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={event => { const file = event.target.files?.[0]; if (!file) return; const reader = new FileReader(); reader.onload = () => onImageChange?.(item.id, String(reader.result)); reader.readAsDataURL(file); event.target.value = ""; }} /></label> : item.imagePath ? <img src={item.imagePath} alt={isArabic ? item.nameAr : item.nameEn} className="mx-auto h-[191px] w-[213px] min-w-[213px] rounded-xl object-cover ring-1 ring-[#d9e3d1]" /> : "—",
           };
           return <td key={column} className={`align-middle border border-[#d9e3d1] px-2 py-3 text-center leading-6 whitespace-normal [word-break:normal] [overflow-wrap:break-word] ${column === "image" ? "w-[229px] min-w-[229px] p-0 align-middle" : ""}`}>{content[column]}</td>;
         })}</tr>)}</tbody>
