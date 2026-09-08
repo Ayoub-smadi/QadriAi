@@ -27,7 +27,7 @@ export const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(func
         {record.fulfillment === "delivery" && <p><strong>{isArabic ? "العنوان" : "Address"}:</strong> {[record.deliveryRegion, record.deliveryAddress].filter(Boolean).join("، ") || "—"}</p>}
       </div>
       <table className="mt-6 w-full border-collapse text-xs [word-break:normal] [overflow-wrap:break-word]">
-        <thead><tr className="bg-[#35530e] text-white">{columns.filter(visible).map(column => <th key={column} className="border border-[#274c3c] px-2 py-3 text-right font-bold">{label(column)}</th>)}</tr></thead>
+        <thead><tr className="bg-[#35530e] text-white">{columns.filter(visible).map(column => <th key={column} className="border border-[#274c3c] px-2 py-3 text-center font-bold">{label(column)}</th>)}</tr></thead>
         <tbody>{record.items.map((item, index) => <tr key={item.id} className="align-top even:bg-[#f8faf5]">{columns.filter(visible).map(column => {
           const content: Record<QuoteColumnKey, ReactNode> = {
             number: index + 1,
