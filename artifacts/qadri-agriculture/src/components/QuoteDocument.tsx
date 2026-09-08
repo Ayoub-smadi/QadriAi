@@ -4,7 +4,7 @@ import { forwardRef, type ReactNode } from "react";
 
 type QuoteDocumentProps = { record: QuoteRecord; className?: string };
 
-const money = (value: number) => `${value.toFixed(2)} د.أ`;
+const money = (value: number) => value.toFixed(2);
 
 export const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(function QuoteDocument({ record, className = "" }, ref) {
   const { language } = useLanguage();
@@ -12,7 +12,7 @@ export const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(func
   const totals = getTotals(record);
   const visible = (key: QuoteColumnKey) => record.visibleColumns[key];
   const label = (key: QuoteColumnKey) => record.columnLabels[key] || key;
-  const columns: QuoteColumnKey[] = ["number", "name", "description", "category", "quantity", "image"];
+  const columns: QuoteColumnKey[] = ["number", "name", "description", "category", "quantity", "price", "total", "image"];
 
   return (
     <div ref={ref} dir={isArabic ? "rtl" : "ltr"} className={`quote-document w-full bg-white p-7 text-[#22351b] ${className}`}>
