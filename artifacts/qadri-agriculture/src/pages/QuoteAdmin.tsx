@@ -74,11 +74,19 @@ export default function QuoteAdmin() {
       const pageHeight = 210 - margin * 2;
       const imageHeight = canvas.height * pageWidth / canvas.width;
       const imageData = canvas.toDataURL("image/png");
-      let offset = 0;
-      while (offset < imageHeight) {
-        if (offset) pdf.addPage();
-        pdf.addImage(imageData, "PNG", margin, margin - offset, pageWidth, imageHeight, undefined, "FAST");
-        offset += pageHeight;
+      const header = sheetRef.current.querySelector<HTMLElement>("[data-quote-header='true']");
+      const headerCanvas = header ? await html2canvas(header, { scale: 2, backgroundColor: "#ffffff", useCORS: true, logging: false }) : null;
+      const headerHeight = headerCanvas ? headerCanvas.height * pageWidth / canvas.width : 0;
+      const bodyHeight = Math.max(1, pageHeight - headerHeight);
+      const pages = Math.max(1, Math.ceil((imageHeight - headerHeight) / bodyHeight));
+      for (let page = 0; page < pages; page += 1) {
+        if (page) pdf.addPage();
+        const sourceOffset = page === 0 ? 0 : headerHeight + (page - 1) * bodyHeight;
+        const imageY = page === 0 ? margin : margin + headerHeight - sourceOffset;
+        pdf.addImage(imageData, "PNG", margin, imageY, pageWidth, imageHeight, undefined, "FAST");
+        if (page > 0 && headerCanvas) {
+          pdf.addImage(headerCanvas.toDataURL("image/png"), "PNG", margin, margin, pageWidth, headerHeight, undefined, "FAST");
+        }
       }
       pdf.save(downloadName(editor));
       toast.success(isArabic ? "تم تنزيل ملف PDF." : "PDF downloaded.");

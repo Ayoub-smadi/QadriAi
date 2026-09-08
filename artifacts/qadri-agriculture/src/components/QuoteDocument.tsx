@@ -17,8 +17,8 @@ export const QuoteDocument = forwardRef<HTMLDivElement, QuoteDocumentProps>(func
 
   return (
     <div ref={ref} dir={isArabic ? "rtl" : "ltr"} className={`quote-document w-full bg-white p-7 text-[#22351b] ${className}`}>
-      <div className="flex items-start justify-between gap-5 border-b-2 border-[#35530e] pb-5">
-        <div className="flex-1"><img src={record.logoPath || "/assets/qadri-logo.png"} alt="Al-Qadri" className="mb-3 h-16 w-auto object-contain" /><div dir="ltr" className="flex items-center justify-between gap-5 text-sm font-bold text-[#35530e]"><span>Al-Qadri Agricultural Establishment</span><span dir="rtl">مؤسسة القادري الزراعية</span></div><h1 className="mt-2 text-2xl font-extrabold">{record.title || (isArabic ? "عرض سعر نباتات" : "Plant quotation")}</h1></div>
+      <div data-quote-header="true" className="flex items-start justify-between gap-5 border-b-2 border-[#35530e] pb-5">
+        <div className="flex-1"><img src={record.logoPath || "/assets/qadri-logo.png"} alt="Al-Qadri" className="mb-4 h-24 w-auto object-contain" /><div dir="ltr" className="flex items-center justify-between gap-5 text-lg font-extrabold text-[#35530e]"><span>Al-Qadri Agricultural Establishment</span><span dir="rtl">مؤسسة القادري الزراعية</span></div><h1 className="mt-2 text-2xl font-extrabold">{record.title || (isArabic ? "عرض سعر نباتات" : "Plant quotation")}</h1></div>
         <div className="text-left text-sm"><p className="font-bold text-[#35530e]">{isArabic ? "رقم العرض" : "Quote no."}: {record.quoteNumber}</p><p className="mt-2 text-[#6c7b62]">{new Date(record.updatedAt).toLocaleDateString(isArabic ? "ar-JO" : "en-US")}</p></div>
       </div>
       <div className="mt-5 grid gap-2 rounded-xl bg-[#f3f7ed] p-4 text-sm sm:grid-cols-2">
