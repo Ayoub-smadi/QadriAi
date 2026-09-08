@@ -22,6 +22,7 @@ export type QuoteItem = {
 export type QuoteRecord = {
   id: string;
   quoteNumber: string;
+  issueDate?: string;
   kind: "request" | "quote";
   status: QuoteStatus;
   customerName: string;
@@ -35,6 +36,11 @@ export type QuoteRecord = {
   closingText?: string;
   logoPath?: string;
   stampPath?: string;
+  companyNameAr?: string;
+  companyNameEn?: string;
+  companyPhone?: string;
+  companyEmail?: string;
+  companyWebsite?: string;
   shippingFee: number;
   items: QuoteItem[];
   visibleColumns: Record<QuoteColumnKey, boolean>;
@@ -104,6 +110,7 @@ export function createEmptyQuote(items: QuoteItem[] = [itemFromPlant(plantKnowle
   return {
     id: makeId("quote"),
     quoteNumber: `Q-${date.getFullYear()}-${day}${month}`,
+    issueDate: now.slice(0, 10),
     kind: "quote",
     status: "pending",
     customerName: "",
@@ -117,6 +124,11 @@ export function createEmptyQuote(items: QuoteItem[] = [itemFromPlant(plantKnowle
     closingText: "واقبلوا فائق الاحترام والتقدير،،،",
     logoPath: "/assets/qadri-logo.png",
     stampPath: "/assets/qadri-stamp.png",
+    companyNameAr: "مؤسسة القادري الزراعية",
+    companyNameEn: "Al-Qadri Agricultural Establishment",
+    companyPhone: "00962777772211",
+    companyEmail: "tamerqadri@gmail.com",
+    companyWebsite: "https://www.alqadrioffers.online",
     shippingFee: 0,
     items,
     visibleColumns: { ...defaultVisibleColumns },
