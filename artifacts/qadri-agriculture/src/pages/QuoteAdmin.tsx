@@ -67,26 +67,53 @@ export default function QuoteAdmin() {
     if (!editor || !sheetRef.current) return;
     setDownloading(true);
     try {
-      const canvas = await html2canvas(sheetRef.current, { scale: 2, backgroundColor: "#ffffff", useCORS: true, logging: false });
       const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
       const margin = 8;
       const pageWidth = 297 - margin * 2;
       const pageHeight = 210 - margin * 2;
-      const imageHeight = canvas.height * pageWidth / canvas.width;
-      const imageData = canvas.toDataURL("image/png");
-      const header = sheetRef.current.querySelector<HTMLElement>("[data-quote-header='true']");
-      const headerCanvas = header ? await html2canvas(header, { scale: 2, backgroundColor: "#ffffff", useCORS: true, logging: false }) : null;
-      const headerHeight = headerCanvas ? headerCanvas.height * pageWidth / canvas.width : 0;
-      const bodyHeight = Math.max(1, pageHeight - headerHeight);
-      const pages = Math.max(1, Math.ceil((imageHeight - headerHeight) / bodyHeight));
-      for (let page = 0; page < pages; page += 1) {
-        if (page) pdf.addPage();
-        const sourceOffset = page === 0 ? 0 : headerHeight + (page - 1) * bodyHeight;
-        const imageY = page === 0 ? margin : margin + headerHeight - sourceOffset;
-        pdf.addImage(imageData, "PNG", margin, imageY, pageWidth, imageHeight, undefined, "FAST");
-        if (page > 0 && headerCanvas) {
-          pdf.addImage(headerCanvas.toDataURL("image/png"), "PNG", margin, margin, pageWidth, headerHeight, undefined, "FAST");
+      const source = sheetRef.current;
+      const sourceTable = source.querySelector("table");
+      const sourceHeader = source.querySelector<HTMLElement>("[data-quote-header='true']");
+      if (!sourceTable || !sourceHeader) throw new Error("Quote layout is incomplete");
+      const rows = Array.from(sourceTable.querySelectorAll("tbody tr"));
+      const sourceChildren = Array.from(source.children);
+      const tableIndex = sourceChildren.indexOf(sourceTable);
+      const pages: HTMLDivElement[] = [];
+      const maxPageHeight = 760;
+      let rowIndex = 0;
+      while (rowIndex < Math.max(1, rows.length)) {
+        const page = document.createElement("div");
+        page.style.cssText = `width:${source.clientWidth}px;background:#fff;color:#22351b;padding:28px;box-sizing:border-box;font-family:inherit;`;
+        page.appendChild(sourceHeader.cloneNode(true));
+        if (!pages.length) sourceChildren.slice(1, tableIndex).forEach(child => page.appendChild(child.cloneNode(true)));
+        const table = sourceTable.cloneNode(false) as HTMLTableElement;
+        const head = sourceTable.querySelector("thead");
+        if (head) table.appendChild(head.cloneNode(true));
+        const body = document.createElement("tbody");
+        table.appendChild(body);
+        page.appendChild(table);
+        document.body.appendChild(page);
+        let added = 0;
+        while (rowIndex + added < rows.length) {
+          const candidate = rows[rowIndex + added].cloneNode(true);
+          body.appendChild(candidate);
+          if (page.scrollHeight > maxPageHeight && added > 0) {
+            body.removeChild(candidate);
+            break;
+          }
+          added += 1;
         }
+        if (!added && rows[rowIndex]) { body.appendChild(rows[rowIndex].cloneNode(true)); added = 1; }
+        if (rowIndex + added >= rows.length) sourceChildren.slice(tableIndex + 1).forEach(child => page.appendChild(child.cloneNode(true)));
+        pages.push(page);
+        rowIndex += added;
+      }
+      for (let index = 0; index < pages.length; index += 1) {
+        if (index) pdf.addPage();
+        const canvas = await html2canvas(pages[index], { scale: 2, backgroundColor: "#ffffff", useCORS: true, logging: false });
+        const imageHeight = canvas.height * pageWidth / canvas.width;
+        pdf.addImage(canvas.toDataURL("image/png"), "PNG", margin, margin, pageWidth, Math.min(imageHeight, pageHeight), undefined, "FAST");
+        pages[index].remove();
       }
       pdf.save(downloadName(editor));
       toast.success(isArabic ? "تم تنزيل ملف PDF." : "PDF downloaded.");
