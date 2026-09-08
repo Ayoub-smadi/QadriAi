@@ -68,10 +68,10 @@ export default function QuoteAdmin() {
     setDownloading(true);
     try {
       const canvas = await html2canvas(sheetRef.current, { scale: 2, backgroundColor: "#ffffff", useCORS: true, logging: false });
-      const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+      const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
       const margin = 8;
-      const pageWidth = 210 - margin * 2;
-      const pageHeight = 297 - margin * 2;
+      const pageWidth = 297 - margin * 2;
+      const pageHeight = 210 - margin * 2;
       const imageHeight = canvas.height * pageWidth / canvas.width;
       const imageData = canvas.toDataURL("image/png");
       let offset = 0;
