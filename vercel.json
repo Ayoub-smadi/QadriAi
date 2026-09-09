@@ -12,6 +12,10 @@
       "destination": "/api/index.ts?operation=:operation"
     },
     {
+      "source": "/api/design/generate",
+      "destination": "/api/index.ts?operation=design.generate"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

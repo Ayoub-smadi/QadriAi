@@ -166,6 +166,36 @@ async function generateGeminiImage(prompt: string, language: string) {
   return { content: content || (language === "en" ? "Here is an agricultural image generated from your request." : "هذه صورة زراعية مولدة بناءً على طلبك."), images };
 }
 
+async function generateGeminiDesign(input: any) {
+  const key = String(process.env.GEMINI_API_KEY || "").trim();
+  if (!key) throw new Error("لم يتم ضبط GEMINI_API_KEY على الخادم.");
+  const description = String(input.description || "").trim();
+  const imageDataUrl = String(input.imageDataUrl || "");
+  const language = input.language === "en" ? "en" : "ar";
+  if (description.length < 8 || description.length > 1200) throw new Error("اكتب وصفًا واضحًا للتصميم بين 8 و1200 حرفًا.");
+  if (!imageDataUrl) throw new Error("ارفع صورة الموقع أولًا حتى يتم تحليلها وإنشاء تصميم مبني عليها.");
+  if (imageDataUrl.length > 18_000_000) throw new Error("حجم صورة الموقع كبير جدًا. استخدم صورة أصغر من 13 ميغابايت تقريبًا.");
+  const match = /^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=]+)$/i.exec(imageDataUrl);
+  if (!match) throw new Error("استخدم صورة JPG أو PNG أو WebP صالحة.");
+  const model = String(process.env.GEMINI_IMAGE_MODEL || "gemini-3.1-flash-image").trim();
+  const prompt = language === "ar"
+    ? `حلل صورة الموقع ثم أنشئ صورة تصميم جديدة مبنية عليها، ولا تُرجع الصورة الأصلية كما هي. حافظ على حدود الأرض والمنظور والمباني والطرق والتضاريس، وأضف بوضوح ما يلي: ${description}. أظهر توزيع الأشجار والنباتات والأحواض والعشب والممرات والجلسات وعناصر اللاندسكيب وشبكة الري ومناطق الري ونقاط التنقيط أو الرشاشات عند الحاجة. اجعل النتيجة تصورًا زراعيًا واقعيًا بلا نصوص أو شعارات أو مخططات أو واجهة مستخدم.`
+    : `Analyze the site photo and create a NEW landscape design image based on it; do not return the original unchanged. Preserve land boundaries, viewpoint, buildings, roads, and terrain, and visibly implement: ${description}. Show trees, plants, beds, grass, paths, seating, landscape elements, irrigation zones, and drip or sprinkler points where appropriate. Make it a realistic agricultural visualization with no text, logos, diagrams, or UI.`;
+  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`, {
+    method: "POST",
+    headers: { "content-type": "application/json", accept: "application/json" },
+    body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }, { inlineData: { mimeType: match[1], data: match[2] } }] }], generationConfig: { responseModalities: ["TEXT", "IMAGE"], imageConfig: { aspectRatio: "4:3" } } }),
+  });
+  const raw = await response.text();
+  let data: any = {};
+  try { data = JSON.parse(raw); } catch { /* handled below */ }
+  if (!response.ok) throw new Error(`فشل إنشاء التصميم (${response.status}): ${data?.error?.message || raw.slice(0, 240)}`);
+  const parts = data?.candidates?.[0]?.content?.parts || [];
+  const image = parts.find((part: any) => part?.inlineData?.data && part?.inlineData?.mimeType);
+  if (!image) throw new Error("لم يُرجع نموذج الصور تصميمًا جديدًا. تأكد من تفعيل نموذج Gemini Image.");
+  return { imageUrl: `data:${image.inlineData.mimeType};base64,${image.inlineData.data}` };
+}
+
 function geminiParts(messages: any[], attachments: any[]) {
   const contents = messages.filter(item => item && typeof item.content === "string" && item.role !== "system").slice(-10).map(item => ({
     role: item.role === "assistant" ? "model" : "user",
@@ -361,6 +391,7 @@ async function handle(req: any, res: any) {
   const operation = pathOperation || queryOperation || "";
   try {
     if (path.includes("ai.consult") || queryOperation === "ai.consult") return await handleGemini(req, res);
+    if (path.includes("design/generate") || String(req.query?.operation || "") === "design.generate" || queryOperation === "generate") return res.status(200).json(await generateGeminiDesign(readInput(req)));
     await ensureUsersSchema();
 
     if (operation === "quotes") return await handleQuoteOperation(req, res, readInput(req));
