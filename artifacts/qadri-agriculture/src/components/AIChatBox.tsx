@@ -51,11 +51,28 @@ function readFileAsDataUrl(file: File) {
 
 let speechRunId = 0;
 
+function getSpeechText(content: string) {
+  return content
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/https?:\/\/\S+/g, "")
+    .replace(/^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)+\|?\s*$/gm, "")
+    .replace(/\bcolumns?\b|كولن(?:ز)?/gi, "")
+    .replace(/^[\s|]*[0-9٠-٩]+[\s.)、-]+/gm, "")
+    .replace(/[0-9٠-٩]+/g, "")
+    .replace(/[*_#>`~|]/g, "")
+    .replace(/\n+/g, ". ")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
 export function speakMessage(content: string, language: "ar" | "en") {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   const runId = ++speechRunId;
   window.speechSynthesis.cancel();
-  const spokenText = content.replace(/<[^>]*>/g, "").replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/https?:\/\/\S+/g, "").replace(/[*_#>`~-]/g, "").replace(/\n+/g, ". ").replace(/\s{2,}/g, " ").trim();
+  const spokenText = getSpeechText(content);
   if (!spokenText) return;
   const wantedPrefix = language === "ar" ? "ar" : "en";
   const voice = window.speechSynthesis.getVoices().find(item => item.lang.toLowerCase().startsWith(wantedPrefix));
