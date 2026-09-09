@@ -43,6 +43,7 @@ export default function Engineer() {
             placeholder={language === "ar" ? "اكتب سؤالك الزراعي…" : "Ask an agricultural question…"}
             emptyStateMessage={language === "ar" ? "كيف يمكنني مساعدتك اليوم؟" : "How can I help today?"}
             suggestedPrompts={prompts}
+            speechLanguage={language}
           />
         </section>
       </main>
