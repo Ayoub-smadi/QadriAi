@@ -95,7 +95,7 @@ function LessonMeta({ lesson, isArabic }: { lesson: VideoLesson; isArabic: boole
       <span className="inline-flex items-center gap-1.5"><Clock3 className="size-3.5 text-[#779a52]" />{lesson.duration}</span>
       <span className="size-1 rounded-full bg-[#b9c9a1]" aria-hidden="true" />
       <span>{isArabic ? levelLabels[lesson.level].ar : levelLabels[lesson.level].en}</span>
-      <span className="rounded-full bg-[#eaf1df] px-2.5 py-1 text-[10px] font-bold text-[#5f793e]">{isArabic ? "فيديو عربي" : "Arabic video"}</span>
+      <span className="rounded-full bg-[#eaf1df] px-2.5 py-1 text-[10px] font-bold text-[#5f793e]">{isArabic ? "فيديو حقيقي" : "Real video"}</span>
     </div>
   );
 }
@@ -263,7 +263,7 @@ export default function Videos() {
                 />
               </div>
               <div className="mt-6">
-                <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-[#789553]"><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? categoryLabels[selected.category].ar : categoryLabels[selected.category].en}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{selected.duration}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? levelLabels[selected.level].ar : levelLabels[selected.level].en}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? "فيديو عربي" : "Arabic video"}</span></div>
+                <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-[#789553]"><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? categoryLabels[selected.category].ar : categoryLabels[selected.category].en}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{selected.duration}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? levelLabels[selected.level].ar : levelLabels[selected.level].en}</span><span className="rounded-full bg-[#eaf1df] px-3 py-1.5">{isArabic ? "فيديو حقيقي" : "Real video"}</span></div>
                 <h2 id="video-viewer-title" className="mt-4 text-2xl font-black leading-tight text-[#294a2e] sm:text-3xl">{isArabic ? selected.titleAr : selected.titleEn}</h2>
                 <p className="mt-3 text-sm leading-7 text-[#667767]">{isArabic ? selected.descriptionAr : selected.descriptionEn}</p>
                 <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#d7e3c7] bg-[#f0f5e8] p-4 text-sm leading-6 text-[#55704b]">
