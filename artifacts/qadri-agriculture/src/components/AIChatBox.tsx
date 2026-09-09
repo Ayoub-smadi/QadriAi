@@ -51,6 +51,26 @@ function readFileAsDataUrl(file: File) {
 
 let speechRunId = 0;
 
+const maleVoiceHints = ["male", "man", "hamed", "hamad", "omar", "maged", "tarik", "tariq", "naayf", "abdul", "saad", "fahad", "راشد", "حامد", "عمر", "ماجد", "طارق", "نايف", "عبد", "سعد", "فهد"];
+const femaleVoiceHints = ["female", "woman", "girl", "zira", "hoda", "hala", "sara", "sarah", "laila", "layla", "ar-sa-x-sfg", "ar-xa-x-"];
+
+function chooseVoice(voices: SpeechSynthesisVoice[], language: "ar" | "en") {
+  const prefix = language === "ar" ? "ar" : "en";
+  const matching = voices.filter(voice => voice.lang.toLowerCase().startsWith(prefix));
+  const ranked = matching.length ? matching : voices;
+  return [...ranked].sort((a, b) => {
+    const score = (voice: SpeechSynthesisVoice) => {
+      const name = `${voice.name} ${voice.voiceURI}`.toLowerCase();
+      let value = 0;
+      if (maleVoiceHints.some(hint => name.includes(hint))) value += 100;
+      if (femaleVoiceHints.some(hint => name.includes(hint))) value -= 100;
+      if (voice.localService) value += 5;
+      return value;
+    };
+    return score(b) - score(a);
+  })[0];
+}
+
 function getSpeechText(content: string) {
   let visible = content.trim();
   try {
@@ -80,25 +100,58 @@ function getSpeechText(content: string) {
 export function speakMessage(content: string, language: "ar" | "en") {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   const runId = ++speechRunId;
-  window.speechSynthesis.cancel();
+  const synthesis = window.speechSynthesis;
+  synthesis.cancel();
   const spokenText = getSpeechText(content);
   if (!spokenText) return;
-  const wantedPrefix = language === "ar" ? "ar" : "en";
-  const voice = window.speechSynthesis.getVoices().find(item => item.lang.toLowerCase().startsWith(wantedPrefix));
   const chunks = spokenText.match(/.{1,180}(?:\s+|$)/g) || [spokenText];
   let index = 0;
+  let retriedWithoutVoice = false;
   const playNext = () => {
     if (runId !== speechRunId || index >= chunks.length) return;
     const utterance = new SpeechSynthesisUtterance(chunks[index++].trim());
     utterance.lang = language === "ar" ? "ar-SA" : "en-US";
     utterance.rate = 0.9;
+    utterance.pitch = language === "ar" ? 0.82 : 0.95;
+    utterance.volume = 1;
+    const voice = chooseVoice(synthesis.getVoices(), language);
     if (voice) utterance.voice = voice;
     utterance.onend = playNext;
-    utterance.onerror = event => { if (event.error === "interrupted" || event.error === "canceled") return; };
-    window.speechSynthesis.resume();
-    window.speechSynthesis.speak(utterance);
+    utterance.onerror = event => {
+      if (event.error === "interrupted" || event.error === "canceled") return;
+      if (!retriedWithoutVoice) {
+        retriedWithoutVoice = true;
+        synthesis.cancel();
+        const retry = new SpeechSynthesisUtterance(chunks[Math.max(0, index - 1)].trim());
+        retry.lang = language === "ar" ? "ar-SA" : "en-US";
+        retry.rate = 0.88;
+        retry.pitch = language === "ar" ? 0.82 : 0.95;
+        retry.volume = 1;
+        retry.onend = playNext;
+        synthesis.resume();
+        synthesis.speak(retry);
+      }
+    };
+    synthesis.resume();
+    synthesis.speak(utterance);
   };
-  playNext();
+  // Desktop Chrome and Edge populate voices asynchronously. Start immediately
+  // for the user gesture, then replay with the preferred male Arabic voice once
+  // the voice list becomes available.
+  const voices = synthesis.getVoices();
+  if (voices.length) {
+    playNext();
+  } else {
+    const start = () => {
+      synthesis.removeEventListener("voiceschanged", start);
+      if (runId === speechRunId) playNext();
+    };
+    synthesis.addEventListener("voiceschanged", start, { once: true });
+    window.setTimeout(() => {
+      synthesis.removeEventListener("voiceschanged", start);
+      if (runId === speechRunId && !synthesis.speaking) playNext();
+    }, 500);
+  }
 }
 
 export function AIChatBox({
