@@ -181,19 +181,25 @@ async function generateGeminiDesign(input: any) {
   const prompt = language === "ar"
     ? `حلل صورة الموقع ثم أنشئ صورة تصميم جديدة مبنية عليها، ولا تُرجع الصورة الأصلية كما هي. حافظ على حدود الأرض والمنظور والمباني والطرق والتضاريس، وأضف بوضوح ما يلي: ${description}. أظهر توزيع الأشجار والنباتات والأحواض والعشب والممرات والجلسات وعناصر اللاندسكيب وشبكة الري ومناطق الري ونقاط التنقيط أو الرشاشات عند الحاجة. اجعل النتيجة تصورًا زراعيًا واقعيًا بلا نصوص أو شعارات أو مخططات أو واجهة مستخدم.`
     : `Analyze the site photo and create a NEW landscape design image based on it; do not return the original unchanged. Preserve land boundaries, viewpoint, buildings, roads, and terrain, and visibly implement: ${description}. Show trees, plants, beds, grass, paths, seating, landscape elements, irrigation zones, and drip or sprinkler points where appropriate. Make it a realistic agricultural visualization with no text, logos, diagrams, or UI.`;
-  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`, {
+  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/interactions", {
     method: "POST",
-    headers: { "content-type": "application/json", accept: "application/json" },
-    body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }, { inlineData: { mimeType: match[1], data: match[2] } }] }], generationConfig: { responseModalities: ["TEXT", "IMAGE"], imageConfig: { aspectRatio: "4:3" } } }),
+    headers: { "content-type": "application/json", accept: "application/json", "x-goog-api-key": key },
+    body: JSON.stringify({
+      model,
+      input: [
+        { type: "text", text: prompt },
+        { type: "image", mime_type: match[1], data: match[2] },
+      ],
+      response_format: { type: "image", aspect_ratio: "4:3" },
+    }),
   });
   const raw = await response.text();
   let data: any = {};
   try { data = JSON.parse(raw); } catch { /* handled below */ }
-  if (!response.ok) throw new Error(`فشل إنشاء التصميم (${response.status}): ${data?.error?.message || raw.slice(0, 240)}`);
-  const parts = data?.candidates?.[0]?.content?.parts || [];
-  const image = parts.find((part: any) => part?.inlineData?.data && part?.inlineData?.mimeType);
-  if (!image) throw new Error("لم يُرجع نموذج الصور تصميمًا جديدًا. تأكد من تفعيل نموذج Gemini Image.");
-  return { imageUrl: `data:${image.inlineData.mimeType};base64,${image.inlineData.data}` };
+  if (!response.ok) throw new Error(`فشل إنشاء التصميم (${response.status}): ${data?.error?.message || data?.message || raw.slice(0, 240)}`);
+  const outputImage = data?.output_image || data?.steps?.flatMap((step: any) => step?.content || []).find((item: any) => item?.type === "image");
+  if (!outputImage?.data) throw new Error("لم يُرجع نموذج الصور تصميمًا جديدًا. تأكد من تفعيل نموذج Gemini Image.");
+  return { imageUrl: `data:${outputImage.mime_type || "image/png"};base64,${outputImage.data}` };
 }
 
 function geminiParts(messages: any[], attachments: any[]) {
@@ -447,6 +453,9 @@ async function handle(req: any, res: any) {
   } catch (error: any) {
     console.error("[API] request failed", error);
     const code = error?.code || "INTERNAL_SERVER_ERROR";
+    if (path.includes("design/generate") || String(req.query?.operation || "") === "design.generate" || queryOperation === "generate") {
+      return res.status(502).json({ message: error instanceof Error ? error.message : "تعذر إنشاء التصميم الآن." });
+    }
     return sendError(res, error instanceof Error ? error.message : "تعذر تنفيذ الطلب حاليًا.", code);
   }
 }
