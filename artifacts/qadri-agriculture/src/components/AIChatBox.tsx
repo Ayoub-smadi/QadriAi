@@ -115,6 +115,7 @@ export function speakMessage(content: string, language: "ar" | "en") {
   const runId = ++speechRunId;
   const synthesis = window.speechSynthesis;
   synthesis.cancel();
+  synthesis.pause();
   const spokenText = getSpeechText(content);
   if (!spokenText) return;
   const chunks = spokenText.match(/.{1,180}(?:\s+|$)/g) || [spokenText];
@@ -146,7 +147,12 @@ export function speakMessage(content: string, language: "ar" | "en") {
       }
     };
     synthesis.resume();
-    synthesis.speak(utterance);
+    // Chrome may retain a canceled utterance for one event-loop turn. The
+    // delayed call prevents a previous answer from being spoken on desktop.
+    window.setTimeout(() => {
+      if (runId !== speechRunId) return;
+      synthesis.speak(utterance);
+    }, 80);
   };
   // Desktop Chrome and Edge populate voices asynchronously. Start immediately
   // for the user gesture, then replay with the preferred male Arabic voice once
