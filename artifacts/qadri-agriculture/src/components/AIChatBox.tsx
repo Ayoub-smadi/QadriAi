@@ -57,7 +57,10 @@ const femaleVoiceHints = ["female", "woman", "girl", "zira", "hoda", "hala", "sa
 function chooseVoice(voices: SpeechSynthesisVoice[], language: "ar" | "en") {
   const prefix = language === "ar" ? "ar" : "en";
   const matching = voices.filter(voice => voice.lang.toLowerCase().startsWith(prefix));
-  const ranked = matching.length ? matching : voices;
+  // Never use an English voice as a fallback for Arabic: desktop browsers
+  // otherwise pronounce Arabic text as unrelated English sounds.
+  if (!matching.length) return undefined;
+  const ranked = matching;
   return [...ranked].sort((a, b) => {
     const score = (voice: SpeechSynthesisVoice) => {
       const name = `${voice.name} ${voice.voiceURI}`.toLowerCase();
@@ -122,12 +125,14 @@ export function speakMessage(content: string, language: "ar" | "en") {
   let retriedWithoutVoice = false;
   const playNext = () => {
     if (runId !== speechRunId || index >= chunks.length) return;
-    const utterance = new SpeechSynthesisUtterance(chunks[index++].trim());
-    utterance.lang = language === "ar" ? "ar-JO" : "en-US";
+    const chunk = chunks[index++].trim();
+    const chunkLanguage = /[\u0600-\u06ff\u0750-\u077f]/.test(chunk) ? "ar" : language;
+    const utterance = new SpeechSynthesisUtterance(chunk);
+    utterance.lang = chunkLanguage === "ar" ? "ar-JO" : "en-US";
     utterance.rate = 0.9;
-    utterance.pitch = language === "ar" ? 0.82 : 0.95;
+    utterance.pitch = chunkLanguage === "ar" ? 0.82 : 0.95;
     utterance.volume = 1;
-    const voice = chooseVoice(synthesis.getVoices(), language);
+    const voice = chooseVoice(synthesis.getVoices(), chunkLanguage);
     if (voice) utterance.voice = voice;
     utterance.onend = playNext;
     utterance.onerror = event => {
@@ -135,10 +140,12 @@ export function speakMessage(content: string, language: "ar" | "en") {
       if (!retriedWithoutVoice) {
         retriedWithoutVoice = true;
         synthesis.cancel();
-        const retry = new SpeechSynthesisUtterance(chunks[Math.max(0, index - 1)].trim());
-        retry.lang = language === "ar" ? "ar-JO" : "en-US";
+        const retryChunk = chunks[Math.max(0, index - 1)].trim();
+        const retryLanguage = /[\u0600-\u06ff\u0750-\u077f]/.test(retryChunk) ? "ar" : language;
+        const retry = new SpeechSynthesisUtterance(retryChunk);
+        retry.lang = retryLanguage === "ar" ? "ar-JO" : "en-US";
         retry.rate = 0.88;
-        retry.pitch = language === "ar" ? 0.82 : 0.95;
+        retry.pitch = retryLanguage === "ar" ? 0.82 : 0.95;
         retry.volume = 1;
         retry.onend = playNext;
         synthesis.resume();
