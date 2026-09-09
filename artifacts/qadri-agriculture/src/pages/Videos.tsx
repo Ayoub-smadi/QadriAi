@@ -168,6 +168,29 @@ export default function Videos() {
           </div>
         </section>
 
+        <section className="mt-8 rounded-[1.75rem] border border-[#d8e5c6] bg-[#f5f8ee] p-5 shadow-[0_12px_35px_rgba(46,73,35,.05)] sm:p-7" aria-label={isArabic ? "خطط الاشتراك القادمة" : "Upcoming subscription plans"}>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-[11px] font-extrabold tracking-[.18em] text-[#7e9b54]">{isArabic ? "عالم الزراعة" : "WORLD OF AGRICULTURE"}</p>
+              <h2 className="mt-2 text-2xl font-black tracking-tight text-[#27492c]">{isArabic ? "اشتراكات الفيديو قادمة" : "Video subscriptions are coming"}</h2>
+            </div>
+            <span className="rounded-full bg-[#e4eed5] px-3 py-2 text-xs font-bold text-[#5f793e]">{isArabic ? "سيتم تفعيل الدفع لاحقًا" : "Payments will be enabled later"}</span>
+          </div>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-[#667767]">{isArabic ? "سنضيف لاحقًا اشتراكًا خاصًا بفيديوهات عالم الزراعة. حاليًا هذه رسالة تعريفية فقط، ولا يوجد دفع أو قفل للمشاهدة." : "A dedicated subscription for World of Agriculture videos will be added later. For now, this is information only; no payment or viewing lock is active."}</p>
+          <div className="mt-5 grid gap-3 md:grid-cols-3">
+            {[
+              { nameAr: "شهري", nameEn: "Monthly", price: "$2", featuresAr: "مشاهدة فيديوهات عالم الزراعة، تحديثات شهرية، إلغاء في أي وقت", featuresEn: "World of Agriculture videos, monthly updates, cancel anytime" },
+              { nameAr: "3 أشهر", nameEn: "3 months", price: "$4", featuresAr: "مشاهدة كاملة، وصول لمدة 3 أشهر، قيمة أفضل من الشهري", featuresEn: "Full access, 3-month duration, better value than monthly" },
+              { nameAr: "سنة كاملة", nameEn: "Annual", price: "$9", featuresAr: "مشاهدة كاملة لمدة سنة، أفضل سعر، وصول إلى المحتوى الجديد", featuresEn: "Full-year access, best value, access to new content" },
+            ].map(plan => (
+              <article key={plan.nameEn} className="rounded-2xl border border-[#dce8cf] bg-white p-4">
+                <div className="flex items-center justify-between gap-3"><h3 className="font-extrabold text-[#315133]">{isArabic ? plan.nameAr : plan.nameEn}</h3><strong className="text-xl text-[#17483b]">{plan.price}</strong></div>
+                <p className="mt-3 text-xs leading-6 text-[#71806c]">{isArabic ? plan.featuresAr : plan.featuresEn}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="mt-8 rounded-[1.5rem] border border-[#dfe8d3] bg-white p-4 shadow-[0_12px_35px_rgba(46,73,35,.05)] sm:p-5" aria-label={isArabic ? "تصفية الدروس" : "Filter lessons"}>
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
             <label className="relative min-w-0 flex-1">
