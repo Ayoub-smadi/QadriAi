@@ -133,22 +133,6 @@ export function speakMessage(content: string, language: "ar" | "en") {
     utterance.pitch = chunkLanguage === "ar" ? 0.82 : 0.95;
     utterance.volume = 1;
     const voice = chooseVoice(synthesis.getVoices(), chunkLanguage);
-    if (chunkLanguage === "ar" && !voice) {
-      void fetch("/api/tts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: chunk }),
-      }).then(async response => {
-        if (runId !== speechRunId || !response.ok) return;
-        const source = URL.createObjectURL(await response.blob());
-        const audio = new Audio(source);
-        audio.onended = () => { URL.revokeObjectURL(source); playNext(); };
-        await audio.play();
-      }).catch(() => {
-        // If server TTS is unavailable, do not pronounce Arabic with English.
-      });
-      return;
-    }
     if (voice) utterance.voice = voice;
     utterance.onend = playNext;
     utterance.onerror = event => {

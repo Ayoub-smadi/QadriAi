@@ -202,42 +202,6 @@ async function generateGeminiDesign(input: any) {
   return { imageUrl: `data:${outputImage.mime_type || "image/png"};base64,${outputImage.data}` };
 }
 
-function pcmToWav(base64Pcm: string, sampleRate = 24000, channels = 1, bitsPerSample = 16) {
-  const pcm = Buffer.from(base64Pcm, "base64");
-  const header = Buffer.alloc(44);
-  header.write("RIFF", 0); header.writeUInt32LE(36 + pcm.length, 4); header.write("WAVE", 8);
-  header.write("fmt ", 12); header.writeUInt32LE(16, 16); header.writeUInt16LE(1, 20);
-  header.writeUInt16LE(channels, 22); header.writeUInt32LE(sampleRate, 24);
-  header.writeUInt32LE(sampleRate * channels * bitsPerSample / 8, 28);
-  header.writeUInt16LE(channels * bitsPerSample / 8, 32); header.writeUInt16LE(bitsPerSample, 34);
-  header.write("data", 36); header.writeUInt32LE(pcm.length, 40);
-  return Buffer.concat([header, pcm]);
-}
-
-async function generateArabicSpeech(input: any) {
-  const key = String(process.env.GEMINI_API_KEY || "").trim();
-  const text = String(input.text || "").trim().slice(0, 5000);
-  if (!key) throw new Error("لم يتم ضبط GEMINI_API_KEY على الخادم.");
-  if (!text) throw new Error("لا يوجد نص لتحويله إلى صوت.");
-  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/interactions", {
-    method: "POST",
-    headers: { "content-type": "application/json", accept: "application/json", "x-goog-api-key": key },
-    body: JSON.stringify({
-      model: String(process.env.GEMINI_TTS_MODEL || "gemini-3.1-flash-tts-preview"),
-      input: `اقرأ النص التالي بصوت رجل أردني واضح وبلهجة أردنية عامية خفيفة، بدون إضافة أو حذف أو تعليق: ${text}`,
-      response_format: { type: "audio" },
-      generation_config: { speech_config: [{ voice: String(process.env.GEMINI_TTS_VOICE || "Charon") }] },
-    }),
-  });
-  const raw = await response.text();
-  let data: any = {};
-  try { data = JSON.parse(raw); } catch { /* handled below */ }
-  if (!response.ok) throw new Error(`فشل توليد الصوت (${response.status}): ${data?.error?.message || data?.message || raw.slice(0, 240)}`);
-  const audio = data?.output_audio?.data || data?.steps?.flatMap((step: any) => step?.content || []).find((item: any) => item?.type === "audio")?.data;
-  if (!audio) throw new Error("لم يُرجع نموذج الصوت ملفًا صالحًا.");
-  return pcmToWav(audio);
-}
-
 function geminiParts(messages: any[], attachments: any[]) {
   const contents = messages.filter(item => item && typeof item.content === "string" && item.role !== "system").slice(-10).map(item => ({
     role: item.role === "assistant" ? "model" : "user",
@@ -433,11 +397,6 @@ async function handle(req: any, res: any) {
   const operation = pathOperation || queryOperation || "";
   try {
     if (path.includes("ai.consult") || queryOperation === "ai.consult") return await handleGemini(req, res);
-    if (path.includes("/tts") || String(req.query?.operation || "") === "tts") {
-      const wav = await generateArabicSpeech(readInput(req));
-      res.setHeader("Content-Type", "audio/wav");
-      return res.status(200).send(wav);
-    }
     if (path.includes("design/generate") || String(req.query?.operation || "") === "design.generate" || queryOperation === "generate") return res.status(200).json(await generateGeminiDesign(readInput(req)));
     await ensureUsersSchema();
 
