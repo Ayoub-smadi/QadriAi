@@ -115,7 +115,6 @@ export function speakMessage(content: string, language: "ar" | "en") {
   const runId = ++speechRunId;
   const synthesis = window.speechSynthesis;
   synthesis.cancel();
-  synthesis.pause();
   const spokenText = getSpeechText(content);
   if (!spokenText) return;
   const chunks = spokenText.match(/.{1,180}(?:\s+|$)/g) || [spokenText];
@@ -124,7 +123,7 @@ export function speakMessage(content: string, language: "ar" | "en") {
   const playNext = () => {
     if (runId !== speechRunId || index >= chunks.length) return;
     const utterance = new SpeechSynthesisUtterance(chunks[index++].trim());
-    utterance.lang = language === "ar" ? "ar-SA" : "en-US";
+    utterance.lang = language === "ar" ? "ar-JO" : "en-US";
     utterance.rate = 0.9;
     utterance.pitch = language === "ar" ? 0.82 : 0.95;
     utterance.volume = 1;
@@ -137,7 +136,7 @@ export function speakMessage(content: string, language: "ar" | "en") {
         retriedWithoutVoice = true;
         synthesis.cancel();
         const retry = new SpeechSynthesisUtterance(chunks[Math.max(0, index - 1)].trim());
-        retry.lang = language === "ar" ? "ar-SA" : "en-US";
+        retry.lang = language === "ar" ? "ar-JO" : "en-US";
         retry.rate = 0.88;
         retry.pitch = language === "ar" ? 0.82 : 0.95;
         retry.volume = 1;
@@ -146,31 +145,16 @@ export function speakMessage(content: string, language: "ar" | "en") {
         synthesis.speak(retry);
       }
     };
+    // Keep speak() in the click event's call stack. Mobile Safari and some
+    // desktop browsers reject delayed speech as an unsolicited autoplay.
     synthesis.resume();
-    // Chrome may retain a canceled utterance for one event-loop turn. The
-    // delayed call prevents a previous answer from being spoken on desktop.
-    window.setTimeout(() => {
-      if (runId !== speechRunId) return;
-      synthesis.speak(utterance);
-    }, 80);
+    synthesis.speak(utterance);
   };
-  // Desktop Chrome and Edge populate voices asynchronously. Start immediately
-  // for the user gesture, then replay with the preferred male Arabic voice once
-  // the voice list becomes available.
-  const voices = synthesis.getVoices();
-  if (voices.length) {
-    playNext();
-  } else {
-    const start = () => {
-      synthesis.removeEventListener("voiceschanged", start);
-      if (runId === speechRunId) playNext();
-    };
-    synthesis.addEventListener("voiceschanged", start, { once: true });
-    window.setTimeout(() => {
-      synthesis.removeEventListener("voiceschanged", start);
-      if (runId === speechRunId && !synthesis.speaking) playNext();
-    }, 500);
-  }
+  // Start immediately inside the button gesture. If the browser has not
+  // loaded its voice list yet, it will still honor the requested Arabic locale
+  // and use its default voice; waiting for voiceschanged can be blocked as
+  // autoplay on phones and some desktop browsers.
+  playNext();
 }
 
 export function AIChatBox({
