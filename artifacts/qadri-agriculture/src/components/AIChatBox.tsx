@@ -51,10 +51,13 @@ function readFileAsDataUrl(file: File) {
 export function speakMessage(content: string, language: "ar" | "en") {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(content.replace(/[*_#`]/g, ""));
+  const spokenText = content.replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/[*_#>`~-]/g, "").replace(/\n+/g, ". ").replace(/\s{2,}/g, " ").trim();
+  if (!spokenText) return;
+  const utterance = new SpeechSynthesisUtterance(spokenText);
   utterance.lang = language === "ar" ? "ar-SA" : "en-US";
   utterance.rate = 0.95;
-  window.speechSynthesis.speak(utterance);
+  const speakWithMatchingVoice = () => { const prefix = language === "ar" ? "ar" : "en"; const voice = window.speechSynthesis.getVoices().find(item => item.lang.toLowerCase().startsWith(prefix)); if (voice) utterance.voice = voice; window.speechSynthesis.speak(utterance); };
+  if (window.speechSynthesis.getVoices().length) speakWithMatchingVoice(); else window.speechSynthesis.addEventListener("voiceschanged", speakWithMatchingVoice, { once: true });
 }
 
 export function AIChatBox({
@@ -75,21 +78,12 @@ export function AIChatBox({
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const recordingStreamRef = useRef<MediaStream | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const lastSpokenAssistantRef = useRef("");
   const displayMessages = messages.filter(message => message.role !== "system");
 
   useEffect(() => {
     const viewport = scrollAreaRef.current?.querySelector("[data-radix-scroll-area-viewport]") as HTMLDivElement | null;
     if (viewport) requestAnimationFrame(() => viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" }));
   }, [messages, isLoading]);
-
-  useEffect(() => {
-    const assistantMessages = messages.filter(message => message.role === "assistant");
-    const latest = assistantMessages[assistantMessages.length - 1];
-    if (!latest?.content || latest.content === lastSpokenAssistantRef.current) return;
-    lastSpokenAssistantRef.current = latest.content;
-    speakMessage(latest.content, /[\u0600-\u06ff]/.test(latest.content) ? "ar" : "en");
-  }, [messages]);
 
   useEffect(() => () => {
     recordingStreamRef.current?.getTracks().forEach(track => track.stop());
