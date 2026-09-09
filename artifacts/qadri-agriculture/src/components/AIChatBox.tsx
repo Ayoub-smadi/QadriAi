@@ -52,7 +52,15 @@ function readFileAsDataUrl(file: File) {
 let speechRunId = 0;
 
 function getSpeechText(content: string) {
-  return content
+  let visible = content.trim();
+  try {
+    const parsed = JSON.parse(visible) as { answer?: unknown; content?: unknown; text?: unknown };
+    const preferred = parsed.answer ?? parsed.content ?? parsed.text;
+    if (typeof preferred === "string") visible = preferred;
+  } catch {
+    // Gemini normally returns prose; only JSON responses need field extraction.
+  }
+  return visible
     .replace(/```[\s\S]*?```/g, "")
     .replace(/<[^>]*>/g, "")
     .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
@@ -60,8 +68,9 @@ function getSpeechText(content: string) {
     .replace(/https?:\/\/\S+/g, "")
     .replace(/^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)+\|?\s*$/gm, "")
     .replace(/\bcolumns?\b|كولن(?:ز)?/gi, "")
+    .replace(/^\s*(?:confidence|tokens|answer|content|metadata|confidence score)\s*:\s*.*$/gim, "")
+    .replace(/^\s*[({"']?(?:confidence|tokens|answer|content)[}"']?\s*[:=].*$/gim, "")
     .replace(/^[\s|]*[0-9٠-٩]+[\s.)、-]+/gm, "")
-    .replace(/[0-9٠-٩]+/g, "")
     .replace(/[*_#>`~|]/g, "")
     .replace(/\n+/g, ". ")
     .replace(/\s{2,}/g, " ")

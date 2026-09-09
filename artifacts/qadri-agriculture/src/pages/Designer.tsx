@@ -102,6 +102,10 @@ export default function Designer() {
   };
 
   const generate = async () => {
+    if (!siteImage) {
+      toast.error(ar ? "ارفع صورة الموقع أولًا حتى يتم تحليلها وتصميمها." : "Upload a site image so it can be analyzed and redesigned.");
+      return;
+    }
     if (!brief.trim()) {
       toast.error(ar ? "اكتب وصفًا واضحًا للنتيجة المطلوبة" : "Describe the result you want");
       return;

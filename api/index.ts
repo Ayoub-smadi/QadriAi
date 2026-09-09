@@ -132,8 +132,8 @@ function geminiInput(req: any) {
 
 function geminiSystem(language: string) {
   return language === "en"
-    ? "You are Al-Qadri Smart Agriculture, a ChatGPT-like assistant specialized only in agriculture. Answer clearly and practically about crops, irrigation, soil, trees, pests, plant diseases, pruning, greenhouses, and farm planning. Politely refuse non-agricultural requests. For images, separate observations from possibilities and never confirm a disease from one image. Do not provide pesticide mixtures or exact chemical doses; recommend a local agronomist when needed."
-    : "أنت القادري الزراعي الذكي، مساعد مثل ChatGPT متخصص بالزراعة فقط. أجب بالعربية بوضوح وعمليًا عن المحاصيل والري والتربة والأشجار والآفات والأمراض النباتية والتقليم والبيوت البلاستيكية وتخطيط المزارع. اعتذر بلطف عن الأسئلة غير الزراعية. عند الصور ميّز بين الملاحظة والاحتمال ولا تؤكد مرضًا من صورة واحدة. لا تعطِ خلطات مبيدات أو جرعات كيميائية دقيقة، وأوصِ بمهندس زراعي محلي عند الحاجة.";
+    ? "You are Al-Qadri Smart Agriculture. For an attached plant image, provide a structured report: plant identification, overall status, visible observations, possible diseases/pests, possible nutrient deficiencies, causes, immediate actions, safe treatment, initial fertilization and irrigation programs, and tests needed. Always say it is a preliminary visual estimate, not a laboratory analysis. Never invent N/P/K percentages or confirm a disease from one image."
+    : "أنت القادري الزراعي الذكي. عند إرفاق صورة نبات، أخرج تقريرًا منظمًا: اسم النبات، الحالة العامة، ما تراه، الأمراض أو الآفات المحتملة، نقص العناصر المحتمل، الأسباب، ما يجب فعله الآن، العلاج الآمن، برنامج تسميد وري مبدئي، والفحوصات اللازمة. اكتب دائمًا: تقدير بصري مبدئي وليس تحليلًا مخبريًا. لا تخترع نسب N أو P أو K ولا تؤكد مرضًا من صورة واحدة.";
 }
 
 function latestUserText(messages: any[]) {
@@ -187,7 +187,8 @@ async function handleGemini(req: any, res: any) {
   const key = String(process.env.GEMINI_API_KEY || "").trim();
   if (!key) return sendError(res, "لم يتم ضبط GEMINI_API_KEY على الخادم.", "INTERNAL_SERVER_ERROR");
   const language = input.language === "en" ? "en" : "ar";
-  if (isImageRequest(messages)) return sendSuccess(res, await generateGeminiImage(latestUserText(messages), language));
+  const attachments = Array.isArray(input.attachments) ? input.attachments : [];
+  if (isImageRequest(messages) && !attachments.some((item: any) => item?.type === "image")) return sendSuccess(res, await generateGeminiImage(latestUserText(messages), language));
   const model = String(process.env.GEMINI_MODEL || "gemini-3.5-flash-lite").trim();
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;
   const response = await fetch(url, {
@@ -195,8 +196,8 @@ async function handleGemini(req: any, res: any) {
     headers: { "content-type": "application/json", accept: "application/json" },
     body: JSON.stringify({
       systemInstruction: { parts: [{ text: geminiSystem(language) }] },
-      contents: geminiParts(messages, Array.isArray(input.attachments) ? input.attachments : []),
-      generationConfig: { temperature: 0.25, maxOutputTokens: 1400 },
+      contents: geminiParts(messages, attachments),
+      generationConfig: { temperature: 0.25, maxOutputTokens: 1800 },
     }),
   });
   const raw = await response.text();

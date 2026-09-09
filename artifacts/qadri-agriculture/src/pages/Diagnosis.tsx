@@ -50,8 +50,8 @@ export default function Diagnosis() {
 
   const heading = isArabic ? "تحليل نبات" : "Plant analysis";
   const helper = isArabic
-    ? "التقط صورة واضحة أو ارفعها لتحصل على إرشاد زراعي أولي سريع، بدون مفاتيح API أو إرسال لمزود خارجي."
-    : "Take a clear photo or upload one for fast initial agricultural guidance, with no API keys or external AI provider.";
+    ? "التقط صورة واضحة أو ارفعها لتحصل على تقرير بصري مبدئي من Gemini Vision. لا يغني التقرير عن التحليل المخبري أو المعاينة الميدانية."
+    : "Take a clear photo or upload one for a preliminary Gemini Vision report. It does not replace laboratory testing or field inspection.";
 
   const selectFile = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -60,6 +60,10 @@ export default function Diagnosis() {
     setAnalysisRequested(false);
     if (!( ["image/jpeg", "image/png", "image/webp"] as string[]).includes(file.type)) {
       setError(isArabic ? "يرجى اختيار صورة JPG أو PNG أو WebP." : "Please choose a JPG, PNG, or WebP image.");
+      return;
+    }
+    if (file.size > 8 * 1024 * 1024) {
+      setError(isArabic ? "حجم الصورة يجب أن يكون أقل من 8 ميغابايت." : "The image must be smaller than 8 MB.");
       return;
     }
     const reader = new FileReader();
