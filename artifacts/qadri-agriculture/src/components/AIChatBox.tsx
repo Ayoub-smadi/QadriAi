@@ -60,7 +60,7 @@ export function speakMessage(content: string, language: "ar" | "en") {
   utterance.rate = 0.95;
   const voice = window.speechSynthesis.getVoices().find(item => item.lang.toLowerCase().startsWith(wantedPrefix));
   if (voice) utterance.voice = voice;
-  window.setTimeout(() => { window.speechSynthesis.cancel(); window.speechSynthesis.speak(utterance); }, 0);
+  window.speechSynthesis.speak(utterance);
 }
 
 export function AIChatBox({
