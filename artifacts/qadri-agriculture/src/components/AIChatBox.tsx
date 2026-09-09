@@ -49,18 +49,30 @@ function readFileAsDataUrl(file: File) {
   });
 }
 
+let speechRunId = 0;
+
 export function speakMessage(content: string, language: "ar" | "en") {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+  const runId = ++speechRunId;
   window.speechSynthesis.cancel();
   const spokenText = content.replace(/<[^>]*>/g, "").replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/https?:\/\/\S+/g, "").replace(/[*_#>`~-]/g, "").replace(/\n+/g, ". ").replace(/\s{2,}/g, " ").trim();
   if (!spokenText) return;
-  const utterance = new SpeechSynthesisUtterance(spokenText);
   const wantedPrefix = language === "ar" ? "ar" : "en";
-  utterance.lang = language === "ar" ? "ar-SA" : "en-US";
-  utterance.rate = 0.95;
   const voice = window.speechSynthesis.getVoices().find(item => item.lang.toLowerCase().startsWith(wantedPrefix));
-  if (voice) utterance.voice = voice;
-  window.speechSynthesis.speak(utterance);
+  const chunks = spokenText.match(/.{1,180}(?:\s+|$)/g) || [spokenText];
+  let index = 0;
+  const playNext = () => {
+    if (runId !== speechRunId || index >= chunks.length) return;
+    const utterance = new SpeechSynthesisUtterance(chunks[index++].trim());
+    utterance.lang = language === "ar" ? "ar-SA" : "en-US";
+    utterance.rate = 0.9;
+    if (voice) utterance.voice = voice;
+    utterance.onend = playNext;
+    utterance.onerror = event => { if (event.error === "interrupted" || event.error === "canceled") return; };
+    window.speechSynthesis.resume();
+    window.speechSynthesis.speak(utterance);
+  };
+  playNext();
 }
 
 export function AIChatBox({
