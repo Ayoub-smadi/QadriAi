@@ -80,7 +80,7 @@ function getSpeechText(content: string) {
   } catch {
     // Gemini normally returns prose; only JSON responses need field extraction.
   }
-  return visible
+  visible = visible
     .replace(/```[\s\S]*?```/g, "")
     .replace(/<[^>]*>/g, "")
     .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
@@ -95,6 +95,19 @@ function getSpeechText(content: string) {
     .replace(/\n+/g, ". ")
     .replace(/\s{2,}/g, " ")
     .trim();
+
+  // Do not make TTS read Gemini's conversational wrapper. Keep it visible in
+  // chat, but start audio at the first actionable heading or instruction.
+  const firstAction = visible.search(/(?:^|\.\s+)(?:\d+[.)]\s+|[-•]\s+|طريقة\s+|النتيجة\s*:|التوصية\s*:|how to\s+|steps?\s*:)/i);
+  if (firstAction > 0) visible = visible.slice(firstAction).replace(/^[.،؛:!?\-\s]+/, "").trim();
+  else {
+    visible = visible
+      .replace(/^(?:أهلًا|أهلاً|مرحبا|مرحبًا)[^.؟!]*[.؟!]\s*/i, "")
+      .replace(/^(?:بصفتي|بوصفي)[^.؟!]*[.؟!]\s*/i, "")
+      .replace(/^(?:إليك|إليكم) (?:الدليل|الإجابة|شرحًا?)[^.؟!]*[.؟!]\s*/i, "")
+      .trim();
+  }
+  return visible;
 }
 
 export function speakMessage(content: string, language: "ar" | "en") {
