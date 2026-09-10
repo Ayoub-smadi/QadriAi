@@ -63,6 +63,14 @@ function responseText(data: unknown): string {
   return candidates?.[0]?.content?.parts?.map(part => typeof part.text === "string" ? part.text : "").filter(Boolean).join("\n").trim() || "";
 }
 
+function compactAnswer(content: string, language: "ar" | "en") {
+  if (language !== "ar") return content.trim();
+  const cleaned = content.replace(/```[\s\S]*?```/g, "").replace(/^\s*(?:مرحبًا|أهلًا|أهلاً|بالتأكيد|طبعًا|يسعدني|إليك|بصفتي)[^.!؟\n]*[.!؟:]?\s*/i, "").trim();
+  const lines = cleaned.split(/\n+/).map(line => line.replace(/^\s*[-*•#\d.)]+\s*/, "").trim()).filter(Boolean);
+  const answer = lines.length > 1 ? lines.slice(0, 2).join("\n") : cleaned.split(/(?<=[.!؟])\s+/).filter(Boolean).slice(0, 2).join(" ");
+  return answer.slice(0, 360).trim();
+}
+
 function latestUserText(messages: unknown): string {
   if (!Array.isArray(messages)) return "";
   const item = [...messages].reverse().find(value => value && typeof value === "object" && (value as { role?: unknown }).role === "user");
@@ -121,7 +129,7 @@ async function callGemini(messages: unknown, attachments: Attachment[], language
   }
   const content = responseText(data);
   if (!content) throw new Error("أعاد Gemini استجابة بلا نص.");
-  return content;
+  return compactAnswer(content, language);
 }
 
 router.post("/trpc/ai.consult", async (req, res) => {

@@ -81,9 +81,8 @@ export function speakMessage(content: string, language: "ar" | "en", onFinished?
   if (!spokenText) return;
   const wantedPrefix = language === "ar" ? "ar" : "en";
   const voices = window.speechSynthesis.getVoices().filter(item => item.lang.toLowerCase().startsWith(wantedPrefix));
-  const maleVoiceHint = /male|man|maged|tarik|omar|hassan|ahmad|mohammad|abdul|arabic male|عربي.*رجل|ذكر/i;
-  const femaleVoiceHint = /female|woman|zira|saba|laila|نورا|أنثى/i;
-  const voice = voices.find(item => maleVoiceHint.test(`${item.name} ${item.voiceURI}`)) || (voices.length === 1 && !femaleVoiceHint.test(voices[0].name) ? voices[0] : undefined);
+  const femaleVoiceHint = /female|woman|zira|saba|laila|nora|noura|نورا|أنثى|arabic/i;
+  const voice = voices.find(item => femaleVoiceHint.test(`${item.name} ${item.voiceURI}`)) || voices[0];
   const chunks = spokenText.match(/.{1,180}(?:\s+|$)/g) || [spokenText];
   let index = 0;
   const playNext = () => {
@@ -92,7 +91,7 @@ export function speakMessage(content: string, language: "ar" | "en", onFinished?
     const utterance = new SpeechSynthesisUtterance(chunks[index++].trim());
     utterance.lang = language === "ar" ? "ar-JO" : "en-US";
     utterance.rate = 0.88;
-    utterance.pitch = language === "ar" ? 0.45 : 0.9;
+    utterance.pitch = language === "ar" ? 1.05 : 1;
     if (voice) utterance.voice = voice;
     utterance.onend = playNext;
     utterance.onerror = event => { if (event.error === "interrupted" || event.error === "canceled") return; };
