@@ -51,39 +51,8 @@ function readFileAsDataUrl(file: File) {
 
 let speechRunId = 0;
 
-const maleVoiceHints = ["male", "man", "hamed", "hamad", "omar", "maged", "tarik", "tariq", "naayf", "abdul", "saad", "fahad", "راشد", "حامد", "عمر", "ماجد", "طارق", "نايف", "عبد", "سعد", "فهد"];
-const femaleVoiceHints = ["female", "woman", "girl", "zira", "hoda", "hala", "sara", "sarah", "laila", "layla", "ar-sa-x-sfg", "ar-xa-x-"];
-
-function chooseVoice(voices: SpeechSynthesisVoice[], language: "ar" | "en") {
-  const prefix = language === "ar" ? "ar" : "en";
-  const matching = voices.filter(voice => voice.lang.toLowerCase().startsWith(prefix));
-  // Never use an English voice as a fallback for Arabic: desktop browsers
-  // otherwise pronounce Arabic text as unrelated English sounds.
-  if (!matching.length) return undefined;
-  const ranked = matching;
-  return [...ranked].sort((a, b) => {
-    const score = (voice: SpeechSynthesisVoice) => {
-      const name = `${voice.name} ${voice.voiceURI}`.toLowerCase();
-      let value = 0;
-      if (maleVoiceHints.some(hint => name.includes(hint))) value += 100;
-      if (femaleVoiceHints.some(hint => name.includes(hint))) value -= 100;
-      if (voice.localService) value += 5;
-      return value;
-    };
-    return score(b) - score(a);
-  })[0];
-}
-
 function getSpeechText(content: string) {
-  let visible = content.trim();
-  try {
-    const parsed = JSON.parse(visible) as { answer?: unknown; content?: unknown; text?: unknown };
-    const preferred = parsed.answer ?? parsed.content ?? parsed.text;
-    if (typeof preferred === "string") visible = preferred;
-  } catch {
-    // Gemini normally returns prose; only JSON responses need field extraction.
-  }
-  visible = visible
+  return content
     .replace(/```[\s\S]*?```/g, "")
     .replace(/<[^>]*>/g, "")
     .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
@@ -91,76 +60,37 @@ function getSpeechText(content: string) {
     .replace(/https?:\/\/\S+/g, "")
     .replace(/^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)+\|?\s*$/gm, "")
     .replace(/\bcolumns?\b|كولن(?:ز)?/gi, "")
-    .replace(/^\s*(?:confidence|tokens|answer|content|metadata|confidence score)\s*:\s*.*$/gim, "")
-    .replace(/^\s*[({"']?(?:confidence|tokens|answer|content)[}"']?\s*[:=].*$/gim, "")
     .replace(/^[\s|]*[0-9٠-٩]+[\s.)、-]+/gm, "")
+    .replace(/[0-9٠-٩]+/g, "")
     .replace(/[*_#>`~|]/g, "")
     .replace(/\n+/g, ". ")
     .replace(/\s{2,}/g, " ")
     .trim();
-
-  // Do not make TTS read Gemini's conversational wrapper. Keep it visible in
-  // chat, but start audio at the first actionable heading or instruction.
-  const firstAction = visible.search(/(?:^|\.\s+)(?:\d+[.)]\s+|[-•]\s+|طريقة\s+|النتيجة\s*:|التوصية\s*:|how to\s+|steps?\s*:)/i);
-  if (firstAction > 0) visible = visible.slice(firstAction).replace(/^[.،؛:!?\-\s]+/, "").trim();
-  else {
-    visible = visible
-      .replace(/^(?:أهلًا|أهلاً|مرحبا|مرحبًا)[^.؟!]*[.؟!]\s*/i, "")
-      .replace(/^(?:بصفتي|بوصفي)[^.؟!]*[.؟!]\s*/i, "")
-      .replace(/^(?:إليك|إليكم) (?:الدليل|الإجابة|شرحًا?)[^.؟!]*[.؟!]\s*/i, "")
-      .trim();
-  }
-  return visible;
 }
 
 export function speakMessage(content: string, language: "ar" | "en") {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   const runId = ++speechRunId;
-  const synthesis = window.speechSynthesis;
-  synthesis.cancel();
+  window.speechSynthesis.cancel();
   const spokenText = getSpeechText(content);
   if (!spokenText) return;
+  const wantedPrefix = language === "ar" ? "ar" : "en";
+  const voices = window.speechSynthesis.getVoices().filter(item => item.lang.toLowerCase().startsWith(wantedPrefix));
+  const maleVoiceHint = /male|man|maged|tarik|omar|hassan|ahmad|mohammad|abdul|google arabic/i;
+  const voice = voices.find(item => maleVoiceHint.test(item.name)) || voices[0];
   const chunks = spokenText.match(/.{1,180}(?:\s+|$)/g) || [spokenText];
   let index = 0;
-  let retriedWithoutVoice = false;
   const playNext = () => {
     if (runId !== speechRunId || index >= chunks.length) return;
-    const chunk = chunks[index++].trim();
-    const chunkLanguage = /[\u0600-\u06ff\u0750-\u077f]/.test(chunk) ? "ar" : language;
-    const utterance = new SpeechSynthesisUtterance(chunk);
-    utterance.lang = chunkLanguage === "ar" ? "ar-JO" : "en-US";
+    const utterance = new SpeechSynthesisUtterance(chunks[index++].trim());
+    utterance.lang = language === "ar" ? "ar-SA" : "en-US";
     utterance.rate = 0.9;
-    utterance.pitch = chunkLanguage === "ar" ? 0.82 : 0.95;
-    utterance.volume = 1;
-    const voice = chooseVoice(synthesis.getVoices(), chunkLanguage);
     if (voice) utterance.voice = voice;
     utterance.onend = playNext;
-    utterance.onerror = event => {
-      if (event.error === "interrupted" || event.error === "canceled") return;
-      if (!retriedWithoutVoice) {
-        retriedWithoutVoice = true;
-        synthesis.cancel();
-        const retryChunk = chunks[Math.max(0, index - 1)].trim();
-        const retryLanguage = /[\u0600-\u06ff\u0750-\u077f]/.test(retryChunk) ? "ar" : language;
-        const retry = new SpeechSynthesisUtterance(retryChunk);
-        retry.lang = retryLanguage === "ar" ? "ar-JO" : "en-US";
-        retry.rate = 0.88;
-        retry.pitch = retryLanguage === "ar" ? 0.82 : 0.95;
-        retry.volume = 1;
-        retry.onend = playNext;
-        synthesis.resume();
-        synthesis.speak(retry);
-      }
-    };
-    // Keep speak() in the click event's call stack. Mobile Safari and some
-    // desktop browsers reject delayed speech as an unsolicited autoplay.
-    synthesis.resume();
-    synthesis.speak(utterance);
+    utterance.onerror = event => { if (event.error === "interrupted" || event.error === "canceled") return; };
+    window.speechSynthesis.resume();
+    window.speechSynthesis.speak(utterance);
   };
-  // Start immediately inside the button gesture. If the browser has not
-  // loaded its voice list yet, it will still honor the requested Arabic locale
-  // and use its default voice; waiting for voiceschanged can be blocked as
-  // autoplay on phones and some desktop browsers.
   playNext();
 }
 
@@ -279,19 +209,19 @@ export function AIChatBox({
   };
 
   return (
-    <div className={cn("flex flex-col overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm", className)} style={{ height }}>
-      <div ref={scrollAreaRef} className="min-h-0 flex-1 overflow-hidden">
+    <div className={cn("flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm", height === "auto" ? "overflow-visible" : "overflow-hidden", className)} style={{ height: height === "auto" ? "auto" : height, minHeight: height === "auto" ? "520px" : undefined }}>
+      <div ref={scrollAreaRef} className={cn("min-h-0 flex-1", height === "auto" ? "overflow-visible" : "overflow-hidden")}>
         {displayMessages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-6 p-4 text-muted-foreground">
             <div className="flex flex-col items-center gap-3 text-center"><AssistantLogo className="size-12 opacity-30" /><p className="text-sm">{emptyStateMessage}</p><p className="max-w-md text-xs leading-5">{"اسأل بالنص، أرفق صورة، أو سجّل صوتك وسأحلّل ما ترسله."}</p></div>
             {suggestedPrompts?.length ? <div className="flex max-w-2xl flex-wrap justify-center gap-2">{suggestedPrompts.map(prompt => <button key={prompt} type="button" onClick={() => onSendMessage(prompt)} disabled={isLoading} className="rounded-lg border border-border bg-card px-4 py-2 text-sm transition-colors hover:bg-accent disabled:opacity-50">{prompt}</button>)}</div> : null}
           </div>
-        ) : <ScrollArea className="h-full"><div className="flex flex-col space-y-4 p-4">{displayMessages.map((message, index) => <div key={`${message.role}-${index}`} className={cn("flex items-start gap-3", message.role === "user" ? "justify-end" : "justify-start")}>
+        ) : <ScrollArea className={height === "auto" ? "h-auto" : "h-full"}><div className="flex flex-col space-y-4 p-4">{displayMessages.map((message, index) => <div key={`${message.role}-${index}`} className={cn("flex items-start gap-3", message.role === "user" ? "justify-end" : "justify-start")}>
           {message.role === "assistant" && <div className="mt-1 grid size-8 shrink-0 place-items-center rounded-full bg-primary/10 p-1"><AssistantLogo className="size-full" /></div>}
           <div className={cn("max-w-[84%] rounded-2xl px-4 py-3", message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted text-foreground")}>
             {message.attachments?.length ? <div className="mb-2 grid gap-2">{message.attachments.map(attachment => attachment.type === "image" ? <img key={attachment.name} src={attachment.dataUrl} alt={attachment.name} className="max-h-52 max-w-full rounded-xl object-contain" /> : <audio key={attachment.name} controls src={attachment.dataUrl} className="max-w-full" />)}</div> : null}
             {message.images?.length ? <div className="mb-2 grid gap-2">{message.images.map((image, imageIndex) => <img key={`${imageIndex}-${image.slice(0, 24)}`} src={image} alt="صورة زراعية مولدة" className="max-h-80 w-full rounded-xl object-contain" />)}</div> : null}
-            {message.role === "assistant" ? <><div className="prose prose-sm max-w-none dark:prose-invert"><Streamdown>{message.content}</Streamdown></div><button type="button" onClick={() => { speakMessage(message.content, speechLanguage || (/[\u0600-\u06ff]/.test(message.content) ? "ar" : "en")); }} className="mt-2 inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs text-muted-foreground transition hover:bg-background hover:text-foreground" title="استمع إلى الرد"><Volume2 className="size-3.5" />استمع</button></> : <p className="whitespace-pre-wrap text-sm">{message.content}</p>}
+            {message.role === "assistant" ? <><div className="prose prose-sm max-w-none dark:prose-invert"><Streamdown>{message.content}</Streamdown></div><button type="button" onClick={event => { const rendered = event.currentTarget.parentElement?.querySelector<HTMLElement>(".prose")?.innerText?.trim(); speakMessage(rendered || message.content, speechLanguage || (/[\u0600-\u06ff]/.test(message.content) ? "ar" : "en")); }} className="mt-2 inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs text-muted-foreground transition hover:bg-background hover:text-foreground" title="استمع إلى الرد"><Volume2 className="size-3.5" />استمع</button></> : <p className="whitespace-pre-wrap text-sm">{message.content}</p>}
           </div>
           {message.role === "user" && <div className="mt-1 grid size-8 shrink-0 place-items-center rounded-full bg-secondary"><User className="size-4 text-secondary-foreground" /></div>}
         </div>)}{isLoading && <div className="flex items-start gap-3"><div className="mt-1 grid size-8 shrink-0 place-items-center rounded-full bg-primary/10 p-1"><AssistantLogo className="size-full" /></div><div className="rounded-2xl bg-muted px-4 py-3"><Loader2 className="size-4 animate-spin text-muted-foreground" /></div></div>}</div></ScrollArea>}

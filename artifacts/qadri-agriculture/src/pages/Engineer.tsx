@@ -12,7 +12,9 @@ export default function Engineer() {
     onSuccess: result => setMessages(previous => [...previous, { role: "assistant", content: result.content, ...(result.images?.length ? { images: result.images } : {}) }]),
     onError: error => {
       console.error("Agricultural consultation failed", error);
-      setMessages(previous => [...previous, { role: "assistant", content: language === "ar" ? `تعذر الحصول على الرد الآن. ${error.message || "تحقق من الاتصال وحاول مرة أخرى."}` : `I could not get an answer right now. ${error.message || "Check your connection and try again."}` }]);
+      const raw = error.message || "";
+      const friendly = raw.includes("429") || raw.toLowerCase().includes("quota") ? (language === "ar" ? "تعذر تنفيذ الطلب الآن بسبب انتهاء حصة خدمة الذكاء الاصطناعي. جرّب سؤالًا نصيًا مختصرًا لاحقًا." : "The AI service quota is currently unavailable. Please try a short text question later.") : (language === "ar" ? "تعذر الحصول على الرد الآن. تحقّق من الاتصال وحاول مرة أخرى." : "I could not get an answer right now. Please check your connection and try again.");
+      setMessages(previous => [...previous, { role: "assistant", content: friendly }]);
     },
   });
   const send = (content: string, attachments?: ChatAttachment[]) => { const next = [...messages, { role: "user" as const, content, ...(attachments?.length ? { attachments } : {}) }]; setMessages(next); consultation.mutate({ messages: next.map(message => ({ role: message.role, content: message.content })), attachments, language }); };
@@ -38,7 +40,7 @@ export default function Engineer() {
             messages={messages}
             onSendMessage={send}
             isLoading={consultation.isPending}
-            height="min(650px, 68vh)"
+            height="auto"
             className="rounded-[1.5rem] border-[#35530e]/10 shadow-[0_16px_40px_rgba(48,67,22,.07)]"
             placeholder={language === "ar" ? "اكتب سؤالك الزراعي…" : "Ask an agricultural question…"}
             emptyStateMessage={language === "ar" ? "كيف يمكنني مساعدتك اليوم؟" : "How can I help today?"}

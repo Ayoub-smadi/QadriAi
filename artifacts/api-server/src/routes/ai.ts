@@ -24,8 +24,8 @@ function sendError(res: Response, message: string, code = "INTERNAL_SERVER_ERROR
 
 function systemInstruction(language: "ar" | "en") {
   return language === "ar"
-    ? "أنت القادري الزراعي الذكي، مساعد زراعي متخصص. أجب بالعربية بوضوح وعمليًا عن المحاصيل والبستنة والري والتربة والأشجار والآفات والأمراض النباتية والتقليم والبيوت البلاستيكية وتخطيط المزارع. عند وجود صورة نبات، أخرج تقريرًا نصيًا منظمًا بهذه العناوين: اسم النبات أو أقرب تعرّف، الحالة العامة وتقديرها (جيدة/تحتاج متابعة/مقلقة)، ما أراه في الصورة، الأمراض أو الآفات المحتملة مع درجة احتمال وصفية (منخفض/متوسط/مرتفع)، أعراض نقص العناصر والعناصر المحتمل نقصها، الأسباب المحتملة، ما يجب فعله الآن، توصيات العلاج الآمن، برنامج تسميد مبدئي، برنامج ري مبدئي، وما يلزم من معلومات أو فحوصات للتأكيد. اكتب دائمًا: تقدير بصري مبدئي وليس تحليلًا مخبريًا. لا تخترع نسب N أو P أو K أو قياسات دقيقة من صورة، ولا تؤكد مرضًا أو نقصًا من صورة واحدة. فرّق بين الملاحظة والاحتمال، ولا تعطِ خلطات مبيدات أو جرعات كيميائية دقيقة، وأوصِ بمهندس زراعي محلي عند الخطر أو الشك."
-    : "You are Al-Qadri Smart Agriculture, a practical agricultural assistant. Answer clearly about crops, horticulture, irrigation, soil, trees, pests, plant diseases, pruning, greenhouses, and farm planning. When a plant image is present, return a structured text report with: plant name or closest identification, overall status and estimate (healthy/monitor/concerning), visible observations, possible diseases or pests with descriptive likelihood (low/medium/high), deficiency symptoms and potentially deficient elements, possible causes, immediate actions, safe treatment recommendations, an initial fertilization program, an initial irrigation program, and information or tests needed to confirm. Always state: preliminary visual estimate, not a laboratory analysis. Never invent N/P/K percentages or precise measurements from an image and never confirm a disease or deficiency from one image. Separate observations from possibilities, do not provide pesticide mixtures or exact chemical doses, and recommend a local agronomist when risk or uncertainty is high.";
+    ? "أنت القادري الزراعي الذكي، مساعد زراعي متخصص. أجب بالعربية وباختصار شديد ومباشرة في موضوع السؤال فقط. استخدم من جملة إلى أربع جمل أو نقاط قصيرة، ولا تكرر السؤال ولا تضف مقدمة أو مواضيع جانبية. إذا احتاج المستخدم تفاصيل إضافية سيطلبها. قدم خطوات آمنة وعملية، ولا تعطِ خلطات مبيدات أو جرعات كيميائية دقيقة. إذا كانت هناك صورة نبات، اذكر الحالة والملاحظة الأهم وخطوة العلاج الأولى باختصار، ووضح أن الصورة لا تؤكد التشخيص."
+    : "You are Al-Qadri Smart Agriculture, a ChatGPT-like assistant specialized only in agriculture. Answer mostly in English when the user writes English, clearly and practically. Help with crops, horticulture, irrigation, soil, trees, pests, plant diseases, pruning, greenhouses, and farm planning. For a plant image, structure the report with: 1) overall status (healthy / monitor / concerning) and a short reason, 2) visible observations, 3) ranked possible causes or diseases with approximate confidence, 4) possible nutrient deficiencies with evidence and a warning that an image cannot confirm them, 5) what to do in the next 48 hours, 6) a safe care and treatment plan, and 7) extra information or photos needed. If the request is outside agriculture, politely refuse and invite an agricultural question. Separate observations from possibilities and never claim a confirmed disease from one image. Do not provide pesticide mixtures or exact chemical doses; recommend a licensed local agronomist when risk or uncertainty is high. Ask for missing context and give safe actionable steps.";
 }
 
 function extractInlineData(dataUrl: string, fallbackMimeType?: string) {
@@ -33,20 +33,28 @@ function extractInlineData(dataUrl: string, fallbackMimeType?: string) {
   if (!match) return null;
   const mimeType = match[1] || fallbackMimeType || "application/octet-stream";
   if (!/^(image\/(jpeg|png|webp)|audio\/(webm|mpeg|mp3|wav|ogg|mp4|m4a))$/i.test(mimeType)) return null;
-  const bytes = Buffer.byteLength(match[2], "base64");
-  if (bytes > 8 * 1024 * 1024) return null;
   return { mimeType, data: match[2] };
 }
 
 function geminiContents(messages: unknown, attachments: Attachment[]): Array<{ role: "user" | "model"; parts: GeminiPart[] }> {
   const safeMessages = Array.isArray(messages) ? messages : [];
   const contents = safeMessages
-    .filter(item => item && typeof item === "object" && (item as ChatMessage).role !== "system" && typeof (item as ChatMessage).content === "string")
+    .filter(item => item && typeof item === "object" && (item as { role?: unknown }).role !== "system" && typeof (item as { content?: unknown }).content === "string")
     .slice(-10)
-    .map(item => ({ role: (item as ChatMessage).role === "assistant" ? "model" as const : "user" as const, parts: [{ text: String((item as ChatMessage).content).slice(0, 12000) }] as GeminiPart[] }));
+    .map(item => ({
+      role: (item as { role: "user" | "assistant" }).role === "assistant" ? "model" as const : "user" as const,
+      parts: [{ text: String((item as { content: string }).content).slice(0, 12000) }] as GeminiPart[],
+    }));
+
   const last = contents[contents.length - 1];
-  const images = attachments.filter(item => item?.type === "image").slice(0, 3).map(item => extractInlineData(item.dataUrl, item.mimeType)).filter((item): item is { mimeType: string; data: string } => Boolean(item));
-  if (last?.role === "user" && images.length) last.parts.push(...images.map(image => ({ inlineData: image })));
+  const images = attachments
+    .filter(item => item?.type === "image")
+    .slice(0, 3)
+    .map(item => extractInlineData(item.dataUrl, item.mimeType))
+    .filter((item): item is { mimeType: string; data: string } => Boolean(item));
+  if (last?.role === "user" && images.length) {
+    last.parts.push(...images.map(image => ({ inlineData: image })));
+  }
   return contents;
 }
 
@@ -57,8 +65,37 @@ function responseText(data: unknown): string {
 
 function latestUserText(messages: unknown): string {
   if (!Array.isArray(messages)) return "";
-  const item = [...messages].reverse().find(value => value && typeof value === "object" && (value as ChatMessage).role === "user");
-  return item && typeof (item as ChatMessage).content === "string" ? String((item as ChatMessage).content).slice(0, 12000) : "";
+  const item = [...messages].reverse().find(value => value && typeof value === "object" && (value as { role?: unknown }).role === "user");
+  return item && typeof (item as { content?: unknown }).content === "string" ? String((item as { content: string }).content).slice(0, 12000) : "";
+}
+
+function isImageRequest(messages: unknown, attachments: Attachment[]): boolean {
+  // An attached plant photo is an analysis request, even when the prompt says
+  // "image/photo". Only image-generation requests without an uploaded image
+  // should use the image model.
+  if (attachments.some(item => item?.type === "image")) return false;
+  const text = latestUserText(messages).toLocaleLowerCase();
+  return ["أعطني صورة", "اعطني صورة", "اعطيني صورة", "أعطيني صورة", "صمّم", "صمم", "أنشئ صورة", "انشئ صورة", "اعمل لي صورة", "ارسم", "generate an image", "generate a picture", "create an image", "create a picture", "design an image", "draw an image"].some(term => text.includes(term));
+}
+
+async function generateGeminiImage(prompt: string, language: "ar" | "en") {
+  const apiKey = process.env.GEMINI_API_KEY?.trim();
+  if (!apiKey) throw new Error("لم يتم ضبط GEMINI_API_KEY على الخادم.");
+  const model = process.env.GEMINI_IMAGE_MODEL?.trim() || "gemini-3.1-flash-image";
+  const url = `${GEMINI_API_URL}/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const response = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify({
+    contents: [{ role: "user", parts: [{ text: `${language === "ar" ? "أنشئ صورة زراعية واقعية بناءً على الطلب التالي. لا تضف نصوصًا أو شعارات:" : "Generate a realistic agricultural image from this request. Do not add text or logos:"} ${prompt}` }] }],
+    generationConfig: { responseModalities: ["TEXT", "IMAGE"], imageConfig: { aspectRatio: "1:1" } },
+  }) });
+  const raw = await response.text();
+  let data: any = {};
+  try { data = JSON.parse(raw); } catch { /* handled below */ }
+  if (!response.ok) throw new Error(`فشل توليد الصورة (${response.status}): ${data?.error?.message || raw.slice(0, 240)}`);
+  const parts = data?.candidates?.[0]?.content?.parts || [];
+  const images = parts.map((part: any) => part?.inlineData?.data && part?.inlineData?.mimeType ? `data:${part.inlineData.mimeType};base64,${part.inlineData.data}` : "").filter(Boolean).slice(0, 2);
+  const content = parts.map((part: any) => typeof part?.text === "string" ? part.text : "").filter(Boolean).join("\n").trim();
+  if (!images.length) throw new Error("لم يُرجع Gemini صورة. جرّب وصفًا زراعيًا أكثر تحديدًا.");
+  return { content: content || (language === "ar" ? "هذه صورة زراعية مولدة بناءً على طلبك." : "Here is an agricultural image generated from your request."), images };
 }
 
 async function callGemini(messages: unknown, attachments: Attachment[], language: "ar" | "en") {
@@ -66,7 +103,15 @@ async function callGemini(messages: unknown, attachments: Attachment[], language
   if (!apiKey) throw new Error("لم يتم ضبط GEMINI_API_KEY على الخادم.");
   const model = process.env.GEMINI_MODEL?.trim() || "gemini-3.5-flash-lite";
   const url = `${GEMINI_API_URL}/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
-  const response = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify({ systemInstruction: { parts: [{ text: systemInstruction(language) }] }, contents: geminiContents(messages, attachments), generationConfig: { temperature: 0.25, maxOutputTokens: 1800 } }) });
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      systemInstruction: { parts: [{ text: systemInstruction(language) }] },
+      contents: geminiContents(messages, attachments),
+      generationConfig: { temperature: 0.25, maxOutputTokens: 450 },
+    }),
+  });
   const raw = await response.text();
   let data: unknown = {};
   try { data = JSON.parse(raw); } catch { /* handled below */ }
@@ -86,9 +131,10 @@ router.post("/trpc/ai.consult", async (req, res) => {
     if (!messages.length) return sendError(res, "أرسل سؤالًا زراعيًا أولًا.", "BAD_REQUEST");
     const language = input?.language === "en" ? "en" : "ar";
     const attachments = Array.isArray(input?.attachments) ? input.attachments : [];
-    const hasImage = attachments.some(item => item?.type === "image" && extractInlineData(item.dataUrl, item.mimeType));
-    if (attachments.some(item => item?.type === "image") && !hasImage) return sendError(res, "تعذر قراءة الصورة. استخدم JPG أو PNG أو WebP بحجم أقل من 8 ميغابايت.", "BAD_REQUEST");
-    return sendSuccess(res, { content: await callGemini(messages, attachments, language), images: [] });
+    const result = isImageRequest(messages, attachments)
+      ? await generateGeminiImage(latestUserText(messages), language)
+      : { content: await callGemini(messages, attachments, language), images: [] };
+    return sendSuccess(res, result);
   } catch (error) {
     console.error("[AI] Gemini agricultural consultation failed", error);
     const message = error instanceof Error ? error.message : "تعذر الحصول على رد من Gemini.";
