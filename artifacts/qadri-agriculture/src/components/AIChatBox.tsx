@@ -37,7 +37,7 @@ const MAX_IMAGE_BYTES = 4 * 1024 * 1024;
 const MAX_AUDIO_BYTES = 16 * 1024 * 1024;
 
 function AssistantLogo({ className }: { className: string }) {
-  return <img src="/assets/qadri-bot-logo.png" alt="" aria-hidden="true" className={cn("object-contain", className)} />;
+  return <img src="/assets/chatbot.png" alt="" aria-hidden="true" className={cn("object-contain", className)} />;
 }
 
 function readFileAsDataUrl(file: File) {
@@ -217,14 +217,14 @@ export function AIChatBox({
   };
 
   return (
-    <div className={cn("flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm", height === "auto" ? "overflow-visible" : "overflow-hidden", className)} style={{ height: height === "auto" ? "auto" : height, minHeight: height === "auto" ? "520px" : undefined }}>
-      <div ref={scrollAreaRef} className={cn("min-h-0 flex-1", height === "auto" ? "overflow-visible" : "overflow-hidden")}>
+    <div className={cn("flex min-h-0 flex-col rounded-lg border bg-card text-card-foreground shadow-sm", height === "auto" ? "overflow-hidden" : "overflow-hidden", className)} style={{ height: height === "auto" ? "100%" : height, minHeight: height === "auto" ? 0 : undefined }}>
+      <div ref={scrollAreaRef} className="min-h-0 flex-1 overflow-hidden">
         {displayMessages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-6 p-4 text-muted-foreground">
             <div className="flex flex-col items-center gap-3 text-center"><AssistantLogo className="size-12 opacity-30" /><p className="text-sm">{emptyStateMessage}</p><p className="max-w-md text-xs leading-5">{"اسأل بالنص، أرفق صورة، أو سجّل صوتك وسأحلّل ما ترسله."}</p></div>
             {suggestedPrompts?.length ? <div className="flex max-w-2xl flex-wrap justify-center gap-2">{suggestedPrompts.map(prompt => <button key={prompt} type="button" onClick={() => onSendMessage(prompt)} disabled={isLoading} className="rounded-lg border border-border bg-card px-4 py-2 text-sm transition-colors hover:bg-accent disabled:opacity-50">{prompt}</button>)}</div> : null}
           </div>
-        ) : <ScrollArea className={height === "auto" ? "h-auto max-h-none overflow-visible" : "h-full"}><div className="flex flex-col space-y-4 p-4">{displayMessages.map((message, index) => <div key={`${message.role}-${index}`} className={cn("flex items-start gap-3", message.role === "user" ? "justify-end" : "justify-start")}>
+        ) : <ScrollArea className="h-full min-h-0 overflow-y-auto"><div className="flex flex-col space-y-4 p-4">{displayMessages.map((message, index) => <div key={`${message.role}-${index}`} className={cn("flex items-start gap-3", message.role === "user" ? "justify-end" : "justify-start")}>
           {message.role === "assistant" && <div className="mt-1 grid size-8 shrink-0 place-items-center rounded-full bg-primary/10 p-1"><AssistantLogo className="size-full" /></div>}
           <div className={cn("min-w-0 max-w-[84%] overflow-hidden rounded-2xl px-4 py-3 break-words", message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted text-foreground")}>
             {message.attachments?.length ? <div className="mb-2 grid gap-2">{message.attachments.map(attachment => attachment.type === "image" ? <img key={attachment.name} src={attachment.dataUrl} alt={attachment.name} className="max-h-52 max-w-full rounded-xl object-contain" /> : <audio key={attachment.name} controls src={attachment.dataUrl} className="max-w-full" />)}</div> : null}
@@ -234,7 +234,7 @@ export function AIChatBox({
           {message.role === "user" && <div className="mt-1 grid size-8 shrink-0 place-items-center rounded-full bg-secondary"><User className="size-4 text-secondary-foreground" /></div>}
         </div>)}{isLoading && <div className="flex items-start gap-3"><div className="mt-1 grid size-8 shrink-0 place-items-center rounded-full bg-primary/10 p-1"><AssistantLogo className="size-full" /></div><div className="rounded-2xl bg-muted px-4 py-3"><Loader2 className="size-4 animate-spin text-muted-foreground" /></div></div>}</div></ScrollArea>}
       </div>
-      <form onSubmit={submit} className="border-t bg-background/50 p-3 sm:p-4">
+      <form onSubmit={submit} className="shrink-0 border-t bg-background/50 p-3 sm:p-4">
         {attachments.length > 0 && <div className="mb-3 flex flex-wrap gap-2">{attachments.map((attachment, index) => <div key={`${attachment.name}-${index}`} className="relative flex items-center gap-2 rounded-xl border bg-card p-1.5 text-xs"><span className="max-w-40 truncate">{attachment.type === "image" ? <ImagePlus className="me-1 inline size-3.5" /> : <Mic className="me-1 inline size-3.5" />}{attachment.name}</span><button type="button" onClick={() => setAttachments(previous => previous.filter((_, itemIndex) => itemIndex !== index))} className="rounded-full p-1 text-muted-foreground hover:bg-muted" aria-label="حذف المرفق"><X className="size-3.5" /></button></div>)}</div>}
         {mediaError && <p className="mb-2 text-xs font-medium text-destructive">{mediaError}</p>}
         <div className="flex items-end gap-2">
