@@ -255,7 +255,7 @@ export function PlatformShell({
               className="container grid grid-cols-2 gap-2 sm:grid-cols-3"
               aria-label="Mobile navigation"
             >
-              {navigation.map(item => {
+              {visibleNavigation.map(item => {
                 const Icon = item.icon;
                 const active = isActive(item.href);
                 return (
