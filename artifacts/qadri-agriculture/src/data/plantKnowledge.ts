@@ -37,10 +37,10 @@ export const countryLabels: Record<SupportedCountry, { ar: string; en: string }>
 };
 
 export const categoryLabels: Record<PlantCategory, { ar: string; en: string }> = {
-  trees: { ar: "أشجار", en: "Trees" },
-  shrubs: { ar: "شجيرات", en: "Shrubs" },
-  flowers: { ar: "زهور", en: "Flowers" },
-  fruit: { ar: "فاكهة", en: "Fruit" },
+  trees: { ar: "أشجار زينة", en: "Ornamental trees" },
+  shrubs: { ar: "شجيرات زينة", en: "Ornamental shrubs" },
+  flowers: { ar: "ورود", en: "Flowers" },
+  fruit: { ar: "أشجار مثمرة", en: "Fruit trees" },
   ornamental: { ar: "زينة", en: "Ornamental" },
   tropical: { ar: "استوائية", en: "Tropical" },
   cactus: { ar: "صباريات وعصاريات", en: "Cacti & succulents" },
