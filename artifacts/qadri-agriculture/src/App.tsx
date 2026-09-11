@@ -27,6 +27,7 @@ import Quotes from "./pages/Quotes";
 import SharedReport from "./pages/SharedReport";
 import Selector from "./pages/Selector";
 import FloatingAIAssistant from "./components/FloatingAIAssistant";
+import PageEditor from "./pages/PageEditor";
 
 function Router() {
   return (
@@ -45,6 +46,7 @@ function Router() {
         <Route path="/quotes/request" component={QuoteRequest} />
         <Route path="/quotes-admin" component={QuoteAdmin} />
         <Route path="/financial-documents" component={FinancialDocuments} />
+        <Route path="/page-editor" component={PageEditor} />
         <Route path="/quotes" component={Quotes} />
         <Route path="/projects" component={Projects} />
         <Route path="/shop" component={EmptyPage} />

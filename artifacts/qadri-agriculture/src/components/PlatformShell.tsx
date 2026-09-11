@@ -38,6 +38,7 @@ const adminNavigation = [
   { href: "/dashboard", label: "dashboard", icon: LayoutDashboard },
   { href: "/quotes-admin", label: "quoteRequests", icon: DollarSign },
   { href: "/financial-documents", label: "financialDocuments", icon: FileText },
+  { href: "/page-editor", label: "pageEditor", icon: FileText },
   { href: "/control", label: "control", icon: ShieldCheck },
 ] as const;
 
