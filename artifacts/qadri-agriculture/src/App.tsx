@@ -13,6 +13,7 @@ import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
 import Designer from "./pages/Designer";
 import Engineer from "./pages/Engineer";
+import FinancialDocuments from "./pages/FinancialDocuments";
 import Home from "./pages/Home";
 import Knowledge from "./pages/Knowledge";
 import KnowledgeDetail from "./pages/KnowledgeDetail";
@@ -42,6 +43,7 @@ function Router() {
         <Route path="/videos" component={Videos} />
         <Route path="/quotes/request" component={QuoteRequest} />
         <Route path="/quotes-admin" component={QuoteAdmin} />
+        <Route path="/financial-documents" component={FinancialDocuments} />
         <Route path="/quotes" component={Quotes} />
         <Route path="/projects" component={Projects} />
         <Route path="/shop" component={EmptyPage} />

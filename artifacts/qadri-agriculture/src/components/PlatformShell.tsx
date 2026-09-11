@@ -37,6 +37,7 @@ import { Button } from "./ui/button";
 const adminNavigation = [
   { href: "/dashboard", label: "dashboard", icon: LayoutDashboard },
   { href: "/quotes-admin", label: "quoteRequests", icon: DollarSign },
+  { href: "/financial-documents", label: "financialDocuments", icon: FileText },
   { href: "/control", label: "control", icon: ShieldCheck },
 ] as const;
 
@@ -396,4 +397,10 @@ export function AccessGate({ children }: { children: ReactNode }) {
       </div>
     </section>
   );
+}
+
+export function AdminGate({ children }: { children: ReactNode }) {
+  const { user } = useAuth();
+  if (user?.role === "admin") return <>{children}</>;
+  return <section className="container py-12"><div className="mx-auto max-w-lg rounded-2xl border border-red-200 bg-white p-8 text-center"><h2 className="text-xl font-bold text-red-800">هذه الصفحة مخصصة للأدمن</h2><p className="mt-2 text-sm text-slate-600">لا تملك صلاحية إدارة الفواتير والسندات.</p></div></section>;
 }
