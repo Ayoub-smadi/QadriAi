@@ -26,6 +26,7 @@ import QuoteRequest from "./pages/QuoteRequest";
 import Quotes from "./pages/Quotes";
 import SharedReport from "./pages/SharedReport";
 import Selector from "./pages/Selector";
+import FloatingAIAssistant from "./components/FloatingAIAssistant";
 
 function Router() {
   return (
@@ -58,5 +59,5 @@ function Router() {
 }
 
 export default function App() {
-  return <ErrorBoundary><ThemeProvider defaultTheme="light"><LanguageProvider><TooltipProvider><CartProvider><Toaster /><Router /><CartDrawer /></CartProvider></TooltipProvider></LanguageProvider></ThemeProvider></ErrorBoundary>;
+  return <ErrorBoundary><ThemeProvider defaultTheme="light"><LanguageProvider><TooltipProvider><CartProvider><Toaster /><Router /><CartDrawer /><FloatingAIAssistant /></CartProvider></TooltipProvider></LanguageProvider></ThemeProvider></ErrorBoundary>;
 }

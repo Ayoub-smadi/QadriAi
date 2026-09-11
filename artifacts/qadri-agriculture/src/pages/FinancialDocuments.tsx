@@ -18,6 +18,28 @@ export default function FinancialDocuments() {
   const [doc, setDoc] = useState<FinancialDocument>(() => emptyDocument("exportInvoice"));
   const [query, setQuery] = useState("");
   useEffect(() => subscribeToDocuments(() => setDocuments(getDocuments())), []);
+  useEffect(() => {
+    const handleCommand = (event: Event) => {
+      const content = (event as CustomEvent<{ content?: string }>).detail?.content?.trim() || "";
+      if (!content) return;
+      const lower = content.toLocaleLowerCase();
+      const nextType: DocumentType = /سند\s*قبض|وصل\s*قبض/.test(lower) ? "receipt" : /سند\s*صرف|وصل\s*صرف/.test(lower) ? "disbursement" : /فاتورة|تصدير/.test(lower) ? "exportInvoice" : type;
+      setType(nextType);
+      setDoc(current => {
+        const next = { ...current, type: nextType };
+        const name = content.match(/(?:لـ|ل|من|اسم(?:ه)?|الدافع|المستلم)\s*[:：]?\s*([\u0600-\u06FFa-zA-Z][\u0600-\u06FFa-zA-Z\s]{2,40})/i)?.[1]?.trim();
+        const amount = content.match(/(?:بمبلغ|المبلغ|بقيمة)\s*[:：]?\s*([\d٠-٩]+(?:[.,][\d٠-٩]+)?)/i)?.[1];
+        const destination = content.match(/(?:إلى|للجهة|لجهة)\s*[:：]?\s*([\u0600-\u06FFa-zA-Z][\u0600-\u06FFa-zA-Z\s]{2,50})/i)?.[1]?.trim();
+        if (nextType === "exportInvoice") {
+          const item = content.match(/(?:صنف|بند|نبات)\s*[:：]?\s*([\u0600-\u06FFa-zA-Z][\u0600-\u06FFa-zA-Z\s]{2,50})/i)?.[1]?.trim();
+          return { ...next, destination: destination || next.destination, totalDinar: amount || next.totalDinar, rows: item ? [{ ...next.rows[0], item, dinar: amount || next.rows[0].dinar }] : next.rows };
+        }
+        return { ...next, personName: name || next.personName, amount: amount || next.amount };
+      });
+    };
+    window.addEventListener("financial-ai-command", handleCommand);
+    return () => window.removeEventListener("financial-ai-command", handleCommand);
+  }, [type]);
   const filtered = useMemo(() => documents.filter(item => item.type === type && `${item.number} ${item.personName} ${item.destination} ${item.sourceName}`.includes(query)), [documents, type, query]);
   const changeType = (next: DocumentType) => { setType(next); setDoc(emptyDocument(next)); };
   const patch = (changes: Partial<FinancialDocument>) => setDoc(current => ({ ...current, ...changes }));
