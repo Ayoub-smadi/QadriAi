@@ -1,4 +1,4 @@
-export type PlantCategory = "trees" | "shrubs" | "flowers" | "fruit" | "ornamental" | "tropical";
+export type PlantCategory = "trees" | "shrubs" | "flowers" | "fruit" | "ornamental" | "tropical" | "cactus" | "medicinal";
 export type SupportedCountry = "الأردن" | "فلسطين" | "مصر" | "قطر";
 
 export type PlantIssue = {
@@ -43,6 +43,8 @@ export const categoryLabels: Record<PlantCategory, { ar: string; en: string }> =
   fruit: { ar: "فاكهة", en: "Fruit" },
   ornamental: { ar: "زينة", en: "Ornamental" },
   tropical: { ar: "استوائية", en: "Tropical" },
+  cactus: { ar: "صباريات وعصاريات", en: "Cacti & succulents" },
+  medicinal: { ar: "نباتات وأشجار طبية", en: "Medicinal plants" },
 };
 
 export const plantKnowledge: PlantKnowledgeEntry[] = [
