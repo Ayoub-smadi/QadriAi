@@ -2,6 +2,7 @@ import { plantKnowledge, type PlantCategory, type PlantKnowledgeEntry } from "./
 import { backupPlantCatalog } from "./backupPlantCatalog";
 
 const CATALOG_KEY = "al-qadri-plant-catalog-v1";
+const REMOVED_KEY = "al-qadri-plant-catalog-removed-v1";
 const CHANGE_EVENT = "al-qadri-plant-catalog-change";
 
 export type EditablePlant = PlantKnowledgeEntry;
@@ -28,16 +29,27 @@ function readStored(): EditablePlant[] | null {
   }
 }
 
+function readRemoved(): Set<string> {
+  if (typeof window === "undefined") return new Set();
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(REMOVED_KEY) || "[]");
+    return new Set(Array.isArray(parsed) ? parsed : []);
+  } catch {
+    return new Set();
+  }
+}
+
 export function getCatalog(): EditablePlant[] {
+  const removed = readRemoved();
   const stored = readStored();
-  if (!stored) return [...plantKnowledge, ...backupPlants];
+  if (!stored) return [...plantKnowledge, ...backupPlants].filter(item => !removed.has(item.id));
   const existing = new Set(stored.map(item => item.id));
   const backupById = new Map(backupPlants.map(item => [item.id, item]));
   const refreshed = stored.map(item => {
     const backup = backupById.get(item.id);
     return backup ? { ...item, imagePath: backup.imagePath, categoryTags: backup.categoryTags } : item;
   });
-  return [...refreshed, ...backupPlants.filter(item => !existing.has(item.id))];
+  return [...refreshed, ...backupPlants.filter(item => !existing.has(item.id) && !removed.has(item.id))].filter(item => !removed.has(item.id));
 }
 
 export function saveCatalog(items: EditablePlant[]) {
@@ -67,6 +79,9 @@ export function addCatalogPlant(input: Pick<EditablePlant, "nameAr" | "nameEn" |
 }
 
 export function removeCatalogPlant(id: string) {
+  const removed = readRemoved();
+  removed.add(id);
+  window.localStorage.setItem(REMOVED_KEY, JSON.stringify([...removed]));
   saveCatalog(getCatalog().filter(item => item.id !== id));
 }
 
@@ -82,5 +97,6 @@ export function subscribeToCatalog(listener: () => void) {
 
 export function resetCatalog() {
   window.localStorage.removeItem(CATALOG_KEY);
+  window.localStorage.removeItem(REMOVED_KEY);
   window.dispatchEvent(new CustomEvent(CHANGE_EVENT));
 }
