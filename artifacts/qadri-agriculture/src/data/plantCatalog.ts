@@ -1,9 +1,21 @@
 import { plantKnowledge, type PlantKnowledgeEntry } from "./plantKnowledge";
+import { backupPlantCatalog } from "./backupPlantCatalog";
 
 const CATALOG_KEY = "al-qadri-plant-catalog-v1";
 const CHANGE_EVENT = "al-qadri-plant-catalog-change";
 
 export type EditablePlant = PlantKnowledgeEntry;
+
+const backupPlants: EditablePlant[] = backupPlantCatalog.map((plant, index) => ({
+  ...plantKnowledge[index % plantKnowledge.length],
+  id: plant.id,
+  nameAr: plant.nameAr,
+  nameEn: plant.nameEn,
+  scientificName: plant.scientificName,
+  imagePath: plant.imagePath,
+  description: { ar: plant.descriptionAr, en: plant.descriptionEn },
+  categoryTags: ["ornamental"],
+}));
 
 function readStored(): EditablePlant[] | null {
   if (typeof window === "undefined") return null;
@@ -17,7 +29,10 @@ function readStored(): EditablePlant[] | null {
 }
 
 export function getCatalog(): EditablePlant[] {
-  return readStored() || plantKnowledge;
+  const stored = readStored();
+  if (!stored) return [...plantKnowledge, ...backupPlants];
+  const existing = new Set(stored.map(item => item.id));
+  return [...stored, ...backupPlants.filter(item => !existing.has(item.id))];
 }
 
 export function saveCatalog(items: EditablePlant[]) {

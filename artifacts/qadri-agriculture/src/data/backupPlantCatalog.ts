@@ -1,0 +1,2192 @@
+export const backupPlantCatalog = [
+  {
+    "id": "id-1779350171772-4t3d6",
+    "nameAr": "جولد ستار",
+    "nameEn": "Cupressus macrocarpa 'Goldcrest'",
+    "scientificName": "Cupressus macrocarpa 'Goldcrest'",
+    "imagePath": "/api/images/img-1e8accd4861dbbc6a6969438",
+    "descriptionAr": "جولد ستار 🌿\n\n نبات زينة متسلق أو شبه متسلق، يتميز بأوراقه الخضراء اللامعة التي يظهر عليها لون ذهبي مميز خصوصًا عند النمو الجديد. يستخدم لتغطية الجدران والأسوار وإضافة شكل جمالي للحدائق. سريع النمو نسبيًا وسهل العناية به. يفضل الشمس الجزئية إلى الكاملة وتربة جيدة التصريف.",
+    "descriptionEn": "Gold Star 🌿\nClimbing or semi-climbing ornamental plant characterized by glossy green leaves with a distinctive golden coloration, especially on new growth.\nUsed to cover walls and fences and to add an attractive aesthetic touch to gardens.\nRelatively fast-growing and easy to care for.\nPrefers partial to full sun and well-drained soil.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779350243601-wndbp",
+    "nameAr": "سرو توتم إيطالي",
+    "nameEn": "Cupressus sempervirens",
+    "scientificName": "Cupressus sempervirens",
+    "imagePath": "/api/images/img-6f365c665d79abe7fd897206",
+    "descriptionAr": "سرو توتم إيطالي 🌿\n\nشجرة زينة دائمة الخضرة تتميز بشكلها العمودي النحيف وأوراقها الكثيفة ذات اللون الأخضر الداكن، وتستخدم بكثرة لتزيين المداخل والحدائق والممرات. تضيف مظهرًا أنيقًا وفخمًا للمكان، كما أنها تتحمل الظروف المناخية المختلفة وسهلة العناية نسبيًا. تفضل الشمس الكاملة والتربة جيدة التصريف.",
+    "descriptionEn": "Italian Cypress 🌿\n\nEvergreen ornamental tree distinguished by its tall, narrow columnar shape and dense dark green foliage. Commonly used to decorate entrances, gardens, and pathways, adding an elegant and luxurious appearance to landscapes. It tolerates various climate conditions and is relatively easy to maintain. Prefers full sun and well-drained soil.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779350740951-gw4be",
+    "nameAr": "ثويا",
+    "nameEn": "Thuja occidentalis",
+    "scientificName": "Thuja occidentalis",
+    "imagePath": "/api/images/img-121161238a026dbe176581b4",
+    "descriptionAr": "ثويا 🌿\n\nشجيرة أو شجرة زينة دائمة الخضرة تتميز بأوراقها الكثيفة الناعمة ولونها الأخضر الجميل، وتستخدم بكثرة في تنسيق الحدائق وعمل الأسيجة النباتية للخصوصية والزينة. تتحمل التقليم ويمكن تشكيلها بسهولة، كما أنها سهلة العناية وتناسب مختلف الأجواء المناخية. تفضل الشمس الكاملة إلى الجزئية والتربة جيدة التصريف.",
+    "descriptionEn": "Thuja 🌿\n\nEvergreen ornamental shrub or tree known for its soft dense foliage and attractive green color. Commonly used in landscaping and as privacy hedges due to its elegant appearance. It tolerates pruning well and can be easily shaped, making it easy to maintain and suitable for various climates. Prefers full to partial sun and well-drained soil.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779350951073-u2wd1",
+    "nameAr": "سرو ليلاندي",
+    "nameEn": "Cupressus × leylandii",
+    "scientificName": "Cupressus × leylandii",
+    "imagePath": "/api/images/img-e49bc56b28040f45652f090a",
+    "descriptionAr": "سرو ليلاندي 🌿\n\nشجرة دائمة الخضرة سريعة النمو، تتميز بأوراقها الكثيفة ولونها الأخضر الجميل، وتستخدم بكثرة كسياج نباتي للخصوصية ومصدات للرياح. تتحمل التقليم بشكل ممتاز ويمكن تشكيلها بسهولة، كما أنها مناسبة للحدائق الواسعة والمزارع. تفضل الشمس الكاملة والتربة جيدة التصريف.",
+    "descriptionEn": "Leyland Cypress 🌿\n\nFast-growing evergreen tree known for its dense foliage and attractive green color. Commonly used as a privacy hedge and windbreak due to its thick growth. It tolerates pruning very well and can be easily shaped, making it ideal for large gardens and farms. Prefers full sun and well-drained soil.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779351368746-qtd4n",
+    "nameAr": "تيكوما صفراء",
+    "nameEn": "Tecoma stans",
+    "scientificName": "Tecoma stans",
+    "imagePath": "/api/images/img-d20e8d20a4a539fef74dcc72",
+    "descriptionAr": "تيكوما صفراء 🌿\n\nشجيرة أو شجرة زينة مزهرة تتميز بأزهارها الصفراء الزاهية التي تتفتح بغزارة خلال فترات طويلة من السنة، مما يضيف منظرًا جماليًا مميزًا للحدائق والشوارع. سريعة النمو وتتحمل الحرارة والجفاف نسبيًا، كما أنها سهلة العناية والتقليم. تفضل الشمس الكاملة والتربة جيدة التصريف.",
+    "descriptionEn": "Yellow Tecoma 🌿\n\nFlowering ornamental shrub or small tree known for its bright yellow blooms that appear abundantly for long periods throughout the year, adding a beautiful touch to gardens and streets. It is fast-growing, relatively heat and drought tolerant, and easy to maintain and prune. Prefers full sun and well-drained soil.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779351447930-xv5wv",
+    "nameAr": "فرشاة الزجاج",
+    "nameEn": "Callistemon citrinus",
+    "scientificName": "Callistemon citrinus",
+    "imagePath": "/api/images/img-b8049d1ecb30ca2e26d8e9d1",
+    "descriptionAr": "فرشاة الزجاج 🌿\n\n شجيرة أو شجرة زينة تتميز بأزهارها الفريدة التي تأخذ شكل فرشاة باللون الأحمر الزاهي وتجذب النحل والطيور. تستخدم بكثرة في الحدائق والشوارع والأسوار بسبب شكلها الجميل وكثافة أوراقها. تتحمل الحرارة والجفاف بشكل جيد وسهلة العناية نسبيًا. تفضل الشمس الكاملة والتربة جيدة التصريف.",
+    "descriptionEn": "Bottlebrush 🌿\n\nOrnamental shrub or small tree known for its unique brush-shaped flowers in bright red colors that attract bees and birds. Widely used in gardens, streets, and fences due to its attractive appearance and dense foliage. Tolerates heat and drought well and is relatively easy to care for. Prefers full sun and well-drained soil.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779351822550-1xmcl",
+    "nameAr": "جكرندا",
+    "nameEn": "Jacaranda mimosifolia",
+    "scientificName": "Jacaranda mimosifolia",
+    "imagePath": "/api/images/img-8717035b289576143e820e4b",
+    "descriptionAr": "جكرندا 🌿\n\nشجرة زينة جميلة تتميز بأزهارها البنفسجية المائلة للأزرق التي تتفتح بكثافة في موسم الربيع والصيف، مما يمنح الشوارع والحدائق منظرًا رائعًا وجذابًا. سريعة النمو نسبيًا وتوفر ظلًا جيدًا، وتستخدم بكثرة في تنسيق الطرق والحدائق العامة. تفضل الشمس الكاملة والتربة جيدة التصريف.",
+    "descriptionEn": "Jacaranda 🌿\n\nBeautiful ornamental tree known for its stunning violet-blue flowers that bloom heavily during spring and summer, creating a striking appearance in streets and gardens. It is relatively fast-growing, provides good shade, and is widely used in landscaping roads and public gardens. Prefers full sun and well-drained soil.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779352155422-4ns4q",
+    "nameAr": "زنزلخت",
+    "nameEn": "Melia azedarach",
+    "scientificName": "Melia azedarach",
+    "imagePath": "/api/images/img-90ecc30894f3f89a33a01367",
+    "descriptionAr": "زنزلخت 🌿\n\nشجرة زينة وظل متساقطة الأوراق تتميز بأزهارها البنفسجية الصغيرة العطرة التي تظهر في الربيع، وتُستخدم بكثرة في الشوارع والحدائق لتوفير الظل والمظهر الجمالي. تتحمل الحرارة والجفاف نسبيًا بعد التأسيس، وسهلة العناية وتناسب البيئات الحارة. تفضل الشمس الكاملة والتربة جيدة التصريف.",
+    "descriptionEn": "Chinaberry 🌿\n\nDeciduous ornamental and shade tree known for its small fragrant purple flowers that appear in spring. It is widely used in streets and gardens for shade and aesthetic value. It is relatively heat and drought tolerant once established and easy to maintain, making it suitable for warm climates. Prefers full sun and well-drained soil.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779353190426-7nv94",
+    "nameAr": "فيكس بنجامينا",
+    "nameEn": "Ficus benjamina",
+    "scientificName": "Ficus benjamina",
+    "imagePath": "/api/images/img-b3d35bf40affb6a1d74ec2db",
+    "descriptionAr": "فيكس بنجامينا 🌿\n\nنبات زينة شجيري دائم الخضرة يتميز بأوراقه الصغيرة اللامعة والكثيفة وساقه المتفرعة بشكل أنيق، مما يعطيه مظهرًا شجريًا جميلًا ومرتبًا. يُستخدم بكثرة في تزيين المنازل والمكاتب والحدائق الداخلية والخارجية، ويُعد من أكثر النباتات الشائعة في تنسيق الديكور النباتي. يساعد في تحسين المظهر الجمالي للمكان وإضفاء طابع طبيعي وحيوي.\n\nيحتاج إلى عناية متوسطة، ويُفضل الإضاءة الساطعة غير المباشرة، لكنه قد يتحمل بعض الظل. لا يحب التغيير المفاجئ في المكان أو الإضاءة لأنه قد يؤدي إلى تساقط الأوراق. يحتاج ري معتدل مع ترك التربة تجف قليلًا بين الريات، مع تربة جيدة التصريف لتجنب تعفن الجذور. يمكن تقليمه بسهولة للتحكم في شكله وحجمه.",
+    "descriptionEn": "Ficus benjamina 🌿\n\nEvergreen ornamental tree/shrub known for its small, glossy, dense leaves and elegant branching structure, giving it a refined and decorative appearance. It is widely used in interior and exterior landscaping, including homes, offices, and gardens, due to its attractive foliage and adaptability.\n\nIt requires moderate care and prefers bright indirect light, though it can tolerate some shade. It is sensitive to sudden changes in environment or lighting, which may cause leaf drop. It needs moderate watering, allowing the soil to partially dry between waterings, and well-drained soil to prevent root rot. It can be easily pruned to maintain shape and size.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779610413079-nrf9p",
+    "nameAr": "مرجان اصفر",
+    "nameEn": "Euonymus japonicus",
+    "scientificName": "Euonymus japonicus",
+    "imagePath": "/api/images/img-0f9becfedc69ef129b90dd99",
+    "descriptionAr": "نبات المرجان 🌿\n\nشجيرة زينة دائمة الخضرة تتميز بأوراقها الكثيفة اللامعة ذات اللون الأخضر أو المبرقش بالأصفر والأبيض حسب الصنف، وتُستخدم بكثرة في تنسيق الحدائق والأسيجة النباتية بسبب شكلها المرتب وسهولة تشكيلها. يُعد من النباتات العملية والمحبوبة في الحدائق المنزلية والعامة لأنه يعطي مظهرًا أنيقًا طوال العام.\n\nيتميز بسرعة نمو معتدلة وتحمله للتقليم، مما يجعله مناسبًا لعمل سياجات خضراء أو تشكيلات هندسية جميلة. كما يتحمل الحرارة نسبيًا والظروف البيئية المختلفة بعد التأسيس. يفضل الشمس الكاملة إلى الجزئية، مع تربة جيدة التصريف وري معتدل ومنتظم.",
+    "descriptionEn": "Japanese Euonymus 🌿\n\nEvergreen ornamental shrub known for its dense glossy foliage, which may be solid green or variegated with yellow and white depending on the variety. It is widely used in landscaping and hedges because of its neat appearance and ease of shaping.\n\nIt has moderate growth and responds well to pruning, making it ideal for hedges and decorative garden forms. It is relatively tolerant to heat and varying environmental conditions once established. Prefers full to partial sun, well-drained soil, and moderate regular watering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779610743903-ntrwn",
+    "nameAr": "شمشير",
+    "nameEn": "Buxus sempervirens",
+    "scientificName": "Buxus sempervirens",
+    "imagePath": "/api/images/img-cf7f6628fd94aceaac4f4a67",
+    "descriptionAr": "شمشير 🌿\n\nشجيرة زينة دائمة الخضرة تُعرف بكثافة أوراقها الصغيرة اللامعة وقدرتها العالية على التحمل والتشكيل، مما يجعلها من أشهر النباتات المستخدمة في الأسيجة والتنسيق الهندسي للحدائق. تُستخدم بكثرة في الممرات والحدائق الرسمية لتكوين أشكال مرتبة وأنيقة، كما يمكن تقليمها وتشكيلها بسهولة إلى كرات أو أشكال هندسية مختلفة.\n\nيتميز الشمشير بنموه الكثيف والبطيء نسبيًا، مما يساعد في الحفاظ على شكله لفترات طويلة بعد التقليم. يفضل الشمس الجزئية إلى الكاملة، ويتحمل الظل الخفيف نسبيًا. يحتاج إلى تربة جيدة التصريف وري معتدل ومنتظم، مع تقليم دوري للحفاظ على كثافته وشكله الجمالي.",
+    "descriptionEn": "Boxwood 🌿\n\nEvergreen ornamental shrub known for its dense small glossy leaves and excellent shaping ability, making it one of the most popular plants for hedges and formal garden landscaping. It is widely used along pathways and in decorative garden designs and can be pruned into balls, borders, and geometric shapes.\n\nBoxwood has a dense and relatively slow growth habit, helping it maintain its shape for long periods after pruning. It prefers partial to full sun and can tolerate light shade. Requires well-drained soil, moderate regular watering, and periodic trimming to maintain its compact appearance.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1786866364623-4uic2",
+    "nameAr": "مرجان نانا",
+    "nameEn": "Murraya paniculata 'Nana'",
+    "scientificName": "Murraya paniculata 'Nana'",
+    "imagePath": "/api/images/img-f81246fba3d1028bfee7829f",
+    "descriptionAr": "🌿 مرجان نانا\n\nشجيرة زينة دائمة الخضرة تتميز بأوراقها الخضراء الكثيفة ونموها المتماسك، وتُعد من النباتات المناسبة لتنسيق الحدائق وتشكيل الأسيجة والحواجز النباتية. تتميز بحجمها الصغير نسبيًا وسهولة تشكيلها بالتقليم، مما يجعلها مناسبة للأحواض والحدائق الصغيرة والممرات.\n\nتنمو بشكل جيد في الشمس الكاملة إلى نصف الظل، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة والجفاف نسبيًا بعد التأسيس، وتحتاج إلى تقليم دوري للحفاظ على شكلها الكثيف والمتناسق.",
+    "descriptionEn": "🌿 Murraya Nana\n\nAn evergreen ornamental shrub known for its dense green foliage and compact growth habit. It is well suited for landscaping, borders, and forming low hedges and plant barriers. Its relatively small size and excellent response to pruning make it ideal for garden beds, pathways, and smaller landscapes.\n\nIt grows well in full sun to partial shade and prefers well-drained soil with moderate regular watering. Once established, it tolerates heat and moderate drought. Regular pruning helps maintain its compact and attractive form.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779615964194-syxh5",
+    "nameAr": "مرجان موشح سياج",
+    "nameEn": "Variegated ornamental hedge shrub",
+    "scientificName": "Variegated ornamental hedge shrub",
+    "imagePath": "/api/images/img-67eb9f09756c10b0f522b83c",
+    "descriptionAr": "مرجان موشح سياج 🌿\n\nشجيرة زينة دائمة الخضرة تُستخدم بشكل واسع كسياج نباتي، وتتميز بأوراقها الكثيفة المبرقشة باللون الأخضر مع الأبيض أو الأصفر، مما يعطيها مظهرًا زخرفيًا مميزًا طوال العام. تُستخدم في الحدائق لتحديد الممرات والمساحات وإعطاء شكل منظم وأنيق، كما أنها تتحمل التقليم بشكل ممتاز مما يجعلها مناسبة لتشكيل سياجات مرتبة.\n\nتنمو بشكل جيد في الشمس الكاملة إلى نصف الظل، وتتحمل الظروف البيئية المختلفة بعد التأسيس. تحتاج إلى تربة جيدة التصريف وري معتدل ومنتظم، مع تقليم دوري للحفاظ على كثافتها وشكلها كتحوط نباتي جميل.",
+    "descriptionEn": "Variegated Hedge Shrub 🌿\n\nEvergreen ornamental hedge plant characterized by dense foliage with green leaves variegated with white or yellow patterns, providing year-round decorative appeal. It is widely used for garden borders, pathways, and formal hedging due to its neat appearance and easy shaping ability.\n\nIt grows well in full sun to partial shade and becomes hardy once established. It requires well-drained soil and moderate regular watering. Frequent pruning is recommended to maintain density and shape as a formal hedge plant",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779616269300-emuxz",
+    "nameAr": "بتسبورم",
+    "nameEn": "Pittosporum spp",
+    "scientificName": "Pittosporum spp",
+    "imagePath": "/api/images/img-391a8facd3237d7b1385f90b",
+    "descriptionAr": "بتسبورم 🌿\n\nشجيرة زينة دائمة الخضرة تُستخدم بكثرة في الحدائق وتنسيق الأسيجة، وتتميز بأوراقها الجلدية اللامعة التي تكون خضراء أو مبرقشة بالأبيض أو الأصفر حسب الصنف. تُعطي مظهرًا مرتبًا وأنيقًا طوال العام، وتُستخدم في الحدائق المنزلية والعامة كعناصر تزيينية أو كسياج نباتي كثيف.\n\nتتحمل الظروف البيئية المختلفة بعد التأسيس، وتنمو بشكل جيد في الشمس الكاملة إلى نصف الظل. تحتاج إلى تربة جيدة التصريف وري معتدل، وتتحمل التقليم مما يجعلها مناسبة للتشكيل والتحكم في حجمها وكثافتها.",
+    "descriptionEn": "Pittosporum 🌿\n\nEvergreen ornamental shrub commonly used in landscaping and hedges. It is known for its glossy leathery leaves, which may be green or variegated with white or yellow depending on the variety. It provides a neat, dense appearance year-round and is widely used in home and public gardens as an ornamental hedge or feature plant.\n\nIt adapts well to different environmental conditions once established. It grows best in full sun to partial shade and requires well-drained soil with moderate watering. It tolerates pruning well, making it suitable for shaping and maintaining formal hedges.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779617650239-76klw",
+    "nameAr": "دورنتا",
+    "nameEn": "Duranta erecta (variegated cultivars)",
+    "scientificName": "Duranta erecta (variegated cultivars)",
+    "imagePath": "/api/images/img-c69481e6fb227cf3750200db",
+    "descriptionAr": "دورنتا ليموني 🌿\n\nشجيرة زينة دائمة الخضرة تتميز بأوراقها الخضراء المبرقشة باللون الأصفر الليموني، مما يعطيها مظهرًا مشرقًا وجذابًا في الحدائق. تُستخدم بكثرة في الأسيجة النباتية وتنسيق الحدائق لإضافة لون مميز وكثافة خضراء جميلة، كما يمكن تشكيلها بسهولة لتناسب التصاميم المختلفة.\n\nتنمو بشكل جيد في الشمس الكاملة إلى نصف الظل، وتتحمل الحرارة نسبيًا بعد التأسيس. تحتاج إلى تربة جيدة التصريف وري معتدل ومنتظم، مع تقليم دوري للحفاظ على شكلها وتحفيز النمو الكثيف والأوراق الجديدة.",
+    "descriptionEn": "Duranta ‘Lemon’ 🌿\n\nEvergreen ornamental shrub known for its bright yellow-lemon variegated foliage, which provides a striking and colorful appearance in landscape designs. It is widely used in hedges, borders, and garden accents due to its dense growth and decorative leaves.\n\nIt grows well in full sun to partial shade and becomes more vibrant with good light exposure. Requires well-drained soil and moderate regular watering. It responds well to pruning, which helps maintain shape and encourages dense growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779704160441-u6okp",
+    "nameAr": "بزروميا",
+    "nameEn": "Ornamental Climbing Shrub",
+    "scientificName": "Ornamental Climbing Shrub",
+    "imagePath": "/api/images/img-e116f35c7724d62640b80325",
+    "descriptionAr": "بزروميا 🌿\n\nنبات زينة متسلق أو شجيري دائم الخضرة يُستخدم بكثرة في تغطية الأسوار والجدران وإضافة لون أخضر كثيف للحدائق. يتميز بنموه الجيد وأوراقه الصغيرة الكثيفة التي تعطي مظهرًا ممتلئًا ومنسقًا، مما يجعله مناسبًا للتنسيق الخارجي كغطاء نباتي أو سياج حي.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويتحمل الظروف الجوية المختلفة بعد التأسيس. يحتاج إلى تربة جيدة التصريف وري معتدل ومنتظم، مع تقليم دوري للحفاظ على شكله وكثافته ومنع التمدد العشوائي.",
+    "descriptionEn": "Ornamental Climbing Shrub 🌿\n\nEvergreen climbing or shrub plant widely used in landscaping for covering fences, walls, and garden structures. It is valued for its dense foliage and ability to create a green visual screen in outdoor spaces.\n\nIt grows well in full sun to partial shade and becomes hardy once established. Requires well-drained soil and moderate regular watering. Periodic pruning is important to maintain shape, density, and controlled growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779704510543-y0z40",
+    "nameAr": "كينا",
+    "nameEn": "Eucalyptus (Kina)",
+    "scientificName": "Eucalyptus (Kina)",
+    "imagePath": "/api/images/img-6d0bb9ebbd1fcbbf6be7934c",
+    "descriptionAr": "كينا 🌿\n\nشجرة زينة سريعة النمو دائمة الخضرة تتميز بجذعها القوي وأوراقها الطويلة الضيقة ذات اللون الأخضر المائل للرمادي، وتُستخدم بكثرة في تشجير الشوارع والمزارع والحدائق الكبيرة. تُعد من الأشجار القوية التي تتحمل الظروف الصعبة وتوفر ظلًا جيدًا ومظهرًا طبيعيًا جميلًا.\n\nتحتاج إلى شمس كاملة لتنمو بشكل أفضل، وتتحمل الحرارة والجفاف نسبيًا بعد التأسيس. تفضل التربة المتوسطة إلى جيدة التصريف، مع ري معتدل خاصة في المراحل الأولى من النمو. كما يُنصح بتقليمها عند الحاجة للحفاظ على شكلها وتنظيم نموها.",
+    "descriptionEn": "Eucalyptus (Kina) 🌿\n\nFast-growing evergreen ornamental tree characterized by its tall structure and long narrow grey-green leaves. It is widely used in large landscapes, farms, and roadside planting due to its hardiness and ability to provide shade and wind protection.\n\nIt thrives in full sun and is highly tolerant of heat and moderate drought once established. Prefers well-drained soil and moderate watering during early growth stages. Pruning may be done to manage shape and growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779706400260-90c7u",
+    "nameAr": "أروكاريا",
+    "nameEn": "Araucaria spp",
+    "scientificName": "Araucaria spp",
+    "imagePath": "/api/images/img-423dbb2dcb33bcb508f172b2",
+    "descriptionAr": "صنوبر أروكاريا 🌿🎄\n\nشجرة زينة دائمة الخضرة تتميز بشكلها الهرمي المنتظم وأفرعها المتناسقة التي تعطي مظهرًا أنيقًا ومرتبًا يشبه شجرة عيد الميلاد. تُستخدم كنبات زينة داخلي في الأصص الكبيرة أو كنبات خارجي في الحدائق بالمناطق الدافئة، وتُعد من النباتات المميزة في التنسيق الحديث بسبب شكلها الجذاب وثبات نموها.\n\nتحتاج إلى إضاءة ساطعة غير مباشرة داخل المنزل، وتتحمل الشمس الجزئية في الخارج. تفضل التربة الخفيفة جيدة التصريف مع ري معتدل ومنتظم، مع تجنب الجفاف الشديد أو زيادة الماء. يُنصح بتدوير النبات بشكل دوري للحفاظ على نمو متوازن من جميع الجهات.",
+    "descriptionEn": "Araucaria Pine 🌿🎄\n\nEvergreen ornamental conifer known for its symmetrical pyramidal shape and evenly spaced branches, resembling a natural Christmas tree. It is commonly used as an indoor decorative plant in large pots and as an outdoor landscape tree in warm climates.\n\nIt prefers bright indirect light indoors and partial sun outdoors. Requires well-drained soil and moderate watering, avoiding both drought stress and overwatering. Regular rotation helps maintain balanced and symmetrical growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779714953128-z10pi",
+    "nameAr": "بونسيانا",
+    "nameEn": "Delonix regia",
+    "scientificName": "Delonix regia",
+    "imagePath": "/api/images/img-059a1b74afa1356240ec54eb",
+    "descriptionAr": "بونسيانا 🌿🌺\n\nشجرة زينة استوائية متساقطة أو شبه دائمة الخضرة تُعرف بجمال أزهارها الحمراء أو البرتقالية الزاهية التي تغطي الشجرة في موسم الإزهار، مما يجعلها من أجمل أشجار الزينة في الحدائق والشوارع. تتميز بتاجها الواسع وأوراقها الريشية الناعمة التي تعطي ظلًا كثيفًا ومظهرًا استوائيًا رائعًا.\n\nتحتاج إلى شمس كاملة ومناخ دافئ لتنمو بشكل جيد، ولا تتحمل الصقيع الشديد. تفضل التربة جيدة التصريف مع ري معتدل ومنتظم خاصة في السنوات الأولى. كما تحتاج إلى مساحة واسعة للنمو بسبب انتشار أفرعها بشكل كبير.",
+    "descriptionEn": "Royal Poinciana 🌿🌺\n\nTropical ornamental tree famous for its spectacular bright red to orange flowers that cover the canopy during blooming season. It is considered one of the most beautiful flowering landscape trees and is widely planted in gardens, streets, and parks for shade and visual impact.\n\nIt thrives in full sun and warm climates and is sensitive to severe frost. Prefers well-drained soil and moderate regular watering, especially during establishment. The tree requires wide open space because of its broad spreading canopy.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780216525585-kwc1m",
+    "nameAr": "مكنسة الجنة",
+    "nameEn": "Bassia scoparia (Kochia scoparia)",
+    "scientificName": "Bassia scoparia (Kochia scoparia)",
+    "imagePath": "/api/images/img-f32e71357872be24e6cc44e2",
+    "descriptionAr": "مكنسة الجنة 🌿🍃\n\nنبات زينة حولي يتميز بنموه الكروي الكثيف وأوراقه الناعمة ذات اللون الأخضر الزاهي، والتي تتحول إلى درجات حمراء وبرونزية جميلة في بعض المواسم. يُستخدم بكثرة في تنسيق الحدائق والأحواض والمساحات المفتوحة لإضفاء شكل هندسي مميز ولمسة جمالية جذابة.\n\nينمو بسرعة ويحتاج إلى شمس كاملة للحصول على أفضل شكل ولون. يفضل التربة جيدة التصريف ويتحمل الحرارة والجفاف نسبيًا بعد التأسيس. يحتاج إلى ري معتدل وتقليم خفيف عند الحاجة للمحافظة على شكله الكروي المنتظم.",
+    "descriptionEn": "Burning Bush / Kochia 🌿🍃\n\nFast-growing annual ornamental plant known for its dense rounded form and soft bright green foliage, which may turn attractive red or bronze shades during the season. It is widely used in landscape beds, borders, and open spaces for its unique shape and decorative appearance.\n\nIt thrives in full sun and prefers well-drained soil. The plant is relatively tolerant of heat and drought once established and requires moderate watering. Light trimming can help maintain its neat rounded shape.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780217023538-mkk5c",
+    "nameAr": "فضية",
+    "nameEn": "Centaurea ragusina",
+    "scientificName": "Centaurea ragusina",
+    "imagePath": "/api/images/img-7c91fa0c72b6cc352531c1d0",
+    "descriptionAr": "فضية 🌿🤍\n\nنبات زينة يتميز بأوراقه الفضية الكثيفة المغطاة بزغب ناعم يمنحه مظهرًا لامعًا وأنيقًا، ويُستخدم بكثرة في تنسيق الحدائق والأحواض لإضافة تباين لوني جميل مع النباتات المزهرة والخضراء. يتميز بتحمله للحرارة والجفاف نسبيًا، مما يجعله مناسبًا للحدائق قليلة الصيانة.\n\nيحتاج إلى شمس كاملة لينمو بشكل أفضل ويحافظ على لونه الفضي المميز، ويفضل التربة الخفيفة جيدة التصريف. يحتاج إلى ري معتدل مع تجنب زيادة الماء، كما يُنصح بإزالة الأجزاء الجافة للحفاظ على مظهره الجمالي.",
+    "descriptionEn": "Silver Knapweed 🌿🤍\n\nOrnamental plant valued for its dense silvery foliage covered with fine hairs, giving it a soft and elegant appearance. It is widely used in landscape designs and flower beds to create attractive contrast with green and flowering plants.\n\nIt thrives in full sun and maintains its best silver coloration under bright light. Prefers well-drained soil and moderate watering, while being relatively tolerant of heat and drought once established. Occasional grooming helps maintain its attractive form.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780218286046-g8e4n",
+    "nameAr": "هايبسكس",
+    "nameEn": "Hibiscus rosa-sinensis",
+    "scientificName": "Hibiscus rosa-sinensis",
+    "imagePath": "/api/images/img-de46e66fd01d998b3fe17318",
+    "descriptionAr": "هايبسكس 🌿🌺\n\nشجيرة زينة مزهرة دائمة أو شبه دائمة الخضرة تتميز بأزهارها الكبيرة والملونة التي تتوفر بألوان متعددة مثل الأحمر، الوردي، الأصفر، البرتقالي والأبيض. تُستخدم بكثرة في الحدائق والأسيجة وأحواض الزينة لما تضيفه من ألوان زاهية وجمال استوائي مميز طوال موسم الإزهار.\n\nتحتاج إلى شمس كاملة أو نصف ظل مع إضاءة جيدة للحصول على أفضل إزهار، وتفضل التربة الخصبة جيدة التصريف مع ري منتظم. كما يُنصح بالتسميد الدوري والتقليم الخفيف لتحفيز النمو الجديد وزيادة كثافة الأزهار.",
+    "descriptionEn": "Hibiscus 🌿🌺\n\nFlowering evergreen or semi-evergreen ornamental shrub known for its large colorful blooms available in shades of red, pink, yellow, orange, and white. It is widely used in gardens, hedges, and landscape designs for its tropical appearance and long flowering season.\n\nIt grows best in full sun to partial shade with good light exposure and prefers fertile, well-drained soil with regular watering. Periodic fertilization and light pruning encourage healthy growth and abundant flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780218698686-driwt",
+    "nameAr": "كلونيا (مسك الليل)",
+    "nameEn": "Cestrum nocturnum",
+    "scientificName": "Cestrum nocturnum",
+    "imagePath": "/api/images/img-c4dffe6434575c9d8dc2e8d1",
+    "descriptionAr": "مسك الليل 🌿🌼\n\nشجيرة زينة دائمة الخضرة تشتهر بعطرها القوي والفواح الذي ينتشر ليلًا، حيث تتفتح أزهارها الصغيرة ذات اللون الأبيض المائل للأخضر وتطلق رائحة عطرة مميزة. تُستخدم بكثرة في الحدائق المنزلية والممرات والجلسات الخارجية لإضفاء أجواء عطرية جميلة، وتُعد من أكثر نباتات الزينة العطرية شهرة.\n\nتنمو بشكل جيد في الشمس الكاملة إلى نصف الظل، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة نسبيًا بعد التأسيس، كما يُنصح بتقليمها بشكل دوري للحفاظ على شكلها وتشجيع النمو والإزهار الكثيف.",
+    "descriptionEn": "Night-blooming Jasmine 🌿🌼\n\nEvergreen ornamental shrub famous for its intense fragrance released during the evening and nighttime hours. It produces clusters of small greenish-white flowers that fill the surrounding area with a sweet, pleasant scent, making it a popular choice for gardens, patios, and outdoor seating areas.\n\nIt grows well in full sun to partial shade and prefers fertile, well-drained soil with moderate regular watering. Once established, it tolerates heat reasonably well. Regular pruning helps maintain shape and encourages dense growth and abundant flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780218874550-z3xok",
+    "nameAr": "أغابانثوس",
+    "nameEn": "Agapanthus africanus",
+    "scientificName": "Agapanthus africanus",
+    "imagePath": "/api/images/img-eed437b876eb72c319fc3d76",
+    "descriptionAr": "أغابانثوس (زنبق النيل) 🌿💙\n\nنبات زينة معمر يتميز بأوراقه الطويلة الشريطية وأزهاره الجميلة التي تنمو على سيقان طويلة فوق النبات، وتظهر في كرات زهرية كثيفة بألوان زرقاء أو بنفسجية أو بيضاء. يُستخدم بكثرة في تنسيق الحدائق والأحواض والممرات لإضافة لمسة أنيقة وألوان جذابة خلال موسم الإزهار.\n\nيحتاج إلى شمس كاملة أو نصف ظل لينمو ويزهر بشكل جيد، ويفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. يتحمل الحرارة نسبيًا بعد التأسيس، كما يُنصح بإزالة الأزهار الذابلة للحفاظ على جمال النبات وتشجيع الإزهار المستقبلي.",
+    "descriptionEn": "Agapanthus (Lily of the Nile) 🌿💙\n\nPerennial ornamental plant known for its strap-like leaves and striking flower clusters borne on tall stems above the foliage. The flowers appear in dense rounded heads, typically blue, purple, or white, making it a popular choice for borders, pathways, and landscape gardens.\n\nIt grows best in full sun to partial shade and prefers fertile, well-drained soil with moderate regular watering. Once established, it tolerates heat reasonably well. Removing spent flowers helps maintain appearance and encourages healthy growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780219169922-e4uc1",
+    "nameAr": "نخيل واشنطونيا",
+    "nameEn": "Washingtonia filifera",
+    "scientificName": "Washingtonia filifera",
+    "imagePath": "/api/images/img-10348654885f9cc29db50e1e",
+    "descriptionAr": "نخيل واشنطونيا 🌴\n\nنخلة زينة دائمة الخضرة سريعة النمو تتميز بساقها الطويلة المستقيمة وأوراقها المروحية الكبيرة التي تمنحها مظهرًا استوائيًا مميزًا. تُستخدم بكثرة في تشجير الشوارع والحدائق والمنتزهات والمداخل الواسعة، حيث تضيف ارتفاعًا وجمالًا معماريًا للمكان.\n\nتحتاج إلى شمس كاملة لتنمو بشكل أفضل، وتتحمل الحرارة والجفاف بشكل جيد بعد التأسيس. تفضل التربة جيدة التصريف مع ري معتدل ومنتظم خلال مراحل النمو الأولى، وتحتاج إلى إزالة الأوراق الجافة بشكل دوري للحفاظ على مظهرها الجميل والصحي",
+    "descriptionEn": "Washingtonia Palm 🌴\n\nFast-growing evergreen ornamental palm known for its tall straight trunk and large fan-shaped leaves. It is widely used in streetscapes, parks, gardens, and landscape entrances due to its impressive height and tropical appearance.\n\nIt thrives in full sun and is highly tolerant of heat and drought once established. Prefers well-drained soil and moderate watering during early growth stages. Periodic removal of old dry fronds helps maintain a clean and attractive appearance.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780219404094-6molj",
+    "nameAr": "جاردينيا",
+    "nameEn": "Gardenia jasminoides",
+    "scientificName": "Gardenia jasminoides",
+    "imagePath": "/api/images/img-11d1645257e391a22bd80405",
+    "descriptionAr": "جاردينيا 🌿🌼\n\nنبات زينة دائم الخضرة يتميز بأزهاره البيضاء العطرية الجميلة وأوراقه الخضراء اللامعة الكثيفة. يُعد من النباتات المميزة جدًا في الحدائق والأحواض بسبب رائحة أزهاره القوية وشكله الأنيق، ويُستخدم بكثرة بالقرب من الجلسات والمداخل للاستمتاع بعطره الفواح.\n\nيحتاج إلى إضاءة متوسطة إلى ساطعة غير مباشرة، ويتحمل نصف الظل. يفضل التربة الحمضية الخفيفة جيدة التصريف مع ري منتظم للحفاظ على رطوبة التربة دون إغراق. كما يُنصح بالتسميد المناسب للنباتات المحبة للحموضة والتقليم الخفيف بعد الإزهار للحفاظ على شكله وتحفيز النمو",
+    "descriptionEn": "Gardenia 🌿🌼\n\nEvergreen ornamental shrub known for its highly fragrant white flowers and glossy dark green foliage. It is widely valued in gardens and landscape design for its strong scent and elegant appearance, often planted near patios, entrances, and seating areas.\n\nIt grows best in bright indirect light to partial shade and prefers acidic, well-drained soil with regular watering to maintain consistent moisture without waterlogging. Suitable fertilization and light pruning after flowering help maintain shape and encourage healthy growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780219903940-61nxl",
+    "nameAr": "دفلة بيضاء",
+    "nameEn": "Nerium oleander",
+    "scientificName": "Nerium oleander",
+    "imagePath": "/api/images/img-2552f62211e10fd0ef5f7786",
+    "descriptionAr": "دفلة بيضاء 🌿🤍\n\nشجيرة زينة دائمة الخضرة تتميز بأزهارها البيضاء الجميلة التي تتفتح بكثافة خلال موسم الإزهار، وأوراقها الطويلة الرفيعة الخضراء. تُستخدم بكثرة في الحدائق والشوارع والأسيجة بسبب تحملها العالي ومظهرها الجذاب الذي يعطي إحساسًا استوائيًا وأنيقًا في نفس الوقت.\n\nتحتاج إلى شمس كاملة لتنمو وتزهر بشكل أفضل، وتتحمل الحرارة والجفاف بشكل كبير. تفضل التربة جيدة التصريف مع ري معتدل ومنتظم، وتحتاج إلى تقليم دوري للحفاظ على شكلها وتحفيز الإزهار.",
+    "descriptionEn": "White Oleander 🌿🤍\n\nEvergreen ornamental shrub known for its clusters of beautiful white flowers and narrow green leaves. It is widely used in landscaping, roadsides, and hedges due to its drought tolerance and attractive appearance.\n\nIt thrives in full sun and is highly heat and drought tolerant. Prefers well-drained soil with moderate watering. Regular pruning helps maintain shape and encourages flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780226337198-y1dpo",
+    "nameAr": "برقوق زينة",
+    "nameEn": "Prunus cerasifera",
+    "scientificName": "Prunus cerasifera",
+    "imagePath": "/api/images/img-1cf37cffcf7a70e02dd8d7c2",
+    "descriptionAr": "برقوق زينة 🌿🌸\n\nشجرة زينة متساقطة الأوراق تتميز بأوراقها ذات اللون الأرجواني أو الأحمر الداكن وأزهارها الوردية أو البيضاء التي تظهر في بداية الربيع، مما يعطيها مظهرًا جماليًا مميزًا في الحدائق والشوارع. تُستخدم بكثرة كنقطة جذب بصرية بسبب لون أوراقها المختلف وشكلها الأنيق.\n\nتحتاج إلى شمس كاملة لتنمو وتُظهر أفضل لون لأوراقها وإزهارها، وتفضل التربة الخصبة جيدة التصريف. تحتاج إلى ري معتدل ومنتظم خاصة في فترات النمو، مع تقليم خفيف للحفاظ على الشكل وتشجيع النمو الصحي.",
+    "descriptionEn": "Cherry Plum 🌿🌸\n\nDeciduous ornamental tree known for its purple or red foliage and beautiful pink or white blossoms in early spring. It is widely used in landscaping and streetscapes as a focal decorative tree due to its striking leaf color and elegant form.\n\nIt grows best in full sun to achieve strong foliage color and good flowering. Prefers fertile well-drained soil and moderate watering. Light pruning helps maintain shape and healthy growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780228896320-79ejd",
+    "nameAr": "خميسة متسلقة",
+    "nameEn": "Climbing Ornamental Vine",
+    "scientificName": "Climbing Ornamental Vine",
+    "imagePath": "/api/images/img-eb4f226b6a5544cad7fc9f5c",
+    "descriptionAr": "خميسة متسلقة 🌿\n\nنبات زينة متسلق دائم الخضرة يُستخدم بكثرة لتغطية الجدران والأسوار والأقواس، ويتميز بنموه القوي وأوراقه الكثيفة التي تعطي غطاءً نباتيًا جميلًا وطبيعيًا. يُعد من النباتات التي تضيف لمسة خضراء ممتدة وتستخدم في تنسيق الحدائق لإخفاء الجدران وإعطاء شكل جمالي مريح.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويتحمل الظروف الجوية المختلفة بعد التأسيس. يحتاج إلى تربة جيدة التصريف وري معتدل ومنتظم، مع تقليم دوري لتوجيه نموه والحفاظ على كثافته وشكله المتناسق.",
+    "descriptionEn": "Climbing Ornamental Vine 🌿\n\nEvergreen climbing ornamental plant widely used for covering walls, fences, and arches. It is valued for its dense foliage and strong growth habit, making it ideal for creating natural green screens in gardens and landscapes.\n\nIt grows well in full sun to partial shade and becomes hardy once established. Prefers well-drained soil and moderate regular watering. Periodic pruning is necessary to control growth and maintain a neat appearance.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780229123534-2y4q8",
+    "nameAr": "مخلب القط",
+    "nameEn": "Dolichandra unguis-cati",
+    "scientificName": "Dolichandra unguis-cati",
+    "imagePath": "/api/images/img-f56e7c2fcaf1f24850fe5320",
+    "descriptionAr": "متسلقة مخلب القط 🌿🌸\n\nنبات زينة متسلق دائم الخضرة يتميز بنموه القوي وسرعة انتشاره، ويُعرف بأزهاره الصفراء إلى البرتقالية ذات الشكل المميز الذي يشبه مخلب القط. يُستخدم بكثرة في تغطية الجدران والأسوار والأقواس، حيث يُكوّن غطاءً نباتيًا كثيفًا ومتماسكًا مع منظر زهري جميل خلال موسم الإزهار.\n\nينمو بشكل ممتاز في الشمس الكاملة إلى نصف الظل، ويتحمل الحرارة والجفاف نسبيًا بعد التأسيس. يحتاج إلى تربة جيدة التصريف وري معتدل، مع تقليم دوري مهم جدًا للتحكم بسرعة نموه ومنع انتشاره العشوائي وتحسين شكله العام.",
+    "descriptionEn": "Cat’s Claw Creeper 🌿🌸\n\nFast-growing evergreen climbing vine known for its vigorous growth and distinctive yellow to orange claw-shaped flowers. It is widely used for covering fences, walls, and pergolas, forming dense green coverage with attractive seasonal flowering.\n\nIt thrives in full sun to partial shade and is highly adaptable once established, tolerating heat and moderate drought. Prefers well-drained soil and regular watering. Frequent pruning is essential to control its aggressive growth and maintain structure.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780231934114-alvt0",
+    "nameAr": "أكاسيا جلوكا",
+    "nameEn": "Acacia glauca",
+    "scientificName": "Acacia glauca",
+    "imagePath": "/api/images/img-e04a7e2580a1a204ecb8e327",
+    "descriptionAr": "أكاسيا 🌿\n\nشجرة زينة دائمة الخضرة سريعة النمو تتميز بأوراقها الخفيفة الدقيقة (ريشية الشكل) ولونها الأخضر الفاتح، وتُستخدم بكثرة في التشجير العام، الحدائق، وتثبيت التربة في المناطق الجافة. تُعطي ظلًا خفيفًا ومظهرًا طبيعيًا جميلًا، كما تتحمل الظروف القاسية وتُعد من الأشجار القوية في البيئات الحارة.\n\nتحتاج إلى شمس كاملة لتنمو بشكل جيد، وتتحمل الحرارة والجفاف بعد التأسيس. تفضل التربة الخفيفة جيدة التصريف، ولا تحتاج إلى ري غزير، كما يُنصح بتقليمها عند الحاجة للحفاظ على شكلها وتنظيم نموها.",
+    "descriptionEn": "Acacia 🌿\n\nFast-growing evergreen ornamental tree known for its fine feathery foliage and light green appearance. It is widely used in landscaping, reforestation, and dry-area planting due to its resilience and soil-improving qualities.\n\nIt thrives in full sun and is highly tolerant of heat and drought once established. Prefers well-drained soil and low to moderate watering. Pruning may be applied to control shape and growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780302582654-s78w7",
+    "nameAr": "فيبرنوم",
+    "nameEn": "Viburnum",
+    "scientificName": "Viburnum",
+    "imagePath": "/api/images/img-6a665c11e55c072574f6eb2b",
+    "descriptionAr": "فيبرنوم 🌿🌸\n\nشجيرة زينة دائمة الخضرة أو متساقطة الأوراق حسب الصنف، تتميز بأوراقها الخضراء الكثيفة وأزهارها البيضاء أو الوردية التي تتجمع في عناقيد جميلة، وقد تنتج بعض الأصناف ثمارًا صغيرة ملونة. تُستخدم بكثرة في الأسيجة والحدائق لتكوين ستائر نباتية كثيفة ومظهر طبيعي أنيق.\n\nتحتاج إلى شمس كاملة إلى نصف ظل، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل التقليم بشكل جيد، مما يجعلها مناسبة لتشكيل الأسيجة والحدود النباتية مع الحفاظ على كثافتها وجمالها.",
+    "descriptionEn": "Viburnum 🌿🌸\n\nEvergreen or deciduous ornamental shrub (depending on species) known for its dense foliage and attractive clusters of white or pink flowers. Some varieties also produce decorative berries. It is widely used in hedges, borders, and landscape planting for privacy screens and aesthetic value.\n\nIt grows well in full sun to partial shade and prefers fertile, well-drained soil with moderate watering. It responds well to pruning, making it ideal for shaped hedges and structured garden designs.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780303116596-h2zjo",
+    "nameAr": "ناندين مستأنس",
+    "nameEn": "Sacred Bamboo",
+    "scientificName": "Sacred Bamboo",
+    "imagePath": "/api/images/img-ca91012bbccdb9c4efd7b018",
+    "descriptionAr": "ناندين مستأنس (الخيزران المقدس) 🌿🎋\n\nشجيرة زينة دائمة الخضرة تتميز بأوراقها الرقيقة المركبة التي تشبه الخيزران، وتتحول ألوانها خلال الفصول من الأخضر إلى الأحمر والبرونزي، مما يمنحها مظهرًا جماليًا متغيرًا طوال العام. تُستخدم بكثرة في تنسيق الحدائق، الأحواض، والأسيجة الخفيفة لإضفاء لمسة أنيقة وملونة.\n\nتحتاج إلى شمس كاملة إلى نصف ظل، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الظروف الجوية بشكل جيد بعد التأسيس، ويُفضل تقليمها خفيفًا للحفاظ على شكلها وتشجيع نمو أوراق جديدة ملونة.",
+    "descriptionEn": "Sacred Bamboo 🌿🎋\n\nEvergreen ornamental shrub with delicate, bamboo-like compound foliage that changes color seasonally from green to red and bronze tones, providing year-round visual interest. It is widely used in gardens, borders, and landscape designs for its elegant structure and colorful foliage.\n\nIt grows well in full sun to partial shade and prefers fertile, well-drained soil with moderate regular watering. Once established, it is relatively hardy and heat tolerant. Light pruning helps maintain shape and encourage vibrant new growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780309599829-zus3s",
+    "nameAr": "مجنونة",
+    "nameEn": "Bougainvillea spp",
+    "scientificName": "Bougainvillea spp",
+    "imagePath": "/api/images/img-5acad3951866819296b22b90",
+    "descriptionAr": "مجنونة / جهنمية بلدي 🌿🌸\n\nشجيرة أو متسلق زينة دائم الخضرة يتميز بنموه القوي وأغصانه المتشابكة وأوراقه الخضراء الصغيرة، ويشتهر بأزهاره الورقية الملونة التي تظهر بألوان قوية مثل البنفسجي، الوردي، الأحمر، والبرتقالي. يُستخدم بكثرة في تغطية الجدران والأسوار والأقواس، ويُعد من أشهر نباتات التزيين في المناطق الحارة.\n\nينمو بشكل ممتاز في الشمس الكاملة ويحتاج ضوء قوي ليزهر بكثافة. يتحمل الحرارة والجفاف بشكل كبير بعد التأسيس، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل. يحتاج إلى تقليم دوري للتحكم في نموه القوي وتشجيع الإزهار.",
+    "descriptionEn": "Bougainvillea 🌿🌸\n\nEvergreen climbing or shrubby ornamental plant known for its vibrant bracts in colors such as purple, pink, red, and orange. It is widely used for covering walls, fences, and pergolas in warm climates due to its strong growth and long flowering period.\n\nIt thrives in full sun and requires strong light for abundant blooming. Highly tolerant of heat and drought once established. Prefers well-drained soil with moderate watering. Regular pruning is important to control vigorous growth and encourage flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780312114625-7hqh6",
+    "nameAr": "فتنة/ياسمين هندي(بلوميرا)",
+    "nameEn": "Plumeria",
+    "scientificName": "Plumeria",
+    "imagePath": "/api/images/img-466ef0e4558a0316f83e5ec0",
+    "descriptionAr": "ياسمين هندي 🌿🌸\n\nشجرة زينة استوائية دائمة الخضرة أو متساقطة جزئيًا حسب المناخ، تتميز بأزهارها الجميلة ذات الرائحة العطرية القوية وألوانها المتنوعة مثل الأبيض، الأصفر، الوردي، والأحمر. تُستخدم بكثرة في الحدائق والمداخل والجلسات الخارجية لإضفاء طابع استوائي فاخر وجذاب.\n\nتحتاج إلى شمس كاملة لتنمو وتزهر بشكل جيد، وتتحمل الحرارة والجفاف نسبيًا بعد التأسيس. تفضل التربة الخفيفة جيدة التصريف مع ري معتدل، ويُفضل تقليل الري في الشتاء. كما يُنصح بعدم الإفراط في الماء لتجنب تعفن الجذور وتشجيع الإزهار.",
+    "descriptionEn": "Plumeria 🌿🌸\n\nTropical ornamental tree known for its highly fragrant and beautiful flowers in shades of white, yellow, pink, and red. It is widely used in gardens, temples, and landscape design for its exotic appearance and strong fragrance.\n\nIt thrives in full sun and prefers warm climates. Requires well-drained soil and low to moderate watering, as it is drought tolerant once established. Overwatering should be avoided to prevent root rot.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780312396851-bpgku",
+    "nameAr": "البيزيا لبخ",
+    "nameEn": "Albizia lebbeck",
+    "scientificName": "Albizia lebbeck",
+    "imagePath": "/api/images/img-68e0f4ab39227afb18805af4",
+    "descriptionAr": "شجرة اللبخ / ذقن الباشا 🌿🌳\n\nشجرة زينة وظل متساقطة الأوراق تتميز بتاج واسع وأوراق ريشية ناعمة تعطي ظلًا كثيفًا ومريحًا. تُعرف بأزهارها الكروية العطرية ذات اللون الأبيض المائل إلى الكريمي، والتي تظهر في مواسم معينة وتضفي شكلًا جماليًا مميزًا. تُستخدم بكثرة في الحدائق العامة والطرق والمزارع كأشجار ظل سريعة النمو.\n\nتحتاج إلى شمس كاملة لتنمو بشكل قوي، وتتحمل الحرارة والجفاف نسبيًا بعد التأسيس. تفضل التربة جيدة التصريف مع ري معتدل، وتحتاج إلى تقليم خفيف عند الحاجة للحفاظ على شكلها وتنظيم نموها الواسع.",
+    "descriptionEn": "Lebbek Tree / Siris Tree 🌿🌳\n\nDeciduous shade tree known for its wide spreading canopy and finely divided bipinnate leaves that provide excellent shade. It produces fragrant puffball-like flowers in white to pale yellow tones and is commonly used in parks, roadsides, and large landscapes.\n\nIt thrives in full sun and is highly tolerant of heat and moderate drought once established. Prefers well-drained soil and moderate watering. Light pruning may be done to manage canopy shape and growth spread.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780314591670-t0x2w",
+    "nameAr": "الفل البلدي / الفل الجيزاني",
+    "nameEn": "Jasminum sambac",
+    "scientificName": "Jasminum sambac",
+    "imagePath": "/api/images/img-83c811750e8b3b5579eb9a68",
+    "descriptionAr": "الفل البلدي / الفل الجيزاني 🌿🌼\n\nنبات زينة وعطري دائم الخضرة يتميز بأزهاره البيضاء الصغيرة شديدة العطر، والتي تُستخدم في التزيين وصناعة العطور والاحتفالات. يُعد من أشهر النباتات العطرية في الحدائق العربية، ويُزرع بالقرب من الجلسات والمداخل للاستمتاع برائحته الفواحة، كما يتميز بكثافة أوراقه الخضراء ومظهره الجميل.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. يحتاج إلى تقليم دوري للحفاظ على شكله وتحفيز الإزهار المستمر وزيادة كثافة النمو.",
+    "descriptionEn": "Arabian Jasmine / Sambac Jasmine 🌿🌼\n\nEvergreen aromatic shrub known for its highly fragrant white flowers, widely used in perfumes, garlands, and ornamental gardens. It is one of the most popular scented plants in warm climates and is often planted near entrances and seating areas for its strong pleasant aroma.\n\nIt grows best in full sun to partial shade and prefers fertile well-drained soil with regular moderate watering. Pruning helps maintain shape and encourages continuous flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780314794108-2lm25",
+    "nameAr": "بوهينيا (خف الجمل)",
+    "nameEn": "Bauhinia variegata",
+    "scientificName": "Bauhinia variegata",
+    "imagePath": "/api/images/img-42f8de80ecd55232ca9768d8",
+    "descriptionAr": "خف الجمل 🌿🌸\n\nشجرة زينة متساقطة الأوراق أو شبه دائمة الخضرة تتميز بأزهارها الكبيرة الجميلة التي تتدرج ألوانها بين الوردي والبنفسجي والأبيض، وتشبه أزهار الأوركيد في شكلها، مما يجعلها من الأشجار المميزة جدًا في تنسيق الحدائق والشوارع. كما تتميز بأوراقها المفصصة بشكل يشبه حافر الجمل، وهو سبب تسميتها.\n\nتحتاج إلى شمس كاملة لتنمو وتزهر بشكل جيد، وتفضل التربة الخصبة جيدة التصريف. تتحمل الحرارة بشكل جيد، وتحتاج إلى ري معتدل، مع تقليم خفيف بعد الإزهار للحفاظ على شكل الشجرة وتحفيز نمو جديد.",
+    "descriptionEn": "Orchid Tree 🌿🌸\n\nDeciduous or semi-evergreen ornamental tree known for its large orchid-like flowers in shades of pink, purple, and white. It is widely used in landscape design and streetscapes for its striking floral display and attractive leaf shape resembling a camel’s hoof.\n\nIt grows best in full sun and prefers fertile, well-drained soil with moderate watering. Light pruning after flowering helps maintain shape and encourages healthy growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780315146673-rfd8k",
+    "nameAr": "حلفاء بيضاء",
+    "nameEn": "White Fountain Grass",
+    "scientificName": "White Fountain Grass",
+    "imagePath": "/api/images/img-16f47d173f3cce8650db7271",
+    "descriptionAr": "حلفاء بيضاء 🌿🤍\n\nنبات زينة عشبي معمر يتميز بأوراقه الرفيعة المقوسة وسنابله الريشية البيضاء أو الكريمية التي تضيف حركة ولمسة ناعمة للحدائق. يُستخدم في تنسيق الأحواض والحدائق الحديثة وعلى جوانب الممرات لإضفاء مظهر طبيعي وأنيق.\n\nينمو بشكل جيد في الشمس الكاملة، ويتحمل الحرارة والجفاف بعد التأسيس. يفضل التربة جيدة التصريف مع ري معتدل، ويحتاج إلى قص الأوراق الجافة في نهاية الموسم للحفاظ على مظهره الجميل.",
+    "descriptionEn": "White Fountain Grass 🌿🤍\n\nPerennial ornamental grass known for its graceful arching foliage and creamy-white feathery flower spikes. It is widely used in landscape designs, borders, and modern gardens for its soft texture and movement.\n\nIt thrives in full sun and is highly tolerant of heat and drought once established. Prefers well-drained soil and moderate watering. Seasonal trimming helps maintain a neat appearance.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780315200569-y5n89",
+    "nameAr": "حلفاء حمراء",
+    "nameEn": "Pennisetum setaceum 'Rubrum'",
+    "scientificName": "Pennisetum setaceum 'Rubrum'",
+    "imagePath": "/api/images/img-f3b16a514a3158657382f976",
+    "descriptionAr": "حلفاء حمراء 🌿❤️\n\nنبات زينة عشبي معمر يتميز بأوراقه ذات اللون الأحمر أو الأرجواني الداكن وسنابله الريشية الجذابة، مما يجعله من أكثر نباتات الزينة العشبية استخدامًا لإضافة لون قوي وتباين مميز في الحدائق والأحواض.\n\nيحتاج إلى شمس كاملة لإظهار أفضل لون للأوراق، ويتحمل الحرارة والجفاف بشكل جيد بعد التأسيس. يفضل التربة جيدة التصريف مع ري معتدل، ويُنصح بتقليم الأوراق القديمة للحفاظ على حيوية النبات وجماله.",
+    "descriptionEn": "Purple Fountain Grass 🌿❤️\n\nStriking ornamental grass with burgundy to purple foliage and attractive feathery flower plumes. It is widely used as an accent plant in landscape designs due to its bold color and graceful form.\n\nIt grows best in full sun, where the foliage develops its richest color. Heat and drought tolerant once established, it prefers well-drained soil and moderate watering. Removing old foliage helps maintain vigor and appearance.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780315384379-dpfm0",
+    "nameAr": "ياسمين أزرق",
+    "nameEn": "Plumbago auriculata",
+    "scientificName": "Plumbago auriculata",
+    "imagePath": "/api/images/img-f21e96ba5bf1a2c712cfb1a7",
+    "descriptionAr": "ياسمين أزرق 🌿💙\n\nشجيرة زينة دائمة الخضرة أو شبه دائمة الخضرة تتميز بأزهارها الزرقاء السماوية الجميلة التي تتفتح بغزارة لفترات طويلة من العام. تُستخدم في تنسيق الحدائق والأسيجة والأحواض، ويمكن تربيتها كشجيرة أو متسلقة خفيفة على الدعامات، مما يضفي لمسة لونية مميزة وجذابة.\n\nتحتاج إلى شمس كاملة إلى نصف ظل لتنمو وتزهر بشكل جيد، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة بشكل جيد بعد التأسيس، كما يُنصح بتقليمها دوريًا للحفاظ على شكلها وتشجيع الإزهار المستمر.",
+    "descriptionEn": "Blue Plumbago 🌿💙\n\nEvergreen to semi-evergreen ornamental shrub known for its clusters of sky-blue flowers that bloom abundantly over a long season. It is widely used in gardens, borders, hedges, and can also be trained as a light climber.\n\nIt grows best in full sun to partial shade and prefers fertile, well-drained soil with moderate watering. Once established, it is heat tolerant and benefits from regular pruning to maintain shape and encourage continuous flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780316595232-ocdtr",
+    "nameAr": "دودونيا",
+    "nameEn": "Dodonaea viscosa",
+    "scientificName": "Dodonaea viscosa",
+    "imagePath": "/api/images/img-e5945b23520630b8652ab762",
+    "descriptionAr": "دودونيا 🌿🍃\n\nشجيرة زينة دائمة الخضرة سريعة النمو تتميز بأوراقها الكثيفة التي يتراوح لونها بين الأخضر والبرونزي أو الأرجواني حسب الصنف. تُستخدم بكثرة في الأسيجة النباتية ومصدات الرياح والتنسيق الخارجي للحدائق، لما تتمتع به من تحمل عالٍ للحرارة والجفاف وسهولة التشكيل بالتقليم.\n\nتحتاج إلى شمس كاملة لتنمو بشكل أفضل وتحافظ على لون أوراقها المميز، وتفضل التربة جيدة التصريف. تتحمل الظروف البيئية القاسية والملوحة نسبيًا، وتحتاج إلى ري معتدل خلال فترة التأسيس ثم تصبح قليلة الاحتياج للمياه.",
+    "descriptionEn": "Hopbush 🌿🍃\n\nFast-growing evergreen ornamental shrub known for its dense foliage, which may appear green, bronze, or purple depending on the variety. It is widely used for hedges, windbreaks, and landscape screening due to its durability and ease of shaping.\n\nIt thrives in full sun and prefers well-drained soil. Once established, it is highly tolerant of heat, drought, and moderate salinity. Regular pruning helps maintain a dense and attractive form.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780405480303-uwyrx",
+    "nameAr": "زيزفون",
+    "nameEn": "Tilia",
+    "scientificName": "Tilia",
+    "imagePath": "/api/images/img-df03136905b9325684fbb7cd",
+    "descriptionAr": "زيزفون 🌿🌳\n\nشجرة زينة وظل متساقطة الأوراق تتميز بتاجها الكثيف وأوراقها القلبية الشكل ذات اللون الأخضر الزاهي. تُنتج أزهارًا عطرية صغيرة ذات لون أصفر فاتح تجذب النحل وتضفي رائحة مميزة خلال موسم الإزهار، مما يجعلها من الأشجار المفضلة في الحدائق والمتنزهات والشوارع الواسعة.\n\nتحتاج إلى شمس كاملة أو نصف ظل، وتفضل التربة الخصبة العميقة جيدة التصريف مع ري منتظم. تنمو بشكل أفضل في المناخات المعتدلة وتوفر ظلًا كثيفًا وجمالًا طبيعيًا على مدار الموسم.",
+    "descriptionEn": "Linden / Lime Tree 🌿🌳\n\nDeciduous shade and ornamental tree known for its dense canopy and heart-shaped green leaves. It produces small fragrant pale-yellow flowers that attract pollinators and add a pleasant scent during the blooming season.\n\nIt grows best in full sun to partial shade and prefers deep, fertile, well-drained soil with regular watering. Widely planted in parks, avenues, and large landscapes for its shade and ornamental value.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780405644648-aidup",
+    "nameAr": "باركنسونيا",
+    "nameEn": "Parkinsonia aculeata",
+    "scientificName": "Parkinsonia aculeata",
+    "imagePath": "/api/images/img-cccf4742498ee712a2f72bda",
+    "descriptionAr": "باركنسونيا 🌿🌳\n\nشجرة زينة دائمة أو شبه دائمة الخضرة تتميز بأغصانها الخضراء المتدلية وأوراقها الريشية الدقيقة، وتنتج أزهارًا صفراء زاهية تضفي مظهرًا جماليًا مميزًا خلال موسم الإزهار. تُستخدم بكثرة في تشجير الشوارع والحدائق والمناطق الجافة بفضل تحملها العالي للحرارة والجفاف.\n\nتحتاج إلى شمس كاملة لتنمو بشكل أفضل، وتتحمل الظروف الصحراوية ونقص المياه بشكل ممتاز بعد التأسيس. تفضل التربة جيدة التصريف، وتحتاج إلى ري معتدل في السنوات الأولى ثم تصبح قليلة الاحتياج للمياه.",
+    "descriptionEn": "Parkinsonia 🌿🌳\n\nOrnamental drought-tolerant tree known for its green drooping branches, fine feathery foliage, and bright yellow flowers. It is widely planted in streetscapes, parks, and arid landscapes due to its graceful appearance and exceptional heat tolerance.\n\nIt thrives in full sun and adapts well to dry conditions. Prefers well-drained soil and requires only moderate watering during establishment. Once mature, it is highly drought resistant and low maintenance.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780406880124-4s9ou",
+    "nameAr": "برختونيا",
+    "nameEn": "Brachychiton",
+    "scientificName": "Brachychiton",
+    "imagePath": "/api/images/img-70fe45c6b68e55c3bd50c9a7",
+    "descriptionAr": "برختونيا 🌳\n\nشجرة زينة دائمة أو شبه دائمة الخضرة، تتميز بساقها القوية وتاجها الأنيق وقدرتها العالية على تحمل الجفاف، مما يجعلها خيارًا مثاليًا لتشجير الحدائق والشوارع والمساحات العامة. كما تمتاز بسرعة نموها نسبيًا وقلة احتياجاتها من الصيانة.\n\nمناسبة للزراعة في المناطق الحارة والمعتدلة، وتفضل التعرض للشمس الكاملة والتربة جيدة التصريف. تتحمل الحرارة والجفاف بشكل ممتاز بعد استقرارها، وتحتاج إلى ري معتدل خلال فترة التأسيس، مع تقليم خفيف عند الحاجة للحفاظ على شكلها وتشجيع النمو المتوازن.",
+    "descriptionEn": "Brachychiton 🌳\n\nAn evergreen or semi-evergreen ornamental tree known for its strong trunk, elegant canopy, and excellent drought tolerance, making it an ideal choice for streets, parks, and landscape projects. It is valued for its adaptability, low maintenance requirements, and attractive appearance.\n\nIt thrives in full sun and well-drained soil, performing well in warm and temperate climates. Once established, it is highly tolerant of heat and drought. Moderate watering is recommended during the establishment period, with occasional pruning to maintain shape and encourage balanced growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780484682053-e0vt1",
+    "nameAr": "زمزريق",
+    "nameEn": "Cercis siliquastrum",
+    "scientificName": "Cercis siliquastrum",
+    "imagePath": "/api/images/img-71051728a86ed6fe121ed8de",
+    "descriptionAr": "زمزريق 🌿\n\nشجرة زينة متساقطة الأوراق تُعرف بأزهارها الوردية أو البنفسجية الصغيرة التي تظهر بكثافة على الأفرع والجذع قبل ظهور الأوراق، مما يعطيها منظرًا جماليًا مميزًا جدًا في فصل الربيع. تُستخدم بكثرة في الحدائق والمتنزهات كعنصر زينة لافت للنظر بسبب غزارة الإزهار.\n\nتحتاج إلى شمس كاملة لتنمو وتزهر بشكل جيد، وتفضل التربة الخصبة جيدة التصريف. تتحمل الحرارة والجفاف نسبيًا بعد التأسيس، وتحتاج إلى ري معتدل، مع تقليم خفيف بعد الإزهار للحفاظ على شكلها وتحفيز النمو.",
+    "descriptionEn": "🌿 Judas Tree / Eastern Redbud\n\nDeciduous ornamental tree known for its striking pink to purple flowers that bloom profusely on bare branches before leaf emergence, creating a dramatic spring display. It is widely used in parks and gardens as a focal flowering tree.\n\nIt grows best in full sun to partial shade and prefers fertile, well-drained soil. Once established, it is moderately drought tolerant. Light pruning after flowering helps maintain shape and encourage healthy growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780488933847-7y8uc",
+    "nameAr": "ياسمين عراقي",
+    "nameEn": "Iraqi Jasmine",
+    "scientificName": "Iraqi Jasmine",
+    "imagePath": "/api/images/img-55a1ce8d77cdd37773c3d929",
+    "descriptionAr": "🌿 ياسمين عراقي 🌸\n\nشجيرة أو متسلق زينة دائم الخضرة يتميز بأزهاره البيضاء العطرية الجميلة التي تتفتح بغزارة خلال مواسم الإزهار، وتنتشر رائحتها الزكية في المكان. يُستخدم بكثرة لتغطية الأسوار والأقواس والجدران، كما يزرع بالقرب من المداخل والجلسات الخارجية لما يضفيه من جمال ورائحة عطرة مميزة.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. يحتاج إلى تقليم دوري للحفاظ على شكله وتشجيع التفرعات والإزهار الكثيف.",
+    "descriptionEn": "🌿 Iraqi Jasmine 🌸\n\nEvergreen ornamental shrub or climber valued for its beautiful fragrant white flowers and vigorous growth. It is commonly used to cover fences, walls, pergolas, and garden structures, adding both beauty and a pleasant scent to outdoor spaces.\n\nIt grows best in full sun to partial shade and prefers fertile, well-drained soil with moderate regular watering. Regular pruning encourages dense growth and abundant flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780489450679-0g416",
+    "nameAr": "ياسمين",
+    "nameEn": "Trachelospermum jasminoides",
+    "scientificName": "Trachelospermum jasminoides",
+    "imagePath": "/api/images/img-61c1fbb1b94a6fd16384c280",
+    "descriptionAr": "🌿 ياسمين نجمي 🌸⭐\n\nنبات زينة متسلق دائم الخضرة يتميز بأزهاره البيضاء النجمية الشكل ذات الرائحة العطرة، والتي تتفتح بغزارة خلال الربيع والصيف. يُستخدم بكثرة لتغطية الأسوار والجدران والأقواس، كما يُزرع بالقرب من المداخل والجلسات الخارجية لما يضفيه من جمال ورائحة زكية.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. يحتاج إلى تقليم دوري للحفاظ على شكله وتشجيع النمو الكثيف والإزهار الغزير.",
+    "descriptionEn": "🌿 Star Jasmine 🌸⭐\n\nEvergreen climbing ornamental plant known for its fragrant star-shaped white flowers and glossy green foliage. It is widely used to cover fences, walls, pergolas, and trellises, adding both beauty and fragrance to the landscape.\n\nIt grows best in full sun to partial shade and prefers fertile, well-drained soil with moderate regular watering. Regular pruning encourages dense growth and abundant flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780489247761-uihz7",
+    "nameAr": "فورميوم",
+    "nameEn": "Phormium spp.",
+    "scientificName": "Phormium spp.",
+    "imagePath": "/api/images/img-e0687807a596d5812d996442",
+    "descriptionAr": "🌿 فورميوم\n\nنبات زينة معمّر يتميز بأوراقه الطويلة الشريطية ذات المظهر المعماري الأنيق، والتي قد تكون خضراء أو مخططة بدرجات الأصفر والكريمي والأحمر حسب الصنف. يُستخدم بكثرة في تنسيق الحدائق الحديثة والأحواض والمداخل كنبات محوري يضيف شكلاً مميزًا وتباينًا جذابًا بين النباتات.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويفضل التربة جيدة التصريف مع ري معتدل. يتحمل الحرارة والرياح والجفاف نسبيًا بعد التأسيس، ويحتاج إلى إزالة الأوراق الجافة أو التالفة للحفاظ على مظهره الجميل.",
+    "descriptionEn": "🌿 Phormium (New Zealand Flax)\n\nEvergreen perennial ornamental plant known for its long sword-like leaves that may be green, variegated, bronze, or reddish depending on the variety. It is widely used in modern landscapes, borders, and containers as a striking architectural plant.\n\nIt grows well in full sun to partial shade and prefers well-drained soil with moderate watering. Once established, it tolerates heat, wind, and moderate drought. Removing old leaves helps maintain its attractive appearance.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780559550945-ijelk",
+    "nameAr": "مجنونة ألوان تايلندي",
+    "nameEn": "Bougainvillea Ball",
+    "scientificName": "Bougainvillea Ball",
+    "imagePath": "/api/images/img-430879f60dcc372e86df5981",
+    "descriptionAr": "🌸 مجنونة ألوان تايلندي\n\nنبات زينة مزهر متسلق يتميز بأزهاره أو قناباته الزاهية والمتنوعة الألوان، ويُستخدم لتغطية الجدران والأسوار والبرجولات وتنسيق الحدائق. يتميز بسرعة نموه وكثافة تفرعاته وقدرته العالية على تحمل الحرارة والجفاف، مما يجعله مناسبًا للمناطق الحارة.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم خلال فترة التأسيس. تتحمل الجفاف بعد استقرارها، وتحتاج إلى تقليم دوري لتنظيم النمو وتشجيع كثافة التفرعات والإزهار.",
+    "descriptionEn": "🌸 Thai Color Bougainvillea\n\nA colorful ornamental climbing plant known for its vibrant flowers and bracts in various shades. It is widely used to cover walls, fences, pergolas, and garden structures. It grows vigorously and has excellent tolerance to heat and drought.\n\nIt thrives in full sun and prefers well-drained soil with moderate watering during establishment. Once established, it is highly drought tolerant. Regular pruning helps control its growth and encourages dense branching and abundant flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780559728281-zh8d4",
+    "nameAr": "دم العاشق او دم الغزال",
+    "nameEn": "Iresine herbstii",
+    "scientificName": "Iresine herbstii",
+    "imagePath": "/api/images/img-0af796b8d08ba3830bed931b",
+    "descriptionAr": "🌿 دم الغزال ❤️\n\nشجيرة زينة دائمة الخضرة تتميز بأوراقها الملونة التي تتدرج بين الأحمر الداكن والعنابي والأخضر، مما يجعلها من النباتات المفضلة لإضافة ألوان قوية ومتباينة في الحدائق والأحواض. تُستخدم كنبات سياج أو كنقطة جذب جمالية في تنسيق الحدائق بفضل ألوانها الزاهية وكثافة نموها.\n\nتنمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويزداد وضوح لون الأوراق الأحمر مع التعرض الجيد للشمس. تفضل التربة جيدة التصريف مع ري معتدل ومنتظم، وتحتاج إلى تقليم خفيف للحفاظ على شكلها وكثافتها.",
+    "descriptionEn": "🌿 Iresine herbstii ❤️\n\nEvergreen ornamental shrub valued for its striking red, burgundy, and green foliage. It is commonly used in landscape designs, borders, and hedges to provide vibrant color contrast and year-round visual interest.\n\nIt grows best in full sun to partial shade, with stronger sunlight enhancing the red coloration of the leaves. Prefers well-drained soil with moderate watering. Light pruning helps maintain a compact and attractive form.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780560015356-3kxsq",
+    "nameAr": "لانتانا زاحفة",
+    "nameEn": "Lantana montevidensis",
+    "scientificName": "Lantana montevidensis",
+    "imagePath": "/api/images/img-d075a3af7983a6c733150216",
+    "descriptionAr": "🌿 لانتانا زاحفة 🌸\n\nنبات زينة معمر منخفض النمو يتميز بأغصانه الزاحفة والمتدلية وأزهاره الملونة التي تظهر بكثافة لفترات طويلة من العام. يُستخدم كغطاء أرضي وعلى المنحدرات وحواف الأحواض والجدران الاستنادية، حيث يشكل بساطًا نباتيًا مزهرًا وجذابًا.\n\nينمو بشكل ممتاز في الشمس الكاملة ويزهر بغزارة مع التعرض المباشر للشمس. يتحمل الحرارة والجفاف بشكل كبير بعد التأسيس، ويفضل التربة جيدة التصريف مع ري معتدل. يحتاج إلى تقليم خفيف عند الحاجة للحفاظ على شكله وتشجيع الإزهار المستمر.",
+    "descriptionEn": "🌿 Trailing Lantana 🌸\n\nLow-growing perennial ornamental plant with a spreading and cascading growth habit. It produces abundant colorful flowers over a long season and is widely used as a ground cover, on slopes, borders, and retaining walls.\n\nIt thrives in full sun and blooms profusely under strong light. Once established, it is highly tolerant of heat and drought. Prefers well-drained soil and moderate watering. Occasional pruning helps maintain shape and encourages continuous flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780560179018-iti7l",
+    "nameAr": "فستوكا",
+    "nameEn": "Festuca glauca",
+    "scientificName": "Festuca glauca",
+    "imagePath": "/api/images/img-8e44621ee09d449494eb25a9",
+    "descriptionAr": "🌿 فستوكا\n\nنبات زينة عشبي معمر يتميز بأوراقه الرفيعة الكثيفة ذات اللون الأزرق المائل إلى الفضي أو الأخضر المزرق، ويُستخدم بكثرة في تنسيق الحدائق الحديثة والأحواض الصخرية وحواف الممرات. يتميز بشكله الكروي الأنيق وقدرته على إضافة تباين لوني جميل بين النباتات الأخرى.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويفضل التربة جيدة التصريف مع ري معتدل. يتحمل الجفاف نسبيًا بعد التأسيس، ويحتاج إلى إزالة الأوراق الجافة وتقسيم الخصلات كل عدة سنوات للحفاظ على حيويته ومظهره الجذاب.",
+    "descriptionEn": "🌿 Fescue Grass\n\nPerennial ornamental grass known for its dense, fine-textured foliage in shades of blue, silver-blue, or blue-green. It is widely used in modern landscapes, rock gardens, borders, and pathway edges for its compact form and attractive color contrast.\n\nIt grows best in full sun to partial shade and prefers well-drained soil with moderate watering. Once established, it is moderately drought tolerant. Removing old foliage helps maintain its neat appearance.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780917111120-kw5t9",
+    "nameAr": "هب",
+    "nameEn": "Hebe",
+    "scientificName": "Hebe",
+    "imagePath": "/api/images/img-2d34ffa778a2daecc8a8ae19",
+    "descriptionAr": "🌿 نبات الهب (زاحف دائم الخضرة)\n\nنبات زينة دائم الخضرة يتميز بنموه الزاحف الأفقي وسرعة انتشاره، ويُستخدم كغطاء أرضي في الحدائق والأحواض لتغطية المساحات وإعطاء مظهر أخضر كثيف. يتميز بأوراقه الصغيرة الكثيفة وقدرته على تكوين بساط نباتي جميل، كما قد ينتج أزهارًا زينة ناعمة تضيف لمسة جمالية خفيفة خلال موسم الإزهار.\n\nينمو بشكل جيد في الشمس الجزئية إلى الظل الخفيف، ويفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. يحتاج إلى تقليم خفيف للسيطرة على انتشاره والحفاظ على شكله الكثيف والمتناسق.",
+    "descriptionEn": "🌿 Ornamental Creeping Plant (Evergreen)\n\nEvergreen ornamental ground cover plant characterized by its horizontal creeping growth habit and fast spreading nature. It is used to form dense green carpets in gardens, landscapes, and planters, providing continuous coverage and aesthetic greenery. It may produce small delicate ornamental flowers depending on conditions.\n\nIt grows well in partial sun to light shade and prefers fertile, well-drained soil with regular moderate watering. Light trimming is recommended to control spread and maintain a compact appearance.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1780946132048-9r21e",
+    "nameAr": "تيكوما برتقالية",
+    "nameEn": "Tecoma capensis",
+    "scientificName": "Tecoma capensis",
+    "imagePath": "/api/images/img-5b17a6dac0229baea3c7b807",
+    "descriptionAr": "🧡 تيكوما برتقالية\n\nشجيرة زينة دائمة الخضرة أو شبه دائمة الخضرة تتميز بأزهارها الأنبوبية البرتقالية الزاهية التي تتفتح بغزارة على مدار فترات طويلة من العام. تُستخدم في تنسيق الحدائق والأسيجة وتغطية الأسوار، كما تجذب الطيور والفراشات وتضفي لونًا حيويًا وجذابًا على المساحات الخارجية.\n\nتنمو بشكل جيد في الشمس الكاملة إلى نصف الظل، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة والجفاف نسبيًا بعد التأسيس، وتحتاج إلى تقليم دوري للحفاظ على شكلها وتشجيع الإزهار الكثيف.",
+    "descriptionEn": "🧡 Orange Tecoma\n\nEvergreen to semi-evergreen ornamental shrub known for its vibrant orange tubular flowers that bloom abundantly over long periods. It is widely used in hedges, garden borders, and landscape planting, attracting birds and butterflies while adding brilliant color to outdoor spaces.\n\nIt grows best in full sun to partial shade and prefers well-drained soil with moderate watering. Once established, it tolerates heat and moderate drought. Regular pruning encourages dense growth and prolific flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1782740974795-n1afz",
+    "nameAr": "ألبيزيا جوليبريسين",
+    "nameEn": "Albizia julibrissin",
+    "scientificName": "Albizia julibrissin",
+    "imagePath": "/api/images/img-d4534f62a94f8fe7d7073b80",
+    "descriptionAr": "🌳 ألبيزيا جوليبريسين\n\nشجرة زينة متساقطة الأوراق تتميز بمظلتها الواسعة وأوراقها الريشية الناعمة، إضافة إلى أزهارها الحريرية الوردية العطرة التي تتفتح خلال فصل الصيف، مما يجعلها من أجمل أشجار الظل والزينة في الحدائق والشوارع والمتنزهات. تتميز بسرعة نموها وقدرتها على تحمل الحرارة والجفاف نسبيًا بعد استقرارها.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة جيدة التصريف مع ري معتدل خلال فترة التأسيس. تحتاج إلى تقليم خفيف لإزالة الأفرع الجافة والحفاظ على شكلها الجميل وتشجيع النمو الصحي.",
+    "descriptionEn": "🌳 Albizia julibrissin\n\nDeciduous ornamental tree known for its broad canopy, delicate fern-like foliage, and beautiful silky pink flowers that bloom during summer. It is widely planted in gardens, parks, and streets for its graceful appearance and excellent shade.\n\nIt thrives in full sun and prefers well-drained soil with moderate watering during establishment. Once established, it is tolerant of heat and moderate drought. Occasional pruning helps maintain its attractive shape and healthy growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1783770337712-up5m9",
+    "nameAr": "الأرز",
+    "nameEn": "Cedrus spp",
+    "scientificName": "Cedrus spp",
+    "imagePath": "/api/images/img-3eb464c1cfb2ff0079093b75",
+    "descriptionAr": "🌲 الأرز\n\nشجرة زينة دائمة الخضرة تتميز بشكلها الهرمي الأنيق وأغصانها القوية وأوراقها الإبرية الكثيفة ذات اللون الأخضر أو الأخضر المزرق. تُعد من أجمل أشجار الظل والزينة، وتُستخدم في الحدائق الواسعة والمتنزهات وتشجير الشوارع، كما تتميز بطول عمرها وقيمتها الجمالية العالية.\n\nتنمو بشكل جيد في الشمس الكاملة، وتفضل التربة العميقة جيدة التصريف مع ري معتدل خلال فترة التأسيس. تتحمل البرودة والظروف المناخية المختلفة، وتحتاج إلى عناية بسيطة وتقليم محدود لإزالة الأفرع الجافة والحفاظ على مظهرها الطبيعي.",
+    "descriptionEn": "🌲 Cedar\n\nEvergreen ornamental conifer known for its elegant pyramidal shape, strong branches, and dense needle-like foliage in shades of green or bluish-green. It is widely planted in parks, large gardens, and landscapes for its majestic appearance, longevity, and excellent shade.\n\nIt grows best in full sun and prefers deep, well-drained soil with moderate watering during establishment. It is tolerant of cold climates and requires minimal maintenance, with only occasional pruning to remove dead branches.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1784975239089-u8fg4",
+    "nameAr": "لاجستروميا( تمر حنا)",
+    "nameEn": "Lagerstroemia",
+    "scientificName": "Lagerstroemia",
+    "imagePath": "/api/images/img-bc8c480348eead1f7eba9f69",
+    "descriptionAr": "🌸 لاجستروميا\n\nشجرة أو شجيرة زينة متساقطة الأوراق تتميز بأزهارها الغزيرة ذات الألوان الزاهية، مثل الوردي والأحمر والأبيض والبنفسجي، والتي تتفتح خلال فصل الصيف لفترة طويلة. تُعد من أجمل أشجار الزينة، وتُستخدم في الحدائق والشوارع والمتنزهات لما تضيفه من ألوان مميزة ومظهر أنيق، كما تتميز بقشرتها الناعمة الجذابة.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة بشكل جيد، وتحتاج إلى تقليم خفيف في نهاية الشتاء لتشجيع النمو الجديد وزيادة كثافة الإزهار.",
+    "descriptionEn": "🌸 Crape Myrtle\n\nDeciduous ornamental tree or shrub known for its abundant, long-lasting blooms in shades of pink, red, white, and purple throughout the summer. It is widely planted in gardens, parks, and streets for its vibrant flowers, smooth decorative bark, and elegant form.\n\nIt thrives in full sun and prefers fertile, well-drained soil with moderate regular watering. It tolerates heat well and benefits from light pruning in late winter to encourage vigorous growth and abundant flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1785309153464-sfnbi",
+    "nameAr": "اراليا",
+    "nameEn": "Ruellia tuberosa",
+    "scientificName": "Ruellia tuberosa",
+    "imagePath": "/api/images/img-40bad2c05d661b374fefe46f",
+    "descriptionAr": "🌿 أراليا\n\nنبات زينة دائم الخضرة يتميز بأوراقه الكثيفة ذات اللون الأخضر اللامع وشكله الأنيق، ويُستخدم في تنسيق الحدائق والأحواض والمداخل، كما يمكن زراعته كنبات داخلي أو خارجي حسب الصنف. يضفي لمسة استوائية جذابة على المكان، ويتميز بسهولة العناية به وسرعة نموه.\n\nينمو بشكل جيد في الشمس الجزئية إلى الضوء الساطع غير المباشر، ويفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. يحتاج إلى تقليم خفيف للحفاظ على شكله الكثيف وتشجيع النمو الجديد.",
+    "descriptionEn": "🌿 Aralia\n\nEvergreen ornamental plant valued for its lush glossy foliage and elegant appearance. It is commonly used in gardens, landscape beds, entrances, and as an indoor or outdoor ornamental plant depending on the variety. Its tropical look and ease of maintenance make it a popular choice.\n\nIt grows best in partial sun to bright indirect light and prefers fertile, well-drained soil with moderate regular watering. Light pruning helps maintain a compact shape and encourages healthy new growth.\n\nAralia spp",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1785309388638-w8shu",
+    "nameAr": "فيكس نيتيدا",
+    "nameEn": "Ficus nitida",
+    "scientificName": "Ficus nitida",
+    "imagePath": "/api/images/img-0d8fc44850bfa933e405b970",
+    "descriptionAr": "🌳 فيكس نيتيدا\n\nشجرة زينة دائمة الخضرة تتميز بتاجها الكثيف وأوراقها الخضراء اللامعة، وتُستخدم على نطاق واسع في تشجير الشوارع والحدائق وتكوين الأسيجة النباتية بفضل سرعة نموها وسهولة تشكيلها. توفر ظلًا كثيفًا وتمنح المساحات الخارجية مظهرًا أنيقًا وطبيعيًا.\n\nتنمو بشكل ممتاز في الشمس الكاملة إلى نصف الظل، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم خلال فترة التأسيس. تتحمل الحرارة والجفاف نسبيًا بعد استقرارها، وتحتاج إلى تقليم دوري للحفاظ على شكلها وتشجيع النمو الكثيف.",
+    "descriptionEn": "🌳 Indian Laurel Fig\n\nEvergreen ornamental tree known for its dense canopy and glossy green leaves. It is widely used for street planting, parks, and formal hedges due to its rapid growth and excellent response to pruning. It provides abundant shade and an elegant landscape appearance.\n\nIt grows best in full sun to partial shade and prefers well-drained soil with moderate watering during establishment. Once established, it tolerates heat and moderate drought. Regular pruning helps maintain a dense, attractive shape.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1785309655978-m2sap",
+    "nameAr": "لوكوفيليوم",
+    "nameEn": "Leucophyllum frutescens",
+    "scientificName": "Leucophyllum frutescens",
+    "imagePath": "/api/images/img-cb5cf39011e8c2e7b1e03bd7",
+    "descriptionAr": "🌿 لوكوفيليوم\n\nشجيرة زينة دائمة الخضرة تتميز بأوراقها الفضية المخملية وأزهارها البنفسجية أو الوردية التي تظهر بغزارة، خاصة بعد هطول الأمطار أو عند ارتفاع الرطوبة. تُستخدم في تنسيق الحدائق والأسيجة والمناظر الطبيعية، وتتميز بقدرتها العالية على تحمل الحرارة والجفاف، مما يجعلها مثالية للمناطق الحارة.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة جيدة التصريف مع ري معتدل خلال فترة التأسيس. تتحمل الجفاف بشكل ممتاز بعد استقرارها، وتحتاج إلى تقليم خفيف للحفاظ على شكلها الكثيف وتشجيع النمو الجديد.",
+    "descriptionEn": "🌿 Leucophyllum (Texas Sage)\n\nEvergreen ornamental shrub known for its soft silvery foliage and abundant purple or pink flowers, which often bloom after rainfall or during periods of high humidity. It is widely used in landscapes, hedges, and gardens due to its exceptional heat and drought tolerance.\n\nIt thrives in full sun and prefers well-drained soil with moderate watering during establishment. Once established, it is highly drought tolerant. Light pruning helps maintain a compact shape and encourages healthy growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1785309988954-5psfb",
+    "nameAr": "عصفور الجنة رفيع",
+    "nameEn": "Strelitzia juncea",
+    "scientificName": "Strelitzia juncea",
+    "imagePath": "/api/images/img-23ccab65935e1dc53e980b0e",
+    "descriptionAr": "🌿  عصفور الجنة رفيع\n\nنبات زينة دائم الخضرة يتميز بأوراقه الأسطوانية الرفيعة التي تنمو بشكل قائم، وأزهاره البرتقالية والزرقاء المميزة التي تشبه شكل طائر الجنة، مما يجعله من أبرز نباتات الزينة الاستوائية. يُستخدم في تنسيق الحدائق والأحواض الكبيرة، ويضفي مظهرًا عصريًا وأنيقًا على المساحات الخارجية.\n\nينمو بشكل ممتاز في الشمس الكاملة إلى نصف الظل، ويفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. يتحمل الحرارة والجفاف النسبي بعد التأسيس، ويحتاج إلى إزالة الأوراق القديمة للحفاظ على مظهره وتشجيع النمو والإزهار.",
+    "descriptionEn": "🌿 Narrow-Leaf Bird of Paradise\n\nEvergreen ornamental plant distinguished by its upright cylindrical leaves and striking orange and blue bird-like flowers. It is widely used in tropical landscapes, garden beds, and large containers for its bold architectural form and exotic appearance.\n\nIt grows best in full sun to partial shade and prefers fertile, well-drained soil with moderate regular watering. Once established, it tolerates heat and moderate drought. Removing old leaves helps maintain its appearance and encourages healthy growth and flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1785310114702-l69r8",
+    "nameAr": "عصفور الجنة عريض",
+    "nameEn": "Strelitzia reginae",
+    "scientificName": "Strelitzia reginae",
+    "imagePath": "/api/images/img-0ea4847a7d648f666089cfca",
+    "descriptionAr": "عصفور الجنة 🌿🌸\n\nنبات زينة استوائي دائم الخضرة يتميز بأوراقه الكبيرة القوية وشكله المميز الذي يشبه الطيور، وتظهر أزهاره الفريدة بألوان برتقالية وزرقاء تشبه طائرًا صغيرًا، لذلك سُمّي بعصفور الجنة. يُستخدم بكثرة في الحدائق والمداخل والمساحات الواسعة لإعطاء مظهر استوائي فاخر وجذاب.\n\nيحتاج إلى شمس كاملة أو إضاءة قوية لينمو ويزهر بشكل جيد، ويفضل التربة الخصبة جيدة التصريف مع ري منتظم دون إغراق. يحتاج إلى مساحة كافية للنمو، كما يُنصح بإزالة الأوراق الجافة وتنظيف النبات للحفاظ على مظهره الصحي والجمالي.",
+    "descriptionEn": "Bird of Paradise 🌿🌸\n\nTropical evergreen ornamental plant known for its large banana-like leaves and unique flowers that resemble a bird in flight, typically in orange and blue colors. It is widely used in landscaping, gardens, and entrances for its strong exotic and architectural appearance.\n\nIt requires full sun or bright light for optimal growth and flowering, along with fertile well-drained soil and regular watering without overwatering. It needs space to develop properly and benefits from removing old leaves to maintain a healthy appearance.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1785311240495-7o0tg",
+    "nameAr": "كريسا",
+    "nameEn": "Carissa macrocarpa",
+    "scientificName": "Carissa macrocarpa",
+    "imagePath": "/api/images/img-cdee021618483ff44c9d7182",
+    "descriptionAr": "🌿 كريسا\n\nشجيرة زينة دائمة الخضرة تتميز بأوراقها الخضراء اللامعة الكثيفة، وأزهارها البيضاء العطرية التي تتحول إلى ثمار حمراء أو أرجوانية عند النضج في بعض الأصناف. تُستخدم في تنسيق الحدائق وتشكيل الأسيجة النباتية بفضل كثافة نموها وتحملها للقص والتشكيل، كما تتحمل الحرارة والجفاف نسبيًا.\n\nتنمو بشكل ممتاز في الشمس الكاملة إلى نصف الظل، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم خلال فترة التأسيس. تتحمل الجفاف بعد استقرارها، ويُنصح بتقليمها دوريًا للحفاظ على شكلها الكثيف وتشجيع النمو الجديد.",
+    "descriptionEn": "🌿 Carissa\n\nEvergreen ornamental shrub valued for its dense glossy green foliage, fragrant white flowers, and attractive red to purple fruits in some varieties. It is widely used for hedges, borders, and landscape planting due to its compact growth and excellent tolerance to pruning.\n\nIt grows best in full sun to partial shade and prefers well-drained soil with moderate watering during establishment. Once established, it is tolerant of heat and moderate drought. Regular pruning helps maintain a dense, attractive shape.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1785313077846-k3l3g",
+    "nameAr": "برباريس",
+    "nameEn": "Berberis spp",
+    "scientificName": "Berberis spp",
+    "imagePath": "/api/images/img-3ad0a5574a46b14e02b20213",
+    "descriptionAr": "🌿 برباريس\n\nشجيرة زينة دائمة أو متساقطة الأوراق حسب الصنف، تتميز بأوراقها الملونة التي تتدرج بين الأخضر والأحمر والأرجواني، وأزهارها الصفراء الصغيرة التي تتحول إلى ثمار حمراء زاهية. تُستخدم في تنسيق الحدائق وتشكيل الأسيجة والأحواض، وتتميز بجمال أوراقها وقدرتها على تحمل ظروف النمو المختلفة.\n\nتنمو بشكل جيد في الشمس الكاملة إلى نصف الظل، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم. تتحمل البرودة والحرارة المعتدلة، ويُنصح بتقليمها دوريًا للحفاظ على شكلها الكثيف وتشجيع النمو الجديد.",
+    "descriptionEn": "🌿 Barberry\n\nEvergreen or deciduous ornamental shrub, depending on the variety, known for its colorful foliage in shades of green, red, and purple, along with small yellow flowers followed by bright red berries. It is widely used in hedges, borders, and landscape plantings for its attractive foliage and adaptability.\n\nIt grows best in full sun to partial shade and prefers well-drained soil with moderate regular watering. It tolerates cold and moderate heat and benefits from regular pruning to maintain a dense, attractive form.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1785313701474-b7aos",
+    "nameAr": "لانتانا (أم كلثوم)",
+    "nameEn": "Lantana camara",
+    "scientificName": "Lantana camara",
+    "imagePath": "/api/images/img-b04b963279832435dd77d20a",
+    "descriptionAr": "لانتانا (أم كلثوم) 🌿🌸\n\nنبات زينة شجيري دائم أو شبه دائم الخضرة يتميز بأزهاره الصغيرة المتجمعة التي تتغير ألوانها بين الأصفر والبرتقالي والوردي والأحمر حسب مرحلة الإزهار. يُستخدم بكثرة في الحدائق والأحواض والأسيجة لأنه يعطي لونًا قويًا وممتدًا لفترة طويلة، كما يجذب الفراشات ويضيف حيوية للمكان.\n\nيحتاج إلى شمس كاملة ليزهر بكثافة، ويتحمل الحرارة والجفاف بشكل ممتاز بعد التأسيس. يفضل التربة الخفيفة جيدة التصريف مع ري معتدل، ويُنصح بتقليمها بشكل دوري للحفاظ على شكلها وتشجيع الإزهار المستمر.",
+    "descriptionEn": "Lantana 🌿🌸\n\nEvergreen or semi-evergreen shrub known for its clusters of small multicolored flowers that change shades from yellow to orange, pink, and red during blooming. It is widely used in gardens, borders, and hedges for its long flowering period and strong ornamental impact, and it attracts butterflies.\n\nIt thrives in full sun and is highly heat and drought tolerant once established. Prefers well-drained soil and moderate watering. Regular pruning helps maintain shape and encourages continuous blooming.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1785314011731-6llz7",
+    "nameAr": "جتروفا",
+    "nameEn": "Jatropha",
+    "scientificName": "Jatropha",
+    "imagePath": "/api/images/img-297e063fb691cdab003b1140",
+    "descriptionAr": "🌺 جتروفا\n\nشجيرة أو شجرة زينة دائمة الخضرة تتميز بأوراقها الخضراء اللامعة وأزهارها الحمراء الزاهية التي تتفتح على مدار معظم أشهر السنة في الأجواء الدافئة. تُستخدم في تنسيق الحدائق والشوارع والأحواض، وتتميز بسرعة نموها وقدرتها على تحمل الحرارة والجفاف نسبيًا، مما يجعلها خيارًا مميزًا للمناطق الحارة.\n\nتنمو بشكل ممتاز في الشمس الكاملة إلى نصف الظل، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم خلال فترة التأسيس. تتحمل الجفاف بعد استقرارها، وتستفيد من التقليم الخفيف للحفاظ على شكلها وتشجيع الإزهار المستمر.",
+    "descriptionEn": "🌺 Jatropha\n\nEvergreen ornamental shrub or small tree valued for its glossy green foliage and bright red flower clusters that bloom for much of the year in warm climates. It is widely used in gardens, streetscapes, and landscape plantings due to its rapid growth and tolerance to heat and moderate drought.\n\nIt grows best in full sun to partial shade and prefers well-drained soil with moderate watering during establishment. Once established, it is drought tolerant. Light pruning encourages a compact shape and continuous flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1785314090524-s6x3m",
+    "nameAr": "مجنونة مقزمة",
+    "nameEn": "Bougainvillea spp. (Dwarf varieties)",
+    "scientificName": "Bougainvillea spp. (Dwarf varieties)",
+    "imagePath": "/api/images/img-60ba0e969c42cf38dda68f5d",
+    "descriptionAr": "🌸 مجنونة مقزمة\n\nشجيرة زينة مزهرة متسلقة أو نصف متسلقة تتميز بحجمها الصغير وكثافة نموها، وتنتج أزهارًا ملونة زاهية تحيط بها أوراق زهرية (قنابات) جذابة بألوان متعددة مثل الوردي والأحمر والأبيض والبنفسجي. تُعد خيارًا مثاليًا للأحواض والأصص والحدائق الصغيرة، كما تتميز بسهولة تشكيلها وتحملها للحرارة والجفاف.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الجفاف بعد التأسيس، وتحتاج إلى تقليم دوري للحفاظ على شكلها المقزم وتشجيع كثافة النمو والإزهار.",
+    "descriptionEn": "🌸 Dwarf Bougainvillea\n\nCompact ornamental flowering shrub or semi-climbing plant known for its dense growth and colorful blooms. Its attractive bracts appear in shades of pink, red, white, and purple, making it ideal for containers, small gardens, and landscape borders. It is easy to shape and highly tolerant of heat and drought.\n\nIt thrives in full sun and prefers well-drained soil with moderate regular watering. Once established, it is drought tolerant and benefits from regular pruning to maintain its compact form and encourage abundant flowering.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1787504917678-6njio",
+    "nameAr": "آس",
+    "nameEn": "Myrtus communis",
+    "scientificName": "Myrtus communis",
+    "imagePath": "/api/images/img-4d02314c05b86af38aa71611",
+    "descriptionAr": "🌿 آس\n\nشجيرة زينة دائمة الخضرة تتميز بأوراقها الخضراء اللامعة ورائحتها العطرية المميزة، وتنتج أزهارًا بيضاء صغيرة عطرة تتبعها ثمار داكنة عند النضج. تُستخدم في تنسيق الحدائق والأسيجة النباتية والأحواض، وتتميز بكثافة نموها وسهولة تشكيلها بالتقليم.\n\nتنمو بشكل ممتاز في الشمس الكاملة إلى نصف الظل، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة والجفاف نسبيًا بعد التأسيس، وتحتاج إلى تقليم خفيف للحفاظ على شكلها وتشجيع النمو الكثيف.",
+    "descriptionEn": "🌿 Myrtle\n\nAn evergreen ornamental shrub known for its glossy green aromatic leaves and small fragrant white flowers, followed by dark-colored berries when mature. It is widely used in gardens, hedges, borders, and landscape planting due to its dense growth and excellent response to pruning.\n\nIt grows well in full sun to partial shade and prefers well-drained soil with moderate regular watering. Once established, it tolerates heat and moderate drought. Light pruning helps maintain its shape and encourages dense growth.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1787990192795-ijnf1",
+    "nameAr": "بولونيا",
+    "nameEn": "Paulownia",
+    "scientificName": "Paulownia",
+    "imagePath": "/api/images/img-921c80b3f2a7a049cb672daa",
+    "descriptionAr": "🌸 بولونيا\n\nشجرة زينة متساقطة الأوراق تتميز بسرعة نموها وأوراقها الكبيرة ذات الشكل القلبي، كما تنتج أزهارًا جميلة ذات لون بنفسجي فاتح إلى أرجواني تظهر في الربيع. تُستخدم في الحدائق والمتنزهات والمساحات الواسعة لما تضيفه من مظهر مميز وظل جيد، كما تُعرف بأهميتها في إنتاج الأخشاب.\n\nتنمو بشكل جيد في الشمس الكاملة، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم خلال فترة التأسيس. تتميز بسرعة نموها وتحتاج إلى مساحة كافية لتكوين تاجها وأغصانها بشكل جيد.",
+    "descriptionEn": "🌸 Paulownia\n\nA fast-growing deciduous ornamental tree known for its large heart-shaped leaves and attractive pale violet to purple flowers that appear during spring. It is widely planted in gardens, parks, and open landscapes and is also valued for its timber.\n\nIt grows best in full sun and prefers fertile, well-drained soil with moderate watering during establishment. Due to its rapid growth and broad canopy, adequate planting space is recommended.",
+    "category": "أشجار وشجيرات وسياجات الزينة"
+  },
+  {
+    "id": "id-1779352915559-tklbc",
+    "nameAr": "قرطاسية",
+    "nameEn": "Hydrangea macrophylla",
+    "scientificName": "Hydrangea macrophylla",
+    "imagePath": "/api/images/img-dbd23dc9ce93296be821fee3",
+    "descriptionAr": "قرطاسية 🌿🌸\n\nنبات زينة مزهر شجيري يتميز بأزهاره الكبيرة الكروية أو النصف كروية، والتي تأتي بألوان متعددة مثل الأزرق، الوردي، الأبيض، والبنفسجي. ومن أشهر مميزاته أن لون الأزهار يمكن أن يتغير حسب درجة حموضة التربة (pH)، حيث تميل إلى الأزرق في التربة الحامضية والوردي في التربة القلوية. يُستخدم بكثرة في الحدائق المنزلية والأحواض المزخرفة والمداخل بسبب مظهره الفاخر وكثافة أزهاره التي تعطي إحساسًا بالفخامة والجمال.\n\nيحتاج النبات إلى عناية متوسطة، حيث يفضل التربة الرطبة جيدة التصريف والغنية بالمواد العضوية، مع ري منتظم دون إغراق. كما يفضل الأماكن شبه الظليلة أو الشمس الصباحية فقط، ويتأثر سلبًا بالحرارة العالية المباشرة. يحتاج إلى تقليم خفيف بعد انتهاء موسم الإزهار لتحفيز نمو جديد.",
+    "descriptionEn": "Hydrangea macrophylla  🌿🌸\n\nDeciduous ornamental shrub known for its large, rounded flower clusters in colors such as blue, pink, white, and purple. One of its unique characteristics is that flower color changes depending on soil pH—acidic soils produce blue flowers, while alkaline soils produce pink tones. It is widely used in gardens, borders, and decorative landscaping due to its lush and luxurious floral display.\n\nIt requires moderate care, preferring moist, well-drained, and organic-rich soil with regular watering. It grows best in partial shade or morning sun and is sensitive to strong direct heat. Light pruning after flowering helps promote healthy new growth and better blooming.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779353536586-11ggp",
+    "nameAr": "كروتون",
+    "nameEn": "Codiaeum variegatum ‘Mammy’",
+    "scientificName": "Codiaeum variegatum ‘Mammy’",
+    "imagePath": "/api/images/img-9f6d713215382cfde996738f",
+    "descriptionAr": "كروتون مامي 🌿\n\nنبات زينة ملون يتميز بأوراقه الملتفة والسميكة ذات الألوان الزاهية مثل الأخضر، الأصفر، الأحمر والبرتقالي، مما يمنحه مظهرًا استوائيًا جذابًا ومميزًا. يُستخدم بكثرة في تزيين الحدائق والأحواض الداخلية والخارجية كعنصر لوني قوي يلفت الانتباه. يحتاج عناية متوسطة ويُعد حساسًا نسبيًا لتغير الظروف البيئية.\n\nيفضل الإضاءة الساطعة غير المباشرة أو الشمس الجزئية، لأن الضوء القوي يساعد على إظهار ألوانه بشكل أوضح. يحتاج ري منتظم مع ترك التربة تجف قليلًا بين الريات، ويجب تجنب زيادة الماء. كما يفضل الرطوبة المعتدلة ودرجة حرارة دافئة مستقرة، مع تربة جيدة التصريف.",
+    "descriptionEn": "Croton Mammy 🌿\n\nColorful ornamental plant known for its twisted, thick leaves with vibrant shades of green, yellow, red, and orange, giving it a strong tropical decorative appearance. It is widely used in indoor and outdoor landscaping as a striking color accent plant. It requires moderate care and is somewhat sensitive to environmental changes.\n\nIt prefers bright indirect light or partial sun, as good lighting enhances its leaf colors. It needs moderate watering, allowing the soil to slightly dry between irrigations, and should not be overwatered. It also prefers stable warm temperatures, moderate humidity, and well-drained soil.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779353611253-flnxh",
+    "nameAr": "غبار الذهب",
+    "nameEn": "Aucuba japonica",
+    "scientificName": "Aucuba japonica",
+    "imagePath": "/api/images/img-ac3697674a47dc5236e806f4",
+    "descriptionAr": "غبار الذهب 🌿\n\nشجيرة زينة دائمة الخضرة تتميز بأوراقها اللامعة ذات اللون الأخضر مع بقع أو نقاط صفراء تشبه غبار الذهب، مما يعطيها مظهرًا زخرفيًا جميلًا ومميزًا في الحدائق والأسيجة. تُستخدم بكثرة في تنسيق الحدائق كعنصر تزييني أو كسياج نباتي بسبب كثافة أوراقها وسهولة تشكيلها. تتحمل التقليم بشكل جيد وتُعد سهلة العناية نسبيًا، كما أنها تضيف لونًا ولمعانًا مميزًا للمكان طوال العام.\n\nتفضل الشمس الجزئية إلى الظل الخفيف، ويمكن أن تتحمل بعض الإضاءة الساطعة غير المباشرة. تحتاج ري معتدل مع تجنب الإفراط في الماء، وتربة جيدة التصريف وغنية نسبيًا بالمواد العضوية. تُستخدم أيضًا في الأماكن الظليلة لإضافة إضاءة لونية مميزة للحديقة.",
+    "descriptionEn": "Gold Dust Plant 🌿\n\nEvergreen ornamental shrub known for its glossy green leaves covered with yellow speckles resembling gold dust, giving it a bright decorative appearance. It is widely used in landscaping and hedges due to its dense foliage and attractive color contrast. It responds well to pruning and is relatively easy to maintain, providing year-round visual interest.\n\nIt prefers partial shade to light shade and can tolerate bright indirect light. It requires moderate watering, avoiding overwatering, and well-drained, nutrient-rich soil. It is often used in shaded garden areas to add color and brightness.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779354470409-phgb2",
+    "nameAr": "بونساي",
+    "nameEn": "Various species (Bonsai form)",
+    "scientificName": "Various species (Bonsai form)",
+    "imagePath": "/api/images/img-31060d13067fc07327add104",
+    "descriptionAr": "بونساي 🌿\n\nنبات زينة فني يتم تشكيله وتربيته بطريقة خاصة ليحاكي شكل الأشجار الطبيعية بحجم صغير، ويُعد من أرقى أنواع نباتات الزينة بسبب دقة العناية به وجمال شكله. يمكن أن يُصنع من عدة أنواع من الأشجار مثل الفيكس أو الزيتون أو الصنوبر، ويُستخدم بكثرة داخل المنازل والمكاتب والحدائق كقطعة ديكور فريدة. يتميز بالبطء الشديد في النمو والحاجة إلى تقليم وتشكيل مستمر للحفاظ على شكله الجمالي المتناسق.\n\nيحتاج إلى عناية دقيقة، ويُفضل الإضاءة الجيدة غير المباشرة أو الشمس الخفيفة حسب النوع المستخدم. يجب ريّه بشكل منتظم مع تجنب الجفاف الكامل أو زيادة الماء، لأن جذوره حساسة جدًا. كما يحتاج إلى تربة جيدة التصريف وتقليم دوري للجذور والأغصان للحفاظ على حجمه الصغير وشكله الفني.",
+    "descriptionEn": "Bonsai 🌿\n\nAn artistic miniature tree created through specialized pruning and training techniques to resemble full-sized trees in small form. It is considered one of the most refined ornamental plants and is commonly used in homes, offices, and gardens as a decorative centerpiece. It can be made from various tree species such as Ficus, olive, or pine.\n\nIt requires precise care and regular shaping to maintain its form. Light requirements vary depending on the species, but generally it prefers bright indirect light or mild sun. It needs careful watering to avoid both drying out and overwatering, as its roots are sensitive. Well-drained soil and regular root and branch pruning are essential to maintain its miniature size and artistic shape.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779360191630-g8s9c",
+    "nameAr": "سنسفيرا او جلد النمر",
+    "nameEn": "Sansevieria trifasciata",
+    "scientificName": "Sansevieria trifasciata",
+    "imagePath": "/api/images/img-eb6c91f125e3b24ec32b134c",
+    "descriptionAr": "جلد النمر 🌿\n\nنبات زينة داخلي دائم الخضرة يتميز بأوراقه الطويلة القوية والعمودية ذات النقوش والخطوط المميزة التي تعطي شكلًا يشبه جلد النمر، مما يجعله من أكثر النباتات المستخدمة في الديكور العصري للمنازل والمكاتب. يُعرف أيضًا بقدرته العالية على تحمل الإهمال النسبي وقلة الري، مما يجعله مناسبًا للمبتدئين.\n\nيحتاج إلى عناية قليلة إلى متوسطة، ويُفضل الإضاءة الجيدة غير المباشرة، لكنه يتحمل الإضاءة الضعيفة. لا يحتاج ري متكرر، بل يُسقى فقط عند جفاف التربة تمامًا تقريبًا، لأن زيادة الماء قد تسبب تعفن الجذور. يفضل التربة الخفيفة جيدة التصريف.",
+    "descriptionEn": "Snake Plant 🌿\n\nEvergreen indoor ornamental plant known for its long, upright, sword-shaped leaves with distinctive striped patterns resembling tiger skin. It is widely used in modern interior design due to its strong architectural appearance and very low maintenance requirements.\n\nIt is highly tolerant of neglect and low light conditions, making it ideal for beginners. It requires minimal watering and should only be watered when the soil is almost completely dry, as overwatering can cause root rot. Prefers well-drained soil and can adapt to a wide range of light conditions.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779611539175-5m412",
+    "nameAr": "قلب عبد الوهاب",
+    "nameEn": "Epipremnum aureum",
+    "scientificName": "Epipremnum aureum",
+    "imagePath": "/api/images/img-f3773f05b57ae2002f5f6d3d",
+    "descriptionAr": "قلب عبد الوهاب 🌿\n\nنبات زينة داخلي متسلق أو زاحف دائم الخضرة يتميز بأوراقه القلبية الشكل اللامعة، والتي تكون غالبًا خضراء مع تبرقش أصفر أو ذهبي حسب الصنف. يُستخدم بكثرة في الديكور الداخلي، سواء في الأصص المعلقة أو على الرفوف أو لتغطية الدعامات، لأنه يعطي مظهرًا طبيعيًا جذابًا وسهل التشكيل. يُعرف أيضًا بتحمله العالي وسهولة العناية به، مما يجعله من أكثر النباتات انتشارًا داخل المنازل والمكاتب.\n\nيحتاج إلى إضاءة متوسطة إلى ساطعة غير مباشرة، لكنه يتحمل الإضاءة الضعيفة أيضًا. يحتاج إلى ري معتدل مع ترك التربة تجف جزئيًا بين الريات، لأن زيادة الماء تسبب تعفن الجذور. يفضل التربة الخفيفة جيدة التصريف، ويمكن إكثاره بسهولة بالعُقل.",
+    "descriptionEn": "Golden Pothos 🌿\n\nEvergreen trailing or climbing indoor ornamental plant known for its heart-shaped glossy leaves, often green with yellow or golden variegation depending on the variety. It is widely used in interior decoration in hanging pots, shelves, or trained on supports due to its attractive cascading growth habit. It is one of the most popular and easy-to-care-for houseplants.\n\nIt tolerates low to medium light but grows best in bright indirect light. Requires moderate watering, allowing the soil to partially dry between waterings, as overwatering may cause root rot. Prefers light well-drained soil and can be easily propagated from cuttings.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779699188645-l0pd2",
+    "nameAr": "بشيرة",
+    "nameEn": "Pachira aquatica",
+    "scientificName": "Pachira aquatica",
+    "imagePath": "/api/images/img-8150459c54c4be6b0c1c41ac",
+    "descriptionAr": "نبتة البشيرة 🌿\n\nنبات زينة داخلي دائم الخضرة يُعرف بجذعه المضفور وأوراقه الخضراء اللامعة التي تنمو بشكل راقٍ وجذاب. يُعتبر من النباتات المحبوبة في المنازل والمكاتب لأنه يعطي مظهرًا استوائيًا أنيقًا ويُعتقد أنه يجلب الحظ والبركة في بعض الثقافات. يتميز بسهولة العناية به وشكله المميز الذي يجعله قطعة ديكور طبيعية مميزة.\n\nيحتاج إلى إضاءة متوسطة إلى ساطعة غير مباشرة، ويتحمل الإضاءة الضعيفة نسبيًا. يحتاج إلى ري معتدل مع ترك التربة تجف جزئيًا بين الريات لتجنب تعفن الجذور. يفضل التربة الخفيفة جيدة التصريف، ويُنصح بتدوير الأصيص بشكل دوري للحصول على نمو متوازن.",
+    "descriptionEn": "Money Tree 🌿\n\nEvergreen indoor ornamental plant known for its braided trunk and glossy green palmate leaves. It is widely used in homes and offices as a decorative plant and is often associated with good luck and positive energy in some cultures. It is appreciated for its attractive tropical appearance and ease of care.\n\nIt prefers medium to bright indirect light but can tolerate lower light conditions. Requires moderate watering, allowing the soil to partially dry between waterings to prevent root rot. It grows best in well-drained soil and benefits from occasional rotation for balanced growth.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779699595709-7s2np",
+    "nameAr": "كوشوك",
+    "nameEn": "Ficus elastica",
+    "scientificName": "Ficus elastica",
+    "imagePath": "/api/images/img-bf95bd751b8cd8dd6b14c27e",
+    "descriptionAr": "كوشوك (فيكس إيلاستيكا) 🌿\n\nنبات زينة داخلي أو خارجي دائم الخضرة يتميز بأوراقه الكبيرة السميكة واللامعة ذات اللون الأخضر الداكن، وقد تكون مبرقشة حسب الصنف. يُعد من النباتات القوية التي تضيف مظهرًا استوائيًا أنيقًا للمنزل أو الحديقة، ويُستخدم بكثرة كنبات ديكور بسبب حجمه وشكله الجذاب وقدرته على النمو ليصبح شجرة متوسطة الحجم.\n\nيحتاج إلى إضاءة متوسطة إلى ساطعة غير مباشرة، ويتحمل بعض الظل. يحتاج إلى ري معتدل مع ترك التربة تجف جزئيًا بين الريات لتجنب تعفن الجذور. يفضل التربة الخصبة جيدة التصريف، ويُنصح بتنظيف أوراقه بشكل دوري للحفاظ على لمعانها وصحتها.",
+    "descriptionEn": "Rubber Plant 🌿\n\nEvergreen ornamental plant known for its large, thick, glossy leaves, usually dark green or variegated depending on the variety. It is widely used as an indoor decorative plant or in gardens where it can grow into a medium-sized tree, adding a strong tropical aesthetic.\n\nIt prefers medium to bright indirect light but can tolerate partial shade. It requires moderate watering, allowing the soil to dry slightly between waterings to prevent root rot. It grows best in fertile, well-drained soil and benefits from regular leaf cleaning to maintain its shine and health.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779700063630-2vvpo",
+    "nameAr": "يوكا",
+    "nameEn": "Yucca spp",
+    "scientificName": "Yucca spp",
+    "imagePath": "/api/images/img-8fbdd4a80df120deb34e7c26",
+    "descriptionAr": "يوكا 🌿\n\nنبات زينة دائم الخضرة يتميز بأوراقه الطويلة الحادة والقوية التي تنمو بشكل وردي أو عمودي، ويُعد من النباتات الصحراوية التي تضيف مظهرًا عصريًا وجريئًا للحدائق والتنسيق الخارجي. يُستخدم بكثرة في الحدائق الجافة والحديثة بسبب شكله المميز وقدرته العالية على التحمل.\n\nيحتاج إلى شمس كاملة لينمو بشكل أفضل، ويتحمل الحرارة والجفاف بشكل ممتاز. يفضل التربة الرملية أو الخفيفة جيدة التصريف، مع ري قليل جدًا وتجنب الإغراق. كما يُنصح بإزالة الأوراق الجافة من القاعدة للحفاظ على مظهر نظيف ومنظم.",
+    "descriptionEn": "Yucca 🌿\n\nEvergreen ornamental plant known for its long, stiff, sword-shaped leaves that grow in rosettes or upright forms. It is widely used in modern and desert landscaping due to its bold architectural appearance and high tolerance to harsh conditions.\n\nIt thrives in full sun and is highly drought and heat tolerant. Prefers sandy or well-drained soil with very low watering requirements. Removing old or dry leaves helps maintain a clean and attractive appearance.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779701603541-t6977",
+    "nameAr": "يوكا ستك",
+    "nameEn": "Yucca spp (dwarf varieties)",
+    "scientificName": "Yucca spp (dwarf varieties)",
+    "imagePath": "/api/images/img-05a87b9805766adf797f6d88",
+    "descriptionAr": "يوكا ستك 🌿\n\nنبات زينة دائم الخضرة صغير الحجم مقارنة باليوكا العادية، يتميز بأوراقه الطويلة الحادة والقوية التي تنمو بشكل كثيف من قاعدة واحدة، مما يعطيه شكلاً جميلاً ومنظماً. يُستخدم بكثرة في الحدائق الحديثة والصخرية والأحواض لأنه يعطي مظهرًا عصريًا ويحتاج لمساحة قليلة.\n\nيحتاج إلى شمس كاملة لينمو بشكل أفضل، ويتحمل الحرارة والجفاف بشكل ممتاز. يفضل التربة الرملية أو الخفيفة جيدة التصريف، مع ري قليل جدًا وتجنب الإغراق. يُنصح بإزالة الأوراق الجافة من القاعدة للحفاظ على شكله النظيف والجذاب.",
+    "descriptionEn": "Dwarf Yucca 🌿\n\nCompact evergreen ornamental plant with stiff, sword-shaped leaves growing in dense rosettes. It is widely used in modern, rock, and low-maintenance landscapes due to its small size and strong architectural appearance.\n\nIt thrives in full sun and is highly drought and heat tolerant. Prefers sandy or well-drained soil and requires very little watering. Removing old or dry lower leaves helps maintain a clean and attractive form.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779704875247-autgu",
+    "nameAr": "اريكا",
+    "nameEn": "Dypsis lutescens",
+    "scientificName": "Dypsis lutescens",
+    "imagePath": "/api/images/img-a6a83b7817deb4055511716e",
+    "descriptionAr": "اريكا 🌿\n\nنبات زينة داخلي أو خارجي دائم الخضرة يُستخدم بكثرة لإضفاء مظهر استوائي أنيق، ويتميز بأوراقه الريشية الخضراء الكثيفة التي تنمو بشكل متناسق وجذاب. يُعد من أكثر النباتات المستخدمة في تزيين المكاتب والمنازل والحدائق، كما يساعد في تحسين شكل المساحات وإعطائها طابعًا طبيعيًا ناعمًا.\n\nيحتاج إلى إضاءة متوسطة إلى ساطعة غير مباشرة، ويتحمل الإضاءة الضعيفة نسبيًا. يفضل التربة الخفيفة جيدة التصريف مع ري منتظم للحفاظ على رطوبة معتدلة دون إغراق. كما يُنصح برش الأوراق بالماء أحيانًا للحفاظ على حيويتها ونظافتها.",
+    "descriptionEn": "Areca Palm 🌿\n\nEvergreen ornamental palm widely used as an indoor and outdoor decorative plant. It is known for its feathery, arching green fronds that create a soft tropical appearance, making it popular in homes, offices, and landscaped gardens.\n\nIt prefers medium to bright indirect light but can tolerate lower light conditions. Requires regular watering to maintain lightly moist soil without waterlogging. It grows best in well-drained soil and benefits from occasional misting to maintain healthy foliage.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779705250705-6ut03",
+    "nameAr": "سيكاس",
+    "nameEn": "Cycas revoluta",
+    "scientificName": "Cycas revoluta",
+    "imagePath": "/api/images/img-8d11fd7dd6bd10238a9aa82f",
+    "descriptionAr": "سيكاس 🌿\n\nنبات زينة دائم الخضرة يُستخدم بكثرة في الحدائق والتنسيق الخارجي، ويتميز بأوراقه الريشية الكثيفة ذات المظهر الاستوائي الجذاب. يُعد من النباتات القوية التي تعطي شكلًا أنيقًا ومنسقًا، ويُستخدم في الحدائق كعنصر تزييني أو كنقطة جذب بصرية بسبب شكله المميز وكثافته الخضراء.\n\nيحتاج إلى إضاءة متوسطة إلى ساطعة غير مباشرة، ويتحمل بعض الظل. يفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم دون إغراق. كما يُنصح بإزالة الأوراق الجافة وتنظيف النبات للحفاظ على مظهره الصحي والكثيف.",
+    "descriptionEn": "Sago Palm 🌿\n\nEvergreen ornamental plant with a palm-like appearance, known for its stiff, glossy, feather-like leaves that grow in a symmetrical rosette. It is widely used in landscaping and decorative gardens due to its bold and structured appearance.\n\nIt grows best in bright indirect light to partial sun and prefers well-drained soil. Requires low to moderate watering and should not be overwatered, as it is sensitive to root rot. Removing old leaves helps maintain a clean and attractive form.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1780303666115-qk53h",
+    "nameAr": "ساق البامبو",
+    "nameEn": "Dracaena sanderiana",
+    "scientificName": "Dracaena sanderiana",
+    "imagePath": "/api/images/img-fe8a0cb6c853d4a14bad8a55",
+    "descriptionAr": "ساق البامبو 🌿🎋\n\nنبات زينة داخلي معروف بسيقانه الخضراء الأسطوانية التي تنمو بشكل مستقيم أو ملتف، ويُستخدم بكثرة في الديكور الداخلي والمكاتب لإضافة طابع بسيط وأنيق. يُعتقد في بعض الثقافات أنه يجلب الحظ والطاقة الإيجابية، لذلك يُزرع في أواني زجاجية أو فخارية بشكل زخرفي.\n\nلا يحتاج إلى تربة دائمًا، ويمكن زراعته في الماء مع حصى صغيرة، أو في تربة خفيفة جيدة التصريف. يفضل الإضاءة غير المباشرة ويحتاج إلى تغيير الماء بشكل دوري إذا كان مزروعًا مائيًا، مع تجنب الشمس المباشرة القوية.",
+    "descriptionEn": "Lucky Bamboo 🌿🎋\n\nPopular indoor ornamental plant known for its straight green stalks that are often shaped or arranged decoratively. It is widely used in homes and offices and is associated with good luck and positive energy in some cultures.\n\nIt grows well in indirect light and can be grown in water with stones or in light soil. Requires clean water changes when grown hydroponically and should be kept away from direct strong sunlight.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1780303761184-vko7d",
+    "nameAr": "خيزران",
+    "nameEn": "Chamaedorea seifrizii",
+    "scientificName": "Chamaedorea seifrizii",
+    "imagePath": "/api/images/img-ac997ec2e950079acdfbec56",
+    "descriptionAr": "نخيل البامبو 🌿🌴\n\nنبات زينة داخلي دائم الخضرة يتميز بسيقانه الرفيعة الشبيهة بالبامبو وأوراقه الريشية الخضراء الناعمة، ويُستخدم بكثرة في تزيين المنازل والمكاتب لإضفاء مظهر استوائي أنيق وهادئ. يُعد من النباتات المناسبة للأماكن الداخلية لأنه يعطي كثافة خضراء جميلة بدون أن يشغل مساحة كبيرة.\n\nينمو بشكل جيد في الإضاءة المتوسطة إلى الضعيفة غير المباشرة، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل ومنتظم. يحتاج إلى الحفاظ على رطوبة خفيفة دون إغراق، كما يُنصح برش الأوراق أحيانًا للحفاظ على حيويتها ونضارتها.",
+    "descriptionEn": "Bamboo Palm 🌿🌴\n\nEvergreen indoor ornamental palm known for its slender bamboo-like stems and soft, feathery green fronds. It is widely used in interior design for homes and offices due to its elegant tropical appearance and ability to thrive in low-light conditions.\n\nIt grows best in medium to low indirect light and prefers well-drained soil with regular moderate watering. It should be kept lightly moist but not waterlogged, and occasional misting helps maintain healthy foliage.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1781688186829-mos1i",
+    "nameAr": "زنبق السلام (الشراع الأبيض)",
+    "nameEn": "Spathiphyllum spp",
+    "scientificName": "Spathiphyllum spp",
+    "imagePath": "/api/images/img-0842a4528ec329266ce5fe79",
+    "descriptionAr": "🤍 زنبق السلام (الشراع الأبيض)\n\nنبات زينة داخلي دائم الخضرة يتميز بأوراقه الخضراء اللامعة وأزهاره البيضاء الأنيقة التي تشبه الشراع، مما يجعله من أكثر نباتات الظل استخدامًا في المنازل والمكاتب. يضفي مظهرًا هادئًا وأنيقًا على المساحات الداخلية، كما يُعرف بسهولة العناية به وقدرته على التأقلم مع الإضاءة المنخفضة.\n\nينمو بشكل جيد في الضوء الساطع غير المباشر أو الظل الجزئي، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل ومنتظم للحفاظ على رطوبة التربة دون إغراق. يُنصح بتنظيف الأوراق من الغبار للحفاظ على جمالها وحيويتها.",
+    "descriptionEn": "🤍 Peace Lily\n\nEvergreen indoor ornamental plant known for its glossy green leaves and elegant white sail-like flowers. It is one of the most popular houseplants due to its attractive appearance and ability to thrive in low-light environments.\n\nIt grows best in bright indirect light or partial shade and prefers well-drained soil with moderate regular watering. Keeping the foliage clean helps maintain its healthy and attractive appearance.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1781688294232-v03o2",
+    "nameAr": "دفنباخيا",
+    "nameEn": "Dieffenbachia spp",
+    "scientificName": "Dieffenbachia spp",
+    "imagePath": "/api/images/img-921021a917de20f8addc6a8f",
+    "descriptionAr": "🌿 دفنباخيا\n\nنبات زينة داخلي دائم الخضرة يتميز بأوراقه الكبيرة العريضة المزخرفة بدرجات الأخضر والأبيض أو الأصفر الكريمي، مما يجعله من أكثر نباتات الظل جمالًا واستخدامًا في المنازل والمكاتب. يضفي لمسة استوائية أنيقة على المساحات الداخلية بفضل أوراقه الكثيفة وألوانه الجذابة.\n\nينمو بشكل جيد في الضوء الساطع غير المباشر، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل ومنتظم. يجب تجنب أشعة الشمس المباشرة القوية، كما يُنصح بالحفاظ على رطوبة معتدلة وتنظيف الأوراق دوريًا للحفاظ على لمعانها وصحتها.",
+    "descriptionEn": "🌿 Dieffenbachia\n\nPopular evergreen indoor ornamental plant known for its large decorative leaves variegated with shades of green, cream, and white. It is widely used in homes and offices for its tropical appearance and attractive foliage.\n\nIt grows best in bright indirect light and prefers well-drained soil with moderate regular watering. Direct sunlight should be avoided, and occasional leaf cleaning helps maintain its healthy appearance.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1781688377282-3dszm",
+    "nameAr": "أنثوريوم",
+    "nameEn": "Anthurium spp",
+    "scientificName": "Anthurium spp",
+    "imagePath": "/api/images/img-e6aa6e90383ade4bd78c6174",
+    "descriptionAr": "❤️ أنثوريوم\n\nنبات زينة داخلي دائم الخضرة يتميز بأزهاره اللامعة ذات الألوان الزاهية، مثل الأحمر والأبيض والوردي، وأوراقه الخضراء القلبية الشكل. يُعد من أجمل نباتات الزينة الداخلية ويُستخدم لإضفاء لمسة استوائية أنيقة على المنازل والمكاتب بفضل أزهاره طويلة العمر ومظهره الجذاب.\n\nينمو بشكل جيد في الضوء الساطع غير المباشر، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل ومنتظم للحفاظ على رطوبة التربة دون إغراق. يحتاج إلى بيئة دافئة ورطوبة معتدلة للحفاظ على صحة الأوراق واستمرار الإزهار.",
+    "descriptionEn": "❤️ Anthurium\n\nEvergreen indoor ornamental plant admired for its glossy heart-shaped leaves and long-lasting colorful flowers, commonly found in red, white, and pink shades. It is widely used as a decorative houseplant for its tropical beauty and elegant appearance.\n\nIt grows best in bright indirect light and prefers well-drained soil with moderate watering. Warm temperatures and moderate humidity help maintain healthy foliage and encourage flowering.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1781688473974-lyq63",
+    "nameAr": "شمادوريا",
+    "nameEn": "Chamaedorea Palm",
+    "scientificName": "Chamaedorea Palm",
+    "imagePath": "/api/images/img-ec7d16778a624b485c857bea",
+    "descriptionAr": "🌴 شمادوريا\n\nنبات زينة داخلي دائم الخضرة يتميز بأوراقه الريشية الخضراء الناعمة ومظهره الاستوائي الأنيق، ويُعد من أكثر أنواع النخيل الداخلي شيوعًا في المنازل والمكاتب. يتميز بسهولة العناية به وقدرته على التأقلم مع ظروف الإضاءة الداخلية، مما يجعله خيارًا مثاليًا لإضافة لمسة خضراء هادئة وأنيقة.\n\nينمو بشكل جيد في الضوء الساطع غير المباشر أو الإضاءة المتوسطة، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل ومنتظم. يجب تجنب أشعة الشمس المباشرة القوية والإفراط في الري للحفاظ على صحة النبات وجمال أوراقه.",
+    "descriptionEn": "🌴 Chamaedorea Palm\n\nElegant evergreen indoor palm known for its soft feathery green fronds and tropical appearance. It is one of the most popular indoor palms due to its adaptability and low-maintenance nature, making it ideal for homes and offices.\n\nIt grows best in bright indirect to moderate light and prefers well-drained soil with moderate watering. Direct sunlight and overwatering should be avoided to maintain healthy growth and attractive foliage.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1781688569247-ffb8v",
+    "nameAr": "زنبق الكالا",
+    "nameEn": "Zantedeschia spp",
+    "scientificName": "Zantedeschia spp",
+    "imagePath": "/api/images/img-9d9bdefca63263b14d3c91d0",
+    "descriptionAr": "🤍 زنبق الكالا\n\nنبات زينة مزهر يتميز بأزهاره الأنيقة القمعية الشكل وألوانه المتعددة مثل الأبيض، الأصفر، الوردي، البنفسجي، والبرتقالي. يُعد من النباتات المفضلة في تنسيق الحدائق والأحواض وتنسيقات الزهور، لما يتمتع به من مظهر راقٍ وأزهار طويلة العمر.\n\nينمو بشكل جيد في الشمس الجزئية أو الضوء الساطع، ويفضل التربة الخصبة جيدة التصريف مع الحفاظ على رطوبة معتدلة. يحتاج إلى ري منتظم خلال فترة النمو والإزهار، ويُفضل حمايته من الحرارة الشديدة المباشرة في فصل الصيف.",
+    "descriptionEn": "🤍 Calla Lily\n\nElegant flowering ornamental plant known for its distinctive funnel-shaped blooms available in white, yellow, pink, purple, and orange shades. It is widely used in gardens, containers, and floral arrangements due to its sophisticated appearance and long-lasting flowers.\n\nIt grows best in partial sun to bright light and prefers fertile, well-drained soil with moderate moisture. Regular watering during active growth and flowering helps maintain healthy blooms.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1781688670615-0icnk",
+    "nameAr": "زاميا",
+    "nameEn": "Zamioculcas zamiifolia",
+    "scientificName": "Zamioculcas zamiifolia",
+    "imagePath": "/api/images/img-22c2eb05ba5e8b3256ca9174",
+    "descriptionAr": "🌿 زاميا\n\nنبات زينة داخلي دائم الخضرة يتميز بأوراقه الخضراء اللامعة والسميكة التي تنمو بشكل منتظم وأنيق، مما يجعله من أكثر النباتات الداخلية شعبية في المنازل والمكاتب. يتمتع بقدرة عالية على تحمل ظروف الإضاءة المنخفضة وقلة الري، ويُعرف بسهولة العناية به ومظهره العصري الجذاب.\n\nينمو بشكل جيد في الضوء الساطع غير المباشر إلى الإضاءة المتوسطة، ويفضل التربة الخفيفة جيدة التصريف. يحتاج إلى ري معتدل مع ترك التربة تجف جزئيًا بين الريات، كما يجب تجنب الإفراط في الري للحفاظ على صحة الجذور.",
+    "descriptionEn": "🌿 ZZ Plant\n\nPopular evergreen indoor ornamental plant known for its glossy dark green leaves and exceptional tolerance to low light and infrequent watering. It is widely used in homes and offices due to its elegant appearance and easy maintenance.\n\nIt grows best in bright indirect to moderate light and prefers well-drained soil. Water moderately and allow the soil to partially dry between waterings to prevent root rot.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1785836661545-mele8",
+    "nameAr": "دراسينا حمراء",
+    "nameEn": "Dracaena marginata",
+    "scientificName": "Dracaena marginata",
+    "imagePath": "/api/images/img-b0f6dd149563d002d73af0f8",
+    "descriptionAr": "🌿 دراسينا حمراء\n\nنبات زينة دائم الخضرة يتميز بأوراقه الطويلة الرفيعة ذات اللون الأخضر المخطط بحواف حمراء أو قرمزية، مما يمنحه مظهرًا أنيقًا وعصريًا. يُستخدم كنبات داخلي وخارجي في الحدائق والأحواض والمداخل، ويُعد من النباتات سهلة العناية التي تضفي لمسة جمالية على مختلف المساحات.\n\nينمو بشكل جيد في الضوء الساطع غير المباشر أو نصف الظل، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل ومنتظم. يتحمل الجفاف النسبي بعد استقراره، ويُنصح بتجنب الإفراط في الري للحفاظ على صحة الجذور وجمال الأوراق",
+    "descriptionEn": "🌿 Red Dracaena\n\nEvergreen ornamental plant known for its long, narrow green leaves edged with striking red or burgundy margins. It is widely used as an indoor and outdoor decorative plant, adding a modern and elegant touch to homes, offices, and landscapes.\n\nIt grows best in bright indirect light to partial shade and prefers light, well-drained soil with moderate regular watering. Once established, it tolerates moderate drought. Avoid overwatering to maintain healthy roots and vibrant foliage.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1787395566374-4og0x",
+    "nameAr": "قفص صدري",
+    "nameEn": "Monstera deliciosa",
+    "scientificName": "Monstera deliciosa",
+    "imagePath": "/api/images/img-56129c7c90cad78948d41aea",
+    "descriptionAr": "🌿 قفص صدري\n\nنبات زينة داخلي دائم الخضرة يتميز بأوراقه الكبيرة الخضراء اللامعة التي تتشكل فيها شقوق وفتحات مميزة مع نمو النبات، مما يمنحه مظهرًا استوائيًا جذابًا. يُستخدم في تنسيق المساحات الداخلية والمكاتب والمداخل، ويمكن زراعته أيضًا في الأماكن الخارجية الدافئة والمظللة.\n\nينمو بشكل جيد في الضوء الساطع غير المباشر إلى الظل الجزئي، ويفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. يحتاج إلى دعم مناسب عند نموه بشكل متسلق، مع تنظيف الأوراق وإزالة الأوراق القديمة للحفاظ على مظهره الصحي.",
+    "descriptionEn": "🌿 Monstera deliciosa\n\nAn evergreen ornamental indoor plant known for its large, glossy green leaves with distinctive splits and holes that develop as the plant matures. It adds a tropical appearance to homes, offices, and entrances and can also be grown outdoors in warm, shaded conditions.\n\nIt grows best in bright indirect light to partial shade and prefers fertile, well-drained soil with moderate regular watering. It benefits from support as it develops a climbing habit, along with occasional leaf cleaning and removal of old leaves.",
+    "category": "نباتات زينة داخلية"
+  },
+  {
+    "id": "id-1779354330667-4qgpk",
+    "nameAr": "ليمون مكسيكي شهري",
+    "nameEn": "Citrus spp",
+    "scientificName": "Citrus spp",
+    "imagePath": "/api/images/img-c1599fc3239680112005ac92",
+    "descriptionAr": "ليمون مكسيكي 🌿🍋\n\nشجرة فاكهة حمضية دائمة الخضرة تتميز بأوراقها الخضراء اللامعة ورائحتها العطرية المميزة، وتُنتج ثمارًا صفراء حامضة تُستخدم في العصائر والأكل والتتبيل. تُعد من الأشجار المنتجة والمحبوبة في الحدائق المنزلية والمزارع بسبب ثمارها الغزيرة وقيمتها الغذائية العالية. تتميز أيضًا بأزهار بيضاء عطرية تجذب النحل وتزيد من جمال الشجرة أثناء الإزهار.\n\nتحتاج إلى عناية متوسطة وري منتظم خصوصًا في فترات النمو والإثمار، مع تجنب الإغراق بالماء. تفضل الشمس الكاملة لضمان إنتاج جيد للثمار، وتحتاج إلى تربة خصبة جيدة التصريف. يمكن تقليمها بشكل دوري للحفاظ على شكلها وتحفيز الإنتاج.",
+    "descriptionEn": "Mexican Lemon  🌿🍋\n\nEvergreen fruit-bearing citrus tree known for its glossy green leaves, aromatic foliage, and yellow acidic fruits used in cooking, beverages, and flavoring. It is widely grown in home gardens and orchards due to its productive yield and nutritional value. The tree also produces fragrant white flowers that attract pollinators.\n\nIt requires moderate care with regular watering, especially during growth and fruiting stages, while avoiding waterlogging. It prefers full sun for optimal fruit production and thrives in fertile, well-drained soil. Regular pruning helps maintain shape and improve yield.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779522847752-x356z",
+    "nameAr": "ليمون سنوي",
+    "nameEn": "Citrus limon",
+    "scientificName": "Citrus limon",
+    "imagePath": "/api/images/img-ef467c902805c8458674626d",
+    "descriptionAr": "ليمون سنوي 🌿🍋\n\nشجرة حمضيات مثمرة دائمة الخضرة تتميز بإنتاجها الموسمي للثمار مرة أو مرتين خلال السنة حسب الظروف المناخية والعناية. تُنتج ثمارًا صفراء ذات رائحة عطرية وطعم حامض يُستخدم في العصائر والطهي والتتبيل، كما تتميز بأوراقها الخضراء اللامعة وأزهارها البيضاء الجميلة ذات الرائحة الزكية.\n\nتُستخدم بكثرة في الحدائق المنزلية والمزارع بسبب إنتاجها الجيد وقيمتها الغذائية العالية، كما تضيف منظرًا جماليًا ورائحة منعشة للمكان. تحتاج إلى شمس كاملة وتربة خصبة جيدة التصريف، مع ري منتظم خاصة خلال فترات الإزهار وتكوين الثمار. كما يُنصح بتقليمها وتسميدها بشكل دوري لتحسين النمو والإنتاج.",
+    "descriptionEn": "Seasonal Lemon 🌿🍋\n\nEvergreen fruit-bearing citrus tree known for its seasonal fruit production, usually once or twice a year depending on climate and care conditions. It produces aromatic yellow acidic fruits commonly used in cooking, juices, and flavoring. The tree also features glossy green foliage and fragrant white blossoms.\n\nIt is widely grown in home gardens and orchards due to its productive nature and nutritional value, while also adding beauty and fresh fragrance to landscapes. Requires full sun, fertile well-drained soil, and regular watering, especially during flowering and fruit development. Regular pruning and fertilization help improve growth and fruit yield.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779523139786-8p6r6",
+    "nameAr": "ليمون مقزم",
+    "nameEn": "Citrus limon (Dwarf varieties)",
+    "scientificName": "Citrus limon (Dwarf varieties)",
+    "imagePath": "/api/images/img-a31d4ea78e843e8f899f946a",
+    "descriptionAr": "ليمون مقزم 🌿🍋\n\nشجرة حمضيات صغيرة الحجم ودائمة الخضرة تتميز بشكلها المدمج وإنتاجها لثمار الليمون العطرية رغم حجمها الصغير، مما يجعلها مناسبة للزراعة في الأحواض والشرفات والحدائق المنزلية الصغيرة. تتميز بأوراقها الخضراء اللامعة وأزهارها البيضاء ذات الرائحة العطرة التي تضيف لمسة جمالية ومنعشة للمكان.\n\nتحتاج إلى شمس كاملة أو إضاءة قوية للحصول على نمو وإثمار جيد، كما تحتاج إلى ري منتظم دون إغراق وتربة خصبة جيدة التصريف. يُنصح بتقليمها بشكل خفيف للحفاظ على شكلها الصغير وتحفيز النمو والإنتاج. يمكن زراعتها داخل المنزل بالقرب من نافذة مضيئة أو في الأماكن الخارجية الدافئة.",
+    "descriptionEn": "Dwarf Lemon Tree 🌿🍋\n\nCompact evergreen citrus tree known for its small size and ability to produce aromatic lemon fruits despite its miniature form, making it ideal for containers, balconies, patios, and small home gardens. It features glossy green leaves and fragrant white blossoms that add beauty and freshness to the surroundings.\n\nIt requires full sun or strong bright light for healthy growth and fruit production, along with regular watering without overwatering and fertile well-drained soil. Light pruning helps maintain its compact shape and encourages healthy growth and fruiting. It can be grown indoors near bright windows or outdoors in warm climates.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779526661532-5qq7t",
+    "nameAr": "ليمون كالامنسي",
+    "nameEn": "Citrus × microcarpa",
+    "scientificName": "Citrus × microcarpa",
+    "imagePath": "/api/images/img-b67dc7c19c8f1df292f5ae90",
+    "descriptionAr": "ليمون كالامنسي 🌿🍊\n\nشجرة حمضيات صغيرة دائمة الخضرة تتميز بثمارها الصغيرة المستديرة ذات اللون البرتقالي المائل للأصفر والطعم الحامض العطري، وتُستخدم بكثرة في العصائر والطهي والتتبيل. تُعد من أشجار الزينة المثمرة الجميلة بسبب كثافة أوراقها الخضراء اللامعة وصغر حجمها المناسب للحدائق المنزلية والأحواض والشرفات. كما تنتج أزهارًا بيضاء عطرية تضيف رائحة جميلة للمكان.\n\nتحتاج إلى شمس كاملة أو إضاءة قوية لتنمو وتثمر بشكل جيد، مع ري معتدل وتربة خصبة جيدة التصريف. تتميز بسهولة العناية نسبيًا وإنتاجها الجيد للثمار، ويمكن تقليمها للحفاظ على شكلها وحجمها المناسب.",
+    "descriptionEn": "Calamansi Lime 🌿🍊\n\nSmall evergreen citrus tree known for its round orange-yellow fruits with a strong aromatic acidic flavor, commonly used in juices, cooking, and seasoning. It is also valued as an ornamental fruit tree because of its glossy green foliage, compact size, and suitability for containers, balconies, and home gardens. The tree produces fragrant white flowers that enhance its decorative appeal.\n\nIt requires full sun or bright light for healthy growth and fruit production, along with moderate watering and fertile well-drained soil. It is relatively easy to maintain and can be pruned to preserve its compact decorative form.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779527230585-anpb8",
+    "nameAr": "ليمون الكافيار",
+    "nameEn": "Citrus australasica",
+    "scientificName": "Citrus australasica",
+    "imagePath": "/api/images/img-f460ca57578cfb3317fe8dba",
+    "descriptionAr": "ليمون الكافيار 🌿🍋\n\nشجيرة أو شجرة حمضيات مميزة تُعرف بثمارها الفريدة التي تحتوي على حبيبات صغيرة داخل الثمرة تشبه الكافيار، وتنفجر في الفم عند الأكل لتعطي طعمًا حامضًا منعشًا. تُستخدم في المطابخ الفاخرة لتزيين الأطباق وإضافة نكهة مميزة، كما تُعد نباتًا زينة بسبب شكلها الغريب وأوراقها اللامعة.\n\nتحتاج إلى عناية متوسطة، وتفضل الشمس الجزئية إلى الكاملة مع إضاءة جيدة. تحتاج إلى ري منتظم دون إغراق، وتربة خفيفة جيدة التصريف. يمكن زراعتها في الأحواض أو الحدائق الدافئة، وتحتاج إلى تسميد دوري لتحسين النمو والإثمار.",
+    "descriptionEn": "Caviar Lime 🌿🍋\n\nA unique citrus plant known for its finger-like fruits filled with small juice vesicles resembling caviar pearls that burst in the mouth, providing a tangy and refreshing flavor. It is highly valued in gourmet cuisine for garnishing and enhancing dishes, and also grown as an ornamental plant due to its unusual fruit appearance and glossy foliage.\n\nIt requires moderate care, preferring full to partial sun with good light exposure. It needs regular watering without overwatering and well-drained light soil. It can be grown in containers or warm garden environments and benefits from regular fertilization for healthy growth and fruit production.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779527478593-bsotm",
+    "nameAr": "ليمون حلو",
+    "nameEn": "Citrus limon (sweet varieties)",
+    "scientificName": "Citrus limon (sweet varieties)",
+    "imagePath": "/api/images/img-bdffe0e6ccec7105a5fe2716",
+    "descriptionAr": "ليمون حلو 🌿🍋\n\nشجرة حمضيات دائمة الخضرة تُنتج ثمارًا ذات طعم أقل حموضة من الليمون العادي، وتميل إلى الحلاوة أو الحموضة الخفيفة حسب الصنف ودرجة النضج. تُستخدم ثمارها في الأكل الطازج والعصائر، كما تتميز بأوراقها الخضراء اللامعة وأزهارها البيضاء العطرية التي تضيف جمالًا ورائحة منعشة للحديقة.\n\nتُعد من الأشجار المناسبة للحدائق المنزلية، وتحتاج إلى شمس كاملة لضمان نمو جيد وإنتاج وفير من الثمار. تحتاج إلى ري معتدل وتربة خصبة جيدة التصريف، مع تسميد دوري لتحسين الإنتاج. يمكن تقليمها للحفاظ على شكلها وتحفيز النمو.",
+    "descriptionEn": "Sweet Lemon 🌿🍋\n\nEvergreen citrus tree known for producing fruits that are less acidic than regular lemons, with a mildly sweet or gentle tart flavor depending on the variety and ripeness. The fruits are used for fresh consumption and juices, and the tree also features glossy green leaves and fragrant white blossoms.\n\nIt is suitable for home gardens and requires full sun for optimal growth and fruit production. It needs moderate watering and fertile well-drained soil, along with regular fertilization. Pruning helps maintain shape and encourages healthy growth.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779527637901-yb7pc",
+    "nameAr": "برتقال أبو صرّة",
+    "nameEn": "Citrus sinensis (Navel group)",
+    "scientificName": "Citrus sinensis (Navel group)",
+    "imagePath": "/api/images/img-07a37aea9706a8805bc4c973",
+    "descriptionAr": "برتقال أبو صرّة 🌿🍊\n\nشجرة حمضيات دائمة الخضرة تُعد من أشهر أنواع البرتقال في الزراعة والاستهلاك، وتتميز بثمارها الكبيرة ذات القشرة السميكة نسبيًا ووجود “صرّة” صغيرة مميزة في أسفل الثمرة. لبّها حلو وعصيري وخالٍ من البذور غالبًا، مما يجعلها مناسبة للأكل الطازج والعصائر. تتميز الشجرة بأوراق خضراء لامعة وأزهار بيضاء عطرية تضيف قيمة جمالية للمكان.\n\nتحتاج إلى شمس كاملة وإضاءة قوية لضمان إنتاج جيد من الثمار، كما تحتاج إلى ري منتظم وتربة خصبة جيدة التصريف. يُنصح بالتسميد الدوري والتقليم الخفيف لتحسين التهوية والإنتاج. تعتبر من الأشجار المثمرة ذات الإنتاج الجيد والمحبوبة في الحدائق المنزلية والمزارع.",
+    "descriptionEn": "Navel Orange 🌿🍊\n\nEvergreen citrus tree known for its large fruits with a thick peel and a characteristic “navel” formation at the blossom end. The fruit is sweet, juicy, and typically seedless, making it ideal for fresh consumption and juice production. The tree also has glossy green leaves and fragrant white blossoms.\n\nIt requires full sun and strong light for optimal fruit production, along with regular watering and fertile well-drained soil. Periodic fertilization and light pruning improve airflow and yield. It is widely grown in home gardens and orchards for its high-quality fruit.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779527819513-1vaho",
+    "nameAr": "برتقال شموطي",
+    "nameEn": "Citrus sinensis (Shamouti group)",
+    "scientificName": "Citrus sinensis (Shamouti group)",
+    "imagePath": "/api/images/img-41177cd2f33559031abce21b",
+    "descriptionAr": "برتقال شموطي 🌿🍊\n\nشجرة حمضيات دائمة الخضرة تُنتج ثمار البرتقال الشموطي المعروفة بحجمها الكبير وقشرتها السميكة نسبيًا، ولونها البرتقالي المائل للخشونة. يتميز هذا النوع بطعمه الحلو المتوازن مع حموضة خفيفة، ويُستخدم بكثرة للأكل الطازج والعصائر، ويُعد من الأصناف المنتشرة في الزراعة التجارية والمنزلية.\n\nتحتاج الشجرة إلى شمس كاملة لضمان إنتاج جيد وجودة عالية للثمار، مع ري منتظم وتربة خصبة جيدة التصريف. تتحمل الحرارة نسبيًا وتحتاج إلى تسميد دوري وتقليم خفيف لتحسين التهوية والإثمار.",
+    "descriptionEn": "Shamouti Orange 🌿🍊\n\nEvergreen citrus tree known for producing large fruits with a thick, slightly rough peel and a sweet flavor with mild acidity. It is widely grown both commercially and in home gardens and is valued for its good juice quality and fresh eating use.\n\nIt requires full sun for optimal growth and fruit production, along with regular watering and fertile well-drained soil. Periodic fertilization and light pruning help improve airflow, tree health, and yield.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779528177727-upg5f",
+    "nameAr": "برتقال فالنسيا",
+    "nameEn": "Citrus sinensis (Valencia group)",
+    "scientificName": "Citrus sinensis (Valencia group)",
+    "imagePath": "/api/images/img-9c11017fb6991ddc1324d651",
+    "descriptionAr": "برتقال فالنسيا 🌿🍊\n\nشجرة حمضيات دائمة الخضرة تُعد من أهم أصناف البرتقال المخصصة للعصير، وتتميز ثمارها بحجم متوسط إلى كبير ولون برتقالي زاهي وقشرة متماسكة نسبيًا. لبّها عصيري غني بالنكهة الحلوة مع حموضة خفيفة، وتُعتبر من أكثر الأصناف إنتاجًا في فصل الصيف، مما يجعلها مميزة مقارنة بباقي أنواع البرتقال.\n\nتحتاج إلى شمس كاملة لضمان إنتاج جيد، وتُفضل التربة الخصبة جيدة التصريف مع ري منتظم خصوصًا في فترات النمو والإثمار. تتحمل الحرارة بشكل جيد وتحتاج إلى تسميد دوري وتقليم خفيف لتحسين التهوية وزيادة الإنتاج.",
+    "descriptionEn": "Valencia Orange 🌿🍊\n\nEvergreen citrus tree widely known for its excellent juice quality and high productivity, especially in late spring and summer seasons when other orange varieties are less available. The fruits are medium to large, with a bright orange color, firm peel, and sweet-tart juicy pulp.\n\nIt requires full sun for optimal growth and fruit production, along with regular irrigation and fertile, well-drained soil. It is heat tolerant and benefits from periodic fertilization and light pruning to improve airflow, tree health, and yield.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779528407651-xsmn3",
+    "nameAr": "كليمنتينا",
+    "nameEn": "Citrus reticulata (Clementine group)",
+    "scientificName": "Citrus reticulata (Clementine group)",
+    "imagePath": "/api/images/img-5290ff26cf4503262af5d466",
+    "descriptionAr": "كليمنتينا 🌿🍊\n\nشجرة حمضيات دائمة الخضرة صغيرة إلى متوسطة الحجم، تُنتج ثمارًا سهلة التقشير وصغيرة نسبيًا، ذات طعم حلو ومحبوب خاصة للأطفال. تتميز بكونها قليلة البذور أو شبه خالية منها، ولونها برتقالي زاهي وقشرتها ناعمة، مما يجعلها من أكثر أنواع الحمضيات استهلاكًا كفاكهة طازجة.\n\nتُعد مناسبة جدًا للحدائق المنزلية والأحواض، وتحتاج إلى شمس كاملة لضمان إنتاج جيد وجودة عالية للثمار. تحتاج إلى ري منتظم وتربة خصبة جيدة التصريف، مع تسميد دوري. كما يُفضل تقليمها بشكل خفيف للحفاظ على شكلها وتحسين التهوية والإنتاج.",
+    "descriptionEn": "Clementine 🌿🍊\n\nEvergreen citrus tree known for producing small, easy-to-peel fruits with a sweet flavor and minimal or no seeds, making it especially popular for fresh eating, particularly among children. The fruits have a bright orange color and smooth skin, and the tree is typically compact and productive.\n\nIt is well-suited for home gardens and container growing. It requires full sun for good fruit production, regular watering, and fertile well-drained soil. Periodic fertilization and light pruning help maintain healthy growth and improve yield.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779614125704-m5bgr",
+    "nameAr": "كمكوات",
+    "nameEn": "Citrus japonica Fortunella spp",
+    "scientificName": "Citrus japonica Fortunella spp",
+    "imagePath": "/api/images/img-ae96386afaefe4aeb2c32673",
+    "descriptionAr": "كمكوات 🌿🍊\n\nشجرة حمضيات دائمة الخضرة صغيرة الحجم تُعد من أشجار الفاكهة والزينة في نفس الوقت. تتميز بثمارها الصغيرة البيضاوية أو المستديرة التي تُؤكل كاملة مع القشرة، حيث تكون القشرة حلوة واللب حامض قليلًا، مما يعطي طعمًا مميزًا ومنعشًا. تُستخدم في الأكل الطازج والمربيات والتزيين، كما تضيف شكلًا جميلًا للحديقة أو الأصص.\n\nتحتاج إلى شمس كاملة أو إضاءة قوية لتنمو وتثمر بشكل جيد، وتفضل التربة الخصبة جيدة التصريف. تحتاج إلى ري منتظم دون إغراق، مع تسميد دوري خلال موسم النمو. يمكن زراعتها في الحدائق أو الأحواض لأنها تتحمل التقليم وتبقى بحجم صغير نسبيًا.",
+    "descriptionEn": "Kumquat 🌿🍊\n\nSmall evergreen citrus tree valued both as an ornamental and fruit plant. It produces small oval or round fruits that are eaten whole, where the peel is sweet and the flesh is slightly sour, creating a unique flavor. It is used fresh, in marmalades, and for decoration.\n\nIt requires full sun or strong bright light for good growth and fruiting, and prefers fertile, well-drained soil. It needs regular watering without overwatering and benefits from periodic fertilization during the growing season. It can be grown in gardens or containers due to its compact size and pruning tolerance.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779693045063-0m7yw",
+    "nameAr": "بوملي",
+    "nameEn": "Citrus maxima",
+    "scientificName": "Citrus maxima",
+    "imagePath": "/api/images/img-0e55ea35f1fe666125b3655e",
+    "descriptionAr": "بوملي 🌿🍊\n\nشجرة حمضيات دائمة الخضرة تُنتج ثمارًا كبيرة الحجم ذات قشرة سميكة ولب عصيري بطعم حلو خفيف مع حموضة معتدلة. يُعتبر البوملي من أكبر أنواع الحمضيات، وتُستخدم ثماره للأكل الطازج والعصائر، كما تتميز الشجرة بأوراقها الخضراء اللامعة وأزهارها البيضاء العطرية التي تضيف جمالًا ورائحة منعشة للحدائق.\n\nتحتاج إلى شمس كاملة ومناخ دافئ لتنمو وتثمر بشكل جيد، مع تربة خصبة جيدة التصريف وري منتظم دون إغراق. كما تحتاج إلى تسميد دوري وتقليم خفيف لتحسين النمو والإنتاج والمحافظة على صحة الشجرة.",
+    "descriptionEn": "Pomelo 🌿🍊\n\nEvergreen citrus tree producing very large fruits with thick peel and juicy flesh that ranges from mildly sweet to slightly tart. Pomelo is considered the largest citrus fruit species and is widely enjoyed fresh or as juice. The tree also features glossy green leaves and fragrant white blossoms.\n\nIt requires full sun and warm climates for healthy growth and fruit production. Prefers fertile well-drained soil and regular watering without waterlogging. Periodic fertilization and light pruning help improve growth, yield, and overall tree health.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779537976182-s8s9e",
+    "nameAr": "لوز",
+    "nameEn": "Prunus dulcis",
+    "scientificName": "Prunus dulcis",
+    "imagePath": "/api/images/img-8772d659bbd6820ce3b59afc",
+    "descriptionAr": "لوز 🌿🌸\n\nشجرة فاكهة متساقطة الأوراق تُزرع لإنتاج ثمار اللوز، وتتميز بأزهارها الوردية أو البيضاء الجميلة التي تتفتح في بداية الربيع قبل ظهور الأوراق، مما يجعلها من أجمل أشجار الزينة المثمرة في هذه الفترة. تُنتج ثمارًا تحتوي على اللب (اللوز) المستخدم كغذاء غني بالبروتينات والدهون الصحية.\n\nتحتاج إلى مناخ معتدل مع شتاء بارد نسبيًا لتحفيز التزهير الجيد، وتفضل الشمس الكاملة والتربة الخصبة جيدة التصريف. تحتاج إلى ري معتدل مع تقليل الماء بعد التأسيس، كما يُنصح بتقليمها سنويًا لتحسين الإنتاج وجودة الثمار.",
+    "descriptionEn": "Almond 🌿🌸\n\nDeciduous fruit tree grown for its edible seeds (almonds), known for its beautiful pink or white blossoms that appear in early spring before leaf emergence, making it highly ornamental as well as productive. The nuts are widely used as a nutritious food rich in healthy fats and proteins.\n\nIt requires a temperate climate with a cool winter period for proper flowering, full sun exposure, and fertile well-drained soil. It needs moderate watering, especially during establishment, and reduced irrigation afterward. Annual pruning helps improve yield and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779539803004-hxlq4",
+    "nameAr": "لوز عواجي",
+    "nameEn": "Prunus dulcis (Awaji variety)",
+    "scientificName": "Prunus dulcis (Awaji variety)",
+    "imagePath": "/api/images/img-891fe557c59580c33f8eb874",
+    "descriptionAr": "لوز عواجي 🌿🌸\n\nشجرة فاكهة متساقطة الأوراق تُعد من أصناف اللوز المنتشرة، وتتميز بإنتاج ثمار لوز جيدة الجودة ذات قشرة صلبة نسبيًا ولب غني بالعناصر الغذائية مثل البروتينات والدهون الصحية. تمتاز الشجرة أيضًا بأزهارها الوردية أو البيضاء التي تتفتح في بداية الربيع قبل ظهور الأوراق، مما يعطيها مظهرًا جماليًا مميزًا في الحدائق والمزارع.\n\nيُعتبر صنف “عواجي” من الأصناف المرغوبة لكونه جيد الإنتاج ومناسب للزراعة في المناطق المعتدلة. يحتاج إلى شمس كاملة ومناخ بارد نسبيًا في الشتاء لتحفيز التزهير والإثمار بشكل أفضل، مع تربة خصبة جيدة التصريف. يحتاج إلى ري معتدل خصوصًا في فترة النمو، مع تقليم سنوي لتحسين التهوية وزيادة الإنتاج وجودة الثمار.",
+    "descriptionEn": "Awaji Almond 🌿🌸\n\nDeciduous almond variety known for producing good-quality nuts with a hard shell and nutrient-rich kernel containing healthy fats and proteins. Like other almond trees, it is also valued for its ornamental spring blossoms, which appear before leaf emergence.\n\nThe Awaji variety is appreciated for its productivity and suitability to temperate climates. It requires full sun, a cool winter period for proper flowering, and fertile well-drained soil. Moderate watering is needed during growth stages, and annual pruning improves air circulation, yield, and nut quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779540012083-shhsd",
+    "nameAr": "دراق",
+    "nameEn": "Prunus persica",
+    "scientificName": "Prunus persica",
+    "imagePath": "/api/images/img-44f34de9151946e6716efcdb",
+    "descriptionAr": "دراق 🌿🍑\n\nشجرة فاكهة متساقطة الأوراق تُزرع لإنتاج ثمار الدراق (الخوخ) ذات القشرة الناعمة واللب العصيري الحلو أو المائل للحموضة حسب الصنف. تتميز الشجرة بأزهارها الوردية الجميلة التي تتفتح في الربيع قبل ظهور الأوراق، مما يعطيها مظهرًا جماليًا مميزًا إضافة إلى قيمتها الإنتاجية. تُستخدم الثمار للأكل الطازج أو العصائر أو الحلويات.\n\nتحتاج إلى مناخ معتدل مع شتاء بارد نسبيًا لتحفيز التزهير الجيد، وتفضل الشمس الكاملة والتربة الخصبة جيدة التصريف. تحتاج إلى ري منتظم خاصة أثناء فترة النمو وتكوين الثمار، مع تقليم سنوي لتحسين التهوية وجودة الإنتاج وتقليل الأمراض.",
+    "descriptionEn": "Peach 🌿🍑\n\nDeciduous fruit tree grown for its juicy, sweet or slightly tart fruits with smooth skin (nectarine is a related type with smooth skin variations). The tree is also highly ornamental due to its beautiful pink blossoms that appear in early spring before leaf growth.\n\nIt requires a temperate climate with sufficient winter chill for proper flowering and fruiting, full sun exposure, and fertile well-drained soil. Regular watering is needed during growth and fruit development, along with annual pruning to improve airflow, productivity, and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779540216858-eex4h",
+    "nameAr": "نكتارين",
+    "nameEn": "Prunus persica var. nucipersica",
+    "scientificName": "Prunus persica var. nucipersica",
+    "imagePath": "/api/images/img-948049e874f61182d308ec82",
+    "descriptionAr": "نكتارين 🌿🍑\n\nشجرة فاكهة متساقطة الأوراق تُشبه شجرة الدراق، وتُنتج ثمارًا ملساء القشرة (بدون زغب) ذات لون أحمر أو برتقالي مائل للأصفر، ولب عصيري حلو أو متوازن الطعم. تُعد من الفواكه الصيفية المحبوبة وتُستخدم للأكل الطازج والعصائر والحلويات. كما تتميز الشجرة بأزهارها الوردية الجميلة في الربيع التي تضيف قيمة جمالية عالية للحدائق.\n\nتحتاج إلى مناخ معتدل مع شتاء بارد نسبيًا لتحفيز التزهير والإثمار الجيد، وتفضل الشمس الكاملة والتربة الخصبة جيدة التصريف. تحتاج إلى ري منتظم أثناء النمو وتكوين الثمار، مع تقليم سنوي لتحسين التهوية وجودة الإنتاج وتقليل الأمراض.",
+    "descriptionEn": "Nectarine 🌿🍑\n\nDeciduous fruit tree closely related to peach, producing smooth-skinned fruits (without fuzz) that are red, orange, or yellow with juicy sweet or balanced-flavor flesh. It is a popular summer fruit used for fresh eating, juices, and desserts. The tree also produces attractive pink blossoms in spring before leaf emergence.\n\nIt requires a temperate climate with sufficient winter chill for proper flowering and fruiting, full sun exposure, and fertile well-drained soil. Regular watering is needed during growth and fruit development, along with annual pruning to improve airflow, productivity, and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779692288015-79kmb",
+    "nameAr": "دراق كعكة",
+    "nameEn": "Donut Peach / Flat Peach",
+    "scientificName": "Donut Peach / Flat Peach",
+    "imagePath": "/api/images/img-46e25afc76bbda1d1ec06be2",
+    "descriptionAr": "دراق كعكة 🌿🍑\n\nشجرة فاكهة متساقطة الأوراق تُعرف بثمارها المميزة المسطحة الشكل والتي تُشبه الكعكة أو الدونات، لذلك تُسمى أحيانًا “خوخ دونات”. تتميز الثمار بطعم حلو وعصيري وقشرة ناعمة مع رائحة عطرية محببة، وتُعد من الأصناف المرغوبة للأكل الطازج. كما تتميز الشجرة بأزهارها الوردية الجميلة في الربيع قبل ظهور الأوراق.\n\nتحتاج إلى مناخ معتدل مع شتاء بارد نسبيًا لتحفيز الإزهار والإثمار الجيد، وتفضل الشمس الكاملة والتربة الخصبة جيدة التصريف. تحتاج إلى ري منتظم خلال فترة النمو وتكوين الثمار، مع تقليم سنوي لتحسين التهوية وزيادة الإنتاج وجودة الثمار.",
+    "descriptionEn": "Donut Peach / Flat Peach 🌿🍑\n\nDeciduous fruit tree known for its uniquely flat-shaped fruits resembling a donut or cake. The fruits are sweet, juicy, aromatic, and highly valued for fresh eating. The tree also produces beautiful pink blossoms in spring before leaf emergence, adding ornamental appeal.\n\nIt requires a temperate climate with sufficient winter chill for proper flowering and fruiting, full sun exposure, and fertile well-drained soil. Regular watering during growth and fruit development is important, along with annual pruning to improve airflow, productivity, and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779540380304-p535z",
+    "nameAr": "مشمش",
+    "nameEn": "Prunus armeniaca",
+    "scientificName": "Prunus armeniaca",
+    "imagePath": "/api/images/img-b4ea6706db7186892a471067",
+    "descriptionAr": "مشمش 🌿🍑\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمار المشمش ذات اللون البرتقالي المائل للأصفر وطعم حلو مميز مع رائحة عطرية جميلة. تُعد من الأشجار المثمرة المهمة في الحدائق والمزارع، وتُستخدم ثمارها للأكل الطازج أو التجفيف أو صناعة المربيات والعصائر. تتميز أيضًا بأزهارها البيضاء أو الوردية التي تتفتح في الربيع قبل ظهور الأوراق، مما يمنحها قيمة جمالية عالية.\n\nتحتاج إلى مناخ معتدل يميل للبرودة في الشتاء لتحفيز التزهير الجيد، وتفضل الشمس الكاملة والتربة الخصبة جيدة التصريف. تحتاج إلى ري منتظم خاصة أثناء فترة الإزهار وتكوين الثمار، مع تقليم سنوي لتحسين التهوية وزيادة الإنتاج وجودة الثمار.",
+    "descriptionEn": "Apricot 🌿🍑\n\nDeciduous fruit tree producing apricot fruits with a sweet, aromatic flavor and orange-yellow skin. It is an important orchard and garden tree, valued for both its fruit production and ornamental spring blossoms, which appear before leaf emergence.\n\nIt requires a temperate climate with cool winters for proper flowering, full sun exposure, and fertile well-drained soil. Regular watering is needed during flowering and fruit development, along with annual pruning to improve airflow, yield, and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779540508244-mpoee",
+    "nameAr": "خوخ أحمر",
+    "nameEn": "Prunus persica",
+    "scientificName": "Prunus persica",
+    "imagePath": "/api/images/img-948049e874f61182d308ec82",
+    "descriptionAr": "خوخ أحمر 🌿🍑\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمار الخوخ ذات اللون الأحمر أو الأحمر المائل للبرتقالي، وتتميز بلب عصيري حلو أو متوازن الطعم حسب الصنف. تُعد من الأشجار المثمرة الصيفية المهمة، كما تضيف جمالًا للحديقة بفضل أزهارها الوردية التي تتفتح في الربيع قبل ظهور الأوراق.\n\nتحتاج إلى مناخ معتدل مع شتاء بارد نسبيًا لتحفيز التزهير والإثمار الجيد، وتفضل الشمس الكاملة والتربة الخصبة جيدة التصريف. تحتاج إلى ري منتظم خلال فترة النمو وتكوين الثمار، مع تقليم سنوي لتحسين التهوية وزيادة الإنتاج وجودة الثمار وتقليل الأمراض.",
+    "descriptionEn": "Red Peach 🌿🍑\n\nDeciduous fruit tree producing red or red-blushed peaches with juicy sweet or balanced-flavor flesh. It is widely grown for fresh consumption and is also appreciated for its ornamental pink blossoms in spring before leaf emergence.\n\nIt requires a temperate climate with sufficient winter chill for proper flowering and fruiting, full sun exposure, and fertile well-drained soil. Regular watering during growth and fruit development is important, along with annual pruning to improve airflow, yield, and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779540714098-wnm2h",
+    "nameAr": "خوخ أخضر",
+    "nameEn": "Prunus persica",
+    "scientificName": "Prunus persica",
+    "imagePath": "/api/images/img-0717e2d5744913de272efccb",
+    "descriptionAr": "خوخ أخضر 🌿🍑\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمار خوخ ذات لون أخضر أو أخضر مائل للأصفر حسب مرحلة النضج والصنف، وتتميز بلب عصيري وطعم حلو منعش. تُعد من الأشجار المثمرة الصيفية المهمة، كما تتميز بأزهارها الوردية الجميلة التي تظهر في الربيع قبل الأوراق، مما يمنحها قيمة جمالية في الحدائق والمزارع.\n\nتحتاج إلى مناخ معتدل مع شتاء بارد نسبيًا لتحفيز التزهير والإثمار الجيد، وتفضل الشمس الكاملة والتربة الخصبة جيدة التصريف. تحتاج إلى ري منتظم خاصة خلال فترة تكوين الثمار، مع تقليم سنوي لتحسين التهوية والإنتاج وجودة الثمار.",
+    "descriptionEn": "Green Peach 🌿🍑\n\nDeciduous fruit tree producing green or green-yellow peaches depending on the variety and ripening stage. The fruits are juicy with a refreshing sweet flavor and are commonly enjoyed fresh. The tree also produces attractive pink blossoms in spring before leaf emergence, adding ornamental value.\n\nIt requires a temperate climate with adequate winter chill for proper flowering and fruiting, full sun exposure, and fertile well-drained soil. Regular watering is needed during fruit development, along with annual pruning to improve airflow, productivity, and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779540878850-h9sub",
+    "nameAr": "كرز أحمر",
+    "nameEn": "Prunus avium / Prunus spp",
+    "scientificName": "Prunus avium / Prunus spp",
+    "imagePath": "/api/images/img-3c3e38dec32a7f037182b180",
+    "descriptionAr": "كرز أحمر 🌿🍒\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمار الكرز الحمراء الصغيرة ذات الطعم الحلو أو الحلو المائل للحموضة حسب الصنف. تُعد من أشجار الفاكهة المميزة والمحبوبة، كما تتميز بأزهارها البيضاء أو الوردية الجميلة التي تتفتح بكثافة في الربيع قبل ظهور الأوراق، مما يمنحها قيمة جمالية عالية في الحدائق والمزارع.\n\nتحتاج إلى مناخ معتدل وشتاء بارد نسبيًا لتحفيز التزهير والإثمار الجيد، وتفضل الشمس الكاملة والتربة الخصبة جيدة التصريف. تحتاج إلى ري منتظم خاصة خلال فترة الإزهار وتكوين الثمار، مع تقليم سنوي لتحسين التهوية وجودة الإنتاج وتقليل الأمراض.",
+    "descriptionEn": "Red Cherry 🌿🍒\n\nDeciduous fruit tree producing small red cherries with sweet or slightly tart flavor depending on the variety. It is valued both for its delicious fruits and its beautiful spring blossoms, which appear abundantly before leaf emergence and add strong ornamental appeal.\n\nIt requires a temperate climate with sufficient winter chill for proper flowering and fruiting, full sun exposure, and fertile well-drained soil. Regular watering is important during flowering and fruit development, while annual pruning improves airflow, productivity, and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779613258755-w7sbu",
+    "nameAr": "تفاح لبناني",
+    "nameEn": "Malus domestica",
+    "scientificName": "Malus domestica",
+    "imagePath": "/api/images/img-2c4125c0e799f3de806c1635",
+    "descriptionAr": "تفاح لبناني 🌿🍎\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمار التفاح ذات الطعم الحلو أو الحلو المائل للحموضة حسب الصنف، وتُعد من أهم أشجار الفاكهة في المناطق الجبلية والمعتدلة. يتميز التفاح اللبناني بجودته العالية ونكهته القوية، ويُستخدم للأكل الطازج والعصائر وصناعة الحلويات. كما أن الشجرة تضيف جمالًا للحديقة خاصة خلال فترة الإزهار في الربيع.\n\nتحتاج إلى مناخ معتدل وشتاء بارد نسبيًا لتحفيز التزهير الجيد، وتفضل الشمس الكاملة والتربة الخصبة جيدة التصريف. تحتاج إلى ري منتظم خاصة في فترات النمو وتكوين الثمار، مع تقليم سنوي لتحسين التهوية وزيادة الإنتاج وجودة الثمار.",
+    "descriptionEn": "Lebanese Apple 🌿🍎\n\nDeciduous fruit tree producing apples with sweet or sweet-tart flavor depending on the variety. Lebanese apples are known for their high quality and strong flavor and are widely consumed fresh or used in juices and desserts. The tree also provides ornamental value, especially during its spring blossom season.\n\nIt requires a temperate climate with a sufficient winter chilling period for proper flowering, full sun exposure, and fertile well-drained soil. Regular watering is needed during growth and fruit development, along with annual pruning to improve airflow, yield, and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779613534388-icp2a",
+    "nameAr": "تفاح شوبكي",
+    "nameEn": "Malus domestica (Shobaki variety)",
+    "scientificName": "Malus domestica (Shobaki variety)",
+    "imagePath": "/api/images/img-1a110066a9909bb63cf5d524",
+    "descriptionAr": "تفاح شوبكي 🌿🍎\n\nشجرة فاكهة متساقطة الأوراق تُعد من أصناف التفاح المنتشرة في المناطق الجبلية، وتتميز بإنتاج ثمار متوسطة إلى كبيرة الحجم ذات طعم حلو مائل للحموضة وقشرة ملساء غالبًا حمراء أو مخططة. يُستخدم هذا الصنف للأكل الطازج والعصائر وصناعة الحلويات، ويُعتبر من الأصناف الجيدة الإنتاج في المناخات الباردة نسبيًا.\n\nتحتاج الشجرة إلى مناخ معتدل وشتاء بارد لتحفيز الإزهار والإثمار بشكل جيد، وتفضل الشمس الكاملة والتربة الخصبة جيدة التصريف. تحتاج إلى ري منتظم خاصة خلال فترة النمو وتكوين الثمار، مع تقليم سنوي لتحسين التهوية وزيادة الإنتاج وجودة الثمار.",
+    "descriptionEn": "Shobaki Apple 🌿🍎\n\nDeciduous fruit tree producing medium to large apples with a sweet to slightly tart flavor and usually red or striped skin. It is commonly grown in mountainous and temperate regions and is valued for fresh consumption, juice production, and desserts.\n\nIt requires a temperate climate with sufficient winter chilling for proper flowering and fruiting, full sun exposure, and fertile well-drained soil. Regular irrigation during growth and fruit development is important, along with annual pruning to improve airflow, yield, and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779613839606-m9o5m",
+    "nameAr": "سفرجل",
+    "nameEn": "Cydonia oblonga",
+    "scientificName": "Cydonia oblonga",
+    "imagePath": "/api/images/img-71e5cb56cba56a0d57e88f49",
+    "descriptionAr": "سفرجل 🌿🍐\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمار السفرجل ذات الشكل الشبيه بالتفاح أو الكمثرى، ولونها أصفر ذهبي عند النضج. تتميز الثمار بطعمها القابض قليلًا عند الأكل الطازج، لذلك تُستخدم غالبًا في الطبخ، المربى، والحلويات، كما تتميز برائحة عطرية قوية ومميزة.\n\nتُعد من الأشجار المثمرة المناسبة للمناطق المعتدلة، وتتحمل البرودة نسبيًا في الشتاء. تحتاج إلى شمس كاملة وتربة خصبة جيدة التصريف، مع ري منتظم خاصة في فترات النمو والإثمار. يُنصح بتقليمها سنويًا لتحسين التهوية وزيادة الإنتاج وجودة الثمار.",
+    "descriptionEn": "Quince 🌿🍐\n\nDeciduous fruit tree producing yellow-golden fruits similar in shape to apples or pears. The fruit is highly aromatic but astringent when raw, so it is mainly used for cooking, jams, jellies, and desserts.\n\nIt is well-suited to temperate climates and can tolerate cold winters. It prefers full sun and fertile, well-drained soil, with regular watering during growth and fruiting stages. Annual pruning improves airflow, yield, and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779618020619-ue1fb",
+    "nameAr": "أسكدنيا",
+    "nameEn": "Eriobotrya japonica",
+    "scientificName": "Eriobotrya japonica",
+    "imagePath": "/api/images/img-56dd82a2c9c2d9af0ad8a7ca",
+    "descriptionAr": "أسكدنيا 🌿🍊\n\nشجرة فاكهة دائمة الخضرة أو شبه دائمة حسب المناخ، تُعرف بثمارها الصفراء أو البرتقالية الصغيرة ذات الطعم الحلو المائل للحموضة. تُعد من الأشجار المثمرة والزينة في نفس الوقت، حيث تتميز بأوراقها الكبيرة اللامعة وأزهارها البيضاء العطرية التي تظهر في الشتاء أو بداية الربيع. تُستخدم ثمارها للأكل الطازج أو العصائر أو المربيات.\n\nتحتاج إلى مناخ معتدل إلى دافئ، وتفضل الشمس الكاملة إلى نصف الظل. تنمو في تربة خصبة جيدة التصريف مع ري معتدل ومنتظم، وتتحمل التقليم لتحسين الشكل وزيادة الإنتاج",
+    "descriptionEn": "Loquat 🌿🍊\n\nEvergreen or semi-evergreen fruit tree depending on climate, known for its small yellow to orange fruits with a sweet-tart flavor. It is both an ornamental and fruit-producing tree, featuring large glossy leaves and fragrant white flowers that bloom in winter or early spring. The fruits are eaten fresh or used for juices and jams.\n\nIt grows best in mild to warm climates and prefers full sun to partial shade. It requires fertile well-drained soil and moderate regular watering. It tolerates pruning well, which helps improve shape and fruit production.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779703850507-z3sts",
+    "nameAr": "عنب بلدي",
+    "nameEn": "Vitis vinifera",
+    "scientificName": "Vitis vinifera",
+    "imagePath": "/api/images/img-2f2088948af254cca9c6e283",
+    "descriptionAr": "عنب بلدي 🌿🍇\n\nشجرة فاكهة متسلقة متساقطة الأوراق تُعد من أقدم وأشهر أشجار الفاكهة في المنطقة، وتُنتج عناقيد عنب متوسطة الحجم ذات طعم حلو أو حلو مائل للحموضة حسب الصنف. تُستخدم الثمار للأكل الطازج، العصائر، الزبيب، وصناعة الدبس، كما تُزرع لتغطية البرجولات والأسوار وإعطاء ظل جميل في الحدائق.\n\nتحتاج إلى شمس كاملة لإنتاج جيد وجودة عالية للثمار، وتفضل التربة العميقة الخصبة جيدة التصريف. تحتاج إلى ري منتظم خاصة في فترات النمو وتكوين الثمار، مع تقليم سنوي ضروري لتنظيم النمو وزيادة الإنتاج وتحسين جودة العناقيد.",
+    "descriptionEn": "Local Grapevine 🌿🍇\n\nDeciduous climbing fruit vine widely cultivated for its clusters of sweet to slightly tart grapes. It is one of the oldest and most important fruit crops in the region, used for fresh consumption, juice, raisins, and molasses production. It is also commonly grown over pergolas and fences for shade and ornamental purposes.\n\nIt requires full sun for high-quality fruit production and deep, fertile, well-drained soil. Regular irrigation is needed during growth and fruiting stages. Annual pruning is essential to control growth, improve air circulation, and enhance yield and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779713874397-ttbl0",
+    "nameAr": "بلوبيري",
+    "nameEn": "Vaccinium spp",
+    "scientificName": "Vaccinium spp",
+    "imagePath": "/api/images/img-10b4b99b2930380fc9ba6c06",
+    "descriptionAr": "بلوبيري 🌿🫐\n\nشجيرة فاكهة صغيرة متساقطة الأوراق تُنتج ثمارًا زرقاء صغيرة غنية بالعناصر الغذائية ومضادات الأكسدة، وتتميز بطعمها الحلو المائل للحموضة. تُستخدم الثمار للأكل الطازج، العصائر، الحلويات والمربيات، كما تضيف الشجيرة مظهرًا جماليًا بفضل أوراقها وألوانها الجميلة خلال المواسم المختلفة.\n\nتحتاج إلى مناخ معتدل إلى بارد نسبيًا، مع شمس كاملة أو نصف ظل خفيف. تفضل التربة الحمضية الخفيفة جيدة التصريف، وتحتاج إلى ري منتظم للحفاظ على رطوبة التربة دون إغراق. كما يُنصح بالتسميد المناسب للنباتات الحمضية والتقليم الدوري لتحسين النمو والإنتاج.",
+    "descriptionEn": "Blueberry 🌿🫐\n\nSmall deciduous fruit shrub producing nutritious blue berries rich in antioxidants with a sweet-tart flavor. The fruits are widely used fresh, in juices, desserts, and jams. The plant is also ornamental due to its attractive foliage and seasonal color changes.\n\nIt grows best in cool to temperate climates with full sun to light partial shade. Prefers acidic well-drained soil and regular watering to keep the soil consistently moist but not waterlogged. Proper fertilization and periodic pruning help improve growth and fruit production.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779714024352-ppnhd",
+    "nameAr": "رازبيري",
+    "nameEn": "Rubus idaeus / Rubus spp",
+    "scientificName": "Rubus idaeus / Rubus spp",
+    "imagePath": "/api/images/img-daeff0acac1804eab337f96f",
+    "descriptionAr": "رازبيري 🌿🍓\n\nنبات فاكهة شجيري أو متسلق جزئيًا يُنتج ثمارًا صغيرة لذيذة ذات ألوان حمراء أو سوداء أو صفراء حسب الصنف، وتتميز بطعمها الحلو المائل للحموضة. تُستخدم الثمار للأكل الطازج، العصائر، الحلويات والمربيات، كما يُعتبر النبات من الخيارات الجميلة للحدائق المنزلية بسبب إنتاجه وشكله الطبيعي.\n\nيحتاج إلى مناخ معتدل مع شمس كاملة أو نصف ظل خفيف، ويفضل التربة الخصبة جيدة التصريف. يحتاج إلى ري منتظم خاصة خلال فترات النمو والإثمار، مع توفير دعائم لبعض الأصناف وتنفيذ تقليم دوري لتحسين التهوية وزيادة الإنتاج.",
+    "descriptionEn": "Raspberry 🌿🍓\n\nFruit-bearing shrub producing delicious berries in red, black, yellow, or purple depending on the variety. The fruits have a sweet-tart flavor and are commonly eaten fresh or used in juices, desserts, and jams. The plant is also valued in home gardens for its productivity and natural appearance.\n\nIt grows best in temperate climates with full sun to light partial shade and fertile well-drained soil. Requires regular watering during growth and fruiting periods. Some varieties benefit from support structures and periodic pruning to improve airflow and fruit yield.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779714156773-74jef",
+    "nameAr": "بلاك بيري",
+    "nameEn": "Rubus fruticosus / Rubus spp",
+    "scientificName": "Rubus fruticosus / Rubus spp",
+    "imagePath": "/api/images/img-40973518ef1ca957131dfd64",
+    "descriptionAr": "بلاك بيري 🌿🫐\n\nنبات فاكهة شجيري متسلق أو نصف متسلق يُنتج ثمارًا سوداء لامعة ذات طعم حلو مائل للحموضة، ويُعد من الفواكه الغنية بالعناصر الغذائية ومضادات الأكسدة. تُستخدم الثمار للأكل الطازج، العصائر، الحلويات والمربيات، كما يُزرع في الحدائق المنزلية والمزارع بسبب إنتاجه الجيد وشكله الطبيعي الجميل.\n\nيحتاج إلى شمس كاملة أو نصف ظل خفيف، مع تربة خصبة جيدة التصريف. يحتاج إلى ري منتظم خاصة خلال فترات النمو والإثمار، كما يُفضل توفير دعائم للأغصان مع تقليم دوري لتحسين التهوية وزيادة الإنتاج وجودة الثمار.",
+    "descriptionEn": "Blackberry 🌿🫐\n\nFruit-bearing shrub with climbing or semi-climbing canes that produce shiny black berries with a sweet-tart flavor. The fruits are rich in nutrients and antioxidants and are widely consumed fresh or used in juices, desserts, and jams.\n\nIt grows best in full sun to light partial shade and prefers fertile well-drained soil. Requires regular watering during growth and fruiting stages. Support structures and periodic pruning help improve airflow, fruit quality, and productivity.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1780220814902-uo811",
+    "nameAr": "تين زراقي",
+    "nameEn": "Ficus carica",
+    "scientificName": "Ficus carica",
+    "imagePath": "/api/images/img-0909eda446d2b306e45aa4fb",
+    "descriptionAr": "تين زراقي 🌿🍈\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمار التين ذات اللون البنفسجي أو الأرجواني المائل للزرقة، وتتميز بطعمها الحلو وقوامها الطري. تُستخدم الثمار للأكل الطازج أو التجفيف أو صناعة المربيات، كما تُعد من الأشجار المثمرة السهلة الزراعة والمناسبة للحدائق المنزلية.\n\nتحتاج إلى شمس كاملة لتنمو وتثمر بشكل جيد، وتتحمل الحرارة والجفاف نسبيًا بعد التأسيس. تفضل التربة الخفيفة جيدة التصريف مع ري معتدل، ويُنصح بتقليمها سنويًا لتحسين الإنتاج وجودة الثمار وتنظيم شكل الشجرة.",
+    "descriptionEn": "Ficus carica 🌿🍈\n\nDeciduous fruit tree producing purple to bluish figs with sweet soft flesh. The fruits are commonly eaten fresh, dried, or used in jams and desserts. It is a popular and easy-to-grow fruit tree in home gardens and farms.\n\nIt grows best in full sun and tolerates heat and moderate drought once established. Prefers well-drained soil with moderate watering. Annual pruning improves yield, fruit quality, and plant structure.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1780221246104-2mi1e",
+    "nameAr": "تين اسباني",
+    "nameEn": "Ficus carica (Spanish type)",
+    "scientificName": "Ficus carica (Spanish type)",
+    "imagePath": "/api/images/img-ac394aefc9e99613a6dbfcc5",
+    "descriptionAr": "تين إسباني 🌿🍈\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمار تين كبيرة الحجم نسبيًا ذات قشرة سميكة، وتتميز بطعم حلو غني وقوام طري. يُستخدم للأكل الطازج والتجفيف وصناعة المربيات، ويُعد من الأصناف الجيدة الإنتاج في المناخات الدافئة والمعتدلة.\n\nتحتاج إلى شمس كاملة لتنمو وتثمر بشكل جيد، وتتحمل الحرارة والجفاف بعد التأسيس. تفضل التربة الخصبة جيدة التصريف مع ري معتدل، ويُنصح بتقليمها سنويًا لتحسين الإنتاج وتنظيم شكل الشجرة وزيادة جودة الثمار.",
+    "descriptionEn": "Spanish Fig 🌿🍈\n\nDeciduous fruit tree producing relatively large figs sweet, rich, soft flesh. It is widely cultivated for fresh consumption, drying, and jam production, and is valued for its good yield and adaptability in warm to temperate climates.\n\nIt grows best in full sun and tolerates heat and moderate drought once established. Prefers fertile well-drained soil with moderate watering. Annual pruning improves fruit quality, yield, and overall tree structure.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1780297439499-yrdr1",
+    "nameAr": "تين بلدي",
+    "nameEn": "Common Fig",
+    "scientificName": "Common Fig",
+    "imagePath": "/api/images/img-96ce30c977e3d5a21145a502",
+    "descriptionAr": "تين بلدي 🌿🍈\n\nشجرة فاكهة متساقطة الأوراق تُعد من أشهر الأشجار المثمرة في المنطقة، وتتميز بإنتاج ثمار حلوة ولذيذة ذات قوام طري ونكهة مميزة. تُستخدم الثمار للأكل الطازج أو التجفيف أو صناعة المربيات، كما تُعرف الشجرة بقوة تحملها وسهولة زراعتها وإنتاجها الجيد في الحدائق المنزلية والمزارع.\n\nتحتاج إلى شمس كاملة لتنمو وتثمر بشكل أفضل، وتتحمل الحرارة والجفاف نسبيًا بعد التأسيس. تفضل التربة الخفيفة جيدة التصريف مع ري معتدل، ويُنصح بتقليمها سنويًا لتحسين الإنتاج وتنظيم شكل الشجرة وزيادة جودة الثمار.",
+    "descriptionEn": "Common Fig 🌿🍈\n\nDeciduous fruit tree widely grown for its sweet and flavorful fruits with soft flesh and distinctive taste. The fruits are enjoyed fresh, dried, or processed into jams. It is a hardy and productive tree that adapts well to home gardens and orchards.\n\nIt grows best in full sun and tolerates heat and moderate drought once established. Prefers well-drained soil with moderate watering. Annual pruning helps improve fruit quality, yield, and overall tree structure.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1780231316401-65qdr",
+    "nameAr": "كاكا",
+    "nameEn": "Diospyros kaki",
+    "scientificName": "Diospyros kaki",
+    "imagePath": "/api/images/img-8637f8fa072cc32e846885e7",
+    "descriptionAr": "كاكا 🌿🍊\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمار الكاكا ذات اللون البرتقالي أو الأحمر، وتتميز بطعمها الحلو وقوامها الطري عند النضج الكامل. تُعد من الفواكه الشتوية المميزة وتُستخدم للأكل الطازج، كما تمتاز الشجرة بمظهرها الجميل وتغير لون أوراقها في فصل الخريف.\n\nتحتاج إلى شمس كاملة ومناخ معتدل لتنمو وتثمر بشكل جيد، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تحتاج إلى تقليم خفيف لتحسين التهوية وزيادة جودة الثمار والإنتاج.",
+    "descriptionEn": "Persimmon 🌿🍊\n\nDeciduous fruit tree producing orange to reddish fruits with sweet, soft flesh when fully ripe. It is a popular seasonal fruit eaten fresh and valued for its ornamental foliage and autumn color changes.\n\nIt grows best in full sun and temperate climates. Prefers fertile well-drained soil with moderate watering. Light pruning improves airflow and fruit quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1780297717539-fri8e",
+    "nameAr": "توت بلدي",
+    "nameEn": "Morus nigra / Morus alba",
+    "scientificName": "Morus nigra / Morus alba",
+    "imagePath": "/api/images/img-e7765ba67d604ca8bdfc868d",
+    "descriptionAr": "توت بلدي 🌿🍇\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمارًا صغيرة حلوة المذاق تتدرج ألوانها من الأحمر إلى البنفسجي الداكن أو الأسود عند النضج. تُستخدم الثمار للأكل الطازج وصناعة العصائر والمربيات، كما تُعد الشجرة من أشجار الظل المميزة بفضل نموها القوي وتاجها الواسع وأوراقها الكثيفة.\n\nتحتاج إلى شمس كاملة لتنمو وتثمر بشكل جيد، وتتحمل الحرارة والجفاف نسبيًا بعد التأسيس. تفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم، ويُنصح بتقليمها عند الحاجة لتحسين شكل الشجرة وزيادة الإنتاج.",
+    "descriptionEn": "Mulberry 🌿🍇\n\nDeciduous fruit tree producing small sweet berries that range in color from red to dark purple or black when ripe. The fruits are enjoyed fresh and used in juices, jams, and desserts. The tree is also valued as a shade tree due to its broad canopy and dense foliage.\n\nIt grows best in full sun and tolerates heat and moderate drought once established. Prefers fertile well-drained soil with moderate watering. Occasional pruning helps maintain shape and improve productivity.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1780297955870-0rd5w",
+    "nameAr": "توت باكستاني",
+    "nameEn": "Morus macroura",
+    "scientificName": "Morus macroura",
+    "imagePath": "/api/images/img-0fe064d137a08dcff0528ff9",
+    "descriptionAr": "توت باكستاني 🌿🍇\n\nشجرة فاكهة متساقطة الأوراق تُعرف بثمارها الطويلة والمميزة التي قد يصل طولها إلى عدة سنتيمترات، وتتميز بطعمها الحلو جدًا وقوامها العصيري. تُعد من الأصناف المرغوبة للأكل الطازج، كما تتميز الشجرة بسرعة نموها وإنتاجها الغزير، إضافة إلى أوراقها الكثيفة التي توفر ظلًا جيدًا.\n\nتحتاج إلى شمس كاملة لتنمو وتثمر بشكل أفضل، وتتحمل الحرارة والجفاف نسبيًا بعد التأسيس. تفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم، ويُنصح بتقليمها دوريًا للحفاظ على شكل الشجرة وتحسين الإنتاج",
+    "descriptionEn": "Pakistani Mulberry 🌿🍇\n\nDeciduous fruit tree famous for its exceptionally long berries and very sweet juicy flavor. It is highly valued for fresh consumption and is known for its vigorous growth, abundant production, and dense foliage that provides excellent shade.\n\nIt grows best in full sun and tolerates heat and moderate drought once established. Prefers fertile well-drained soil with moderate regular watering. Periodic pruning helps maintain shape and improve fruit production.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1780301519818-58gvq",
+    "nameAr": "خوخ بلحي",
+    "nameEn": "Prunus domestica",
+    "scientificName": "Prunus domestica",
+    "imagePath": "/api/images/img-1ce22167da41d1d0bbec627c",
+    "descriptionAr": "خوخ بلحي (البرقوق الأوروبي) 🌿🍑\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمارًا بيضاوية أو مستديرة يتدرج لونها من الأخضر إلى الأحمر، البنفسجي أو الأسود حسب الصنف. تتميز الثمار بلب أصفر أو ذهبي عصيري بطعم حلو أو حلو مائل للحموضة، وتُستخدم للأكل الطازج أو التجفيف أو صناعة المربيات.\n\nتحتاج إلى شمس كاملة لتنمو وتثمر بشكل جيد، وتفضل المناخ المعتدل مع توفر برودة شتوية مناسبة لتحفيز الإزهار. تنمو في تربة خصبة جيدة التصريف مع ري معتدل ومنتظم، ويُنصح بتقليمها سنويًا لتحسين الإنتاج وجودة الثمار.",
+    "descriptionEn": "European Plum 🌿🍑\n\nDeciduous fruit tree producing round to oval fruits with skin colors ranging from green to red, purple, or dark almost black depending on the cultivar. The flesh is typically yellow or golden, juicy, and sweet to slightly tart, commonly eaten fresh, dried, or used in jams.\n\nIt grows best in full sun and temperate climates with sufficient winter chill for proper flowering and fruit set. Prefers fertile well-drained soil with moderate regular watering. Annual pruning improves yield, fruit quality, and tree structure.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1780312598332-2oogi",
+    "nameAr": "السدر / الدوم",
+    "nameEn": "Ziziphus spina-christi",
+    "scientificName": "Ziziphus spina-christi",
+    "imagePath": "/api/images/img-97476fa4cb563dfc7a4f69b3",
+    "descriptionAr": "شجرة السدر / الدوم 🌿🌳\n\nشجرة زينة ومثمرة دائمة الخضرة تتميز بأوراقها الصغيرة الخضراء الكثيفة وأغصانها القوية، وتُعد من الأشجار الشائعة في البيئات الحارة والجافة. تُنتج ثمارًا صغيرة مستديرة حلوة المذاق تُعرف بثمار السدر، كما تُستخدم الشجرة للظل والتشجير العام ولها قيمة بيئية وتراثية مهمة.\n\nتتحمل الحرارة والجفاف بشكل ممتاز، وتنمو في الشمس الكاملة بشكل أفضل. تفضل التربة المتنوعة حتى الفقيرة منها بشرط التصريف الجيد، وتحتاج إلى ري قليل بعد التأسيس، مع تقليم خفيف عند الحاجة.",
+    "descriptionEn": "Christ’s Thorn Jujube / Sidr 🌿🌳\n\nEvergreen fruit and shade tree known for its dense foliage, thorny branches, and small sweet edible fruits. It is widely adapted to hot and arid environments and is valued for landscaping, shade, and ecological resilience.\n\nIt thrives in full sun and is highly drought and heat tolerant once established. It grows in various soil types with good drainage and requires minimal irrigation. Occasional pruning helps maintain structure.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1780314083617-a3gzb",
+    "nameAr": "جوز",
+    "nameEn": "Juglans regia",
+    "scientificName": "Juglans regia",
+    "imagePath": "/api/images/img-253b403f19f9cf4929006671",
+    "descriptionAr": "جوز 🌿🌰\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمار الجوز ذات القشرة الخشبية الصلبة والبذرة الغنية بالزيوت والعناصر الغذائية. تُعد من الأشجار المثمرة المهمة اقتصاديًا، كما تُستخدم أيضًا كأشجار ظل بفضل تاجها الواسع وأوراقها الكبيرة.\n\nتحتاج إلى شمس كاملة ومناخ معتدل مع شتاء بارد نسبيًا لتحفيز النمو والإثمار بشكل جيد. تفضل التربة الخصبة العميقة جيدة التصريف مع ري منتظم خاصة في السنوات الأولى، وتحتاج إلى مساحة واسعة للنمو.",
+    "descriptionEn": "Walnut 🌿🌰\n\nDeciduous fruit tree producing hard-shelled nuts with a highly nutritious edible kernel rich in oils and nutrients. It is economically important and also valued as a shade tree due to its broad canopy and large leaves.\n\nIt grows best in full sun and temperate climates with sufficient winter chilling for proper fruiting. Prefers deep fertile well-drained soil with regular watering during establishment and early growth stages. Requires ample space for development.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1780315967793-m1pmc",
+    "nameAr": "خروب",
+    "nameEn": "Ceratonia siliqua",
+    "scientificName": "Ceratonia siliqua",
+    "imagePath": "/api/images/img-83201ffc190e5a8929ded3b0",
+    "descriptionAr": "خروب 🌿🌳\n\nشجرة دائمة الخضرة تُعد من الأشجار المثمرة المعمرة، وتتميز بأوراقها الخضراء اللامعة وقرونها البنية الطويلة التي تحتوي على لب حلو المذاق. تُستخدم ثمار الخروب في الصناعات الغذائية والمشروبات، كما تُزرع كشجرة ظل وزينة في الحدائق والمزارع بفضل تحملها للظروف المناخية القاسية.\n\nتحتاج إلى شمس كاملة لتنمو بشكل جيد، وتتحمل الحرارة والجفاف بشكل ممتاز بعد التأسيس. تفضل التربة جيدة التصريف، وتحتاج إلى ري معتدل خلال السنوات الأولى ثم تصبح قليلة الاحتياج للمياه.",
+    "descriptionEn": "Carob Tree 🌿🌳\n\nEvergreen fruit tree known for its glossy green foliage and long brown pods containing sweet edible pulp. The pods are widely used in food products and beverages, while the tree is also valued for shade and ornamental planting.\n\nIt thrives in full sun and is highly tolerant of heat and drought once established. Prefers well-drained soil and requires moderate watering during early growth, becoming very water-efficient as it matures.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1781168580317-3z21j",
+    "nameAr": "فيجوا",
+    "nameEn": "Acca sellowiana",
+    "scientificName": "Acca sellowiana",
+    "imagePath": "/api/images/img-051567f9a2415e19f8cbb77d",
+    "descriptionAr": "🍈 فيجوا\n\nشجرة أو شجيرة مثمرة دائمة الخضرة تتميز بأوراقها الفضية الخضراء الجميلة وأزهارها الجذابة ذات البتلات البيضاء والوردية. تُنتج ثمارًا خضراء بيضاوية ذات رائحة عطرية مميزة وطعم يجمع بين الأناناس والجوافة، مما يجعلها من الفواكه المحببة للأكل الطازج وصناعة العصائر والمربيات.\n\nتنمو بشكل جيد في الشمس الكاملة إلى نصف الظل، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل البرودة والحرارة المعتدلة، وتحتاج إلى تقليم خفيف للحفاظ على شكلها وتحسين الإنتاج.",
+    "descriptionEn": "🍈 Feijoa \n\nEvergreen fruiting shrub or small tree known for its attractive silvery-green foliage and beautiful white-pink flowers. It produces aromatic green oval fruits with a unique flavor reminiscent of pineapple and guava, making it popular for fresh consumption and preserves.\n\nIt grows best in full sun to partial shade and prefers fertile, well-drained soil with moderate watering. It tolerates both mild cold and warm conditions and benefits from light pruning to maintain shape and improve fruit production.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1781173115403-r7gal",
+    "nameAr": "جوافة قلب أبيض",
+    "nameEn": "Psidium guajava",
+    "scientificName": "Psidium guajava",
+    "imagePath": "/api/images/img-3e102b22bdb9e28ee79a4c83",
+    "descriptionAr": "🤍 جوافة قلب أبيض\n\nشجرة فاكهة دائمة الخضرة تتميز بثمارها الخضراء أو الصفراء ذات اللب الأبيض العطري والطعم الحلو المنعش. تُعد من الأشجار المثمرة المحببة للحدائق المنزلية والمزارع، وتتميز بإنتاج وفير وقيمة غذائية عالية، كما يمكن تناول ثمارها طازجة أو استخدامها في العصائر والمربيات.\n\nتنمو بشكل جيد في الشمس الكاملة، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة بشكل جيد وتحتاج إلى تقليم خفيف لتحسين التهوية وتشجيع الإثمار وزيادة الإنتاج.",
+    "descriptionEn": "🤍 White-Fleshed Guava\n\nEvergreen fruit tree known for its green to yellow fruits with fragrant white flesh and a sweet refreshing flavor. It is widely grown in home gardens and orchards for its abundant production and nutritional value. The fruits are enjoyed fresh or used in juices, desserts, and preserves.\n\nIt thrives in full sun and prefers fertile, well-drained soil with moderate regular watering. Heat tolerant and benefits from light pruning to improve airflow and fruit production.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1781173260797-sbu6v",
+    "nameAr": "جوافة قلب أحمر",
+    "nameEn": "Psidium guajava",
+    "scientificName": "Psidium guajava",
+    "imagePath": "/api/images/img-3e102b22bdb9e28ee79a4c83",
+    "descriptionAr": "❤️ جوافة قلب أحمر\n\nشجرة فاكهة دائمة الخضرة تتميز بثمارها العطرية ذات اللب الأحمر أو الوردي الغني بالنكهة والطعم الحلو المميز. تُعد من الأشجار المثمرة المرغوبة لإنتاجها الوفير وقيمتها الغذائية العالية، كما تُستهلك ثمارها طازجة أو تُستخدم في العصائر والمربيات والحلويات.\n\nتنمو بشكل جيد في الشمس الكاملة، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة والرطوبة بشكل جيد، وتحتاج إلى تقليم خفيف لتحسين التهوية وتشجيع الإثمار وزيادة جودة الثمار.",
+    "descriptionEn": "❤️ Red-Fleshed Guava\n\nEvergreen fruit tree producing aromatic fruits with pink to red flesh and a rich sweet flavor. It is highly valued for its abundant yield and nutritional benefits. The fruits are commonly eaten fresh or used in juices, jams, and desserts.\n\nIt grows best in full sun and prefers fertile, well-drained soil with moderate regular watering. It is well adapted to warm climates and benefits from light pruning to improve airflow and fruit production.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1781173749529-8zphc",
+    "nameAr": "إجاص",
+    "nameEn": "Pyrus communis",
+    "scientificName": "Pyrus communis",
+    "imagePath": "/api/images/img-831e8f58cfc3c00aa64da5a4",
+    "descriptionAr": "🍐 إجاص\n\nشجرة فاكهة متساقطة الأوراق تُنتج ثمارًا لذيذة ذات قوام عصيري وطعم حلو مميز، وتُعد من الأشجار المثمرة الشائعة في البساتين والحدائق المنزلية. تتميز بأزهارها البيضاء الجميلة التي تتفتح في الربيع قبل ظهور الثمار، مما يضفي عليها قيمة جمالية وإنتاجية في آنٍ واحد.\n\nتنمو بشكل جيد في الشمس الكاملة، وتفضل التربة الخصبة العميقة جيدة التصريف مع ري معتدل ومنتظم. تحتاج إلى برودة شتوية مناسبة لتحفيز الإزهار والإثمار، كما يُنصح بتقليمها سنويًا لتحسين التهوية وزيادة جودة وإنتاج الثمار.",
+    "descriptionEn": "🍐 Pear Tree\n\nDeciduous fruit tree producing sweet, juicy fruits that are widely enjoyed fresh and used in various culinary applications. It is valued for both its productive yield and attractive white spring blossoms.\n\nIt grows best in full sun and prefers deep, fertile, well-drained soil with regular moderate watering. Adequate winter chilling is important for flowering and fruit production. Annual pruning helps improve airflow, fruit quality, and yield.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1781173975584-m4lft",
+    "nameAr": "رمان احمر",
+    "nameEn": "Punica granatum (Red Variety)",
+    "scientificName": "Punica granatum (Red Variety)",
+    "imagePath": "/api/images/img-73f68a14d96c6f609e3585b3",
+    "descriptionAr": "❤️ رمان أحمر\n\nشجرة فاكهة متساقطة الأوراق تتميز بثمارها الكبيرة ذات القشرة الحمراء الجذابة والحبوب العصيرية ذات اللون الأحمر الغني والطعم الحلو أو الحلو المائل للحموضة. تُعد من الأشجار المثمرة ذات القيمة الغذائية العالية، وتُستخدم ثمارها للأكل الطازج والعصائر ودبس الرمان.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتتحمل الحرارة والجفاف نسبيًا بعد التأسيس. تفضل التربة جيدة التصريف مع ري معتدل ومنتظم خلال فترة الإثمار، كما يُنصح بتقليمها دوريًا لتحسين التهوية وزيادة الإنتاج وجودة الثمار.",
+    "descriptionEn": "❤️ Red Pomegranate\n\nDeciduous fruit tree producing attractive red-skinned fruits filled with juicy deep-red arils. The fruits are known for their sweet to mildly tart flavor and high nutritional value, making them popular for fresh consumption, juices, and pomegranate molasses.\n\nIt thrives in full sun and adapts well to warm climates. Once established, it is tolerant of heat and moderate drought. Prefers well-drained soil with moderate watering, especially during fruit development. Regular pruning helps improve fruit quality and overall productivity.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1781349391640-r86cs",
+    "nameAr": "لومي",
+    "nameEn": "Citrus aurantiifolia (dried form)",
+    "scientificName": "Citrus aurantiifolia (dried form)",
+    "imagePath": "/api/images/img-61f7f8be2bf6927d9a8a6735",
+    "descriptionAr": "🍋 لومي (ليمون أسود)\n\nشجرة فاكهة دائمة الخضرة تُنتج ثمارًا صغيرة مستديرة تُجفف لتتحول إلى اللون الأسود أو البني الداكن، وتُستخدم كمنكّه في الطبخ العربي والخليجي لإضافة نكهة حامضية مميزة للأطعمة والشوربات. تتميز الشجرة بأوراقها الخضراء اللامعة ورائحتها العطرية الجميلة.\n\nتنمو بشكل جيد في الشمس الكاملة، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة بشكل جيد، وتحتاج إلى تقليم خفيف للحفاظ على شكلها وتحسين التهوية وزيادة الإنتاج.",
+    "descriptionEn": "🍋 Black Lime (Loomi)\n\nEvergreen fruit tree producing small limes that are traditionally sun-dried until they turn dark brown or black. They are widely used in Middle Eastern cuisine as a sour aromatic spice for soups, stews, and rice dishes.\n\nIt grows best in full sun and prefers fertile, well-drained soil with moderate regular watering. Heat tolerant and benefits from light pruning to maintain shape and improve productivity.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1781598498151-xhasr",
+    "nameAr": "عنب زيني",
+    "nameEn": "Parthenocissus / Vitis ornamental varieties",
+    "scientificName": "Parthenocissus / Vitis ornamental varieties",
+    "imagePath": "/api/images/img-488e0cf79a41f4912bb7acbc",
+    "descriptionAr": "🍇 عنب زيني\n\nنبات متسلق زينة سريع النمو يُستخدم لتغطية الأسوار والجدران والبرجولات، ويتميز بأوراقه الكثيفة الخضراء التي تعطي مظهرًا طبيعيًا وظلًا جميلًا. في بعض الأصناف تتغير ألوان الأوراق في الخريف إلى الأحمر والبرتقالي، مما يزيد من قيمته الجمالية في تنسيق الحدائق.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. يحتاج إلى دعائم للتسلق وتقليم دوري للتحكم في نموه وتشجيع كثافة الأوراق.",
+    "descriptionEn": "🍇 Ornamental Grape Vine\n\nFast-growing climbing ornamental plant used for covering fences, walls, and pergolas. It is valued for its dense foliage and seasonal color changes in some varieties, which turn red or orange in autumn, enhancing its decorative appeal.\n\nIt grows best in full sun to partial shade and prefers fertile, well-drained soil with moderate watering. Requires support structures and regular pruning to maintain shape and control growth.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1781602847976-8i0f3",
+    "nameAr": "عنب بناتي (دون بزر)",
+    "nameEn": "Vitis vinifera (Seedless varieties)",
+    "scientificName": "Vitis vinifera (Seedless varieties)",
+    "imagePath": "/api/images/img-e8d182ad03077598549491d2",
+    "descriptionAr": "🍇 عنب بناتي (دون بزر)\n\nنبات متسلق مثمر من أصناف العنب يتميز بإنتاج عناقيد حلوة من الحبات المتوسطة إلى الكبيرة بدون بذور مما يجعله مناسبًا للأكل الطازج مباشرة. يُستخدم بكثرة في الحدائق والمزارع لإنتاج فاكهة عالية الجودة وسهلة التناول، كما يمكن استخدامه كمتسلق لتغطية البرجولات والأسوار.\n\nينمو بشكل جيد في الشمس الكاملة، ويحتاج إلى تربة خصبة جيدة التصريف مع ري معتدل ومنتظم. يتطلب تقليم سنوي مهم لتنظيم الإنتاج وتحسين جودة العناقيد وزيادة الإثمار.",
+    "descriptionEn": "🍇 Seedless Grapes (Table Grapes)\n\nClimbing fruit vine producing medium to large grape clusters without seeds, making them ideal for fresh eating. They are widely grown in home gardens and commercial farms for their high-quality, easy-to-eat fruit and ornamental value when trained on trellises and pergolas.\n\nIt grows best in full sun and prefers fertile, well-drained soil with moderate regular watering. Annual pruning is essential to control growth and improve fruit yield and quality.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1781602998023-pr6mm",
+    "nameAr": "عنب حلواني",
+    "nameEn": "Vitis vinifera (Halwani variety)",
+    "scientificName": "Vitis vinifera (Halwani variety)",
+    "imagePath": "/api/images/img-7a35c26509a8ed277e80f9b7",
+    "descriptionAr": "🍇 عنب حلواني\n\nنبات متسلق مثمر من أصناف العنب يُزرع لإنتاج عناقيد كبيرة من الحبات الحلوة ذات الطعم الغني والمميز، ويُستخدم بشكل رئيسي كعنب طاولة للأكل الطازج. يتميز بقدرة جيدة على الإنتاج وبجودة ثمار مناسبة للاستهلاك المباشر أو العصائر، كما يمكن استخدامه لتغطية البرجولات والأسوار وإعطاء مظهر أخضر جميل.\n\nينمو بشكل جيد في الشمس الكاملة، ويحتاج إلى تربة خصبة جيدة التصريف مع ري معتدل ومنتظم. يتطلب تقليمًا سنويًا مهمًا لتنظيم الحمل وتحسين جودة وحجم العناقيد وزيادة الإنتاج.",
+    "descriptionEn": "🍇 Halwani Grape\n\nClimbing fruit vine producing sweet, high-quality table grapes with large clusters suitable for fresh consumption. It is widely grown for its pleasant flavor and good productivity, and is also used as an ornamental climbing plant on trellises and pergolas.\n\nIt grows best in full sun and prefers fertile, well-drained soil with moderate watering. Annual pruning is essential to improve fruit quality, cluster size, and overall yield.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1782740739112-c532k",
+    "nameAr": "فستق حلبي عاشوري",
+    "nameEn": "Pistacia vera 'Ashouri'",
+    "scientificName": "Pistacia vera 'Ashouri'",
+    "imagePath": "/api/images/img-4d1ab4a641721c32d16a52ed",
+    "descriptionAr": "🌳 فستق حلبي عاشوري\n\nشجرة فاكهة متساقطة الأوراق تُعد من أصناف الفستق الحلبي المميزة، وتتميز بإنتاج ثمار عالية الجودة ذات قشرة صلبة ولب أخضر غني بالنكهة. تُزرع في البساتين والمزارع التجارية لما تتمتع به من قيمة اقتصادية وإنتاجية مرتفعة، كما تُعرف بطول عمرها وقدرتها على التكيف مع البيئات الجافة.\n\nتنمو بشكل أفضل في الشمس الكاملة، وتفضل التربة العميقة جيدة التصريف. تتحمل الجفاف والحرارة بعد التأسيس، وتحتاج إلى برودة شتوية كافية لتحفيز الإزهار والإثمار، مع ري معتدل وتقليم دوري للحفاظ على صحة الشجرة وزيادة الإنتاج.",
+    "descriptionEn": "🌳 Ashouri Pistachio\n\nA deciduous pistachio tree known for producing high-quality nuts with hard shells and flavorful green kernels. It is widely cultivated in orchards for its excellent productivity, economic value, and long lifespan.\n\nIt thrives in full sun and prefers deep, well-drained soil. Once established, it is highly tolerant of heat and drought. Adequate winter chilling, moderate irrigation, and regular pruning help ensure healthy growth and high fruit production.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1782892803050-lbc3f",
+    "nameAr": "مندلينا",
+    "nameEn": "Citrus reticulata",
+    "scientificName": "Citrus reticulata",
+    "imagePath": "/api/images/img-c56ac95378fc595f89b99e87",
+    "descriptionAr": "🍊 مندلينا\n\nشجرة فاكهة دائمة الخضرة تتميز بثمارها الصغيرة إلى المتوسطة ذات القشرة الرقيقة سهلة التقشير والطعم الحلو المنعش. تُعد من أشهر أشجار الحمضيات، وتُزرع في الحدائق المنزلية والبساتين لإنتاج ثمار غنية بالفيتامينات تُؤكل طازجة أو تُستخدم في العصائر والحلويات.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة بشكل جيد، وتحتاج إلى تسميد دوري وتقليم خفيف للحفاظ على صحة الشجرة وتحسين جودة وإنتاج الثمار.",
+    "descriptionEn": "🍊 Mandarin\n\nEvergreen citrus tree producing small to medium-sized fruits with thin, easy-to-peel skin and a sweet, refreshing flavor. It is one of the most popular citrus trees, widely grown for fresh consumption, juices, and desserts.\n\nIt thrives in full sun and prefers fertile, well-drained soil with moderate regular watering. Regular fertilization and light pruning help maintain healthy growth and improve fruit quality and yield.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1782892973335-bgl94",
+    "nameAr": "عناب",
+    "nameEn": "Ziziphus jujuba",
+    "scientificName": "Ziziphus jujuba",
+    "imagePath": "/api/images/img-0ab1e27d55251799b52ccf8e",
+    "descriptionAr": "🌳 عناب\n\nشجرة فاكهة متساقطة الأوراق تتميز بثمارها الصغيرة البيضاوية التي تتحول من اللون الأخضر إلى الأحمر البني عند النضج، وتُعرف بمذاقها الحلو وقيمتها الغذائية العالية. تُزرع في الحدائق والبساتين لإنتاج الثمار الطازجة أو المجففة، كما تتميز بقدرتها على تحمل الظروف المناخية القاسية والجفاف.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة جيدة التصريف مع ري معتدل خلال فترة النمو. تتحمل الحرارة والجفاف بعد التأسيس، وتحتاج إلى تقليم خفيف للحفاظ على شكلها وتحسين الإنتاج وجودة الثمار.",
+    "descriptionEn": "🌳 Jujube\n\nDeciduous fruit tree producing small oval fruits that turn from green to reddish-brown when ripe. The fruits are valued for their sweet taste and high nutritional value and can be eaten fresh or dried. It is well adapted to warm climates and is known for its excellent drought tolerance.\n\nIt grows best in full sun and prefers well-drained soil with moderate watering during active growth. Once established, it is highly tolerant of heat and drought. Light pruning helps maintain tree shape and improve fruit production.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1782982405023-8u1zw",
+    "nameAr": "جريب فروت",
+    "nameEn": "Citrus × paradisi",
+    "scientificName": "Citrus × paradisi",
+    "imagePath": "/api/images/img-0f8e7b845b0929db5cbe1240",
+    "descriptionAr": "🍊 جريب فروت\n\nشجرة فاكهة دائمة الخضرة من الحمضيات، تتميز بثمارها الكبيرة ذات القشرة الصفراء أو الوردية واللب العصيري الذي يجمع بين الحلاوة والحموضة. تُعد من الأشجار المثمرة ذات القيمة الغذائية العالية، وتُستهلك ثمارها طازجة أو تُستخدم في العصائر والمشروبات المختلفة.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة بشكل جيد، وتحتاج إلى تسميد دوري وتقليم خفيف للحفاظ على صحة الشجرة وتحسين جودة وإنتاج الثمار.",
+    "descriptionEn": "🍊 Grapefruit\n\nEvergreen citrus tree producing large fruits with yellow or pink skin and juicy flesh that offers a balanced sweet and tangy flavor. It is widely cultivated for its nutritious fruits, which are enjoyed fresh or used in juices and beverages.\n\nIt thrives in full sun and prefers fertile, well-drained soil with moderate regular watering. Regular fertilization and light pruning help maintain healthy growth and improve fruit quality and yield.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1784102114530-n2zx3",
+    "nameAr": "عنب أوتوم كريسب",
+    "nameEn": "Autumn Crisp Grapes",
+    "scientificName": "Autumn Crisp Grapes",
+    "imagePath": "/api/images/img-4d48a50dfba4ab4c91deb644",
+    "descriptionAr": "🍇 عنب أوتوم كريسب\n\nنبات متسلق مثمر من أصناف العنب الفاخرة، يتميز بإنتاج عناقيد كبيرة من الحبات الخضراء المقرمشة عديمة البذور ذات المذاق الحلو والمنعش. يُعد من الأصناف المتأخرة في النضج، ويتميز بجودة ثماره العالية وقدرته على التخزين والنقل، مما يجعله من أفضل أصناف العنب للأكل الطازج.\n\nينمو بشكل ممتاز في الشمس الكاملة، ويفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. يحتاج إلى تقليم سنوي لتنظيم النمو وتحسين جودة العناقيد وزيادة الإنتاج، كما يستفيد من التسميد المنتظم خلال موسم النمو.",
+    "descriptionEn": "🍇 Autumn Crisp Grapes\n\nPremium seedless table grape variety producing large clusters of crisp green berries with a sweet, refreshing flavor. It is a late-season variety known for its excellent fruit quality, long shelf life, and suitability for fresh consumption.\n\nIt thrives in full sun and prefers fertile, well-drained soil with moderate regular watering. Annual pruning and proper fertilization help improve fruit quality, cluster size, and overall yield.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1785837139911-y5cag",
+    "nameAr": "عنب الياقوت (أصابع الساحرة)",
+    "nameEn": "Vitis vinifera",
+    "scientificName": "Vitis vinifera",
+    "imagePath": "/api/images/img-50449a4a64c70a79e18bb5a1",
+    "descriptionAr": "🍇 عنب الياقوت (أصابع الساحرة)\n\nنبات متسلق مثمر يتميز بعناقيده الجذابة وحباته الطويلة الأسطوانية ذات اللون الأحمر الداكن إلى الأرجواني، والتي تشبه الأصابع، مما أكسبه اسم أصابع الساحرة. يمتاز بطعمه الحلو وقوامه المقرمش، ويُعد من أصناف العنب الفاخرة المناسبة للاستهلاك الطازج، كما يتميز بجاذبيته العالية في الأسواق.\n\nينمو بشكل ممتاز في الشمس الكاملة، ويفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. يحتاج إلى تقليم سنوي وتسميد دوري لتحسين جودة العناقيد وزيادة الإنتاج، كما يستفيد من توفير دعامات قوية لتسلق الأفرع ونموها بشكل سليم.",
+    "descriptionEn": "🍇 Witch Fingers Grapes\n\nA premium climbing grapevine producing attractive clusters of long, finger-shaped berries with a deep red to purple color. Known for its crisp texture and exceptionally sweet flavor, it is a highly sought-after table grape variety with outstanding visual appeal.\n\nIt thrives in full sun and prefers fertile, well-drained soil with moderate regular watering. Annual pruning, regular fertilization, and sturdy trellis support help ensure vigorous growth and high-quality fruit production.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1786452692757-qzl8e",
+    "nameAr": "صنوبر",
+    "nameEn": "Pinus spp",
+    "scientificName": "Pinus spp",
+    "imagePath": "/api/images/img-0757d3972bda322b1e8736a8",
+    "descriptionAr": "🌲 صنوبر\n\nشجرة دائمة الخضرة تتميز بأوراقها الإبرية وتاجها المخروطي أو الممتد حسب النوع، وتُستخدم في تشجير الحدائق والمتنزهات والمناطق المفتوحة، كما تتميز بتحملها للظروف المناخية المختلفة وطول عمرها.\n\nتنمو بشكل جيد في الشمس الكاملة، وتفضل التربة جيدة التصريف مع ري معتدل خلال فترة التأسيس. تتحمل الجفاف والحرارة بدرجات متفاوتة حسب النوع، وتحتاج إلى عناية بسيطة وتقليم محدود لإزالة الأفرع الجافة والحفاظ على شكلها الطبيعي.",
+    "descriptionEn": "🌲 Pine Tree\n\nEvergreen conifer characterized by its needle-like foliage and conical or spreading crown, depending on the species. It is widely used for landscaping, parks, open areas, and reforestation, and is valued for its longevity and adaptability to different climates.\n\nIt grows best in full sun and prefers well-drained soil with moderate watering during establishment. Drought and heat tolerance vary by species. Minimal maintenance and occasional removal of dead branches are generally sufficient.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1787742919342-c6fey",
+    "nameAr": "جميز",
+    "nameEn": "Ficus sycomorus",
+    "scientificName": "Ficus sycomorus",
+    "imagePath": "/api/images/img-8084383aee9879f818d0e447",
+    "descriptionAr": "🌳 جميز\n\nشجرة كبيرة دائمة الخضرة أو شبه دائمة الخضرة تتميز بتاجها الواسع وأوراقها الخضراء الكبيرة، وتنتج ثمارًا صغيرة تشبه التين تنمو على الجذع والأفرع. تُعد من الأشجار المثمرة والظلّية المميزة، وتستخدم في الحدائق والمزارع والمناطق المفتوحة، كما تتميز بقدرتها الجيدة على تحمل الحرارة والجفاف.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة العميقة جيدة التصريف مع ري منتظم خلال فترة النمو. تتحمل الحرارة والجفاف بعد التأسيس، وتحتاج إلى مساحة كافية للنمو بسبب حجمها الكبير وانتشار تاجها.",
+    "descriptionEn": "🌳 Sycamore Fig\n\nA large evergreen or semi-evergreen tree known for its broad canopy and large green leaves. It produces small fig-like fruits that grow along the trunk and branches. It is valued as both a fruit-bearing and shade tree and is suitable for gardens, farms, and open landscapes.\n\nIt thrives in full sun and prefers deep, well-drained soil with regular watering during active growth. Once established, it tolerates heat and drought well and requires sufficient space for its large canopy to develop.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1787989959415-aed2e",
+    "nameAr": "سماق",
+    "nameEn": "Rhus coriaria",
+    "scientificName": "Rhus coriaria",
+    "imagePath": "/api/images/img-1a937198eff1065d71a87c74",
+    "descriptionAr": "🌿 سماق\n\nشجيرة أو شجرة صغيرة متساقطة الأوراق تتميز بأوراقها المركبة وألوانها الجذابة، كما تنتج عناقيد كثيفة من الثمار الحمراء المميزة. يُستخدم السماق كنبات زينة وفي بعض الأنواع تُستخدم ثماره كتابل معروف، مما يجعله نباتًا ذا قيمة جمالية واستخدامية.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويفضل التربة جيدة التصريف مع ري معتدل خلال فترة التأسيس. يتحمل الجفاف والظروف المناخية المختلفة بعد استقراره، ويحتاج إلى تقليم خفيف لإزالة الأفرع الجافة والحفاظ على شكل النبات.",
+    "descriptionEn": "🌿 Sumac\n\nA deciduous shrub or small tree known for its attractive compound leaves and dense clusters of distinctive red fruits. It is valued as an ornamental plant, and some species produce fruits that are traditionally used as a culinary spice.\n\nIt grows well in full sun to partial shade and prefers well-drained soil with moderate watering during establishment. Once established, it tolerates drought and various climatic conditions. Light pruning helps remove dry branches and maintain a healthy shape.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1787990032382-rugw6",
+    "nameAr": "بلوط",
+    "nameEn": "Quercus spp",
+    "scientificName": "Quercus spp",
+    "imagePath": "/api/images/img-62e4062d15aac199821e4824",
+    "descriptionAr": "🌳 بلوط\n\nشجرة كبيرة معمرة تتميز بقوتها وطول عمرها وتاجها الواسع الذي يوفر ظلًا كثيفًا، كما تتميز بأوراقها الجميلة وثمارها المعروفة باسم البلوط أو الجوزة. تُستخدم في الحدائق والمتنزهات والتشجير الطبيعي والغابات، وتُعد من الأشجار ذات القيمة البيئية والجمالية العالية.\n\nتنمو بشكل جيد في الشمس الكاملة إلى نصف الظل، وتفضل التربة العميقة جيدة التصريف. تحتاج إلى ري معتدل خلال فترة التأسيس، وبعد استقرارها تصبح أكثر قدرة على تحمل الظروف المناخية المختلفة. تحتاج إلى مساحة كافية للنمو بسبب حجمها الكبير وانتشار تاجها",
+    "descriptionEn": "🌳 Oak\n\nA large, long-lived tree known for its strength, broad canopy, and dense shade. It features attractive foliage and produces distinctive acorns. Oaks are widely used in parks, large gardens, natural landscapes, and forests due to their environmental and ornamental value.\n\nIt grows well in full sun to partial shade and prefers deep, well-drained soil. Moderate watering is recommended during establishment, after which it becomes more tolerant of varying climatic conditions. Adequate space is needed for its large canopy and mature size.",
+    "category": "اشجار مثمرة"
+  },
+  {
+    "id": "id-1779354808164-omgu7",
+    "nameAr": "دراجون فروت",
+    "nameEn": "Hylocereus undatus",
+    "scientificName": "Hylocereus undatus",
+    "imagePath": "/api/images/img-05a710ca146c28f33a3798e2",
+    "descriptionAr": "دراجون فروت 🌿🍈\n\nنبات فاكهة متسلق ينتمي إلى الصباريات، يتميز بسيقانه الخضراء المضلعة وأزهاره الكبيرة الليلية وثماره ذات الشكل المميز والقشرة الوردية أو الحمراء مع لب أبيض أو أحمر يحتوي على بذور سوداء صغيرة. يُستخدم كنبات زينة وإنتاج فاكهة في نفس الوقت، ويُزرع على دعامات أو تعريشات ليأخذ شكله المتسلق بشكل صحيح.\n\nيحتاج إلى عناية متوسطة وري معتدل مع تجنب زيادة الماء، ويُفضل التربة الرملية جيدة التصريف. يتميز بتحمله للحرارة والجفاف نسبيًا، لكنه يحتاج إلى شمس كاملة وإضاءة قوية ليعطي إنتاجًا جيدًا من الثمار. كما يحتاج إلى تقليم دوري لتنظيم النمو وتشجيع التزهير والإثمار.",
+    "descriptionEn": "Dragon Fruit 🌿🍈\n\nA climbing cactus plant known for its green ribbed stems, large night-blooming flowers, and distinctive fruits with pink or red skin and white or red flesh filled with tiny black seeds. It is grown both as an ornamental and fruit-producing plant and requires support structures such as trellises for proper growth.\n\nIt needs moderate care with careful watering, avoiding overwatering, and prefers sandy, well-drained soil. It is heat and drought tolerant but requires full sun and strong light for good fruit production. Regular pruning is needed to control growth and encourage flowering and fruiting.",
+    "category": "اشجار ونباتات استوائية"
+  },
+  {
+    "id": "id-1779697997989-dtzzt",
+    "nameAr": "بابايا",
+    "nameEn": "Carica papaya",
+    "scientificName": "Carica papaya",
+    "imagePath": "/api/images/img-814e87556519f238d2f9b628",
+    "descriptionAr": "بابايا 🌿🍈\n\nشجرة فاكهة استوائية سريعة النمو تتميز بساقها الطويلة وأوراقها الكبيرة المفصصة، وتُنتج ثمارًا كبيرة ذات لب برتقالي أو أصفر حلو وغني بالعناصر الغذائية. تُستخدم الثمار للأكل الطازج والعصائر والحلويات، كما تحتوي على إنزيمات طبيعية تساعد في الهضم. تضيف الشجرة مظهرًا استوائيًا جميلًا للحدائق والمزارع بفضل شكلها المميز وسرعة نموها.\n\nتحتاج إلى مناخ دافئ وشمس كاملة لتنمو وتثمر بشكل جيد، ولا تتحمل الصقيع أو البرد الشديد. تحتاج إلى تربة خفيفة جيدة التصريف مع ري منتظم دون إغراق، كما يُنصح بالتسميد الدوري لتحفيز النمو والإثمار الجيد.",
+    "descriptionEn": "Papaya 🌿🍈\n\nFast-growing tropical fruit tree known for its tall stem, large lobed leaves, and sweet orange or yellow fruits rich in nutrients. The fruits are widely used fresh, in juices, and desserts, and contain natural enzymes that support digestion. The tree also adds a tropical ornamental appearance to gardens and farms due to its unique shape and rapid growth.\n\nIt requires a warm climate and full sun for healthy growth and fruit production and is sensitive to frost and extreme cold. Prefers light well-drained soil with regular watering without overwatering. Periodic fertilization helps encourage strong growth and high fruit yield.",
+    "category": "اشجار ونباتات استوائية"
+  },
+  {
+    "id": "id-1779698287891-oda51",
+    "nameAr": "باشن فروت",
+    "nameEn": "Passiflora edulis",
+    "scientificName": "Passiflora edulis",
+    "imagePath": "/api/images/img-fafe26bea49abca82a9cabb8",
+    "descriptionAr": "باشن فروت 🌿🍈\n\nنبات متسلق استوائي دائم الخضرة يُزرع لإنتاج ثمار الباشن فروت ذات القشرة البنفسجية أو الصفراء، واللب الداخلي العطري الغني بالبذور والهلام. يتميز الطعم بمزيج حلو حامض منعش، ويُستخدم بكثرة في العصائر والحلويات والآيس كريم. كما يُعد نباتًا زينة جميلًا بسبب أزهاره الفريدة والغريبة الشكل.\n\nيحتاج إلى شمس كاملة أو نصف ظل مع إضاءة جيدة، وتربة خصبة جيدة التصريف. يحتاج إلى ري منتظم خاصة في فترات النمو والإزهار والإثمار، مع تسميد دوري. كما يُنصح بتوفير دعائم للتسلق مع تقليم الأفرع لتحفيز النمو والإنتاج.",
+    "descriptionEn": "Passion Fruit 🌿🍈\n\nFast-growing tropical climbing vine cultivated for its round purple or yellow fruits containing aromatic pulp filled with edible seeds. The flavor is sweet-tart and highly refreshing, commonly used in juices, desserts, and ice cream. The plant is also valued as an ornamental vine due to its striking exotic flowers.\n\nIt requires full sun to partial shade with good light exposure and fertile well-drained soil. Regular watering is needed, especially during growth, flowering, and fruiting stages. Support structures are essential for climbing, and pruning helps improve growth and fruit yield.",
+    "category": "اشجار ونباتات استوائية"
+  },
+  {
+    "id": "id-1779714322531-79odg",
+    "nameAr": "مانجا",
+    "nameEn": "Mangifera indica",
+    "scientificName": "Mangifera indica",
+    "imagePath": "/api/images/img-ec58df6627b4edcc7949e7e3",
+    "descriptionAr": "مانجا 🌿🥭\n\nشجرة فاكهة استوائية دائمة الخضرة تُنتج ثمار المانجا الشهيرة ذات الطعم الحلو والعصيري والرائحة العطرية المميزة. تتنوع الثمار في الشكل واللون والحجم حسب الصنف، وتُستخدم للأكل الطازج والعصائر والحلويات. كما تتميز الشجرة بأوراقها الطويلة اللامعة ومظهرها الاستوائي الجميل الذي يجعلها مناسبة للحدائق والمزارع.\n\nتحتاج إلى مناخ دافئ وشمس كاملة لتنمو وتثمر بشكل جيد، ولا تتحمل الصقيع الشديد. تفضل التربة الخصبة جيدة التصريف مع ري منتظم خاصة في السنوات الأولى وفترات الإثمار، كما تحتاج إلى تسميد دوري وتقليم خفيف لتحسين النمو والإنتاج.",
+    "descriptionEn": "Mango 🌿🥭\n\nEvergreen tropical fruit tree known for producing sweet, juicy, and aromatic mango fruits. Fruit size, color, and flavor vary depending on the cultivar. Mangoes are widely consumed fresh and used in juices, desserts, and many tropical dishes. The tree also has attractive glossy foliage and a lush tropical appearance.\n\nIt thrives in warm climates with full sun exposure and is sensitive to severe frost. Prefers fertile well-drained soil and regular watering, especially during early growth and fruiting stages. Periodic fertilization and light pruning help improve growth and fruit production.",
+    "category": "اشجار ونباتات استوائية"
+  },
+  {
+    "id": "id-1779714430855-za4oe",
+    "nameAr": "قشطة",
+    "nameEn": "Annona spp.",
+    "scientificName": "Annona spp.",
+    "imagePath": "/api/images/img-f6ddd041a3bbc9422b2e6622",
+    "descriptionAr": "قشطة 🌿🍈\n\nشجرة فاكهة استوائية أو شبه استوائية تُنتج ثمارًا ذات قشرة خضراء ولب أبيض كريمي حلو المذاق، وتُعد من الفواكه المميزة بطعمها الغني والعطري. تُستخدم الثمار للأكل الطازج والعصائر والحلويات، كما تتميز الشجرة بأوراقها الخضراء الجميلة ومظهرها الاستوائي الجذاب.\n\nتحتاج إلى مناخ دافئ وشمس كاملة أو نصف ظل خفيف لتنمو وتثمر بشكل جيد، ولا تتحمل الصقيع الشديد. تفضل التربة الخصبة جيدة التصريف مع ري منتظم دون إغراق، كما يُنصح بالتسميد الدوري والتقليم الخفيف لتحسين النمو والإنتاج.",
+    "descriptionEn": "Custard Apple 🌿🍈\n\nTropical to subtropical fruit tree producing green fruits with creamy white sweet flesh and a rich aromatic flavor. The fruits are commonly eaten fresh and used in juices and desserts. The tree also adds ornamental value with its lush green foliage and tropical appearance.\n\nIt grows best in warm climates with full sun to light partial shade and does not tolerate severe frost. Prefers fertile well-drained soil with regular watering without overwatering. Periodic fertilization and light pruning help improve growth and fruit production.",
+    "category": "اشجار ونباتات استوائية"
+  },
+  {
+    "id": "id-1779714548754-5k52h",
+    "nameAr": "أفوكادو",
+    "nameEn": "Persea americana",
+    "scientificName": "Persea americana",
+    "imagePath": "/api/images/img-5ad4baf4672a6ddb9bf9aff2",
+    "descriptionAr": "أفوكادو 🌿🥑\n\nشجرة فاكهة دائمة الخضرة تُنتج ثمار الأفوكادو الغنية بالدهون الصحية والقوام الكريمي الناعم، وتُعد من الفواكه ذات القيمة الغذائية العالية. تُستخدم الثمار في السلطات والعصائر والوجبات الصحية، كما تتميز الشجرة بأوراقها الخضراء اللامعة ومظهرها الجميل الذي يجعلها مناسبة للحدائق والمزارع.\n\nتحتاج إلى مناخ دافئ وشمس كاملة أو نصف ظل خفيف لتنمو وتثمر بشكل جيد، ولا تتحمل الصقيع الشديد. تفضل التربة الخفيفة جيدة التصريف مع ري منتظم دون إغراق، خاصة في السنوات الأولى وفترات النمو. كما يُنصح بالتسميد الدوري والتقليم الخفيف لتحسين النمو والإنتاج.",
+    "descriptionEn": "Avocado 🌿🥑\n\nEvergreen fruit tree known for producing nutrient-rich avocados with creamy texture and healthy fats. The fruits are widely used in salads, smoothies, and healthy dishes. The tree also has attractive glossy foliage and a lush appearance suitable for gardens and orchards.\n\nIt grows best in warm climates with full sun to light partial shade and is sensitive to severe frost. Prefers light well-drained soil with regular watering without waterlogging, especially during early growth stages. Periodic fertilization and light pruning help improve growth and fruit production.",
+    "category": "اشجار ونباتات استوائية"
+  },
+  {
+    "id": "id-1779714704099-x39vy",
+    "nameAr": "أناناس",
+    "nameEn": "Ananas comosus",
+    "scientificName": "Ananas comosus",
+    "imagePath": "/api/images/img-6fd43ed624535adf4b26f6ba",
+    "descriptionAr": "أناناس 🌿🍍\n\nنبات فاكهة استوائي يتميز بأوراقه الطويلة الحادة وثمرته العطرية ذات الطعم الحلو والمنعش. يُعد من النباتات المميزة في الحدائق الاستوائية والزراعة المنزلية، وتُستخدم ثماره للأكل الطازج والعصائر والحلويات. كما يضيف النبات مظهرًا استوائيًا جميلًا بفضل شكله الوردي وأوراقه المتناسقة.\n\nيحتاج إلى مناخ دافئ وشمس كاملة لينمو بشكل جيد، ولا يتحمل الصقيع أو البرد الشديد. يفضل التربة الخفيفة جيدة التصريف مع ري معتدل دون إغراق، ويحتاج إلى عناية بسيطة نسبيًا مع تسميد دوري لتحفيز النمو والإثمار.",
+    "descriptionEn": "Pineapple 🌿🍍\n\nTropical fruit plant known for its long spiky leaves and sweet aromatic fruit. It is widely grown in tropical gardens and home cultivation for fresh consumption, juices, and desserts. The plant also adds an exotic ornamental appearance due to its rosette growth form.\n\nIt thrives in warm climates with full sun exposure and does not tolerate frost or severe cold. Prefers light well-drained soil and moderate watering without overwatering. Requires relatively low maintenance with periodic fertilization to encourage healthy growth and fruit production.",
+    "category": "اشجار ونباتات استوائية"
+  },
+  {
+    "id": "id-1780297007709-tthoo",
+    "nameAr": "صبار مثمر",
+    "nameEn": "Fruiting Cactus",
+    "scientificName": "Fruiting Cactus",
+    "imagePath": "/api/images/img-7ff751a584c159cb8566b2df",
+    "descriptionAr": "صبار مثمر 🌵🍈\n\nنبات صحراوي معمر يُعرف بقدرته العالية على تحمل الجفاف والحرارة، ويُنتج ثمارًا صالحة للأكل ذات طعم حلو ومنعش. يتميز بألواحه الخضراء اللحمية وأزهاره الملونة التي تتحول إلى ثمار غنية بالعناصر الغذائية. يُستخدم للإنتاج الزراعي ولأغراض الزينة في الحدائق والمناطق الجافة.\n\nيحتاج إلى شمس كاملة وتربة خفيفة جيدة التصريف، ويتطلب كميات قليلة من الماء. يُعد من النباتات سهلة العناية والمناسبة للمناخات الحارة والجافة، كما يتميز بإنتاجه الجيد للثمار عند توفر الظروف المناسبة.",
+    "descriptionEn": "Fruiting Cactus 🌵🍈\n\nPerennial desert plant known for its exceptional tolerance to heat and drought. It produces edible fruits with a sweet, refreshing flavor and features fleshy green pads and colorful flowers. It is cultivated both for fruit production and ornamental landscaping in arid regions.\n\nIt thrives in full sun and well-drained soil, requiring very little water. It is easy to maintain and highly adapted to hot, dry climates, producing abundant fruits under suitable growing conditions.",
+    "category": "صباريات وعصاريات"
+  },
+  {
+    "id": "id-1779358172348-gt162",
+    "nameAr": "أغاف أمريكي",
+    "nameEn": "Agave americana",
+    "scientificName": "Agave americana",
+    "imagePath": "/api/images/img-64be1365de3d66f86369c92b",
+    "descriptionAr": "أغاف أمريكي 🌿🌵\n\nنبات زينة صحراوي دائم الخضرة يتميز بأوراقه الكبيرة السميكة القاسية ذات الحواف الشوكية التي تنمو على شكل وردة قاعدية جذابة. يُستخدم بكثرة في تنسيق الحدائق الحديثة والصخرية والحدائق الجافة، ويعطي مظهرًا قويًا ومميزًا. يتميز ببطء شديد في النمو، وقد يزهر مرة واحدة في عمره بعد سنوات طويلة ثم يموت النبات الأم بعد الإزهار.\n\nيُعد من أكثر النباتات تحمّلًا للجفاف والحرارة، ويحتاج إلى عناية قليلة جدًا، مما يجعله مثاليًا للمناطق الحارة والجافة. يفضل الشمس الكاملة والتربة الرملية جيدة التصريف، ويجب تقليل الري بشكل كبير لتجنب تعفن الجذور.",
+    "descriptionEn": "Century Plant 🌿🌵\n\nA desert evergreen succulent known for its large, stiff, spiny leaves arranged in a striking rosette form. It is widely used in modern, rock, and xeriscape landscaping due to its bold architectural appearance. It grows very slowly and typically flowers once in its lifetime after many years, after which the mother plant dies.\n\nIt is extremely drought and heat tolerant and requires minimal care, making it ideal for dry and hot climates. It prefers full sun and sandy, well-drained soil, with very limited watering to prevent root rot.",
+    "category": "صباريات وعصاريات"
+  },
+  {
+    "id": "id-1779358749102-n0xjg",
+    "nameAr": "صبار الكرة الذهبية",
+    "nameEn": "Echinocactus grusonii",
+    "scientificName": "Echinocactus grusonii",
+    "imagePath": "/api/images/img-f079c45025a79641f7c6bf4b",
+    "descriptionAr": "صبار الكرة الذهبية 🌿🌵\n\nنبات صباري زينة يتميز بشكله الكروي ولونه الأخضر الفاتح المائل للذهبي مع أشواك صفراء كثيفة تغطي سطحه، مما يعطيه مظهرًا فريدًا وجذابًا في الحدائق الصخرية والتنسيقات الحديثة. يُعد من النباتات بطيئة النمو جدًا ويستخدم كنقطة جمالية مميزة في التصميمات الصحراوية والحدائق الجافة.\n\nيتحمل الجفاف والحرارة العالية بشكل ممتاز، ويحتاج إلى عناية قليلة جدًا، مما يجعله مناسبًا جدًا للمناطق الحارة. يفضل الشمس الكاملة والتربة الرملية جيدة التصريف، ويجب تقليل الري بشكل كبير جدًا لأن زيادة الماء قد تسبب تعفن الجذور.",
+    "descriptionEn": "Golden Barrel Cactus 🌿🌵\n\nA globular ornamental cactus known for its spherical shape and light green body covered with dense golden-yellow spines, making it highly decorative in rock gardens and desert landscapes. It is extremely slow-growing and often used as a focal point in arid garden designs.\n\nIt is highly drought and heat tolerant and requires very low maintenance, making it ideal for hot and dry environments. Prefers full sun and sandy, well-drained soil, with minimal watering to prevent root rot.",
+    "category": "صباريات وعصاريات"
+  },
+  {
+    "id": "id-1780220336994-5b2pi",
+    "nameAr": "صبار عامود السيريس",
+    "nameEn": "Cereus spp",
+    "scientificName": "Cereus spp",
+    "imagePath": "/api/images/img-a6b1261cc8d79ee7a7e1a4df",
+    "descriptionAr": "صبار عامود السيريس 🌿🌵\n\nنبات صباري عمودي الشكل يتميز بسيقانه الطويلة الأسطوانية ذات اللون الأخضر المزرق، ويُعد من نباتات الزينة القوية التي تُستخدم في الحدائق الصخرية والتصاميم الحديثة والصحراوية. يعطي مظهرًا معماريًا مميزًا ويُستخدم كنقطة جذب بصرية في تنسيق الحدائق.\n\nيتحمل الحرارة العالية والجفاف بشكل ممتاز، ويحتاج إلى شمس كاملة لينمو بشكل صحي وقوي. يفضل التربة الرملية أو الخفيفة جيدة التصريف مع ري قليل جدًا، لأن زيادة الماء قد تسبب تعفن الجذور. يُعد من النباتات سهلة العناية وقليلة المتطلبات.",
+    "descriptionEn": "Cereus Cactus 🌿🌵\n\nColumnar cactus characterized by tall cylindrical green to bluish stems. It is widely used in desert landscaping, rock gardens, and modern landscape design due to its striking architectural form and drought tolerance.\n\nIt thrives in full sun and extremely dry conditions. Prefers sandy, well-drained soil with very minimal watering, as excess moisture can cause root rot. It is a low-maintenance and highly resilient ornamental plant.",
+    "category": "صباريات وعصاريات"
+  },
+  {
+    "id": "id-1780224371954-53g0x",
+    "nameAr": "ببروميا خضراء",
+    "nameEn": "Peperomia spp",
+    "scientificName": "Peperomia spp",
+    "imagePath": "/api/images/img-79f47bf4ac1dbed2e25d8f9a",
+    "descriptionAr": "ببروميا خضراء 🌿\n\nنبات زينة داخلي صغير الحجم دائم الخضرة يتميز بأوراقه السميكة واللحمية ذات اللون الأخضر اللامع، ويُعد من النباتات المثالية لتزيين المكاتب والرفوف والأماكن الداخلية. يتميز بشكله الهادئ ونموه البطيء، مما يجعله مناسبًا للأماكن الصغيرة وسهل العناية.\n\nيحتاج إلى إضاءة متوسطة إلى ساطعة غير مباشرة، ويتحمل الإضاءة الضعيفة نسبيًا. يفضل التربة الخفيفة جيدة التصريف مع ري خفيف ومنتظم، مع ترك التربة تجف بين الريات لتجنب تعفن الجذور. لا يحتاج إلى عناية كبيرة ويُعد من النباتات المناسبة للمبتدئين.",
+    "descriptionEn": "Green Peperomia 🌿\n\nSmall evergreen indoor ornamental plant known for its thick, glossy green leaves and compact growth habit. It is widely used for decorating desks, shelves, and indoor spaces due to its minimal size and easy care requirements.\n\nIt prefers medium to bright indirect light but can tolerate low light conditions. Requires light watering with well-drained soil, allowing the soil to dry between watering sessions to prevent root rot. It is a low-maintenance plant ideal for beginners.",
+    "category": "صباريات وعصاريات"
+  },
+  {
+    "id": "id-1779615668839-03khj",
+    "nameAr": "صباريات  مشكلة",
+    "nameEn": "Succulent  (various genera)",
+    "scientificName": "Succulent  (various genera)",
+    "imagePath": "/api/images/img-6481dcc06a59a026dbd77de8",
+    "descriptionAr": "صباريات  مشكلة 🌿🌵\n\nمجموعة نباتات زينة متنوعة تضم أنواع الصباريات والعصاريات المختلفة، وتتميز بأشكالها الغريبة والمتنوعة وألوانها المميزة وقدرتها العالية على تحمل الجفاف والحرارة. تُستخدم بكثرة في تنسيق الحدائق الصخرية والحديثة، وكذلك في الأصص الداخلية والخارجية لإعطاء مظهر ديكوري مميز ومتنوع.\n\nتحتاج هذه النباتات إلى عناية قليلة جدًا، وتفضل الشمس الكاملة والتربة الرملية أو الخفيفة جيدة التصريف. يجب تقليل الري بشكل كبير لأن زيادة الماء تسبب تعفن الجذور، وهي مناسبة جدًا للأماكن الحارة والجافة وسهلة التكيف مع الظروف المختلفة.",
+    "descriptionEn": "Mixed Succulents 🌿🌵\n\nA mixed group of ornamental succulents and cacti known for their unique shapes, colors, and excellent tolerance to drought and heat. They are widely used in rock gardens, modern landscaping, and decorative indoor/outdoor pots, providing a diverse and attractive visual effect.\n\nThey require very low maintenance, full sun exposure, and sandy or well-drained soil. Watering should be minimal, as overwatering can cause root rot. They are highly suitable for hot, dry climates and adapt easily to different environments.",
+    "category": "صباريات وعصاريات"
+  },
+  {
+    "id": "id-1780315741146-afctp",
+    "nameAr": "ألوفيرا",
+    "nameEn": "Aloe vera",
+    "scientificName": "Aloe vera",
+    "imagePath": "/api/images/img-37ee733256efd09d6f0ebb48",
+    "descriptionAr": "ألوفيرا (الصبار الطبي) 🌿💚\n\nنبات عصاري معمر يتميز بأوراقه اللحمية الخضراء السميكة التي تحتوي على هلام شفاف معروف بفوائده المتعددة. يُستخدم كنبات زينة داخلي وخارجي، ويُعد من أكثر النباتات العصارية شيوعًا بسبب سهولة العناية به وشكله الجذاب.\n\nيحتاج إلى إضاءة قوية أو شمس مباشرة جزئيًا، ويفضل التربة الرملية أو الخفيفة جيدة التصريف. يتحمل الجفاف بشكل ممتاز ويحتاج إلى ري متباعد، مع ترك التربة تجف بين الريات لتجنب تعفن الجذور.",
+    "descriptionEn": "Aloe Vera 🌿💚\n\nPopular perennial succulent known for its thick fleshy green leaves containing a clear gel. It is widely grown as both an ornamental indoor and outdoor plant due to its attractive appearance and low maintenance requirements.\n\nIt thrives in bright light to partial direct sun and prefers sandy, well-drained soil. Highly drought tolerant and requires infrequent watering, allowing the soil to dry out between waterings.",
+    "category": "صباريات وعصاريات"
+  },
+  {
+    "id": "id-1785838042777-05x1r",
+    "nameAr": "عصاريات مشكلة",
+    "nameEn": "Mixed Succulents",
+    "scientificName": "Mixed Succulents",
+    "imagePath": "/api/images/img-2279ada6396c0b591e09e7f2",
+    "descriptionAr": "🌵 عصاريات مشكلة\n\nمجموعة متنوعة من نباتات العصاريات تتميز بأشكالها وألوانها الجذابة، وتُستخدم في تنسيق الحدائق الصخرية والأحواض والأصص والديكورات الداخلية والخارجية. تتميز بسهولة العناية بها وقدرتها العالية على تخزين المياه، مما يجعلها مثالية للمناطق الحارة والجافة وللأشخاص الباحثين عن نباتات قليلة الصيانة.\n\nتنمو بشكل ممتاز في الأماكن المشمسة أو ذات الإضاءة الساطعة، وتفضل التربة الرملية جيدة التصريف مع ري خفيف ومتباعد. تتحمل الجفاف لفترات طويلة، ويُنصح بتجنب الإفراط في الري للحفاظ على صحة الجذور ومنع تعفنها.",
+    "descriptionEn": "🌵 Mixed Succulents\n\nA diverse collection of succulent plants featuring a wide variety of shapes, sizes, and colors. They are ideal for rock gardens, containers, indoor décor, and outdoor landscapes. Their ability to store water makes them low-maintenance and well suited to hot, dry climates.\n\nThey thrive in full sun or bright light and prefer sandy, well-drained soil with light, infrequent watering. Succulents are highly drought tolerant, and overwatering should be avoided to prevent root rot.",
+    "category": "صباريات وعصاريات"
+  },
+  {
+    "id": "id-1779358470332-0au25",
+    "nameAr": "غازانيا",
+    "nameEn": "Gazania rigens",
+    "scientificName": "Gazania rigens",
+    "imagePath": "/api/images/img-8428893e29e0ba375f294422",
+    "descriptionAr": "غازانيا 🌿🌼\n\nنبات زينة مزهر منخفض النمو يتميز بأزهاره الكبيرة الزاهية بألوان مثل الأصفر، البرتقالي، الأحمر، والوردي، وغالبًا ما تكون الأزهار لامعة ومفتوحة في ضوء الشمس. يُستخدم بكثرة في تغطية الأرض وتزيين الحدائق والأحواض لأنه يعطي مظهرًا ملونًا ومشرقًا. يتميز بسرعة تغطيته للمساحات وسهولة العناية به.\n\nيحتاج إلى شمس كاملة ليزهر بشكل قوي، ويتحمل الحرارة والجفاف بشكل ممتاز، مما يجعله مناسبًا للمناطق الحارة. يفضل التربة الخفيفة جيدة التصريف مع ري معتدل وتجنب زيادة الماء.",
+    "descriptionEn": "Gazania 🌿🌼\n\nLow-growing ornamental flowering plant known for its large, bright blooms in shades of yellow, orange, red, and pink, often with a shiny appearance that opens in sunlight. It is widely used as ground cover in gardens and landscape beds for its vibrant color display. It spreads quickly and is easy to maintain.\n\nIt requires full sun for best flowering and is highly tolerant to heat and drought, making it suitable for warm climates. Prefers light, well-drained soil and moderate watering, avoiding overwatering.",
+    "category": "ورود وحوليات"
+  },
+  {
+    "id": "id-1779615146221-g3m0a",
+    "nameAr": "ورد جوري متسلق",
+    "nameEn": "Rosa spp. (Climbing varieties)",
+    "scientificName": "Rosa spp. (Climbing varieties)",
+    "imagePath": "/api/images/img-3486c1c895b57ff97e35f65e",
+    "descriptionAr": "ورد جوري متسلق 🌿🌹\n\nنبات زينة متسلق دائم الخضرة أو شبه دائم حسب الصنف، يتميز بأزهاره الجورية العطرية الجميلة التي تتنوع ألوانها بين الأحمر، الوردي، الأبيض والأصفر. يُستخدم بكثرة في تزيين الأقواس والأسوار والجدران، ويضيف مظهرًا رومانسيًا وجذابًا للحدائق بفضل كثافة أزهاره ورائحته العطرية القوية.\n\nيحتاج إلى شمس كاملة لإعطاء أفضل إزهار، وتربة خصبة جيدة التصريف. يحتاج إلى ري منتظم دون إغراق، مع تسميد دوري خلال موسم النمو. كما يُنصح بتقليم الأغصان بشكل مستمر لتوجيه نموه وتحفيز الإزهار الغزير.",
+    "descriptionEn": "Climbing Rose 🌿🌹\n\nClimbing ornamental rose known for its fragrant and colorful blooms in shades of red, pink, white, and yellow. It is widely used in landscaping to cover arches, fences, and walls, creating a romantic and decorative garden appearance.\n\nIt requires full sun for best flowering, fertile well-drained soil, and regular watering without overwatering. Seasonal fertilization and pruning are essential to guide growth and encourage abundant blooming.",
+    "category": "ورود وحوليات"
+  },
+  {
+    "id": "id-1779615220440-tnfqm",
+    "nameAr": "ورد جوري هولندي",
+    "nameEn": "Rosa hybrida (Dutch varieties)",
+    "scientificName": "Rosa hybrida (Dutch varieties)",
+    "imagePath": "/api/images/img-f0850e00e40bb0234b86be74",
+    "descriptionAr": "ورد جوري هولندي 🌿🌹\n\nنبات زينة مزهر يُعد من أجود أنواع الورد الجوري التجارية، ويتميز بأزهاره الكبيرة المتناسقة وألوانه القوية والزاهية مثل الأحمر، الوردي، الأبيض والأصفر، مع رائحة عطرية جميلة. يُستخدم بكثرة في تنسيق الحدائق وتنسيق الباقات والقطف التجاري بسبب شكل الزهرة المثالي وطول فترة بقائها بعد القطف.\n\nيحتاج إلى شمس كاملة لإنتاج أزهار قوية وجودة عالية، وتربة خصبة جيدة التصريف. يحتاج إلى ري منتظم دون إغراق، مع تسميد دوري خلال موسم النمو لتحفيز الإزهار المستمر. كما يُنصح بتقليمه بشكل منتظم لإزالة الأفرع القديمة وتشجيع نمو أزهار جديدة.",
+    "descriptionEn": "Dutch Rose 🌿🌹\n\nHigh-quality ornamental rose widely used in commercial flower production and landscaping. It is known for its large, well-formed blooms in vibrant colors such as red, pink, white, and yellow, with a pleasant fragrance and excellent vase life, making it ideal for bouquets and cut flowers.\n\nIt requires full sun for optimal flowering, fertile well-drained soil, and regular watering without waterlogging. Frequent fertilization during the growing season and proper pruning are essential to promote continuous blooming and healthy growth.",
+    "category": "ورود وحوليات"
+  },
+  {
+    "id": "id-1779698475776-eurxz",
+    "nameAr": "جيرانيوم خبيزة",
+    "nameEn": "Pelargonium / Geranium spp.",
+    "scientificName": "Pelargonium / Geranium spp.",
+    "imagePath": "/api/images/img-7ee756c83f4cae5ba1b64d37",
+    "descriptionAr": "جيرانيوم (خبيزة) 🌿🌸\n\nنبات زينة مزهر يُزرع بكثرة في الحدائق والأحواض، ويتميز بأزهاره الملونة التي تتدرج بين الأحمر والوردي والأبيض والبنفسجي، مع أوراق خضراء عطرية الشكل. يُستخدم في تزيين الشرفات والحدائق وإضافة لون جميل ومظهر ممتد طوال موسم الإزهار.\n\nيحتاج إلى شمس كاملة لإعطاء أفضل إزهار، ويحتاج إلى ري معتدل مع ترك التربة تجف قليلًا بين الريات. يفضل التربة الخفيفة جيدة التصريف، مع إزالة الأزهار الذابلة لتحفيز استمرار الإزهار وتحسين الشكل العام للنبات.",
+    "descriptionEn": "Geranium (Mallow-type ornamental) 🌿🌸\n\nFlowering ornamental plant widely grown in gardens and containers, known for its colorful blooms in shades of red, pink, white, and purple. It is commonly used in balconies, flower beds, and decorative landscaping for continuous seasonal color.\n\nIt grows best in full sun for maximum flowering, with moderate watering and allowing the soil to dry slightly between irrigations. Prefers well-drained soil, and deadheading spent flowers promotes continuous blooming and improves plant appearance.",
+    "category": "ورود وحوليات"
+  },
+  {
+    "id": "id-1779698651265-8b0tz",
+    "nameAr": "قدسية",
+    "nameEn": "Tagetes erecta",
+    "scientificName": "Tagetes erecta",
+    "imagePath": "/api/images/img-9757b0a272b64b25a343fe73",
+    "descriptionAr": "القدسية – القطيفة 🌿🌼\n\nنبات زينة مزهر موسمي يتميز بأزهاره الكثيفة ذات الألوان الزاهية مثل الأصفر والبرتقالي، ويُستخدم بكثرة في الحدائق والأحواض لتزيين المساحات وإضافة لون قوي ومشرق. يُعد من النباتات سهلة الزراعة وسريعة النمو، كما يساعد في إعطاء شكل منظم وجذاب للحدائق ويمكن استخدامه كحدود نباتية.\n\nيحتاج إلى شمس كاملة ليعطي أفضل إزهار، ويتحمل الحرارة نسبيًا. يفضل تربة خفيفة جيدة التصريف مع ري معتدل دون إفراط، مع إزالة الأزهار الذابلة لتحفيز استمرار الإزهار وزيادة كثافته.",
+    "descriptionEn": "Marigold 🌿🌼\n\nSeasonal flowering ornamental plant known for its dense bright blooms in yellow and orange shades. It is widely used in garden beds, borders, and landscaping due to its strong color impact and easy growth.\n\nIt thrives in full sun and tolerates heat relatively well. Requires moderate watering and well-drained soil, and deadheading spent flowers encourages continuous blooming and better plant performance.",
+    "category": "ورود وحوليات"
+  },
+  {
+    "id": "id-1779699034765-x41hl",
+    "nameAr": "شكرية",
+    "nameEn": "Ornamental Flowering Plant",
+    "scientificName": "Ornamental Flowering Plant",
+    "imagePath": "/api/images/img-3d14fee969862bd06dd5132c",
+    "descriptionAr": "شكرية  🌿🌸\n\nنبات زينة مزهر يُستخدم في الحدائق والأحواض لإضافة ألوان زهرية جميلة ولمسة جمالية ناعمة. يتميز بأزهاره المتوسطة إلى الصغيرة التي تظهر بألوان متعددة حسب الصنف، مثل الوردي والأحمر والأبيض، مع نمو كثيف يعطي مظهرًا ممتلئًا وجذابًا. يُستخدم في تنسيق الحدائق كأحواض زهور أو حدود نباتية.\n\nيحتاج إلى شمس كاملة ليزهر بشكل جيد، مع ري معتدل وتربة خفيفة جيدة التصريف. يُفضل إزالة الأزهار الذابلة بشكل مستمر لتحفيز الإزهار الجديد وتحسين شكل النبات. كما يحتاج إلى تسميد خفيف خلال موسم النمو لدعم الإزهار.",
+    "descriptionEn": "Ornamental Flowering Plant 🌿🌸\n\nFlowering ornamental plant used in gardens and landscape designs for its attractive colorful blooms, typically in shades of pink, red, and white depending on the variety. It is commonly used in flower beds and borders to create dense decorative displays.\n\nIt grows best in full sun with moderate watering and well-drained soil. Regular removal of spent flowers encourages continuous blooming and improves overall plant appearance. Light fertilization during the growing season supports healthy flowering.",
+    "category": "ورود وحوليات"
+  },
+  {
+    "id": "id-1779699706320-azovx",
+    "nameAr": "أكياس بتونيا",
+    "nameEn": "Petunia spp",
+    "scientificName": "Petunia spp",
+    "imagePath": "/api/images/img-70ac9ac443df65300545db27",
+    "descriptionAr": "أكياس بتونيا 🌿🌸\n\nنبات زينة مزهر موسمي يُزرع في الأكياس أو الأحواض المعلقة، ويتميز بأزهاره الكثيفة ذات الألوان الزاهية مثل الوردي والبنفسجي والأبيض والأحمر. يُستخدم بكثرة في تزيين الشرفات والحدائق وإضافة لون قوي وجميل طوال موسم الإزهار، كما يعطي مظهرًا ممتلئًا ومتدليًا جذابًا عند زراعته في الأكياس.\n\nيحتاج إلى شمس كاملة أو نصف ظل مع إضاءة جيدة ليزهر بشكل غزير، وتربة خفيفة جيدة التصريف. يحتاج إلى ري منتظم دون إغراق، مع تسميد دوري خلال موسم النمو. كما يُنصح بإزالة الأزهار الذابلة باستمرار لتحفيز الإزهار المتواصل وزيادة كثافته.",
+    "descriptionEn": "Petunia (Bag / Hanging Grow Bags) 🌿🌸\n\nSeasonal flowering ornamental plant commonly grown in bags, pots, and hanging containers. It produces dense and colorful blooms in shades of pink, purple, white, and red, making it highly popular for balconies and garden decoration.\n\nIt grows best in full sun to partial shade with good light exposure for abundant flowering. Requires regular watering without waterlogging and well-drained soil. Frequent fertilization and deadheading help promote continuous blooming and improve plant appearance.",
+    "category": "ورود وحوليات"
+  },
+  {
+    "id": "id-1780311847027-f96bd",
+    "nameAr": "عرف الديك",
+    "nameEn": "Celosia argentea",
+    "scientificName": "Celosia argentea",
+    "imagePath": "/api/images/img-4d62ba68434eaff03aa8e62e",
+    "descriptionAr": "عرف الديك 🌿🌺\n\nنبات زينة موسمي يُعرف بأزهاره المميزة التي تشبه شكل العُرف أو الريش بألوان زاهية مثل الأحمر، الوردي، البرتقالي، والأصفر. يُستخدم بكثرة في أحواض الزينة والحدائق لإضافة ألوان قوية وجذابة، كما يتميز بزهوره الطويلة التي تدوم طوال الموسم.\n\nينمو بشكل جيد في الشمس الكاملة ويحتاج إلى إضاءة قوية ليزهر بكثافة، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل ومنتظم. يُنصح بإزالة الأزهار الذابلة لتحفيز الإزهار المستمر والحفاظ على مظهره الجميل.",
+    "descriptionEn": "Cockscomb 🌿🌺\n\nAnnual ornamental plant known for its unique flower heads that resemble a rooster’s comb, producing vibrant colors such as red, pink, orange, and yellow. It is widely used in flower beds and decorative gardens for its bold and striking appearance.\n\nIt grows best in full sun and requires good light exposure for abundant flowering. Prefers well-drained soil with moderate watering. Removing spent blooms helps prolong the flowering period.",
+    "category": "ورود وحوليات"
+  },
+  {
+    "id": "id-1780747679808-g9x4r",
+    "nameAr": "قرنفل صيني",
+    "nameEn": "Dianthus chinensis",
+    "scientificName": "Dianthus chinensis",
+    "imagePath": "/api/images/img-a43775e35a42372f9e9ebab5",
+    "descriptionAr": "🌸 قرنفل صيني\n\nنبات زينة مزهر يتميز بأزهاره الملونة الزاهية التي تتدرج بين الأحمر والوردي والأبيض والبنفسجي، وغالبًا ما تحمل نقوشًا وألوانًا متعددة على الزهرة الواحدة. يُستخدم بكثرة في أحواض الزهور، الحواف، والأصص لإضفاء ألوان مميزة وجذابة خلال موسم الإزهار.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل ومنتظم. إزالة الأزهار الذابلة تساعد على إطالة فترة الإزهار والحفاظ على مظهر النبات الجميل.",
+    "descriptionEn": "🌸 China Pink\n\nA flowering ornamental plant known for its vibrant blooms in shades of red, pink, white, and purple, often displaying attractive patterns and color combinations. It is widely used in flower beds, borders, and containers for its bright and cheerful appearance.\n\nIt grows best in full sun to partial shade and prefers well-drained soil with moderate watering. Removing spent flowers encourages prolonged blooming and maintains a tidy appearance.\n\nDianthus chinensis",
+    "category": "ورود وحوليات"
+  },
+  {
+    "id": "id-1785311068661-6ulof",
+    "nameAr": "جوري سلطاني",
+    "nameEn": "Rosa damascena",
+    "scientificName": "Rosa damascena",
+    "imagePath": "/api/images/img-4d688c94a4c142980ea150fc",
+    "descriptionAr": "🌹 جوري سلطاني\n\nشجيرة زينة مزهرة متساقطة جزئيًا، تشتهر بأزهارها الوردية العطرة ذات الرائحة الفواحة، وتُعد من أشهر أصناف الورد المستخدمة في تنسيق الحدائق وإنتاج ماء الورد والزيوت العطرية. تتميز بغزارة الإزهار وقيمتها الجمالية والعطرية العالية، مما يجعلها خيارًا مميزًا للحدائق المنزلية والمشاتل.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تحتاج إلى تسميد دوري وتقليم سنوي بعد الإزهار لتحفيز النمو الجديد وزيادة كثافة الأزهار والحفاظ على صحة النبات.",
+    "descriptionEn": "🌹 Damask Rose\n\nA semi-deciduous flowering ornamental shrub renowned for its highly fragrant pink blooms. It is one of the most famous rose varieties, widely cultivated for landscaping as well as the production of rose water and essential oils. Its abundant flowering and exceptional fragrance make it a favorite in gardens and nurseries.\n\nIt thrives in full sun and prefers fertile, well-drained soil with moderate regular watering. Regular fertilization and annual pruning after flowering encourage healthy growth and abundant blooms.",
+    "category": "ورود وحوليات"
+  },
+  {
+    "id": "id-1785838585470-o1bwg",
+    "nameAr": "فينكا",
+    "nameEn": "Catharanthus roseus",
+    "scientificName": "Catharanthus roseus",
+    "imagePath": "/api/images/img-8409f43dc938a4d055056a09",
+    "descriptionAr": "🌸 فينكا\n\nنبات زينة مزهر دائم الخضرة يتميز بأزهاره الغزيرة ذات الألوان المتنوعة مثل الأبيض والوردي والأحمر والبنفسجي، ويزهر لفترات طويلة خلال الموسم. يُستخدم في تنسيق الحدائق والأحواض والأصص، ويتميز بقدرته العالية على تحمل الحرارة والجفاف، مما يجعله من أكثر نباتات الزينة المزهرة شيوعًا.\n\nينمو بشكل ممتاز في الشمس الكاملة إلى نصف الظل، ويفضل التربة جيدة التصريف مع ري معتدل ومنتظم. يتحمل الحرارة والجفاف بعد التأسيس، ويحتاج إلى إزالة الأزهار الذابلة عند الحاجة للحفاظ على مظهره وتشجيع الإزهار المستمر.",
+    "descriptionEn": "🌸 Vinca\n\nEvergreen flowering ornamental plant known for its abundant blooms in shades of white, pink, red, and purple. It flowers continuously throughout the warm season and is widely used in garden beds, borders, containers, and landscape plantings due to its excellent heat and drought tolerance.\n\nIt thrives in full sun to partial shade and prefers well-drained soil with moderate watering. Once established, it is highly tolerant of heat and drought. Removing spent flowers helps maintain its appearance and encourages continuous blooming.",
+    "category": "ورود وحوليات"
+  },
+  {
+    "id": "id-1779478017123-s6a9u",
+    "nameAr": "لافندر",
+    "nameEn": "Lavandula spp",
+    "scientificName": "Lavandula spp",
+    "imagePath": "/api/images/img-91d7123b4daa7aa180905e31",
+    "descriptionAr": "لافندر 🌿🌸\n\nنبات عطري وزينة دائم الخضرة يتميز بأزهاره البنفسجية الجميلة ورائحته العطرية القوية والمنعشة، ويُستخدم بكثرة في تنسيق الحدائق وصناعة الزيوت العطرية والعطور ومنتجات العناية الطبيعية. يتميز بأوراقه الرمادية المائلة للأخضر وشكله الأنيق الذي يضيف لمسة هادئة وجمالية للمكان، كما يجذب النحل والفراشات.\n\nيُعد من النباتات المقاومة للجفاف والحرارة نسبيًا، ويحتاج إلى عناية قليلة إلى متوسطة. يفضل الشمس الكاملة والتربة الخفيفة الرملية جيدة التصريف، ويجب عدم الإفراط في الري لأن الرطوبة الزائدة قد تضر بالجذور. كما يُنصح بتقليم الأزهار الجافة لتحفيز نمو وإزهار جديد.",
+    "descriptionEn": "Lavender 🌿🌸\n\nEvergreen aromatic ornamental plant known for its beautiful purple flowers and strong refreshing fragrance. It is widely used in landscaping, essential oils, perfumes, and natural care products. Its gray-green foliage and elegant form add a calm and decorative touch to gardens, while also attracting bees and butterflies.\n\nLavender is relatively drought and heat tolerant and requires low to moderate maintenance. It thrives in full sun and light sandy well-drained soil. Overwatering should be avoided, as excess moisture can damage the roots. Pruning faded flowers encourages new growth and blooming.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1779609530759-9dwbf",
+    "nameAr": "زعتر",
+    "nameEn": "Thymus vulgaris",
+    "scientificName": "Thymus vulgaris",
+    "imagePath": "/api/images/img-41a7afa83d5f7c3eb1b07499",
+    "descriptionAr": "زعتر 🌿\n\nنبات عطري وطبي دائم الخضرة يتميز بأوراقه الصغيرة العطرية ورائحته القوية المميزة، ويُستخدم بكثرة في الطهي والتوابل والمشروبات الطبية. يُعد من النباتات الشائعة في الحدائق المنزلية والزراعة العطرية، كما يتميز بأزهاره الصغيرة التي تجذب النحل والفراشات. يمتلك قيمة غذائية وعطرية عالية ويُستخدم طازجًا أو مجففًا.\n\nيتميز الزعتر بتحمله للجفاف والحرارة نسبيًا، ويحتاج إلى عناية قليلة إلى متوسطة. يفضل الشمس الكاملة والتربة الخفيفة جيدة التصريف، مع ري معتدل وتجنب زيادة الماء. كما يُنصح بتقليم الأطراف بشكل دوري لتشجيع النمو الكثيف والحفاظ على شكل النبات.",
+    "descriptionEn": "Thyme 🌿\n\nEvergreen aromatic and medicinal herb known for its small fragrant leaves and strong distinctive aroma. It is widely used in cooking, herbal drinks, and traditional remedies. Thyme is commonly grown in home gardens and herb farms and produces small flowers that attract bees and butterflies.\n\nIt is relatively drought and heat tolerant and requires low to moderate maintenance. It thrives in full sun and light well-drained soil, with moderate watering and avoidance of overwatering. Regular trimming encourages dense healthy growth and maintains the plant’s shape.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1779609738173-49mop",
+    "nameAr": "ميرمية",
+    "nameEn": "Salvia officinalis",
+    "scientificName": "Salvia officinalis",
+    "imagePath": "/api/images/img-315595a538656475ac6ea026",
+    "descriptionAr": "ميرمية 🌿\n\nنبات عطري وطبي دائم الخضرة يتميز بأوراقه الرمادية المائلة للأخضر ورائحته العطرية القوية، ويُستخدم بكثرة في المشروبات العشبية والطهي والطب الشعبي. يُعد من النباتات المعروفة بفوائدها العطرية والزخرفية، كما تضيف أزهاره البنفسجية أو الزرقاء الصغيرة لمسة جمالية للحدائق والأحواض.\n\nتتحمل الميرمية الجفاف والحرارة نسبيًا، وتحتاج إلى عناية قليلة إلى متوسطة. تفضل الشمس الكاملة والتربة الخفيفة جيدة التصريف، مع ري معتدل وتجنب زيادة الماء. كما يُنصح بتقليمها بشكل دوري للحفاظ على شكلها وتشجيع النمو الكثيف.",
+    "descriptionEn": "Sage 🌿\n\nEvergreen aromatic and medicinal herb known for its gray-green leaves and strong pleasant fragrance. It is widely used in herbal drinks, cooking, and traditional medicine. The plant is also valued ornamentally for its attractive foliage and small purple or blue flowers.\n\nSage is relatively drought and heat tolerant and requires low to moderate maintenance. It thrives in full sun and light well-drained soil, with moderate watering and avoidance of excessive moisture. Regular pruning encourages dense healthy growth and maintains the plant’s appearance.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1779614324082-apo8l",
+    "nameAr": "نعنع",
+    "nameEn": "Mentha spp",
+    "scientificName": "Mentha spp",
+    "imagePath": "/api/images/img-59bdb82cfb4dc9288723b920",
+    "descriptionAr": "نعنع 🌿\n\nنبات عشبي عطري معمر يتميز بأوراقه الخضراء المسننة ورائحته المنعشة القوية، ويُستخدم بكثرة في المشروبات الساخنة والباردة، وكذلك في الطهي والسلطات. يُعد من النباتات سريعة النمو والانتشار، ويُزرع بسهولة في الحدائق أو الأحواض المنزلية، كما يُستخدم لأغراض طبية وعطرية متعددة.\n\nينمو بشكل أفضل في الشمس الجزئية إلى الظل الخفيف، لكنه يتحمل الشمس إذا توفر ري كافٍ. يحتاج إلى تربة رطبة جيدة التصريف مع ري منتظم للحفاظ على رطوبة التربة. يتميز بسرعة الانتشار ويمكن تقليمه باستمرار لتشجيع نمو أوراق جديدة.",
+    "descriptionEn": "Mint 🌿\n\nPerennial aromatic herb known for its fresh green serrated leaves and strong refreshing scent. It is widely used in hot and cold beverages, cooking, and salads, and is also valued for its medicinal and aromatic properties. It grows quickly and spreads easily in gardens and containers.\n\nIt grows best in partial shade to light shade but can tolerate sun with sufficient watering. It requires moist, well-drained soil and regular irrigation to maintain soil moisture. Frequent pruning encourages new leafy growth and prevents over-spreading.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1779652927965-pzrxa",
+    "nameAr": "غار",
+    "nameEn": "Laurus nobilis",
+    "scientificName": "Laurus nobilis",
+    "imagePath": "/api/images/img-c5355f08a8dc1a0f29eeee73",
+    "descriptionAr": "غار 🌿\n\nشجرة أو شجيرة دائمة الخضرة تتميز بأوراقها الخضراء الداكنة العطرية، وتُستخدم بكثرة في تنسيق الحدائق والأسيجة، كما تُستعمل أوراقها في الطهي كنوع من التوابل العطرية. يتميز نبات الغار بمظهره الأنيق وكثافة أوراقه، مما يجعله مناسبًا للتشكيل والتقليم وعمل السياجات النباتية.\n\nيتحمل الظروف البيئية المختلفة نسبيًا بعد التأسيس، وينمو بشكل جيد في الشمس الكاملة إلى نصف الظل. يحتاج إلى تربة جيدة التصريف وري معتدل ومنتظم، مع تقليم دوري للحفاظ على الشكل والكثافة المطلوبة.",
+    "descriptionEn": "Bay Laurel 🌿\n\nEvergreen tree or shrub known for its dark green aromatic leaves, widely used in landscaping, hedges, and culinary applications as a flavorful herb. It has dense attractive foliage and responds very well to pruning and shaping, making it ideal for formal garden designs.\n\nIt adapts well to different environmental conditions once established and grows best in full sun to partial shade. Requires well-drained soil and moderate regular watering, along with periodic pruning to maintain its dense ornamental shape.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1779694867103-31xvb",
+    "nameAr": "إكليل الجبل (روزمري)",
+    "nameEn": "Salvia rosmarinus (Rosmarinus officinalis)",
+    "scientificName": "Salvia rosmarinus (Rosmarinus officinalis)",
+    "imagePath": "/api/images/img-d8ca280115637757befc389e",
+    "descriptionAr": "إكليل الجبل (روزمري) 🌿\n\nنبات عطري وطبي دائم الخضرة يتميز بأوراقه الرفيعة العطرية ذات اللون الأخضر الداكن ورائحته القوية والمنعشة. يُستخدم بكثرة في الطهي والتتبيل والمشروبات العشبية، كما يُزرع كنبات زينة في الحدائق والأحواض بسبب شكله الجميل وقدرته على التحمل. ينتج أزهارًا صغيرة زرقاء أو بنفسجية تضيف لمسة جمالية للنبات.\n\nيتحمل الجفاف والحرارة بشكل جيد، ويحتاج إلى عناية قليلة إلى متوسطة. يفضل الشمس الكاملة والتربة الخفيفة جيدة التصريف، مع ري معتدل وتجنب زيادة الماء. كما يُنصح بتقليم الأطراف بشكل دوري للحفاظ على كثافة النبات وتشجيع النمو الجديد.",
+    "descriptionEn": "Rosemary 🌿\n\nEvergreen aromatic and medicinal herb known for its narrow dark green fragrant leaves and strong refreshing scent. It is widely used in cooking, seasoning, herbal drinks, and ornamental landscaping. The plant also produces small blue to violet flowers that add decorative value.\n\nRosemary is drought and heat tolerant and requires low to moderate maintenance. It thrives in full sun and light well-drained soil, with moderate watering and avoidance of excessive moisture. Regular trimming helps maintain dense growth and encourages new shoots.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1780219589868-5ig1y",
+    "nameAr": "مورينجا أوليفيرا",
+    "nameEn": "Moringa oleifera",
+    "scientificName": "Moringa oleifera",
+    "imagePath": "/api/images/img-58e607d21e5e4805125dab57",
+    "descriptionAr": "مورينغا 🌿\n\nشجرة سريعة النمو متعددة الاستخدامات تُعرف باسم “شجرة الحياة” بسبب قيمتها الغذائية والطبية العالية. تتميز بأوراقها الصغيرة المركبة التي تُستخدم كغذاء غني بالفيتامينات والمعادن، كما تُستخدم في الطب الشعبي وبعض الاستخدامات التجميلية. تُنتج أزهارًا بيضاء صغيرة وقرونًا طويلة تحتوي على بذور.\n\nتحتاج إلى شمس كاملة لتنمو بشكل أفضل، وتتحمل الحرارة والجفاف بشكل ممتاز. تفضل التربة الخفيفة جيدة التصريف مع ري معتدل وخفيف، وتُعد من النباتات قليلة المتطلبات وسهلة الزراعة، مع إمكانية تقليمها للتحكم في ارتفاعها وزيادة كثافة الأوراق.",
+    "descriptionEn": "Moringa 🌿\n\nFast-growing multipurpose tree known as the “Tree of Life” due to its high nutritional and medicinal value. Its small compound leaves are edible and rich in vitamins and minerals, and it also produces small white flowers and long seed pods containing oil-rich seeds.\n\nIt thrives in full sun and is highly tolerant of heat and drought. Prefers light well-drained soil with minimal to moderate watering. It is easy to grow and maintain and can be pruned regularly to control height and promote leaf production.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1780300130431-r535y",
+    "nameAr": "ميرمية روسية",
+    "nameEn": "Salvia yangii (Perovskia atriplicifolia)",
+    "scientificName": "Salvia yangii (Perovskia atriplicifolia)",
+    "imagePath": "/api/images/img-cf5d76cd0b8eeee4835165c9",
+    "descriptionAr": "ميرمية روسية 🌿💜\n\nشجيرة زينة معمرة تتميز بأوراقها الفضية العطرية وأزهارها البنفسجية المائلة إلى الأزرق التي تتفتح بغزارة خلال الصيف والخريف. تُستخدم بكثرة في تنسيق الحدائق والأحواض والممرات لإضافة لون جذاب ومظهر طبيعي أنيق، كما أنها تجذب النحل والفراشات.\n\nتحتاج إلى شمس كاملة لتنمو وتزهر بشكل أفضل، وتتحمل الحرارة والجفاف بشكل ممتاز بعد التأسيس. تفضل التربة الخفيفة جيدة التصريف مع ري معتدل، وتُعد من النباتات قليلة الصيانة، كما يُنصح بتقليمها في نهاية الموسم للحفاظ على شكلها وتشجيع النمو الجديد.",
+    "descriptionEn": "Russian Sage 🌿💜\n\nPerennial ornamental shrub known for its aromatic silvery foliage and abundant lavender-blue flowers that bloom from summer into autumn. It is widely used in landscape gardens, borders, and mass plantings for its long flowering season and elegant appearance. It also attracts bees and butterflies.\n\nIt thrives in full sun and is highly tolerant of heat and drought once established. Prefers light well-drained soil and requires only moderate watering. Low-maintenance and benefits from seasonal pruning to encourage fresh growth and maintain shape.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1780312761215-t8soo",
+    "nameAr": "ريحان",
+    "nameEn": "Ocimum basilicum",
+    "scientificName": "Ocimum basilicum",
+    "imagePath": "/api/images/img-e64d90e4abf60988f0d342ef",
+    "descriptionAr": "ريحان 🌿🌸\n\nنبات عشبي عطري يُستخدم بكثرة في الحدائق المنزلية والأحواض، ويتميز بأوراقه الخضراء الصغيرة ذات الرائحة العطرية القوية والمحببة. يُستخدم في الطهي، التزيين، وأحيانًا في الاستخدامات الطبية التقليدية، كما يُعتبر من النباتات السهلة الزراعة وسريعة النمو.\n\nيحتاج إلى شمس كاملة أو نصف ظل مع إضاءة جيدة، ويفضل التربة الخفيفة جيدة التصريف مع ري منتظم دون إغراق. يُنصح بقرط القمم بشكل مستمر لتحفيز النمو وزيادة كثافة الأوراق.",
+    "descriptionEn": "Basil 🌿🌸\n\nAromatic herb widely used in cooking and ornamental gardening. It is known for its fragrant green leaves and fast growth, making it popular in home gardens and pots. It is also used in traditional herbal practices.\n\nIt grows best in full sun to partial shade and prefers well-drained soil with regular moderate watering. Pinching the tips encourages bushier growth and more leaf production.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1780312989819-ngwb7",
+    "nameAr": "سجاد",
+    "nameEn": "Ornamental Carpet",
+    "scientificName": "Ornamental Carpet",
+    "imagePath": "/api/images/img-e21f30465bae21cec9c40032",
+    "descriptionAr": "سجاد 🌿🍃\n\nنبات زينة عشبي منخفض النمو يُستخدم كغطاء أرضي (سجاد نباتي) في الحدائق، ويتميز بكثافته وسرعة انتشاره وأوراقه الصغيرة التي قد تكون خضراء أو ملونة بدرجات الأحمر والبنفسجي حسب الصنف. يُستخدم لإعطاء شكل منسق وجمالي لتغطية التربة والمساحات الفارغة.\n\nكما يُعد من النباتات ذات الرائحة الخفيفة العطرية في بعض أصنافه، ويُستخدم في تنسيق الحدائق لإضافة لمسة جمالية ورائحة لطيفة خفيفة.\n\nينمو في الشمس الكاملة إلى نصف الظل، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل. يحتاج إلى تقليم دوري للحفاظ على شكله الكثيف ومنع التمدد العشوائي.",
+    "descriptionEn": "Ornamental Carpet / Aromatic Ground Cover 🌿🍃\n\nLow-growing ground cover plant used to form dense decorative “carpet-like” landscaping. Some varieties have a light aromatic scent and are used in garden design for both visual and sensory appeal.\n\nIt grows well in full sun to partial shade and prefers well-drained fertile soil with moderate watering. Regular trimming maintains density and shape.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1780313251762-thk4i",
+    "nameAr": "نبات العطرة",
+    "nameEn": "Pelargonium spp.",
+    "scientificName": "Pelargonium spp.",
+    "imagePath": "/api/images/img-b4a248b61485bfc09e6fc51f",
+    "descriptionAr": "نبات العطرة 🌿🌸\n\nنبات زينة وعطري دائم الخضرة يتميز بأوراقه ذات الرائحة العطرية المميزة عند لمسها، وأزهاره الصغيرة الجميلة التي تظهر بألوان مختلفة مثل الوردي والأحمر والأبيض. يُستخدم بكثرة في الحدائق والأحواض وعلى الشرفات، كما يُزرع بسبب رائحته العطرية المميزة وإضفاءه لمسة جمالية طبيعية.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل ومنتظم. يُنصح بتقليم خفيف وإزالة الأزهار الذابلة لتحفيز الإزهار المستمر وزيادة كثافة النمو.",
+    "descriptionEn": "Scented Geranium 🌿🌸\n\nAromatic ornamental plant known for its fragrant leaves that release a pleasant scent when touched. It produces small attractive flowers in shades of pink, red, and white and is widely used in gardens, pots, and balconies for both ornamental and aromatic value.\n\nIt grows best in full sun to partial shade and prefers well-drained soil with moderate watering. Light pruning and removing spent flowers encourage continuous blooming and bushier growth.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1780313743249-sywgr",
+    "nameAr": "نبتة الشذاب",
+    "nameEn": "Ruta graveolens",
+    "scientificName": "Ruta graveolens",
+    "imagePath": "/api/images/img-6a77c08c5cad2cb8619d4924",
+    "descriptionAr": "نبتة الشذاب 🌿🌼\n\nنبات عشبي معمر عطري يتميز بأوراقه الخضراء المزرقة ورائحته القوية المميزة. يُستخدم كنبات زينة في الحدائق، كما يُعرف في الاستخدامات الشعبية التقليدية. يتميز بتحمله للحرارة والجفاف ومظهره الكثيف المنظم الذي يعطي لمسة طبيعية جميلة في التنسيق.\n\nينمو بشكل جيد في الشمس الكاملة، ويفضل التربة الخفيفة جيدة التصريف. يحتاج إلى ري خفيف ومنتظم دون إغراق، ويُفضل تقليمه بشكل خفيف للحفاظ على شكله وتحفيز نمو أوراق جديدة.",
+    "descriptionEn": "Rue 🌿🌼\n\nPerennial aromatic herb with bluish-green foliage and a strong distinctive scent. It is used both as an ornamental garden plant and in traditional herbal practices. It is valued for its drought tolerance and structured bushy appearance.\n\nIt grows best in full sun and prefers well-drained soil with low to moderate watering. Light pruning helps maintain shape and encourage fresh growth.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1780313872429-1e0v5",
+    "nameAr": "حبق",
+    "nameEn": "Mentha longifolia",
+    "scientificName": "Mentha longifolia",
+    "imagePath": "/api/images/img-d9319cadee02fca9d1abd3e6",
+    "descriptionAr": "حبق 🌿🌸\n\nنبات عشبي معمر عطري يتميز بأوراقه الخضراء الطويلة ذات الرائحة القوية والمنعشة. يُستخدم بكثرة في الحدائق المنزلية، كما يُستعمل في المشروبات والأغراض الشعبية والعطرية. ينمو بسرعة ويكوّن مجموعات خضراء كثيفة تعطي مظهرًا طبيعيًا جميلًا ورائحة مميزة في المكان.\n\nينمو بشكل جيد في الشمس الكاملة إلى نصف الظل، ويفضل التربة الرطبة جيدة التصريف. يحتاج إلى ري منتظم للحفاظ على رطوبة التربة، كما يُنصح بتقليمه باستمرار لمنع تمدده العشوائي وتشجيع نمو أوراق جديدة.",
+    "descriptionEn": "Horsemint 🌿🌸\n\nPerennial aromatic herb with long green leaves and a strong refreshing scent. It is commonly used in traditional practices and herbal applications, and it forms dense green patches in gardens.\n\nIt grows well in full sun to partial shade and prefers moist, well-drained soil. Requires regular watering and benefits from frequent trimming to encourage fresh growth and control spread.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1783341640589-1n77t",
+    "nameAr": "قيصوم",
+    "nameEn": "Achillea",
+    "scientificName": "Achillea",
+    "imagePath": "/api/images/img-2838da86495c5b122178f19e",
+    "descriptionAr": "🌿 قيصوم\n\nنبات معمر عطري يتميز بأوراقه الفضية المائلة إلى الرمادي ورائحته العطرية المميزة، ويُستخدم في الحدائق الصخرية وأحواض الزينة، كما يُعرف باستخداماته التقليدية في الطب الشعبي. يتميز بقدرته على تحمل الجفاف والحرارة، مما يجعله مناسبًا للبيئات الجافة وشبه الجافة.\n\nينمو بشكل جيد في الشمس الكاملة، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل. يتحمل الجفاف بعد التأسيس، ويحتاج إلى تقليم خفيف بعد الإزهار للحفاظ على شكله وتشجيع نموه.",
+    "descriptionEn": "🌿 Wormwood\n\nA perennial aromatic plant recognized for its silvery-gray foliage and distinctive fragrance. It is commonly used in rock gardens and ornamental landscapes and has a long history of traditional herbal use. Its excellent tolerance to heat and drought makes it well suited to dry climates.\n\nIt grows best in full sun and prefers light, well-drained soil with moderate watering. Once established, it is highly drought tolerant. Light pruning after flowering helps maintain its shape and encourages healthy growth.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1783341917551-hfa2v",
+    "nameAr": "شيح",
+    "nameEn": "Artemisia judaica",
+    "scientificName": "Artemisia judaica",
+    "imagePath": "/api/images/img-b7ad6411b25b61350fa82b99",
+    "descriptionAr": "🌿 شيح\n\nنبات معمر عطري يتميز بأوراقه الفضية المائلة إلى الرمادي ورائحته العطرية القوية، ويُستخدم في الحدائق الطبيعية والنباتات الطبية، كما يُعرف باستعمالاته التقليدية في الطب الشعبي. يتميز بقدرته العالية على تحمل الجفاف والحرارة، مما يجعله مناسبًا للمناطق الجافة وشبه الجافة.\n\nينمو بشكل جيد في الشمس الكاملة، ويفضل التربة الخفيفة جيدة التصريف مع ري معتدل. يتحمل الجفاف بعد التأسيس، ويحتاج إلى تقليم خفيف للحفاظ على شكله وتشجيع النمو الجديد.",
+    "descriptionEn": "🌿 Wormwood\n\nA perennial aromatic plant known for its silvery-gray foliage and strong fragrance. It is widely grown in herbal and ornamental gardens and has a long history of traditional medicinal use. Its excellent tolerance to heat and drought makes it well suited to arid and semi-arid climates.\n\nIt grows best in full sun and prefers light, well-drained soil with moderate watering. Once established, it is highly drought tolerant. Light pruning encourages healthy new growth and maintains its compact form.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1787989870407-151zb",
+    "nameAr": "أراك",
+    "nameEn": "Salvadora persica",
+    "scientificName": "Salvadora persica",
+    "imagePath": "/api/images/img-12e7644920572df5e96bc7b7",
+    "descriptionAr": "🌿 أراك\n\nشجيرة أو شجرة صغيرة دائمة الخضرة تتميز بأغصانها الكثيفة وأوراقها الخضراء اللحمية، وتُعرف بأنها مصدر نبات السواك الطبيعي المستخدم تقليديًا لتنظيف الأسنان. تنتج أزهارًا صغيرة مائلة إلى الأخضر أو الأصفر، تتبعها ثمار صغيرة مستديرة تتحول إلى اللون الأحمر أو الداكن عند النضج. كما تتميز بقدرتها العالية على تحمل الحرارة والجفاف وملوحة التربة.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة الرملية أو جيدة التصريف، وتتحمل الظروف الجافة والملوحة بشكل جيد. تحتاج إلى ري معتدل خلال فترة التأسيس، ثم تصبح أكثر تحملاً للجفاف بعد استقرارها. يمكن استخدامها في الحدائق الطبيعية والمناطق الصحراوية والتشجير البيئي.",
+    "descriptionEn": "🌿 Arak / Toothbrush Tree\n\nAn evergreen shrub or small tree known for its dense branching, slightly fleshy green leaves, and traditional use as a source of natural miswak. It produces small greenish to yellowish flowers followed by small round fruits that turn red to dark in color when ripe. It is highly tolerant of heat, drought, and saline soils.\n\nIt thrives in full sun and prefers sandy or well-drained soils. Once established, it is highly tolerant of dry conditions and salinity, making it suitable for natural landscapes, arid مناطق التشجير, and environmentally adapted planting.",
+    "category": "نباتات واشجار طبية وعطرية"
+  },
+  {
+    "id": "id-1779696414639-e0e1g",
+    "nameAr": "زيتون زينة معمر",
+    "nameEn": "Olea europaea",
+    "scientificName": "Olea europaea",
+    "imagePath": "/api/images/img-92472008bfb891eec6f6b0e7",
+    "descriptionAr": "زيتون زينة معمر 🌿🫒\n\nشجرة زينة دائمة الخضرة تتميز بجذعها القوي الملتوي وأوراقها الفضية المائلة للأخضر، وتُعد من أكثر الأشجار استخدامًا في تنسيق الحدائق الفاخرة والمداخل بسبب شكلها التراثي والعمر الطويل الذي قد يمتد لعشرات أو مئات السنين. تضيف مظهرًا طبيعيًا راقيًا ولمسة متوسطية مميزة للمكان، ويمكن زراعتها في الحدائق أو الأحواض الكبيرة.\n\nتتحمل الجفاف والحرارة بشكل ممتاز بعد التأسيس، وتحتاج إلى عناية قليلة نسبيًا. تفضل الشمس الكاملة والتربة جيدة التصريف، مع ري معتدل خاصة في السنوات الأولى. كما تتحمل التقليم ويمكن تشكيلها للحفاظ على شكلها الجمالي المميز.",
+    "descriptionEn": "Ornamental Mature Olive Tree 🌿🫒\n\nEvergreen ornamental tree valued for its twisted trunk, silver-green foliage, and long lifespan that can extend for decades or even centuries. It is widely used in luxury landscaping and garden entrances due to its elegant Mediterranean appearance and timeless character.\n\nIt is highly tolerant to drought and heat once established and requires relatively low maintenance. Prefers full sun and well-drained soil with moderate watering, especially during early establishment. It also tolerates pruning and shaping to maintain its ornamental form.",
+    "category": "اشجار زيتون"
+  },
+  {
+    "id": "id-1779697625763-5pszm",
+    "nameAr": "زيتون نبالي محسن",
+    "nameEn": "Olea europaea (Nabali Improved variety)",
+    "scientificName": "Olea europaea (Nabali Improved variety)",
+    "imagePath": "/api/images/img-4fb40e06fc9e3f5b5b4bb6cc",
+    "descriptionAr": "زيتون نبالي محسن🌿🫒\n\nشجرة زيتون دائمة الخضرة تُعد من أشهر وأفضل أصناف الزيتون في المنطقة، وتتميز بإنتاج وفير وجودة عالية للثمار والزيت. ثمارها متوسطة إلى كبيرة الحجم وتُستخدم لاستخراج زيت زيتون عالي الجودة، كما يمكن استخدامها للتخليل. تتميز الشجرة بقوة نموها وتحملها للظروف المناخية المختلفة، إضافة إلى شكلها الجميل وأوراقها الفضية المائلة للأخضر.\n\nتتحمل الجفاف والحرارة بشكل جيد بعد التأسيس، وتحتاج إلى شمس كاملة وتربة جيدة التصريف. تحتاج إلى ري معتدل خاصة في السنوات الأولى وفترات الإثمار، مع تقليم دوري لتحسين التهوية وزيادة الإنتاج والحفاظ على صحة الشجرة.",
+    "descriptionEn": "Improved Nabali Olive 🌿🫒\n\nEvergreen olive tree considered one of the most important and high-quality olive varieties in the region. It is known for its abundant production and excellent fruit and oil quality. The fruits are medium to large and are used for premium olive oil extraction as well as table olives. The tree also features strong growth and attractive silver-green foliage.\n\nIt is highly tolerant to drought and heat once established and grows best in full sun with well-drained soil. Moderate watering is needed during early establishment and fruiting periods. Regular pruning improves airflow, productivity, and overall tree health.",
+    "category": "اشجار زيتون"
+  },
+  {
+    "id": "id-1786523165949-gd7dj",
+    "nameAr": "زيتون نبالي بلدي",
+    "nameEn": "Olea europaea 'Nabali Baladi'",
+    "scientificName": "Olea europaea 'Nabali Baladi'",
+    "imagePath": "/api/images/img-44ab97b18a3cc9baaaf60e20",
+    "descriptionAr": "🌳 يتون نبالي بلدي\n\nشجرة زيتون دائمة الخضرة تتميز بأوراقها الخضراء الفضية وتاجها المتناسق، وتُعد من الأصناف المحلية المعروفة والمهمة في زراعة الزيتون. تتميز بقدرتها الجيدة على تحمل الظروف المناخية الجافة، وتُستخدم لإنتاج الزيتون وزيت الزيتون، كما يمكن الاستفادة من ثمارها للتخليل حسب الصنف وطريقة المعالجة.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم خلال فترة التأسيس. تتحمل الجفاف بعد استقرارها، وتحتاج إلى تقليم دوري للمحافظة على شكل الشجرة وتحسين التهوية والإنتاج.",
+    "descriptionEn": "🫒 Nabali Baladi Olive\n\nAn evergreen olive tree and a traditional local cultivar known for its silvery-green foliage and well-shaped canopy. It is widely cultivated for olive and olive oil production and is well adapted to the dry climate of the region. Its fruits can also be used for table olives depending on harvesting and processing methods.\n\nIt thrives in full sun and prefers well-drained soil with moderate watering during establishment. Once established, it has good drought tolerance. Regular pruning helps maintain the tree structure, improve airflow, and support fruit production.",
+    "category": "اشجار زيتون"
+  },
+  {
+    "id": "id-1779697735522-7ghlx",
+    "nameAr": "زيتون K18",
+    "nameEn": "Olea europaea (K18 cultivar)",
+    "scientificName": "Olea europaea (K18 cultivar)",
+    "imagePath": "/api/images/img-1e4cca366b471b36e0204a84",
+    "descriptionAr": "زيتون K18 🌿🫒\n\nشجرة زيتون دائمة الخضرة تُعرف بإنتاجها الجيد للثمار والزيت، وتُعد من الأصناف المحسنة المستخدمة في الزراعة الحديثة. تتميز بقوة نموها وتحملها للظروف المناخية المختلفة، مع إنتاج ثمار ذات جودة مناسبة لاستخراج الزيت أو الاستخدام كمائدة حسب طريقة الزراعة والعناية. كما تضيف الشجرة مظهرًا جماليًا بأوراقها الفضية المائلة للأخضر وشكلها المتناسق.\n\nتتحمل الجفاف والحرارة بشكل جيد بعد التأسيس، وتحتاج إلى شمس كاملة وتربة جيدة التصريف للحصول على أفضل نمو وإنتاج. تحتاج إلى ري معتدل خاصة في السنوات الأولى وفترات تكوين الثمار، مع تقليم دوري لتحسين التهوية وزيادة الإنتاج والمحافظة على صحة الشجر",
+    "descriptionEn": "K18 Olive 🌿🫒\n\nEvergreen olive tree known for its good fruit and oil production and considered one of the improved olive cultivars used in modern agriculture. It is valued for its strong growth, adaptability to different climates, and suitable fruit quality for oil extraction or table use depending on cultivation practices. The tree also has attractive silver-green foliage and a balanced ornamental form.\n\nIt is highly tolerant to drought and heat once established and performs best in full sun with well-drained soil. Moderate watering is recommended during establishment and fruit development stages, along with periodic pruning to improve airflow, productivity, and tree health.",
+    "category": "اشجار زيتون"
+  },
+  {
+    "id": "id-1781173548975-5o3px",
+    "nameAr": "زيتون سوري",
+    "nameEn": "Olea europaea (Syrian Variety)",
+    "scientificName": "Olea europaea (Syrian Variety)",
+    "imagePath": "/api/images/img-09abf4b2da4d8d1d3647a801",
+    "descriptionAr": "🌿 زيتون سوري\n\nشجرة مثمرة دائمة الخضرة تُعد من أشهر أصناف الزيتون في المنطقة، وتتميز بقوة نموها وإنتاجها الوفير من الثمار ذات الجودة العالية. تُستخدم ثمارها للكبيس واستخراج الزيت، كما تتميز الشجرة بأوراقها الفضية الخضراء وقدرتها الكبيرة على تحمل الجفاف والظروف المناخية المختلفة.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة جيدة التصريف. تتحمل الحرارة والجفاف بعد التأسيس، وتحتاج إلى ري معتدل خلال السنوات الأولى من النمو. كما يُنصح بالتقليم الدوري لتحسين التهوية وزيادة الإنتاج والمحافظة على شكل الشجرة.",
+    "descriptionEn": "🌿 Syrian Olive\n\nEvergreen fruit tree renowned for its vigorous growth and abundant production of high-quality olives. The fruits are suitable for both table olives and olive oil production. The tree is valued for its silvery-green foliage, longevity, and excellent drought tolerance.\n\nIt thrives in full sun and prefers well-drained soil. Once established, it is highly tolerant of heat and drought. Moderate watering is recommended during the early years, while periodic pruning helps improve airflow, productivity, and tree structure.",
+    "category": "اشجار زيتون"
+  },
+  {
+    "id": "id-1786522923669-xpmrm",
+    "nameAr": "زيتون كورونيكي",
+    "nameEn": "Olea europaea 'Koroneiki'",
+    "scientificName": "Olea europaea 'Koroneiki'",
+    "imagePath": "/api/images/img-a7569d6d9c9f61d8a2239ea3",
+    "descriptionAr": "🫒 زيتون كورونيكي\n\nشجرة زيتون دائمة الخضرة تتميز بحجمها المتوسط ونموها المتوازن وأوراقها الخضراء الفضية. يُعد صنف كورونيكي من الأصناف المعروفة بإنتاج زيتون الزيت، ويتميز بغزارة الإنتاج وارتفاع جودة الزيت المستخرج من ثماره، مع قدرة جيدة على تحمل الظروف المناخية الجافة والحارة.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم حسب الظروف. تتحمل الجفاف بعد التأسيس، وتحتاج إلى تقليم دوري للمحافظة على شكل الشجرة وتحسين التهوية والإنتاج.",
+    "descriptionEn": "🫒 Koroneiki Olive\n\nAn evergreen olive tree known for its balanced growth, medium size, and silvery-green foliage. Koroneiki is one of the well-known olive cultivars grown primarily for oil production, valued for its high productivity and excellent-quality olive oil. It also performs well under hot and relatively dry conditions.\n\nIt thrives in full sun and prefers well-drained soil with moderate watering according to growing conditions. Once established, it has good drought tolerance. Regular pruning helps maintain tree structure, improve airflow, and support fruit production.",
+    "category": "اشجار زيتون"
+  },
+  {
+    "id": "id-1787036358792-kud6b",
+    "nameAr": "زيتون كالاماتا",
+    "nameEn": "Olea europaea 'Kalamata'",
+    "scientificName": "Olea europaea 'Kalamata'",
+    "imagePath": "/api/images/img-3d81987f3d632ae9d2f5d5a7",
+    "descriptionAr": "🫒 زيتون كالاماتا\n\nشجرة زيتون دائمة الخضرة تتميز بأوراقها الخضراء الفضية وتاجها المتناسق، وتنتج ثمارًا كبيرة نسبيًا ذات لون أخضر يتحول إلى أرجواني داكن أو أسود عند النضج. يُعد من أشهر أصناف زيتون المائدة، ويتميز بطعمه الغني وقوامه المميز، ويُستخدم بشكل أساسي في التخليل وإعداد زيتون المائدة.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة الخصبة جيدة التصريف مع ري معتدل ومنتظم. تتحمل الحرارة والجفاف نسبيًا بعد التأسيس، وتحتاج إلى تقليم دوري لتحسين التهوية والحفاظ على شكل الشجرة ودعم إنتاج الثمار.",
+    "descriptionEn": "🫒 Kalamata Olive\n\nAn evergreen olive tree producing relatively large fruits that change from green to deep purple or black when fully ripe. Kalamata is one of the world's best-known table olive cultivars, valued for its rich flavor and firm texture. It is primarily used for table olives and pickling.\n\nIt thrives in full sun and prefers fertile, well-drained soil with moderate regular watering. Once established, it has good tolerance to heat and drought. Regular pruning helps maintain the tree's shape, improve airflow, and support fruit production.",
+    "category": "اشجار زيتون"
+  },
+  {
+    "id": "id-1787048989016-rvj0x",
+    "nameAr": "زيتون أربيكوينا",
+    "nameEn": "Olea europaea 'Arbequina'",
+    "scientificName": "Olea europaea 'Arbequina'",
+    "imagePath": "/api/images/img-d72009f971961ca670f4a3f8",
+    "descriptionAr": "🫒 زيتون أربيكوينا\n\nشجرة زيتون دائمة الخضرة تتميز بحجمها الصغير وتاجها الكثيف وأوراقها الخضراء الفضية، وتُعد من الأصناف المعروفة بإنتاج زيت الزيتون. تتميز بالإنتاجية الجيدة وثمرتها الصغيرة نسبيًا، كما تُعرف بجودة الزيت المستخرج منها ومناسبتها للزراعة في الحدائق والمزارع والمناطق ذات المساحات المحدودة.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم خلال فترة النمو. تتحمل الجفاف نسبيًا بعد التأسيس، وتحتاج إلى تقليم دوري للحفاظ على شكل الشجرة وتحسين التهوية والإنتاج.",
+    "descriptionEn": "🫒 Arbequina Olive\n\nAn evergreen olive tree known for its compact size, dense canopy, and silvery-green foliage. It is a widely cultivated olive cultivar valued for good productivity and high-quality olive oil. Its relatively small fruit and compact growth also make it suitable for gardens, farms, and smaller planting spaces.\n\nIt thrives in full sun and prefers well-drained soil with moderate regular watering during active growth. Once established, it has good drought tolerance. Regular pruning helps maintain the tree's shape, improve airflow, and support fruit production.",
+    "category": "اشجار زيتون"
+  },
+  {
+    "id": "id-1787049157156-zcibt",
+    "nameAr": "زيتون أربوزانا",
+    "nameEn": "Olea europaea 'Arbosana'",
+    "scientificName": "Olea europaea 'Arbosana'",
+    "imagePath": "/api/images/img-4358f004feab325c92073635",
+    "descriptionAr": "🫒 زيتون أربوزانا\n\nشجرة زيتون دائمة الخضرة تتميز بنموها المتماسك وتاجها الكثيف وأوراقها الخضراء الفضية، وتُعد من الأصناف المعروفة بإنتاج زيت الزيتون. تتميز بإنتاجية جيدة وجودة عالية للزيت، كما أن حجمها المتوسط ونموها المتوازن يجعلانها مناسبة للزراعة في المزارع والحدائق.\n\nتنمو بشكل ممتاز في الشمس الكاملة، وتفضل التربة جيدة التصريف مع ري معتدل ومنتظم خلال فترة النمو. تتحمل الجفاف نسبيًا بعد التأسيس، وتحتاج إلى تقليم دوري للمحافظة على شكل الشجرة وتحسين التهوية والإنتاج.",
+    "descriptionEn": "🫒 Arbosana Olive\n\nAn evergreen olive tree known for its compact growth, dense canopy, and silvery-green foliage. It is widely cultivated for olive oil production and is valued for its good productivity and high-quality oil. Its balanced growth makes it suitable for orchards, gardens, and organized agricultural plantings.\n\nIt thrives in full sun and prefers well-drained soil with moderate regular watering during active growth. Once established, it has good drought tolerance. Regular pruning helps maintain its structure, improve airflow, and support fruit production.",
+    "category": "اشجار زيتون"
+  },
+  {
+    "id": "id-1780473148588-3w1im",
+    "nameAr": "زيتون مقزم",
+    "nameEn": "Olea europaea ‘Nana’",
+    "scientificName": "Olea europaea ‘Nana’",
+    "imagePath": "/api/images/img-fa0fb4091fd0021840a3dc7f",
+    "descriptionAr": "🌿 زيتون مقزم\n\nشجيرة زينة دائمة الخضرة تتميز بأوراقها الفضية الخضراء الكثيفة ونموها المدمج، مما يجعلها مثالية للحدائق الصغيرة والأحواض والمداخل. يُستخدم الزيتون المقزم في تنسيق الحدائق كنبات زينة أنيق، ويمكن تشكيله بسهولة بالتقليم ليحافظ على مظهره الجذاب والمنظم.\n\nينمو بشكل جيد في الشمس الكاملة، ويتحمل الحرارة والجفاف بعد التأسيس. يفضل التربة جيدة التصريف مع ري معتدل، ويحتاج إلى تقليم دوري خفيف للحفاظ على شكله الكثيف والمتناسق.",
+    "descriptionEn": "🌿 Dwarf Olive\n\nCompact evergreen ornamental shrub characterized by its dense silvery-green foliage and neat growth habit. It is widely used in small gardens, containers, entrances, and landscape designs where a refined Mediterranean appearance is desired.\n\nIt thrives in full sun and is highly tolerant of heat and drought once established. Prefers well-drained soil with moderate watering. Light pruning helps maintain its compact shape and attractive appearance.",
+    "category": "اشجار زيتون"
+  },
+  {
+    "id": "id-1781349460241-t4igd",
+    "nameAr": "حجر توف بركاني  15 - 20 كغ(شوال)",
+    "nameEn": "Tuff Rock Substrate 15 - 20 kg",
+    "scientificName": "Tuff Rock Substrate 15 - 20 kg",
+    "imagePath": "/api/images/img-bba7013fb7c16b67ca37535c",
+    "descriptionAr": "حجر توف بركاني  15 - 20 كغ(شوال)",
+    "descriptionEn": "Tuff Rock Substrate 15 - 20 kg",
+    "category": "زينة للحديقة"
+  },
+  {
+    "id": "id-1786877713986-1c8ac",
+    "nameAr": "توف بركاني ناعم",
+    "nameEn": "Tuff Rock Substrate",
+    "scientificName": "Tuff Rock Substrate",
+    "imagePath": "/api/images/img-4e2311226825603130c02145",
+    "descriptionAr": "حجر التوف حجر بركاني   \nخصائصه\nالتوف هو نوع من الصخور يتكون من الرماد البركاني المقذوف من فتحة خلال ثوران بركاني. بعد الطرد والترسب، يتم تحويل الرماد إلى صخور صلبة.\nحجر التوف حجر بركانيلونه أسود أو أخضر داكن أو أحمر.\nتختلف أحجار التوف بشكل كبير في الخشونة، بعضها مليء بقنابل إسفنجية مستديرة قطرها قدم أو أكثر. وقد تحتوي على الصخر الزيتي، والحجر الرملي، والحصى، ومواد رسوبية أخرى، وأحيانًا تكون أحفورية.\nاستخداماته\nتم استخدام حجر التوف في البناء منذ العصور القديمة نظرًا لأنه شائع في إيطاليا، فقد استخدمه الرومان كثيرًا.\nتسمح أحجار التوف بتغطية مساحات واسعة من الأرض باستثمارات مالية معقولة، والتمتع بحديقة مصممة ومزخرفة.\nيحافظ التوف على رطوبة ودرجة حرارة ثابتة للتربة، ولا يحتوي على بذور الأعشاب، ويحافظ على مظهره لسنوات.\nتأتي أحجار التوف بأحجام وأنواع مختلفة، وألوانها الأكثر شيوعًا هي الأحمر والأسود.\nتُستخدم أحجار التوف أيضًا في مجال الزراعة كأرض خصبة في البيوت الزجاجية، ولكنها تُعرف في الغالب باسم الحجر الذي يغطي الأرض، وهو شائع في الحدائق والشرفات والأماكن العامة.\nيتميز حجر التوف بخصائص فريدة، حيث يوفر حماية أفضل بنسبة 30٪ من برد الشتاء أو حرارة الصيف مقارنة بالأحجار\nالأخرى، بحيث يحافظ على المنزل دافئًا في الشتاء وباردًا في الصيف.\n يملك حجر التوف العديد من الخصائص الطبية. على سبيل المثال يشعر مرضى الرئة براحة أكبر عند تزيين الغرفة بأحجار\nالتوف",
+    "descriptionEn": "Tuff is a volcanic rock.   \nIts characteristics\nTuff is a type of rock formed from volcanic ash ejected from a vent during a volcanic eruption. After ejection and deposition, the ash is transformed into solid rock.\nTuff is a volcanic rock, black, dark green or red in color.\nTuff rocks vary greatly in roughness; some are filled with round, spongy bombs a foot or more in diameter. They may contain shale, sandstone, gravel, and other sedimentary materials, and are sometimes fossilized.\nIts uses\nTuff stone has been used in construction since ancient times. Because it is common in Italy, the Romans used it a lot.\nTuff stones allow for the covering of large areas of land with reasonable financial investments, and the enjoyment of a well-designed and decorated garden.\nTuf maintains a constant soil moisture and temperature, does not contain weed seeds, and maintains its appearance for years.\nTuff stones come in different sizes and types, and their most common colors are red and black.\nTuff stones are also used in agriculture as fertile soil in greenhouses, but they are mostly known as ground cover stone, which is common in gardens, balconies and public spaces.\nTuff stone has unique properties, providing 30% better protection from winter cold or summer heat compared to other stones.\nThe other, so that it keeps the house warm in winter and cool in summer.\n Tuff stone possesses numerous medicinal properties. For example, lung patients often feel more comfortable when their room is decorated with tuff.\nTofu",
+    "category": "زينة للحديقة"
+  },
+  {
+    "id": "id-1782653633845-qulsm",
+    "nameAr": "زلط ابيض  شوال 50 لتر",
+    "nameEn": "",
+    "scientificName": "",
+    "imagePath": "/api/images/img-fae985ab9fa1451e21777918",
+    "descriptionAr": "زلط ابيض  شوال 50 لتر",
+    "descriptionEn": "",
+    "category": "زينة للحديقة"
+  },
+  {
+    "id": "id-1782653767927-2wnuk",
+    "nameAr": "زلط اسود شوال 50 لتر",
+    "nameEn": "",
+    "scientificName": "",
+    "imagePath": "/api/images/img-7e5c1cc209ff8aeae382ebd8",
+    "descriptionAr": "زلط اسود شوال 50 لتر",
+    "descriptionEn": "",
+    "category": "زينة للحديقة"
+  },
+  {
+    "id": "id-1782653789928-hw6td",
+    "nameAr": "زلط رمادي شوال 50 لتر",
+    "nameEn": "",
+    "scientificName": "",
+    "imagePath": "/api/images/img-b64ebd9dd0cea57dbd432cc5",
+    "descriptionAr": "زلط رمادي شوال 50 لتر",
+    "descriptionEn": "",
+    "category": "زينة للحديقة"
+  },
+  {
+    "id": "id-1787817965957-kaxv6",
+    "nameAr": "زينة للحدائق دلة عربية",
+    "nameEn": "",
+    "scientificName": "",
+    "imagePath": "/api/images/img-23338bcc0e2a2c597495ef0a",
+    "descriptionAr": "زينة للحدائق دلة عربية",
+    "descriptionEn": "",
+    "category": "زينة للحديقة"
+  },
+  {
+    "id": "id-1780917880079-s4e5t",
+    "nameAr": "قوار فخار",
+    "nameEn": "Clay Pots",
+    "scientificName": "Clay Pots",
+    "imagePath": "/api/images/img-8f1737bdc68a31bea41382a1",
+    "descriptionAr": "قوار فخار اشكال واحجام متعددة",
+    "descriptionEn": "Clay Pots (Various Shapes and Sizes)",
+    "category": "قوار"
+  },
+  {
+    "id": "id-1780918021372-huh6d",
+    "nameAr": "قوار حجر ابيض",
+    "nameEn": "White Stone Pots",
+    "scientificName": "White Stone Pots",
+    "imagePath": "/api/images/img-94ee522ae3b01243582e0c7c",
+    "descriptionAr": "قوار حجر ابيض اشكال متعددة",
+    "descriptionEn": "White Stone Pots (Various Shapes and Designs)",
+    "category": "قوار"
+  },
+  {
+    "id": "id-1780921572001-ccqkr",
+    "nameAr": "قوار مصري  مزخرف",
+    "nameEn": "Decorated Egyptian Pots",
+    "scientificName": "Decorated Egyptian Pots",
+    "imagePath": "/api/images/img-8ef8a96b1e1e260827802dd9",
+    "descriptionAr": "قوار مصري  مزخرف عدة الوان",
+    "descriptionEn": "Decorated Egyptian Pots (Multi-Color)",
+    "category": "قوار"
+  },
+  {
+    "id": "id-1780922331170-31xi5",
+    "nameAr": "قوار بط",
+    "nameEn": "Duck-Shaped Pots",
+    "scientificName": "Duck-Shaped Pots",
+    "imagePath": "/api/images/img-91018968d4ffad522876c688",
+    "descriptionAr": "قوار بط",
+    "descriptionEn": "Duck-Shaped Pots",
+    "category": "قوار"
+  },
+  {
+    "id": "id-1780922515746-4y3ig",
+    "nameAr": "قوار حجر اصفر",
+    "nameEn": "Yellow Stone Pots",
+    "scientificName": "Yellow Stone Pots",
+    "imagePath": "/api/images/img-f9277288fb3204e7784947f0",
+    "descriptionAr": "قوار حجر اصفر",
+    "descriptionEn": "Yellow Stone Pots",
+    "category": "قوار"
+  },
+  {
+    "id": "id-1780922645834-bwbj1",
+    "nameAr": "نافورة حجر اشكال واحجام متعددة",
+    "nameEn": "Stone Fountains (Various Shapes and Sizes)",
+    "scientificName": "Stone Fountains (Various Shapes and Sizes)",
+    "imagePath": "/api/images/img-4eee9a5c5afbd569ec1eafd2",
+    "descriptionAr": "نافورة حجر اشكال واحجام متعددة",
+    "descriptionEn": "Stone Fountains (Various Shapes and Sizes)Stone Fountains (Various Shapes and Sizes)",
+    "category": "قوار"
+  },
+  {
+    "id": "id-1783330327430-a4ob0",
+    "nameAr": "قوار حجر ابيض مزهرية احجام متعددة",
+    "nameEn": "",
+    "scientificName": "",
+    "imagePath": "/api/images/img-d104be061c090e92e7668b61",
+    "descriptionAr": "قوار حجر ابيض احجام متعددة",
+    "descriptionEn": "",
+    "category": "قوار"
+  },
+  {
+    "id": "id-1783330435668-y37sg",
+    "nameAr": "قوار حجر ابيض مستطيل احجام متعددة",
+    "nameEn": "",
+    "scientificName": "",
+    "imagePath": "/api/images/img-2b6c81b718b50ba35cce86e3",
+    "descriptionAr": "قوار حجر ابيض مستطيل احجام متعددة",
+    "descriptionEn": "",
+    "category": "قوار"
+  },
+  {
+    "id": "id-1786877951229-u9kk9",
+    "nameAr": "قوار حجر اشكال متعددة",
+    "nameEn": "",
+    "scientificName": "",
+    "imagePath": "/api/images/img-9a070b047a24f104dbf59d03",
+    "descriptionAr": "قوار حجر اشكال متعددة",
+    "descriptionEn": "",
+    "category": "قوار"
+  },
+  {
+    "id": "id-1788674432331-2hj29",
+    "nameAr": "قوار حجر لون سكني احجام واشكال متعددة",
+    "nameEn": "",
+    "scientificName": "",
+    "imagePath": "/api/images/img-ed0875a3a582f53925e836b8",
+    "descriptionAr": "قوار حجر لون سكني احجام واشكال متعددة",
+    "descriptionEn": "",
+    "category": "قوار"
+  },
+  {
+    "id": "id-1788674616582-yscqr",
+    "nameAr": "قوار حجر لون اصفر احجام واشكال متعددة",
+    "nameEn": "",
+    "scientificName": "",
+    "imagePath": "/api/images/img-eb7212cf1a930bdc33cdb059",
+    "descriptionAr": "قوار حجر لون اصفر احجام واشكال متعددة",
+    "descriptionEn": "",
+    "category": "قوار"
+  }
+] as const;
