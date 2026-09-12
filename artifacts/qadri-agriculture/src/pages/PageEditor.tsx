@@ -41,17 +41,16 @@ function ExcelTable({ item, selected, activeCell, onSelect, onPatch }: ExcelTabl
           const delta = (event.clientX - resize.start) / 100;
           const original = resize.values[resize.index];
           const next = Math.max(0.35, original + delta);
-          const neighbor = resize.index < values.length - 1 ? resize.index + 1 : resize.index - 1;
+          // Resize only the selected column. Do not shrink its neighbor: the pointer direction
+          // should always match the selected column's width change.
           values[resize.index] = next;
-          values[neighbor] = Math.max(0.35, resize.values[neighbor] - (next - original));
           onPatch({ columnWidths: values });
         } else {
           const delta = event.clientY - resize.start;
           const original = resize.values[resize.index];
           const next = Math.max(24, original + delta);
-          const neighbor = resize.index < values.length - 1 ? resize.index + 1 : resize.index - 1;
+          // Resize only the selected row. Dragging down increases height; dragging up decreases it.
           values[resize.index] = next;
-          values[neighbor] = Math.max(24, resize.values[neighbor] - (next - original));
           onPatch({ rowHeights: values });
         }
       }
