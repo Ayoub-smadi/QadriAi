@@ -69,7 +69,7 @@ function ExcelTable({ item, selected, activeCell, onSelect, onPatch }: ExcelTabl
     window.addEventListener("pointermove", move); window.addEventListener("pointerup", up);
     return () => { document.body.style.userSelect = ""; window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); };
   }, [resize, fill, item, onPatch]);
-  return <div dir="rtl" className="page-editor-excel-wrap h-full w-full overflow-auto bg-white" onPointerDown={e => e.stopPropagation()}>
+  return <div dir="ltr" className="page-editor-excel-wrap h-full w-full overflow-auto bg-white" onPointerDown={e => e.stopPropagation()}>
     <table className="page-editor-excel-grid border-collapse text-center text-sm" style={{ width: "100%", minWidth: Math.max(460, item.cols * 70), tableLayout: "fixed" }}>
       <colgroup><col style={{ width: 42 }} />{widths.map((width, col) => <col key={col} style={{ width: `${width / total * 100}%` }} />)}</colgroup>
       <thead><tr><th className="excel-ui-only relative border bg-[#e7f2ea]" style={{ borderColor: item.tableBorderColor, height: 28 }} aria-label="corner" />{widths.map((_, col) => <th key={col} className="excel-ui-only relative border font-semibold" style={{ borderColor: item.tableBorderColor, backgroundColor: item.tableHeaderColor, color: item.tableTextColor, height: 28 }}>{excelColumn(col)}<span onPointerDown={e => { e.stopPropagation(); e.preventDefault(); e.currentTarget.setPointerCapture(e.pointerId); setResize({ axis: "col", index: col, start: e.clientX, values: widths }); }} className="absolute -right-2 top-0 z-30 h-full w-4 cursor-col-resize" title="تغيير عرض العمود" /></th>)}</tr></thead>
