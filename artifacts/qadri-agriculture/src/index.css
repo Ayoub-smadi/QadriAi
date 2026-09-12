@@ -136,6 +136,21 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 
 @media (prefers-reduced-motion: no-preference) { a, button { transition-duration: 180ms; transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1); } button:active { transform: scale(.97); } }
 
+.nursery-gallery { position: relative; overflow: hidden; margin-left: -1rem; margin-right: -1rem; padding: .75rem 1rem 1rem; mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent); }
+.nursery-gallery__track { display: flex; width: max-content; gap: 1rem; animation: nursery-marquee 48s linear infinite; }
+.nursery-gallery:hover .nursery-gallery__track, .nursery-gallery:focus-within .nursery-gallery__track { animation-play-state: paused; }
+.nursery-gallery__card { position: relative; flex: 0 0 17rem; height: 13rem; overflow: hidden; border: 5px solid rgba(255,255,255,.78); border-radius: 1.65rem; background: #dfead0; box-shadow: 0 14px 30px rgba(48,67,22,.14); transform: rotate(-1.3deg); }
+.nursery-gallery__card:nth-child(3n) { transform: translateY(1.1rem) rotate(1.4deg); }
+.nursery-gallery__card:nth-child(4n) { transform: translateY(-.3rem) rotate(-2deg); }
+.nursery-gallery__card img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms cubic-bezier(.23,1,.32,1), filter 300ms ease; }
+.nursery-gallery__card:hover img { transform: scale(1.08); filter: saturate(1.12); }
+.nursery-gallery__card figcaption { position: absolute; right: .65rem; bottom: .65rem; left: .65rem; display: flex; align-items: center; justify-content: space-between; gap: .5rem; border: 1px solid rgba(255,255,255,.34); border-radius: .75rem; background: rgba(31,55,19,.62); padding: .45rem .55rem; color: white; font-size: .68rem; font-weight: 700; line-height: 1.25; backdrop-filter: blur(8px); }
+.nursery-gallery__dot { flex: 0 0 .35rem; width: .35rem; height: .35rem; border-radius: 999px; background: #d5e9af; box-shadow: 0 0 0 .2rem rgba(213,233,175,.16); }
+@keyframes nursery-marquee { from { transform: translateX(0); } to { transform: translateX(calc(-50% - .5rem)); } }
+@media (min-width: 640px) { .nursery-gallery { margin-left: -1.5rem; margin-right: -1.5rem; padding-right: 1.5rem; padding-left: 1.5rem; } .nursery-gallery__card { flex-basis: 20rem; height: 15rem; } }
+@media (min-width: 1024px) { .nursery-gallery { margin-left: -2rem; margin-right: -2rem; padding-right: 2rem; padding-left: 2rem; } .nursery-gallery__track { gap: 1.25rem; } .nursery-gallery__card { flex-basis: 22rem; height: 16rem; } }
+@media (prefers-reduced-motion: reduce) { .nursery-gallery__track { animation: none; } .nursery-gallery { overflow-x: auto; mask-image: none; scrollbar-width: thin; } }
+
 @keyframes video-library-reveal {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
