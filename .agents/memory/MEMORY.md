@@ -3,3 +3,4 @@
 - [Admin account persistence](admin-account-persistence.md) — the Ayoub admin identity is database-backed and re-seeded from the secret at server startup.
 - [Auth API boundary](auth-api-boundary.md) — the agriculture frontend expects tRPC-shaped auth responses from the separate API artifact at `/api/trpc`.
 - [Duplicate agriculture previews](duplicate-agriculture-previews.md) — two agriculture web artifacts share the root preview, so user-facing fixes must stay synchronized.
+- [Imported workspace dependencies](imported-workspace-dependencies.md) — imported workspaces may need a frozen-lockfile install before managed workflows can start reliably.

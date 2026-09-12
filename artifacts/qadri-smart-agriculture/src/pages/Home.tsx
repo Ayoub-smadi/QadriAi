@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Bot, CheckCircle2, ClipboardCheck, DraftingCompa
 import { Link, useLocation } from "wouter";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { getNurseryGallery, subscribeToNurseryGallery, type NurseryGalleryImage } from "@/data/nurseryGallery";
 
 
 function useTypewriter(text: string) {
@@ -70,16 +71,8 @@ export default function Home() {
     { icon: Sprout, title: language === "ar" ? "ماذا أزرع؟" : "What should I grow?", text: language === "ar" ? "ترشيحات قابلة للتفسير قبل بدء التخطيط أو التنفيذ." : "Explainable suitability recommendations before you plan or build.", href: "/selector", tone: "bg-[#edf3ee]" },
     { icon: TreePine, title: language === "ar" ? "تابع مزرعتك وحديقتك" : "Manage farms & gardens", text: language === "ar" ? "مهام العناية والمشاريع والسجل الزراعي في مساحة واحدة." : "Care tasks, projects, and your agricultural record in one workspace.", href: "/dashboard", tone: "bg-[#edf0df]" },
   ];
-  const nurseryGallery = [
-    { src: "/assets/nursery-01.jpeg", ar: "مشاتل القادري الزراعية", en: "Al-Qadri Agricultural Nurseries" },
-    { src: "/assets/nursery-02.jpeg", ar: "أشجار مزهرة للحدائق", en: "Flowering trees for gardens" },
-    { src: "/assets/nursery-03.jpeg", ar: "نباتات وتنسيقات موسمية", en: "Seasonal plants and arrangements" },
-    { src: "/assets/nursery-04.jpeg", ar: "نخيل وتنسيقات خارجية", en: "Palms and outdoor landscaping" },
-    { src: "/assets/nursery-05.jpeg", ar: "أشجار الزينة والخضرة", en: "Ornamental trees and greenery" },
-    { src: "/assets/nursery-06.jpeg", ar: "ألوان من مشتلنا", en: "Color from our nursery" },
-    { src: "/assets/nursery-07.jpeg", ar: "حدائق تنبض بالحياة", en: "Gardens full of life" },
-    { src: "/assets/nursery-08.jpeg", ar: "خبرة تنمو معك", en: "Experience that grows with you" },
-  ];
+  const [nurseryGallery, setNurseryGallery] = useState<NurseryGalleryImage[]>(() => getNurseryGallery());
+  useEffect(() => subscribeToNurseryGallery(() => setNurseryGallery(getNurseryGallery())), []);
 
   return <PlatformShell>
     <main>
