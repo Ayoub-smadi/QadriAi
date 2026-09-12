@@ -15,7 +15,7 @@ export default function FloatingAIAssistant() {
     onError: error => setMessages(previous => [...previous, { role: "assistant", content: error.message || "تعذر الحصول على الرد الآن." }]),
   });
   useEffect(() => {
-    if (location === "/financial-documents" && user?.role === "admin") setOpen(true);
+    if (location === "/financial-documents") setOpen(true);
   }, [location, user?.role]);
   useEffect(() => {
     localStorage.setItem("qadri-ai-chat-open", open ? "1" : "0");
