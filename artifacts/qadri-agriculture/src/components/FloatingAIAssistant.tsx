@@ -8,15 +8,15 @@ import { useLocation } from "wouter";
 export default function FloatingAIAssistant() {
   const { user } = useAuth();
   const [location] = useLocation();
-  const [open, setOpen] = useState(() => typeof window !== "undefined" && localStorage.getItem("qadri-ai-chat-open") === "1");
+  const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const consultation = trpc.ai.consult.useMutation({
     onSuccess: result => setMessages(previous => [...previous, { role: "assistant", content: result.content, ...(result.images?.length ? { images: result.images } : {}) }]),
     onError: error => setMessages(previous => [...previous, { role: "assistant", content: error.message || "تعذر الحصول على الرد الآن." }]),
   });
   useEffect(() => {
-    if (location === "/financial-documents") setOpen(true);
-  }, [location, user?.role]);
+    if (location === "/financial-documents") setOpen(false);
+  }, [location]);
   useEffect(() => {
     localStorage.setItem("qadri-ai-chat-open", open ? "1" : "0");
   }, [open]);
