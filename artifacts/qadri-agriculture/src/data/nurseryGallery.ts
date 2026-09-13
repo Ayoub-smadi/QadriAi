@@ -7,6 +7,7 @@ export type NurseryGalleryImage = {
 
 const GALLERY_KEY = "al-qadri-nursery-gallery-v1";
 const CHANGE_EVENT = "al-qadri-nursery-gallery-change";
+const NEW_IMAGE_MIGRATION_KEY = "al-qadri-nursery-gallery-new-image-v1";
 
 export const defaultNurseryGallery: NurseryGalleryImage[] = [
   { id: "nursery-01", src: "/assets/nursery-01.jpeg", ar: "مشاتل القادري الزراعية", en: "Al-Qadri Agricultural Nurseries" },
@@ -26,6 +27,7 @@ export const defaultNurseryGallery: NurseryGalleryImage[] = [
   { id: "gallery-15", src: "/assets/gallery-15-grafted-olive-trees.jpeg", ar: "زيتون مطعّم بعناية", en: "Carefully grafted olive trees" },
   { id: "gallery-16", src: "/assets/gallery-16-garden-tree.jpeg", ar: "أشجار للحدائق والمساحات الخارجية", en: "Trees for gardens and outdoor spaces" },
   { id: "gallery-17", src: "/assets/gallery-17-nursery-greenery.jpeg", ar: "خضرة تنمو بخبرة القادري", en: "Greenery grown with Al-Qadri expertise" },
+  { id: "nursery-09", src: "/assets/nursery-09-black-planter.jpeg", ar: "أحواض زراعية بتنسيق القادري", en: "Planters styled by Al-Qadri" },
 ];
 
 function readStored(): NurseryGalleryImage[] | null {
@@ -39,7 +41,17 @@ function readStored(): NurseryGalleryImage[] | null {
 }
 
 export function getNurseryGallery() {
-  return readStored() ?? defaultNurseryGallery;
+  const stored = readStored();
+  if (!stored) return defaultNurseryGallery;
+  if (!window.localStorage.getItem(NEW_IMAGE_MIGRATION_KEY)) {
+    const newImage = defaultNurseryGallery.find(image => image.id === "nursery-09");
+    if (newImage && !stored.some(image => image.id === newImage.id)) {
+      stored.push(newImage);
+      window.localStorage.setItem(GALLERY_KEY, JSON.stringify(stored));
+    }
+    window.localStorage.setItem(NEW_IMAGE_MIGRATION_KEY, "1");
+  }
+  return stored;
 }
 
 export function saveNurseryGallery(images: NurseryGalleryImage[]) {
