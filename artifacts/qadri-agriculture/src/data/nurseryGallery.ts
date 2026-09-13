@@ -42,7 +42,12 @@ function readStored(): NurseryGalleryImage[] | null {
 
 export function getNurseryGallery() {
   const stored = readStored();
-  if (!stored) return defaultNurseryGallery;
+  if (!stored) {
+    const initialGallery = [...defaultNurseryGallery];
+    window.localStorage.setItem(GALLERY_KEY, JSON.stringify(initialGallery));
+    window.localStorage.setItem(NEW_IMAGE_MIGRATION_KEY, "1");
+    return initialGallery;
+  }
   if (!window.localStorage.getItem(NEW_IMAGE_MIGRATION_KEY)) {
     const newImage = defaultNurseryGallery.find(image => image.id === "nursery-09");
     if (newImage && !stored.some(image => image.id === newImage.id)) {
