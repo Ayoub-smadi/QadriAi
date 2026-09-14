@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { addNurseryGalleryImage, getNurseryGallery, getNurseryGalleryRemote, removeNurseryGalleryImage, type NurseryGalleryImage } from "@/data/nurseryGallery";
+import { getNurseryGallery, getNurseryGalleryRemote, saveNurseryGallery, type NurseryGalleryImage } from "@/data/nurseryGallery";
 import { ImagePlus, Plus, Trash2, Upload } from "lucide-react";
 import { useEffect, useState, type ChangeEvent } from "react";
 import { useLanguage } from "@/lib/i18n";
@@ -34,9 +34,11 @@ export default function NurseryGalleryManager() {
   const { language } = useLanguage();
   const [images, setImages] = useState<NurseryGalleryImage[]>(() => getNurseryGallery());
   const [draft, setDraft] = useState(blank);
+  const [dirty, setDirty] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    void getNurseryGalleryRemote().then(setImages).catch(() => undefined);
+    void getNurseryGalleryRemote().then(remote => { setImages(remote); setDirty(false); }).catch(() => undefined);
   }, []);
 
   if (user?.role !== "admin") return null;
@@ -52,7 +54,7 @@ export default function NurseryGalleryManager() {
     readImage(file, src => setDraft(current => ({ ...current, src })), () => toast.error(language === "ar" ? "تعذر قراءة الصورة" : "Could not read image"));
   };
 
-  const save = async () => {
+  const addImage = () => {
     if (!draft.src) {
       toast.error(language === "ar" ? "ارفع صورة أولًا" : "Upload an image first");
       return;
@@ -64,25 +66,30 @@ export default function NurseryGalleryManager() {
       en: draft.en.trim() || "From Al-Qadri Nurseries",
     };
     setImages(current => [...current, optimistic]);
+    setDirty(true);
     setDraft(blank);
-    toast.success(language === "ar" ? "تمت إضافة الصورة، جارٍ حفظها" : "Image added, saving it now");
-    try {
-      const image = await addNurseryGalleryImage({ src: optimistic.src, ar: optimistic.ar, en: optimistic.en });
-      setImages(current => current.map(item => item.id === optimistic.id ? image : item));
-    } catch (error) {
-      setImages(current => current.filter(item => item.id !== optimistic.id));
-      toast.error(error instanceof Error ? error.message : (language === "ar" ? "تعذرت إضافة الصورة" : "Could not add the image"));
-    }
+    toast.success(language === "ar" ? "تمت إضافة الصورة مؤقتًا، اضغط حفظ البيانات" : "Image added temporarily; press Save data");
   };
 
-  const remove = async (image: NurseryGalleryImage) => {
+  const remove = (image: NurseryGalleryImage) => {
     if (!window.confirm(language === "ar" ? "هل تريد حذف هذه الصورة من المعرض؟" : "Remove this image from the gallery?")) return;
+    setImages(current => current.filter(item => item.id !== image.id));
+    setDirty(true);
+    toast.success(language === "ar" ? "تم حذف الصورة مؤقتًا، اضغط حفظ البيانات" : "Image removed temporarily; press Save data");
+  };
+
+  const saveChanges = async () => {
+    if (!dirty || saving) return;
+    setSaving(true);
     try {
-      await removeNurseryGalleryImage(image.id);
-      setImages(current => current.filter(item => item.id !== image.id));
-      toast.success(language === "ar" ? "تم حذف الصورة من المعرض" : "Image removed from the gallery");
+      const saved = await saveNurseryGallery(images);
+      setImages(saved);
+      setDirty(false);
+      toast.success(language === "ar" ? "تم حفظ بيانات المعرض بنجاح" : "Gallery data saved successfully");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : (language === "ar" ? "تعذر حذف الصورة" : "Could not remove the image"));
+      toast.error(error instanceof Error ? error.message : (language === "ar" ? "تعذر حفظ بيانات المعرض" : "Could not save gallery data"));
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -94,6 +101,9 @@ export default function NurseryGalleryManager() {
           <h2 className="mt-1 text-xl font-bold text-[#314617]">{language === "ar" ? "إضافة وحذف صور جمال ينمو بخبرة القادري" : "Manage the Beauty grown with Al-Qadri expertise gallery"}</h2>
           <p className="mt-2 text-sm text-[#718062]">{language === "ar" ? "هذه الأدوات متاحة للأدمن فقط، وتظهر التغييرات مباشرة في الصفحة الرئيسية." : "These controls are available to admins only and update the home page immediately."}</p>
         </div>
+        <Button type="button" onClick={saveChanges} disabled={!dirty || saving} className="h-11 rounded-xl bg-[#35530e] px-5 font-bold text-white hover:bg-[#294108] disabled:opacity-50">
+          {saving ? (language === "ar" ? "جارٍ الحفظ..." : "Saving...") : (language === "ar" ? "حفظ البيانات" : "Save data")}
+        </Button>
       </div>
       <div className="mt-5 grid gap-3 rounded-2xl bg-[#f7f9f3] p-4 sm:grid-cols-2">
         <Input value={draft.ar} onChange={event => setDraft({ ...draft, ar: event.target.value })} placeholder="عنوان الصورة بالعربية (اختياري)" className="h-10 rounded-xl bg-white" />
@@ -104,7 +114,7 @@ export default function NurseryGalleryManager() {
           <input type="file" accept="image/*" onChange={selectImage} className="hidden" />
         </label>
         {draft.src && <img src={draft.src} alt="" className="h-32 w-full rounded-xl object-cover sm:col-span-2" />}
-        <Button type="button" onClick={save} className="h-10 rounded-xl bg-[#35530e] text-white hover:bg-[#294108] sm:col-span-2"><Plus className="me-2 size-4" />{language === "ar" ? "إضافة الصورة للمعرض" : "Add image to gallery"}</Button>
+        <Button type="button" onClick={addImage} className="h-10 rounded-xl bg-[#35530e] text-white hover:bg-[#294108] sm:col-span-2"><Plus className="me-2 size-4" />{language === "ar" ? "إضافة الصورة للمعرض" : "Add image to gallery"}</Button>
       </div>
       <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {images.map(image => (

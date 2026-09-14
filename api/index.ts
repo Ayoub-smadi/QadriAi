@@ -397,6 +397,17 @@ async function handleNurseryGallery(req: any, res: any, input: any) {
     await pool.query('UPDATE "nursery_gallery" SET "images" = $1::jsonb, "updatedAt" = NOW() WHERE "id" = 1', [JSON.stringify(images)]);
     return sendSuccess(res, next);
   }
+  if (action === "replace") {
+    if (!Array.isArray(input?.images)) throw Object.assign(new Error("قائمة الصور مطلوبة."), { code: "BAD_REQUEST" });
+    const images = input.images.filter((image: any) => image && typeof image.id === "string" && typeof image.src === "string" && image.src.length > 0).map((image: any) => ({
+      id: image.id,
+      src: image.src,
+      ar: String(image.ar || "من مشاتل القادري"),
+      en: String(image.en || "From Al-Qadri Nurseries"),
+    }));
+    await pool.query('UPDATE "nursery_gallery" SET "images" = $1::jsonb, "updatedAt" = NOW() WHERE "id" = 1', [JSON.stringify(images)]);
+    return sendSuccess(res, images);
+  }
   if (action === "remove") {
     const images = current.filter((image: any) => image?.id !== String(input?.id || ""));
     await pool.query('UPDATE "nursery_gallery" SET "images" = $1::jsonb, "updatedAt" = NOW() WHERE "id" = 1', [JSON.stringify(images)]);

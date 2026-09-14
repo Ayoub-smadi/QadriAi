@@ -79,6 +79,13 @@ export async function addNurseryGalleryImage(input: Omit<NurseryGalleryImage, "i
   return image as NurseryGalleryImage;
 }
 
+export async function saveNurseryGallery(images: NurseryGalleryImage[]) {
+  const saved = await requestGallery({ action: "replace", images });
+  if (!Array.isArray(saved)) throw new Error("تعذر حفظ معرض الصور");
+  cacheNurseryGallery(saved as NurseryGalleryImage[]);
+  return saved as NurseryGalleryImage[];
+}
+
 export async function removeNurseryGalleryImage(id: string) {
   await requestGallery({ action: "remove", id });
   window.dispatchEvent(new CustomEvent(CHANGE_EVENT));
