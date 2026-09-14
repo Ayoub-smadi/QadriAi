@@ -39,7 +39,8 @@ function readStored(): NurseryGalleryImage[] | null {
 }
 
 export function getNurseryGallery() {
-  return window.localStorage.getItem(CONFIRMED_KEY) === "1" ? (readStored() || []) : [];
+  if (window.localStorage.getItem(CONFIRMED_KEY) === "1") return readStored() || [];
+  return [...defaultNurseryGallery];
 }
 
 async function requestGallery(input: Record<string, unknown> = {}) {
