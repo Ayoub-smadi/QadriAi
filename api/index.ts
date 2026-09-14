@@ -100,6 +100,7 @@ function readInput(req: any) {
 }
 
 function sendSuccess(res: any, data: unknown) {
+  if (res.locals?.galleryRest) return res.status(200).json(data);
   if (res.locals?.authRest) return res.status(200).json({ user: data });
   return res.status(200).json([{ result: { data: { json: data } } }]);
 }
@@ -375,6 +376,7 @@ async function ensureNurseryGallerySchema() {
 }
 
 async function handleNurseryGallery(req: any, res: any, input: any) {
+  res.locals.galleryRest = true;
   await ensureNurseryGallerySchema();
   await pool.query('INSERT INTO "nursery_gallery" ("id", "images") VALUES (1, $1::jsonb) ON CONFLICT ("id") DO NOTHING', [JSON.stringify(initialNurseryGallery)]);
   const action = String(input?.action || "list");

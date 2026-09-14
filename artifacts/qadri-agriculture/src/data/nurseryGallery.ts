@@ -59,7 +59,7 @@ async function requestGallery(input: Record<string, unknown> = {}) {
   if (!response.ok || data?.error || data?.[0]?.error) {
     throw new Error(data?.error || data?.[0]?.error?.json?.message || "تعذر تحميل معرض الصور");
   }
-  return data?.user ?? data?.[0]?.result?.data?.json;
+  return data?.user ?? data?.[0]?.result?.data?.json ?? data;
 }
 
 export async function getNurseryGalleryRemote() {
