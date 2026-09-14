@@ -338,6 +338,26 @@ async function ensureQuoteSchema() {
 }
 
 let nurseryGallerySchemaReady: Promise<void> | undefined;
+const initialNurseryGallery = [
+  { id: "nursery-01", src: "/assets/nursery-01.jpeg", ar: "مشاتل القادري الزراعية", en: "Al-Qadri Agricultural Nurseries" },
+  { id: "nursery-02", src: "/assets/nursery-02.jpeg", ar: "أشجار مزهرة للحدائق", en: "Flowering trees for gardens" },
+  { id: "nursery-03", src: "/assets/nursery-03.jpeg", ar: "نباتات وتنسيقات موسمية", en: "Seasonal plants and arrangements" },
+  { id: "nursery-04", src: "/assets/nursery-04.jpeg", ar: "نخيل وتنسيقات خارجية", en: "Palms and outdoor landscaping" },
+  { id: "nursery-05", src: "/assets/nursery-05.jpeg", ar: "أشجار الزينة والخضرة", en: "Ornamental trees and greenery" },
+  { id: "nursery-06", src: "/assets/nursery-06.jpeg", ar: "ألوان من مشتلنا", en: "Color from our nursery" },
+  { id: "nursery-07", src: "/assets/nursery-07.jpeg", ar: "حدائق تنبض بالحياة", en: "Gardens full of life" },
+  { id: "nursery-08", src: "/assets/nursery-08.jpeg", ar: "خبرة تنمو معك", en: "Experience that grows with you" },
+  { id: "gallery-09", src: "/assets/gallery-09-sculpted-planters.jpeg", ar: "أحواض وأعمال حجرية فنية", en: "Sculpted planters and stonework" },
+  { id: "gallery-10", src: "/assets/gallery-10-olive-nursery.jpeg", ar: "شتلات الزيتون في مشتلنا", en: "Olive seedlings in our nursery" },
+  { id: "gallery-11", src: "/assets/gallery-11-greenhouse-seedlings.jpeg", ar: "شتلات خضراء داخل البيوت المحمية", en: "Green seedlings in the greenhouse" },
+  { id: "gallery-12", src: "/assets/gallery-12-old-olive-trees.jpeg", ar: "أشجار زيتون معمّرة", en: "Mature olive trees" },
+  { id: "gallery-13", src: "/assets/gallery-13-ficus-nursery.jpeg", ar: "فيكس وتنسيقات داخلية", en: "Ficus trees and indoor arrangements" },
+  { id: "gallery-14", src: "/assets/gallery-14-ornamental-plants.jpeg", ar: "نباتات زينة مختارة", en: "Selected ornamental plants" },
+  { id: "gallery-15", src: "/assets/gallery-15-grafted-olive-trees.jpeg", ar: "زيتون مطعّم بعناية", en: "Carefully grafted olive trees" },
+  { id: "gallery-16", src: "/assets/gallery-16-garden-tree.jpeg", ar: "أشجار للحدائق والمساحات الخارجية", en: "Trees for gardens and outdoor spaces" },
+  { id: "gallery-17", src: "/assets/gallery-17-nursery-greenery.jpeg", ar: "خضرة تنمو بخبرة القادري", en: "Greenery grown with Al-Qadri expertise" },
+  { id: "nursery-09", src: "/assets/nursery-09-black-planter.jpeg", ar: "أحواض زراعية بتنسيق القادري", en: "Planters styled by Al-Qadri" },
+];
 async function ensureNurseryGallerySchema() {
   if (!nurseryGallerySchemaReady) {
     nurseryGallerySchemaReady = pool.query(`
@@ -353,8 +373,7 @@ async function ensureNurseryGallerySchema() {
 
 async function handleNurseryGallery(req: any, res: any, input: any) {
   await ensureNurseryGallerySchema();
-  const defaults = input?.defaults && Array.isArray(input.defaults) ? input.defaults : [];
-  await pool.query('INSERT INTO "nursery_gallery" ("id", "images") VALUES (1, $1::jsonb) ON CONFLICT ("id") DO NOTHING', [JSON.stringify(defaults)]);
+  await pool.query('INSERT INTO "nursery_gallery" ("id", "images") VALUES (1, $1::jsonb) ON CONFLICT ("id") DO NOTHING', [JSON.stringify(initialNurseryGallery)]);
   const action = String(input?.action || "list");
   if (action === "list") {
     const result = await pool.query('SELECT "images" FROM "nursery_gallery" WHERE "id" = 1');

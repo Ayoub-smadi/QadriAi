@@ -38,7 +38,7 @@ function readStored(): NurseryGalleryImage[] | null {
 }
 
 export function getNurseryGallery() {
-  return readStored() || [...defaultNurseryGallery];
+  return [];
 }
 
 async function requestGallery(input: Record<string, unknown> = {}) {
@@ -46,7 +46,7 @@ async function requestGallery(input: Record<string, unknown> = {}) {
     method: "POST",
     credentials: "include",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ json: { ...input, defaults: readStored() || defaultNurseryGallery } }),
+    body: JSON.stringify({ json: input }),
   });
   const data = await response.json().catch(() => null);
   if (!response.ok || data?.error) throw new Error(data?.error || "تعذر تحميل معرض الصور");
