@@ -49,10 +49,6 @@ export default function NurseryGalleryManager() {
       toast.error(language === "ar" ? "اختَر ملف صورة فقط" : "Choose an image file");
       return;
     }
-    if (file.size > 8 * 1024 * 1024) {
-      toast.error(language === "ar" ? "حجم الصورة يجب ألا يتجاوز 8 ميغابايت" : "Image must be under 8 MB");
-      return;
-    }
     readImage(file, src => setDraft(current => ({ ...current, src })), () => toast.error(language === "ar" ? "تعذر قراءة الصورة" : "Could not read image"));
   };
 
@@ -61,16 +57,20 @@ export default function NurseryGalleryManager() {
       toast.error(language === "ar" ? "ارفع صورة أولًا" : "Upload an image first");
       return;
     }
+    const optimistic: NurseryGalleryImage = {
+      id: `pending-${Date.now()}`,
+      src: draft.src,
+      ar: draft.ar.trim() || "من مشاتل القادري",
+      en: draft.en.trim() || "From Al-Qadri Nurseries",
+    };
+    setImages(current => [...current, optimistic]);
+    setDraft(blank);
+    toast.success(language === "ar" ? "تمت إضافة الصورة، جارٍ حفظها" : "Image added, saving it now");
     try {
-      const image = await addNurseryGalleryImage({
-        src: draft.src,
-        ar: draft.ar.trim() || "من مشاتل القادري",
-        en: draft.en.trim() || "From Al-Qadri Nurseries",
-      });
-      setImages(current => [...current, image]);
-      setDraft(blank);
-      toast.success(language === "ar" ? "تمت إضافة الصورة إلى المعرض" : "Image added to the gallery");
+      const image = await addNurseryGalleryImage({ src: optimistic.src, ar: optimistic.ar, en: optimistic.en });
+      setImages(current => current.map(item => item.id === optimistic.id ? image : item));
     } catch (error) {
+      setImages(current => current.filter(item => item.id !== optimistic.id));
       toast.error(error instanceof Error ? error.message : (language === "ar" ? "تعذرت إضافة الصورة" : "Could not add the image"));
     }
   };
