@@ -160,26 +160,9 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 @media (prefers-reduced-motion: reduce) { .video-library-reveal { animation: none; } }
 
 .qadri-services-section { background: radial-gradient(circle at 50% 14%, rgba(224,241,222,.55), transparent 30%), #fff; }
-.qadri-services-stage { position: relative; min-height: 34rem; display: grid; place-items: center; }
-.qadri-services-card { position: relative; z-index: 2; width: min(100%, 24rem); min-height: 26rem; overflow: hidden; border: 1px solid rgba(3,79,59,.12); border-radius: 2rem; background: linear-gradient(145deg, #fff, #f3fbf5); box-shadow: 0 28px 70px rgba(23,84,54,.16); text-align: center; }
-.qadri-services-card__glow { position: absolute; inset: 20% -20% auto; height: 13rem; background: radial-gradient(circle, rgba(102,190,133,.32), transparent 68%); filter: blur(8px); }
-.qadri-services-card__top { position: relative; display: flex; align-items: center; justify-content: center; gap: .5rem; padding: 1.2rem 1rem; color: #73917e; font-size: .58rem; font-weight: 900; letter-spacing: .12em; }
-.qadri-services-card__dot { width: .45rem; height: .45rem; border-radius: 999px; background: #48a574; box-shadow: 0 0 0 .25rem rgba(72,165,116,.13); }
-.qadri-services-bot { position: absolute; inset: 7rem 0 auto; margin: auto; width: 7rem; height: 9rem; color: #075a44; filter: drop-shadow(0 14px 11px rgba(9,88,64,.18)); animation: qadri-bot-float 3.8s ease-in-out infinite; }
-.qadri-services-bot__antenna { position: absolute; top: -.8rem; left: 3.32rem; width: .35rem; height: 1.2rem; border-radius: 999px; background: #56aa7b; }
-.qadri-services-bot__antenna::before { position: absolute; top: -.4rem; left: -.18rem; width: .7rem; height: .7rem; border-radius: 999px; background: #f3b646; box-shadow: 0 0 0 .22rem rgba(243,182,70,.18); content: ""; }
-.qadri-services-bot__face { position: absolute; inset: 0 0 auto; display: flex; justify-content: center; gap: 1.25rem; margin: auto; width: 6rem; height: 4.1rem; padding-top: 1.55rem; border: 4px solid #0a7052; border-radius: 1.6rem 1.6rem 1.1rem 1.1rem; background: #d7f1df; }
-.qadri-services-bot__face span { display: block; width: .58rem; height: .58rem; border-radius: 999px; background: #0a7052; animation: qadri-blink 4s infinite; }
-.qadri-services-bot__body { position: absolute; top: 4.5rem; left: 1.35rem; display: flex; justify-content: center; gap: 1.1rem; width: 4.3rem; height: 3.5rem; padding-top: 1.25rem; border-radius: .9rem; background: #2c9b6d; }
-.qadri-services-bot__body i { display: block; width: .75rem; height: .75rem; border: 2px solid #d7f1df; border-radius: .2rem; }
-.qadri-services-bot__wheel { position: absolute; top: 7.3rem; width: 1.15rem; height: .6rem; border-radius: 0 0 .5rem .5rem; background: #0a7052; }
-.qadri-services-bot__wheel--one { left: 1.55rem; } .qadri-services-bot__wheel--two { right: 1.55rem; }
-.qadri-services-bomb { position: absolute; top: 11.7rem; left: calc(50% - 1.6rem); display: grid; place-items: center; width: 3.2rem; height: 3.2rem; border-radius: 999px; color: #fff; background: #f29e38; box-shadow: 0 8px 20px rgba(242,158,56,.3); animation: qadri-bomb-pop 3.8s cubic-bezier(.23,1,.32,1) infinite; }
-.qadri-services-bomb span { position: absolute; font-size: .85rem; font-weight: 900; }
-.qadri-services-card__message { position: absolute; inset: auto 1.5rem 1.65rem; display: grid; gap: .4rem; color: #245f4b; }
-.qadri-services-card__message strong { font-size: 1.1rem; } .qadri-services-card__message span { color: #789287; font-size: .8rem; }
-.qadri-services-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-content: center; pointer-events: none; }
-.qadri-service-tile { display: flex; align-items: center; gap: .9rem; min-height: 8.3rem; padding: 1.1rem; border: 1px solid rgba(3,79,59,.1); border-radius: 1.25rem; background: rgba(255,255,255,.94); box-shadow: 0 16px 36px rgba(48,67,22,.09); text-decoration: none; opacity: 0; pointer-events: auto; transition: transform 180ms cubic-bezier(.23,1,.32,1), box-shadow 180ms ease; }
+.qadri-services-stage { position: relative; }
+.qadri-services-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.qadri-service-tile { display: flex; align-items: center; gap: .9rem; min-height: 8.3rem; padding: 1.1rem; border: 1px solid rgba(3,79,59,.1); border-radius: 1.25rem; background: rgba(255,255,255,.94); box-shadow: 0 16px 36px rgba(48,67,22,.09); text-decoration: none; transition: transform 180ms cubic-bezier(.23,1,.32,1), box-shadow 180ms ease; animation: qadri-service-enter 650ms cubic-bezier(.23,1,.32,1) both; }
 .qadri-service-tile:hover { transform: translateY(-5px) !important; box-shadow: 0 22px 44px rgba(48,67,22,.15); }
 .qadri-service-tile__icon { position: relative; flex: 0 0 3.1rem; display: grid; place-items: center; width: 3.1rem; height: 3.1rem; overflow: hidden; border-radius: 1rem; color: #2b795a; background: #e8f4e8; }
 .qadri-service-tile__icon img { position: absolute; inset: .4rem; z-index: 1; width: calc(100% - .8rem); height: calc(100% - .8rem); object-fit: contain; mix-blend-mode: multiply; }
@@ -187,19 +170,10 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 .qadri-service-tile h3 { color: #294c36; font-size: 1rem; font-weight: 900; line-height: 1.35; }
 .qadri-service-tile p { margin-top: .35rem; color: #73857a; font-size: .72rem; line-height: 1.55; }
 .qadri-service-tile span { display: inline-flex; align-items: center; gap: .25rem; margin-top: .55rem; color: #3b8b64; font-size: .72rem; font-weight: 800; }
-.qadri-service-tile--1 { transform: translateX(-2.5rem) translateY(-1rem); animation: qadri-tile-one 900ms .55s cubic-bezier(.23,1,.32,1) forwards; }
-.qadri-service-tile--2 { transform: translateX(2.5rem) translateY(-1rem); animation: qadri-tile-two 900ms .7s cubic-bezier(.23,1,.32,1) forwards; }
-.qadri-service-tile--3 { transform: translateX(-2.5rem) translateY(1rem); animation: qadri-tile-three 900ms .85s cubic-bezier(.23,1,.32,1) forwards; }
-.qadri-service-tile--4 { transform: translateX(2.5rem) translateY(1rem); animation: qadri-tile-four 900ms 1s cubic-bezier(.23,1,.32,1) forwards; }
-@keyframes qadri-bot-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-@keyframes qadri-blink { 0%, 45%, 49%, 100% { transform: scaleY(1); } 47% { transform: scaleY(.12); } }
-@keyframes qadri-bomb-pop { 0%, 55% { transform: scale(.82) rotate(-12deg); opacity: .8; } 65%, 100% { transform: scale(1) rotate(0); opacity: 1; } }
-@keyframes qadri-tile-one { to { opacity: 1; transform: translateX(calc(-50% - 14rem)) translateY(-7rem); } }
-@keyframes qadri-tile-two { to { opacity: 1; transform: translateX(calc(50% + 14rem)) translateY(-7rem); } }
-@keyframes qadri-tile-three { to { opacity: 1; transform: translateX(calc(-50% - 14rem)) translateY(7rem); } }
-@keyframes qadri-tile-four { to { opacity: 1; transform: translateX(calc(50% + 14rem)) translateY(7rem); } }
-@media (max-width: 900px) { .qadri-services-stage { min-height: 42rem; } .qadri-services-grid { position: relative; grid-template-columns: 1fr; width: min(100%, 26rem); margin: 0 auto; padding-top: 28rem; } .qadri-service-tile { min-height: 6.6rem; } .qadri-service-tile--1, .qadri-service-tile--2, .qadri-service-tile--3, .qadri-service-tile--4 { transform: translateY(1rem); animation-name: qadri-tile-mobile; } @keyframes qadri-tile-mobile { to { opacity: 1; transform: translateY(0); } } .qadri-services-card { position: absolute; top: 0; } }
-@media (prefers-reduced-motion: reduce) { .qadri-services-bot, .qadri-services-bomb, .qadri-service-tile { animation: none !important; } .qadri-service-tile { opacity: 1; transform: none !important; } }
+.qadri-service-tile--2 { animation-delay: 80ms; } .qadri-service-tile--3 { animation-delay: 160ms; } .qadri-service-tile--4 { animation-delay: 240ms; }
+@keyframes qadri-service-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 900px) { .qadri-services-grid { grid-template-columns: 1fr; width: min(100%, 34rem); margin: 0 auto; } .qadri-service-tile { min-height: 6.6rem; } }
+@media (prefers-reduced-motion: reduce) { .qadri-service-tile { animation: none !important; } }
 
 .window-rescue__scene { position: absolute; inset: 0; height: 100%; width: 100%; }
 .window-rescue__label { position: absolute; inset: 1rem 1rem auto; z-index: 2; display: flex; align-items: center; justify-content: space-between; color: #668a7d; font-size: .62rem; font-weight: 800; letter-spacing: .14em; }

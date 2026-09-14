@@ -2,7 +2,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { PlatformShell } from "@/components/PlatformShell";
 import { SmartPlantRescue } from "@/components/SmartPlantRescue";
 import { useLanguage } from "@/lib/i18n";
-import { ArrowLeft, ArrowRight, Bomb, Bot, Boxes, CheckCircle2, ClipboardCheck, DraftingCompass, Globe2, Handshake, LineChart, Mail, Phone, ScanSearch, ShieldCheck, Sprout, TreePine } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bot, Boxes, CheckCircle2, ClipboardCheck, DraftingCompass, Globe2, Handshake, LineChart, Mail, Phone, ScanSearch, ShieldCheck, Sprout, TreePine } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -78,7 +78,6 @@ export default function Home() {
     { icon: Globe2, ar: "الاستيراد والتصدير", en: "Import & Export", copyAr: "نربط احتياجك بالأسواق والفرص الزراعية حول العالم.", copyEn: "Connecting your needs with agricultural markets and opportunities worldwide.", image: "https://cdn-icons-png.flaticon.com/512/870/870910.png" },
     { icon: Handshake, ar: "تنسيق وصيانة الحدائق", en: "Garden Landscaping", copyAr: "مساحات خضراء أجمل، مصممة بعناية وتحافظ على رونقها.", copyEn: "Beautiful green spaces, thoughtfully designed and cared for over time.", image: "https://cdn-icons-png.flaticon.com/512/2917/2917995.png" },
   ];
-  const [servicesReplay, setServicesReplay] = useState(0);
   const [nurseryGallery, setNurseryGallery] = useState<NurseryGalleryImage[]>(() => getNurseryGallery());
   useEffect(() => {
     const refreshGallery = () => { void getNurseryGalleryRemote().then(images => setNurseryGallery(images)).catch(() => undefined); };
@@ -120,18 +119,8 @@ export default function Home() {
          <div className="container py-14 sm:py-20">
            <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
              <div><p className="text-xs font-bold tracking-[.16em] text-[#759244]">{language === "ar" ? "خدمات القادري" : "AL-QADRI SERVICES"}</p><h2 className="mt-2 text-3xl font-bold tracking-tight text-[#293d12] sm:text-4xl">{language === "ar" ? "نزرع الفكرة، ونعتني بكل تفاصيلها" : "We grow the idea and care for every detail"}</h2><p className="mt-3 max-w-2xl text-sm leading-7 text-[#68775a]">{language === "ar" ? "حلول زراعية متكاملة للأفراد والمشاريع، من التوريد والتأسيس إلى التصدير وتنسيق المساحات." : "Integrated agricultural solutions for people and projects—from supply and setup to export and outdoor spaces."}</p></div>
-             <button type="button" onClick={() => setServicesReplay(value => value + 1)} className="inline-flex w-fit items-center gap-2 rounded-full border border-[#bcd3a1] bg-[#f8fbf2] px-4 py-2 text-sm font-bold text-[#35530e] transition hover:bg-[#eef5e4]"><Bomb className="size-4" />{language === "ar" ? "شغّل العرض من جديد" : "Replay the reveal"}</button>
            </div>
-           <div key={servicesReplay} className="qadri-services-stage mt-10">
-             <div className="qadri-services-card" aria-live="polite">
-               <div className="qadri-services-card__glow" />
-               <div className="qadri-services-card__top"><span className="qadri-services-card__dot" /> <span>{language === "ar" ? "خدمات زراعية متكاملة" : "INTEGRATED AGRICULTURAL SERVICES"}</span></div>
-               <div className="qadri-services-bot" aria-label={language === "ar" ? "روبوت القادري" : "Al-Qadri robot"}><span className="qadri-services-bot__antenna" /><span className="qadri-services-bot__face"><span /><span /></span><span className="qadri-services-bot__body"><i /><i /></span><span className="qadri-services-bot__wheel qadri-services-bot__wheel--one" /><span className="qadri-services-bot__wheel qadri-services-bot__wheel--two" /></div>
-               <div className="qadri-services-bomb"><Bomb className="size-8" /><span>!</span></div>
-               <div className="qadri-services-card__message"><strong>{language === "ar" ? "انفجار أفكار زراعية" : "A burst of agri ideas"}</strong><span>{language === "ar" ? "اكتشف ما نقدمه" : "Discover what we offer"}</span></div>
-             </div>
-             <div className="qadri-services-grid">{qadriServices.map((service, index) => <Link key={service.en} href="/quotes/request" className={`qadri-service-tile qadri-service-tile--${index + 1} group`}><div className="qadri-service-tile__icon"><img src={service.image} alt="" loading="lazy" onError={(event) => { event.currentTarget.style.display = "none"; }} /><service.icon className="size-7" /></div><div><h3>{language === "ar" ? service.ar : service.en}</h3><p>{language === "ar" ? service.copyAr : service.copyEn}</p><span>{language === "ar" ? "اطلب الخدمة" : "Request service"}<Arrow className="size-4 transition-transform group-hover:-translate-x-1 rtl:group-hover:translate-x-1" /></span></div></Link>)}</div>
-           </div>
+           <div className="qadri-services-grid mt-10">{qadriServices.map((service, index) => <Link key={service.en} href="/quotes/request" className={`qadri-service-tile qadri-service-tile--${index + 1} group`}><div className="qadri-service-tile__icon"><img src={service.image} alt="" loading="lazy" onError={(event) => { event.currentTarget.style.display = "none"; }} /><service.icon className="size-7" /></div><div><h3>{language === "ar" ? service.ar : service.en}</h3><p>{language === "ar" ? service.copyAr : service.copyEn}</p><span>{language === "ar" ? "اطلب الخدمة" : "Request service"}<Arrow className="size-4 transition-transform group-hover:-translate-x-1 rtl:group-hover:translate-x-1" /></span></div></Link>)}</div>
            <a className="mt-5 inline-flex items-center text-[11px] font-semibold text-[#8a9b7d] underline-offset-2 hover:underline" href="https://www.flaticon.com/" target="_blank" rel="noreferrer">{language === "ar" ? "الأيقونات: Flaticon" : "Icons: Flaticon"}</a>
          </div>
        </section>
