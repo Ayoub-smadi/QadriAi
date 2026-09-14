@@ -86,8 +86,8 @@ export function PlatformShell({
   const handleLogout = async () => { await logout(); setLocation("/"); };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 overflow-hidden border-b border-white/10 bg-primary text-primary-foreground shadow-[0_12px_36px_rgba(3,79,59,.25)]">
+    <div className="min-h-screen bg-[#f4faf7] text-[#12382d]">
+      <header className="sticky top-0 z-50 overflow-hidden border-b border-[#0b5a48] bg-[#004132] text-white shadow-[0_12px_36px_rgba(3,79,59,.25)]">
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#9dd7bd]/90 to-transparent" />
 
         <div className="border-b border-white/10 bg-[#003f31]/80">
@@ -206,7 +206,7 @@ export function PlatformShell({
         </div>
 
         {!compact && (
-          <div className="hidden border-t border-white/10 bg-[#003f31]/90 xl:block">
+          <div className="hidden border-t border-[#0b5a48] bg-[#003f31] xl:block">
             <nav
               className="container flex items-stretch justify-center gap-1 overflow-x-auto py-2"
               aria-label="Primary navigation"
@@ -251,7 +251,7 @@ export function PlatformShell({
         )}
 
         {mobileMenu && !compact && (
-          <div className="border-t border-white/10 bg-[#003f31]/95 px-4 py-4 backdrop-blur-xl xl:hidden">
+          <div className="border-t border-[#0b5a48] bg-[#003f31] px-4 py-4 xl:hidden">
             <nav
               className="container grid grid-cols-2 gap-2 sm:grid-cols-3"
               aria-label="Mobile navigation"
@@ -269,7 +269,7 @@ export function PlatformShell({
                       "flex min-h-[66px] items-center gap-3 rounded-xl border px-3 py-3 text-sm font-bold no-underline transition-colors",
                       active
                         ? "border-[#b4ce65]/50 bg-[#b4ce65] text-[#29410d]"
-                        : "border-white/10 bg-white/10 text-white hover:bg-white/16"
+                        : "border-[#2b725f] bg-[#0b5a48] text-white hover:bg-[#126b56]"
                     )}
                   >
                     <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-black/10">
@@ -285,7 +285,7 @@ export function PlatformShell({
                   onClick={closeMobileMenu}
                   className="flex min-h-[66px] items-center gap-3 rounded-xl border border-white/10 bg-white/10 px-3 py-3 text-sm font-bold text-white no-underline transition-colors hover:bg-white/16"
                 >
-                  <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-black/10">
+                  <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-[#084938]">
                     <UserRound className="size-5" />
                   </span>
                   <span className="truncate">{t.profile}</span>
