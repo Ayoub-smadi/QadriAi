@@ -1,9 +1,9 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { addNurseryGalleryImage, getNurseryGallery, removeNurseryGalleryImage, type NurseryGalleryImage } from "@/data/nurseryGallery";
+import { addNurseryGalleryImage, getNurseryGallery, getNurseryGalleryRemote, removeNurseryGalleryImage, type NurseryGalleryImage } from "@/data/nurseryGallery";
 import { ImagePlus, Plus, Trash2, Upload } from "lucide-react";
-import { useState, type ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { toast } from "sonner";
 
@@ -35,6 +35,10 @@ export default function NurseryGalleryManager() {
   const [images, setImages] = useState<NurseryGalleryImage[]>(() => getNurseryGallery());
   const [draft, setDraft] = useState(blank);
 
+  useEffect(() => {
+    void getNurseryGalleryRemote().then(setImages).catch(() => undefined);
+  }, []);
+
   if (user?.role !== "admin") return null;
 
   const selectImage = (event: ChangeEvent<HTMLInputElement>) => {
@@ -52,12 +56,12 @@ export default function NurseryGalleryManager() {
     readImage(file, src => setDraft(current => ({ ...current, src })), () => toast.error(language === "ar" ? "تعذر قراءة الصورة" : "Could not read image"));
   };
 
-  const save = () => {
+  const save = async () => {
     if (!draft.src) {
       toast.error(language === "ar" ? "ارفع صورة أولًا" : "Upload an image first");
       return;
     }
-    const image = addNurseryGalleryImage({
+    const image = await addNurseryGalleryImage({
       src: draft.src,
       ar: draft.ar.trim() || "من مشاتل القادري",
       en: draft.en.trim() || "From Al-Qadri Nurseries",
@@ -67,9 +71,9 @@ export default function NurseryGalleryManager() {
     toast.success(language === "ar" ? "تمت إضافة الصورة إلى المعرض" : "Image added to the gallery");
   };
 
-  const remove = (image: NurseryGalleryImage) => {
+  const remove = async (image: NurseryGalleryImage) => {
     if (!window.confirm(language === "ar" ? "هل تريد حذف هذه الصورة من المعرض؟" : "Remove this image from the gallery?")) return;
-    removeNurseryGalleryImage(image.id);
+    await removeNurseryGalleryImage(image.id);
     setImages(current => current.filter(item => item.id !== image.id));
     toast.success(language === "ar" ? "تم حذف الصورة من المعرض" : "Image removed from the gallery");
   };

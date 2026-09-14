@@ -7,7 +7,6 @@ export type NurseryGalleryImage = {
 
 const GALLERY_KEY = "al-qadri-nursery-gallery-v1";
 const CHANGE_EVENT = "al-qadri-nursery-gallery-change";
-const NEW_IMAGE_MIGRATION_KEY = "al-qadri-nursery-gallery-new-image-v1";
 
 export const defaultNurseryGallery: NurseryGalleryImage[] = [
   { id: "nursery-01", src: "/assets/nursery-01.jpeg", ar: "مشاتل القادري الزراعية", en: "Al-Qadri Agricultural Nurseries" },
@@ -35,51 +34,50 @@ function readStored(): NurseryGalleryImage[] | null {
   try {
     const parsed = JSON.parse(window.localStorage.getItem(GALLERY_KEY) || "null");
     return Array.isArray(parsed) ? parsed.filter(item => item && typeof item.id === "string" && typeof item.src === "string") : null;
-  } catch {
-    return null;
-  }
+  } catch { return null; }
 }
 
 export function getNurseryGallery() {
-  const stored = readStored();
-  if (!stored) {
-    const initialGallery = [...defaultNurseryGallery];
-    window.localStorage.setItem(GALLERY_KEY, JSON.stringify(initialGallery));
-    window.localStorage.setItem(NEW_IMAGE_MIGRATION_KEY, "1");
-    return initialGallery;
-  }
-  if (!window.localStorage.getItem(NEW_IMAGE_MIGRATION_KEY)) {
-    const newImage = defaultNurseryGallery.find(image => image.id === "nursery-09");
-    if (newImage && !stored.some(image => image.id === newImage.id)) {
-      stored.push(newImage);
-      window.localStorage.setItem(GALLERY_KEY, JSON.stringify(stored));
-    }
-    window.localStorage.setItem(NEW_IMAGE_MIGRATION_KEY, "1");
-  }
-  return stored;
+  return readStored() || [...defaultNurseryGallery];
 }
 
-export function saveNurseryGallery(images: NurseryGalleryImage[]) {
-  window.localStorage.setItem(GALLERY_KEY, JSON.stringify(images));
+async function requestGallery(input: Record<string, unknown> = {}) {
+  const response = await fetch("/api/gallery?format=rest&operation=gallery", {
+    method: "POST",
+    credentials: "include",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ json: { ...input, defaults: readStored() || defaultNurseryGallery } }),
+  });
+  const data = await response.json().catch(() => null);
+  if (!response.ok || data?.error) throw new Error(data?.error || "تعذر تحميل معرض الصور");
+  return data?.user;
+}
+
+export async function getNurseryGalleryRemote() {
+  const images = await requestGallery({ action: "list" });
+  return Array.isArray(images) ? images as NurseryGalleryImage[] : [];
+}
+
+export async function addNurseryGalleryImage(input: Omit<NurseryGalleryImage, "id">) {
+  const image = await requestGallery({ action: "add", image: input });
+  if (!image?.id) throw new Error("تعذر إضافة الصورة");
   window.dispatchEvent(new CustomEvent(CHANGE_EVENT));
+  return image as NurseryGalleryImage;
 }
 
-export function addNurseryGalleryImage(input: Omit<NurseryGalleryImage, "id">) {
-  const image = { ...input, id: `gallery-custom-${Date.now()}` };
-  saveNurseryGallery([...getNurseryGallery(), image]);
-  return image;
-}
-
-export function removeNurseryGalleryImage(id: string) {
-  saveNurseryGallery(getNurseryGallery().filter(image => image.id !== id));
+export async function removeNurseryGalleryImage(id: string) {
+  await requestGallery({ action: "remove", id });
+  window.dispatchEvent(new CustomEvent(CHANGE_EVENT));
 }
 
 export function subscribeToNurseryGallery(listener: () => void) {
   const handler = () => listener();
   window.addEventListener("storage", handler);
   window.addEventListener(CHANGE_EVENT, handler);
-  return () => {
-    window.removeEventListener("storage", handler);
-    window.removeEventListener(CHANGE_EVENT, handler);
-  };
+  return () => { window.removeEventListener("storage", handler); window.removeEventListener(CHANGE_EVENT, handler); };
+}
+
+export function cacheNurseryGallery(images: NurseryGalleryImage[]) {
+  window.localStorage.setItem(GALLERY_KEY, JSON.stringify(images));
+  window.dispatchEvent(new CustomEvent(CHANGE_EVENT));
 }

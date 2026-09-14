@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, Bot, CheckCircle2, ClipboardCheck, DraftingCompa
 import { Link, useLocation } from "wouter";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { getNurseryGallery, subscribeToNurseryGallery, type NurseryGalleryImage } from "@/data/nurseryGallery";
+import { getNurseryGallery, getNurseryGalleryRemote, subscribeToNurseryGallery, type NurseryGalleryImage } from "@/data/nurseryGallery";
 
 
 function useTypewriter(text: string) {
@@ -74,7 +74,7 @@ export default function Home() {
   ];
   const [nurseryGallery, setNurseryGallery] = useState<NurseryGalleryImage[]>(() => getNurseryGallery());
   useEffect(() => {
-    const refreshGallery = () => setNurseryGallery([...getNurseryGallery()]);
+    const refreshGallery = () => { void getNurseryGalleryRemote().then(images => setNurseryGallery(images)).catch(() => undefined); };
     const unsubscribe = subscribeToNurseryGallery(refreshGallery);
     window.addEventListener("pageshow", refreshGallery);
     window.addEventListener("focus", refreshGallery);

@@ -337,6 +337,50 @@ async function ensureQuoteSchema() {
   `);
 }
 
+let nurseryGallerySchemaReady: Promise<void> | undefined;
+async function ensureNurseryGallerySchema() {
+  if (!nurseryGallerySchemaReady) {
+    nurseryGallerySchemaReady = pool.query(`
+      CREATE TABLE IF NOT EXISTS "nursery_gallery" (
+        "id" INTEGER PRIMARY KEY DEFAULT 1,
+        "images" JSONB NOT NULL,
+        "updatedAt" TIMESTAMP NOT NULL DEFAULT NOW()
+      )
+    `).then(() => undefined).catch(error => { nurseryGallerySchemaReady = undefined; throw error; });
+  }
+  await nurseryGallerySchemaReady;
+}
+
+async function handleNurseryGallery(req: any, res: any, input: any) {
+  await ensureNurseryGallerySchema();
+  const defaults = input?.defaults && Array.isArray(input.defaults) ? input.defaults : [];
+  await pool.query('INSERT INTO "nursery_gallery" ("id", "images") VALUES (1, $1::jsonb) ON CONFLICT ("id") DO NOTHING', [JSON.stringify(defaults)]);
+  const action = String(input?.action || "list");
+  if (action === "list") {
+    const result = await pool.query('SELECT "images" FROM "nursery_gallery" WHERE "id" = 1');
+    return sendSuccess(res, result.rows[0]?.images || []);
+  }
+  const userId = requireSessionUser(req);
+  const userResult = await pool.query<UserRow>('SELECT * FROM "users" WHERE "id" = $1 LIMIT 1', [userId]);
+  if (userResult.rows[0]?.role !== "admin") throw Object.assign(new Error("غير مصرح بهذا الطلب."), { code: "FORBIDDEN" });
+  const currentResult = await pool.query('SELECT "images" FROM "nursery_gallery" WHERE "id" = 1');
+  const current = Array.isArray(currentResult.rows[0]?.images) ? currentResult.rows[0].images : [];
+  if (action === "add") {
+    const image = input?.image && typeof input.image === "object" ? input.image : {};
+    const next = { id: `gallery-custom-${Date.now()}-${randomBytes(4).toString("hex")}`, src: String(image.src || ""), ar: String(image.ar || "من مشاتل القادري"), en: String(image.en || "From Al-Qadri Nurseries") };
+    if (!next.src) throw Object.assign(new Error("الصورة مطلوبة."), { code: "BAD_REQUEST" });
+    const images = [...current, next];
+    await pool.query('UPDATE "nursery_gallery" SET "images" = $1::jsonb, "updatedAt" = NOW() WHERE "id" = 1', [JSON.stringify(images)]);
+    return sendSuccess(res, next);
+  }
+  if (action === "remove") {
+    const images = current.filter((image: any) => image?.id !== String(input?.id || ""));
+    await pool.query('UPDATE "nursery_gallery" SET "images" = $1::jsonb, "updatedAt" = NOW() WHERE "id" = 1', [JSON.stringify(images)]);
+    return sendSuccess(res, { success: true });
+  }
+  throw Object.assign(new Error("عملية معرض غير معروفة."), { code: "BAD_REQUEST" });
+}
+
 function requireSessionUser(req: any) {
   const userId = getSessionUserId(req);
   if (!userId) throw Object.assign(new Error("يرجى تسجيل الدخول أولًا."), { code: "UNAUTHORIZED" });
@@ -401,6 +445,7 @@ async function handle(req: any, res: any) {
     await ensureUsersSchema();
 
     if (operation === "quotes") return await handleQuoteOperation(req, res, readInput(req));
+    if (path.includes("/api/gallery") || queryOperation === "gallery") return await handleNurseryGallery(req, res, readInput(req));
 
     if (operation === "me") {
       const userId = getSessionUserId(req);
