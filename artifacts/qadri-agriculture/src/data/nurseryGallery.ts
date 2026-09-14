@@ -5,8 +5,6 @@ export type NurseryGalleryImage = {
   en: string;
 };
 
-const GALLERY_KEY = "al-qadri-nursery-gallery-v1";
-const CONFIRMED_KEY = "al-qadri-nursery-gallery-confirmed-v1";
 const CHANGE_EVENT = "al-qadri-nursery-gallery-change";
 
 export const defaultNurseryGallery: NurseryGalleryImage[] = [
@@ -30,16 +28,7 @@ export const defaultNurseryGallery: NurseryGalleryImage[] = [
   { id: "nursery-09", src: "/assets/nursery-09-black-planter.jpeg", ar: "أحواض زراعية بتنسيق القادري", en: "Planters styled by Al-Qadri" },
 ];
 
-function readStored(): NurseryGalleryImage[] | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const parsed = JSON.parse(window.localStorage.getItem(GALLERY_KEY) || "null");
-    return Array.isArray(parsed) ? parsed.filter(item => item && typeof item.id === "string" && typeof item.src === "string") : null;
-  } catch { return null; }
-}
-
 export function getNurseryGallery() {
-  if (window.localStorage.getItem(CONFIRMED_KEY) === "1") return readStored() || [];
   return [...defaultNurseryGallery];
 }
 
@@ -77,7 +66,11 @@ export async function getNurseryGalleryRemote() {
     }
   }
   if (!Array.isArray(images)) throw lastError instanceof Error ? lastError : new Error("تعذر تحميل صور المعرض");
-  cacheNurseryGallery(images as NurseryGalleryImage[]);
+  try {
+    cacheNurseryGallery(images as NurseryGalleryImage[]);
+  } catch {
+    // A small mobile storage quota must never prevent the API response from rendering.
+  }
   return images as NurseryGalleryImage[];
 }
 
@@ -108,7 +101,6 @@ export function subscribeToNurseryGallery(listener: () => void) {
 }
 
 export function cacheNurseryGallery(images: NurseryGalleryImage[]) {
-  window.localStorage.setItem(GALLERY_KEY, JSON.stringify(images));
-  window.localStorage.setItem(CONFIRMED_KEY, "1");
+  void images;
   window.dispatchEvent(new CustomEvent(CHANGE_EVENT));
 }
