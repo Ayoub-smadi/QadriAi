@@ -2,7 +2,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { PlatformShell } from "@/components/PlatformShell";
 import { SmartPlantRescue } from "@/components/SmartPlantRescue";
 import { useLanguage } from "@/lib/i18n";
-import { ArrowLeft, ArrowRight, Bot, Boxes, CheckCircle2, ClipboardCheck, DraftingCompass, Globe2, Handshake, LineChart, Mail, Phone, ScanSearch, ShieldCheck, Sprout, TreePine } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bot, CheckCircle2, ClipboardCheck, DraftingCompass, Globe2, LineChart, Mail, Phone, ScanSearch, ShieldCheck, Sprout, TreePine } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -53,6 +53,14 @@ function useTypewriter(text: string) {
   return visibleText;
 }
 
+function ServiceGlyph({ type }: { type: string }) {
+  const common = { viewBox: "0 0 48 48", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
+  if (type === "supply") return <svg {...common}><path d="M9 20h30v19H9z" /><path d="M13 20v-5h22v5M17 25v9M24 25v9M31 25v9" /><path d="M7 39h34M17 11c2-5 12-5 14 0" /></svg>;
+  if (type === "projects") return <svg {...common}><path d="M8 38c7-11 13-19 25-26 1 10-2 19-11 25-5 3-10 3-14 1Z" /><path d="M9 38c7-5 14-11 22-21M24 18c-2-5 1-9 6-11 3 4 2 9-2 12M12 41h24" /></svg>;
+  if (type === "trade") return <svg {...common}><path d="M8 17h24M27 11l6 6-6 6M40 31H16M21 25l-6 6 6 6" /><circle cx="8" cy="17" r="3" /><circle cx="40" cy="31" r="3" /></svg>;
+  return <svg {...common}><path d="M9 36c4-12 9-18 15-18s11 6 15 18M9 36h30M15 36V24M24 36V17M33 36V24M10 14c5-6 11-6 14 0M24 12c4-7 10-6 14 1M6 41h36" /></svg>;
+}
+
 export default function Home() {
   const { language, t } = useLanguage();
   const { isAuthenticated } = useAuth();
@@ -73,13 +81,12 @@ export default function Home() {
     { icon: TreePine, title: language === "ar" ? "تابع مزرعتك وحديقتك" : "Manage farms & gardens", text: language === "ar" ? "مهام العناية والمشاريع والسجل الزراعي في مساحة واحدة." : "Care tasks, projects, and your agricultural record in one workspace.", href: "/dashboard", tone: "bg-[#edf0df]" },
   ];
   const qadriServices = [
-    { icon: Boxes, ar: "توريد المنتجات الزراعية", en: "Agricultural Supply", copyAr: "منتجات زراعية موثوقة تصل إلى مشروعك في الوقت المناسب.", copyEn: "Reliable agricultural products delivered when your project needs them.", image: "https://cdn-icons-png.flaticon.com/512/3079/3079165.png" },
-    { icon: Sprout, ar: "تأسيس المشاريع الزراعية", en: "Agricultural Projects", copyAr: "من الفكرة إلى أرض منتجة بخطة واضحة وتنفيذ مدروس.", copyEn: "From first idea to productive ground, with a clear plan and considered execution.", image: "https://cdn-icons-png.flaticon.com/512/2917/2917995.png" },
-    { icon: Globe2, ar: "الاستيراد والتصدير", en: "Import & Export", copyAr: "نربط احتياجك بالأسواق والفرص الزراعية حول العالم.", copyEn: "Connecting your needs with agricultural markets and opportunities worldwide.", image: "https://cdn-icons-png.flaticon.com/512/870/870910.png" },
-    { icon: Handshake, ar: "تنسيق وصيانة الحدائق", en: "Garden Landscaping", copyAr: "مساحات خضراء أجمل، مصممة بعناية وتحافظ على رونقها.", copyEn: "Beautiful green spaces, thoughtfully designed and cared for over time.", image: "https://cdn-icons-png.flaticon.com/512/2917/2917995.png" },
+    { type: "supply", ar: "توريد المنتجات الزراعية", en: "Agricultural Supply", copyAr: "منتجات زراعية موثوقة تصل إلى مشروعك في الوقت المناسب.", copyEn: "Reliable agricultural products delivered when your project needs them.", color: "#9fe870" },
+    { type: "projects", ar: "تأسيس المشاريع الزراعية", en: "Agricultural Projects", copyAr: "من الفكرة إلى أرض منتجة بخطة واضحة وتنفيذ مدروس.", copyEn: "From first idea to productive ground, with a clear plan and considered execution.", color: "#64d7c0" },
+    { type: "trade", ar: "الاستيراد والتصدير", en: "Import & Export", copyAr: "نربط احتياجك بالأسواق والفرص الزراعية حول العالم.", copyEn: "Connecting your needs with agricultural markets and opportunities worldwide.", color: "#ffc86b" },
+    { type: "garden", ar: "تنسيق وصيانة الحدائق", en: "Garden Landscaping", copyAr: "مساحات خضراء أجمل، مصممة بعناية وتحافظ على رونقها.", copyEn: "Beautiful green spaces, thoughtfully designed and cared for over time.", color: "#c5a3ff" },
   ];
   const [activeQadriService, setActiveQadriService] = useState(0);
-  const ActiveQadriIcon = qadriServices[activeQadriService].icon;
   const [nurseryGallery, setNurseryGallery] = useState<NurseryGalleryImage[]>(() => getNurseryGallery());
   useEffect(() => {
     const refreshGallery = () => { void getNurseryGalleryRemote().then(images => setNurseryGallery(images)).catch(() => undefined); };
@@ -117,17 +124,16 @@ export default function Home() {
 
        <section className="relative overflow-hidden bg-[#f1f6e8] py-14 sm:py-20" dir={language === "ar" ? "rtl" : "ltr"} aria-label={language === "ar" ? "صور مشاتل القادري" : "Al-Qadri nursery gallery"}><div className="pointer-events-none absolute -start-24 top-8 size-64 rounded-full bg-[#dcebbd]/70 blur-3xl" /><div className="pointer-events-none absolute -end-20 bottom-0 size-72 rounded-full bg-[#c8dfaa]/60 blur-3xl" /><div className="container relative"><div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="text-xs font-bold tracking-[.16em] text-[#759244]">{language === "ar" ? "من أرضنا إلى حديقتك" : "FROM OUR LAND TO YOUR GARDEN"}</p><h2 className="mt-2 text-3xl font-bold tracking-tight text-[#293d12] sm:text-4xl">{language === "ar" ? "جمال ينمو بخبرة القادري" : "Beauty grown with Al-Qadri expertise"}</h2></div><p className="max-w-md text-sm leading-7 text-[#68775a]">{language === "ar" ? "جولة سريعة بين نباتاتنا، أشجارنا، وتنسيقاتنا الخارجية." : "A quick tour through our plants, trees, and outdoor arrangements."}</p></div><div className="nursery-gallery mt-9" dir="ltr"><div className="nursery-gallery__track">{[...nurseryGallery, ...nurseryGallery].map((image, index) => <figure key={`${image.src}-${index}`} className="nursery-gallery__card"><img src={image.src} alt={language === "ar" ? image.ar : image.en} loading={index < 4 ? "eager" : "lazy"} /><figcaption><span>{language === "ar" ? image.ar : image.en}</span><span className="nursery-gallery__dot" /></figcaption></figure>)}</div></div></div></section>
 
-       <section id="qadri-services" className="qadri-services-section border-y border-[#35530e]/8 bg-white" dir={language === "ar" ? "rtl" : "ltr"}>
+       <section id="qadri-services" className="qadri-services-section border-y border-[#35530e]/8" dir={language === "ar" ? "rtl" : "ltr"}>
          <div className="container py-14 sm:py-20">
            <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
-             <div><p className="text-xs font-bold tracking-[.16em] text-[#759244]">{language === "ar" ? "خدمات القادري" : "AL-QADRI SERVICES"}</p><h2 className="mt-2 text-3xl font-bold tracking-tight text-[#293d12] sm:text-4xl">{language === "ar" ? "نزرع الفكرة، ونعتني بكل تفاصيلها" : "We grow the idea and care for every detail"}</h2><p className="mt-3 max-w-2xl text-sm leading-7 text-[#68775a]">{language === "ar" ? "حلول زراعية متكاملة للأفراد والمشاريع، من التوريد والتأسيس إلى التصدير وتنسيق المساحات." : "Integrated agricultural solutions for people and projects—from supply and setup to export and outdoor spaces."}</p></div>
+             <div><p className="qadri-services-kicker">{language === "ar" ? "القادري // نظام الخدمات الذكي" : "AL-QADRI // SMART SERVICE SYSTEM"}</p><h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">{language === "ar" ? "من احتياجك تبدأ الخطة" : "Your need becomes the plan"}</h2><p className="mt-3 max-w-2xl text-sm leading-7 text-[#a9c8b8]">{language === "ar" ? "اختر المسار الزراعي الأقرب لك. الذكاء يقرأ احتياجك، والخبرة تحوّل الفكرة إلى نتيجة." : "Choose the agricultural path closest to you. AI reads the need; expertise turns it into results."}</p></div>
            </div>
            <div className="qadri-services-orbit mt-10">
              <div className="qadri-services-orbit__rings" aria-hidden="true"><span /><span /><span /></div>
-             <div className="qadri-services-orbit__core"><div className="qadri-services-orbit__core-icon"><img src={qadriServices[activeQadriService].image} alt="" /><ActiveQadriIcon className="size-8" /></div><span className="qadri-services-orbit__eyebrow">{language === "ar" ? "مطابقة ذكية للاحتياج" : "SMART NEED MATCH"}</span><strong>{language === "ar" ? qadriServices[activeQadriService].ar : qadriServices[activeQadriService].en}</strong><p>{language === "ar" ? "اختر الخدمة الأقرب لفكرتك، ودع خبراء القادري يكملون الصورة." : "Choose the service closest to your idea, and let Al-Qadri experts complete the picture."}</p><Link href="/quotes/request" className="qadri-services-orbit__cta">{language === "ar" ? "ابدأ من هنا" : "Start here"}<Arrow className="size-4" /></Link></div>
-             <div className="qadri-services-grid">{qadriServices.map((service, index) => <Link key={service.en} href="/quotes/request" onMouseEnter={() => setActiveQadriService(index)} onFocus={() => setActiveQadriService(index)} className={`qadri-service-tile qadri-service-tile--${index + 1} ${activeQadriService === index ? "is-active" : ""} group`}><div className="qadri-service-tile__icon"><img src={service.image} alt="" loading="lazy" onError={(event) => { event.currentTarget.style.display = "none"; }} /><service.icon className="size-7" /></div><div><h3>{language === "ar" ? service.ar : service.en}</h3><span>{language === "ar" ? "استكشف" : "Explore"}<Arrow className="size-4 transition-transform group-hover:-translate-x-1 rtl:group-hover:translate-x-1" /></span></div></Link>)}</div>
+             <div className="qadri-services-orbit__core"><div className="qadri-services-orbit__core-icon"><span className="qadri-ai-pulse" /><Bot className="size-7" /></div><span className="qadri-services-orbit__eyebrow">{language === "ar" ? "محرّك القادري الذكي" : "AL-QADRI AI ENGINE"}</span><strong>{language === "ar" ? "جاهز لفهم احتياجك" : "Ready to understand"}</strong><p>{language === "ar" ? "تواصل معنا لنصمم المسار المناسب لمشروعك." : "Connect with us and we will design the right path for your project."}</p><Link href="/quotes/request" className="qadri-services-orbit__cta">{language === "ar" ? "ابدأ المحادثة" : "Start the conversation"}<Arrow className="size-4" /></Link></div>
+             <div className="qadri-services-grid">{qadriServices.map((service, index) => <Link key={service.en} href="/quotes/request" onMouseEnter={() => setActiveQadriService(index)} onFocus={() => setActiveQadriService(index)} className={`qadri-service-tile qadri-service-tile--${index + 1} ${activeQadriService === index ? "is-active" : ""} group`} style={{ "--service-color": service.color } as React.CSSProperties}><div className="qadri-service-tile__icon"><ServiceGlyph type={service.type} /></div><div><small>0{index + 1} / AI PATH</small><h3>{language === "ar" ? service.ar : service.en}</h3><span>{language === "ar" ? "افتح المسار" : "Open path"}<Arrow className="size-4 transition-transform group-hover:-translate-x-1 rtl:group-hover:translate-x-1" /></span></div></Link>)}</div>
            </div>
-           <a className="mt-5 inline-flex items-center text-[11px] font-semibold text-[#8a9b7d] underline-offset-2 hover:underline" href="https://www.flaticon.com/" target="_blank" rel="noreferrer">{language === "ar" ? "الأيقونات: Flaticon" : "Icons: Flaticon"}</a>
          </div>
        </section>
 
