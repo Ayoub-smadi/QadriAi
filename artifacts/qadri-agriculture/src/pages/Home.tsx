@@ -74,9 +74,9 @@ export default function Home() {
     { icon: TreePine, title: language === "ar" ? "تابع مزرعتك وحديقتك" : "Manage farms & gardens", text: language === "ar" ? "مهام العناية والمشاريع والسجل الزراعي في مساحة واحدة." : "Care tasks, projects, and your agricultural record in one workspace.", href: "/dashboard", tone: "bg-[#edf0df]" },
   ];
   const qadriBusinessServices = [
-    { ar: "توريد المنتجات الزراعية", en: "Agricultural Supply", descAr: "نوفر لك مستلزمات ومنتجات زراعية مختارة بجودة تثق بها.", descEn: "Selected agricultural products and supplies, delivered with confidence.", image: "/assets/gallery-11-greenhouse-seedlings.jpeg" },
-    { ar: "تأسيس المشاريع الزراعية", en: "Agricultural Projects", descAr: "نحوّل فكرتك إلى مشروع أخضر بخطة واضحة من البداية.", descEn: "We turn your idea into a green project with a clear start-to-finish plan.", image: "/assets/qadri-productive-garden.jpg" },
-    { ar: "الاستيراد والتصدير", en: "Import & Export", descAr: "نفتح لك أبواب الأسواق وننسّق حركة المنتجات الزراعية.", descEn: "Opening market access and coordinating the movement of agricultural goods.", image: "/assets/qadri-natural-agriculture.jpg" },
+    { ar: "توريد المنتجات الزراعية", en: "Agricultural Supply", descAr: "نوفر لك مستلزمات ومنتجات زراعية مختارة بجودة تثق بها.", descEn: "Selected agricultural products and supplies, delivered with confidence.", image: "/assets/gallery-10-olive-nursery.jpeg" },
+    { ar: "تأسيس المشاريع الزراعية", en: "Agricultural Projects", descAr: "نحوّل فكرتك إلى مشروع أخضر بخطة واضحة من البداية.", descEn: "We turn your idea into a green project with a clear start-to-finish plan.", image: "/assets/gallery-16-garden-tree.jpeg" },
+    { ar: "الاستيراد والتصدير", en: "Import & Export", descAr: "نفتح لك أبواب الأسواق وننسّق حركة المنتجات الزراعية.", descEn: "Opening market access and coordinating the movement of agricultural goods.", image: "/assets/qadri-traditional-rural.jpg" },
     { ar: "تنسيق الحدائق وصيانتها", en: "Garden Landscaping & Maintenance", descAr: "فريقنا يزرع، ينسّق، ويعتني بحديقتك لتبقى نابضة بالحياة.", descEn: "Our team plants, shapes, and cares for gardens that stay full of life.", image: "/assets/qadri-garden-team.png" },
   ];
   const [nurseryGallery, setNurseryGallery] = useState<NurseryGalleryImage[]>(() => getNurseryGallery());

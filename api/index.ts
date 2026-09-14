@@ -363,9 +363,9 @@ const initialNurseryGallery = [
   { id: "nursery-09", src: "/assets/nursery-09-black-planter.jpeg", ar: "أحواض زراعية بتنسيق القادري", en: "Planters styled by Al-Qadri" },
 ];
 const initialBusinessServices = [
-  { id: "service-supply", src: "/assets/gallery-11-greenhouse-seedlings.jpeg", ar: "توريد المنتجات الزراعية", en: "Agricultural Supply" },
-  { id: "service-projects", src: "/assets/qadri-productive-garden.jpg", ar: "تأسيس المشاريع الزراعية", en: "Agricultural Projects" },
-  { id: "service-trade", src: "/assets/qadri-natural-agriculture.jpg", ar: "الاستيراد والتصدير", en: "Import & Export" },
+  { id: "service-supply", src: "/assets/gallery-10-olive-nursery.jpeg", ar: "توريد المنتجات الزراعية", en: "Agricultural Supply" },
+  { id: "service-projects", src: "/assets/gallery-16-garden-tree.jpeg", ar: "تأسيس المشاريع الزراعية", en: "Agricultural Projects" },
+  { id: "service-trade", src: "/assets/qadri-traditional-rural.jpg", ar: "الاستيراد والتصدير", en: "Import & Export" },
   { id: "service-gardens", src: "/assets/qadri-garden-team.png", ar: "تنسيق الحدائق وصيانتها", en: "Garden Landscaping & Maintenance" },
 ];
 async function ensureNurseryGallerySchema() {
