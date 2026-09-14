@@ -159,6 +159,21 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 .video-library-reveal { animation: video-library-reveal 520ms cubic-bezier(.23,1,.32,1) both; }
 @media (prefers-reduced-motion: reduce) { .video-library-reveal { animation: none; } }
 
+.qadri-business-section { background: linear-gradient(180deg, #f7fbf4, #edf6ec); }
+.qadri-business-kicker { color: #679145; font-size: .68rem; font-weight: 900; letter-spacing: .16em; }
+.qadri-business-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.qadri-business-card { position: relative; min-height: 19rem; overflow: hidden; border-radius: 1.65rem; background: #d8e8d2; box-shadow: 0 18px 38px rgba(40,78,43,.12); text-decoration: none; transition: transform 220ms cubic-bezier(.23,1,.32,1), box-shadow 220ms ease; }
+.qadri-business-card:hover { transform: translateY(-5px); box-shadow: 0 26px 48px rgba(40,78,43,.18); }
+.qadri-business-card img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms cubic-bezier(.23,1,.32,1); }
+.qadri-business-card:hover img { transform: scale(1.06); }
+.qadri-business-card__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,45,24,.02) 25%, rgba(12,45,24,.86) 100%); }
+.qadri-business-card__content { position: absolute; right: 1.35rem; bottom: 1.25rem; left: 1.35rem; color: white; }
+.qadri-business-card__number { display: inline-grid; place-items: center; width: 2rem; height: 2rem; border: 1px solid rgba(255,255,255,.36); border-radius: .65rem; background: rgba(255,255,255,.14); font-size: .7rem; font-weight: 900; backdrop-filter: blur(8px); }
+.qadri-business-card h3 { margin-top: .65rem; font-size: 1.35rem; font-weight: 900; line-height: 1.25; text-shadow: 0 2px 18px rgba(0,0,0,.22); }
+.qadri-business-card p { margin-top: .4rem; max-width: 27rem; color: rgba(255,255,255,.84); font-size: .78rem; line-height: 1.6; }
+.qadri-business-card__link { display: inline-flex; align-items: center; gap: .3rem; margin-top: .65rem; color: #d9f4bd; font-size: .75rem; font-weight: 900; }
+@media (max-width: 640px) { .qadri-business-grid { grid-template-columns: 1fr; gap: 1rem; } .qadri-business-card { min-height: 17rem; } }
+
 .window-rescue__scene { position: absolute; inset: 0; height: 100%; width: 100%; }
 .window-rescue__label { position: absolute; inset: 1rem 1rem auto; z-index: 2; display: flex; align-items: center; justify-content: space-between; color: #668a7d; font-size: .62rem; font-weight: 800; letter-spacing: .14em; }
 .window-rescue__dot { width: .45rem; height: .45rem; border-radius: 999px; background: #65b293; box-shadow: 0 0 0 .22rem rgba(101,178,147,.14); }
