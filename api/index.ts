@@ -248,7 +248,10 @@ async function handleGemini(req: any, res: any) {
 function getCookie(req: any) {
   const header = String(req.headers?.cookie || "");
   const token = header.split(";").map((part: string) => part.trim()).find((part: string) => part.startsWith(`${SESSION_COOKIE}=`));
-  return token?.slice(SESSION_COOKIE.length + 1);
+  if (token) return token.slice(SESSION_COOKIE.length + 1);
+  const authorization = String(req.headers?.authorization || "");
+  if (authorization.startsWith("Bearer ")) return authorization.slice(7).trim();
+  return undefined;
 }
 
 function sessionSignature(userId: number) {

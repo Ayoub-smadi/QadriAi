@@ -13,14 +13,14 @@ function readImage(file: File, onLoad: (src: string) => void, onError: () => voi
   const objectUrl = URL.createObjectURL(file);
   const image = new Image();
   image.onload = () => {
-    const maxSide = 1600;
+    const maxSide = 1200;
     const scale = Math.min(1, maxSide / Math.max(image.naturalWidth, image.naturalHeight));
     const canvas = document.createElement("canvas");
     canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
     canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
     canvas.getContext("2d")?.drawImage(image, 0, 0, canvas.width, canvas.height);
     URL.revokeObjectURL(objectUrl);
-    onLoad(canvas.toDataURL("image/jpeg", 0.84));
+    onLoad(canvas.toDataURL("image/jpeg", 0.72));
   };
   image.onerror = () => {
     URL.revokeObjectURL(objectUrl);
@@ -61,21 +61,29 @@ export default function NurseryGalleryManager() {
       toast.error(language === "ar" ? "ارفع صورة أولًا" : "Upload an image first");
       return;
     }
-    const image = await addNurseryGalleryImage({
-      src: draft.src,
-      ar: draft.ar.trim() || "من مشاتل القادري",
-      en: draft.en.trim() || "From Al-Qadri Nurseries",
-    });
-    setImages(current => [...current, image]);
-    setDraft(blank);
-    toast.success(language === "ar" ? "تمت إضافة الصورة إلى المعرض" : "Image added to the gallery");
+    try {
+      const image = await addNurseryGalleryImage({
+        src: draft.src,
+        ar: draft.ar.trim() || "من مشاتل القادري",
+        en: draft.en.trim() || "From Al-Qadri Nurseries",
+      });
+      setImages(current => [...current, image]);
+      setDraft(blank);
+      toast.success(language === "ar" ? "تمت إضافة الصورة إلى المعرض" : "Image added to the gallery");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : (language === "ar" ? "تعذرت إضافة الصورة" : "Could not add the image"));
+    }
   };
 
   const remove = async (image: NurseryGalleryImage) => {
     if (!window.confirm(language === "ar" ? "هل تريد حذف هذه الصورة من المعرض؟" : "Remove this image from the gallery?")) return;
-    await removeNurseryGalleryImage(image.id);
-    setImages(current => current.filter(item => item.id !== image.id));
-    toast.success(language === "ar" ? "تم حذف الصورة من المعرض" : "Image removed from the gallery");
+    try {
+      await removeNurseryGalleryImage(image.id);
+      setImages(current => current.filter(item => item.id !== image.id));
+      toast.success(language === "ar" ? "تم حذف الصورة من المعرض" : "Image removed from the gallery");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : (language === "ar" ? "تعذر حذف الصورة" : "Could not remove the image"));
+    }
   };
 
   return (

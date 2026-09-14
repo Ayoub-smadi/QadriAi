@@ -42,10 +42,17 @@ export function getNurseryGallery() {
 }
 
 async function requestGallery(input: Record<string, unknown> = {}) {
+  const headers: Record<string, string> = { "content-type": "application/json", "cache-control": "no-cache" };
+  try {
+    const raw = sessionStorage.getItem("manus-cookie");
+    const token = raw?.split(";").find(value => value.trim().startsWith("qadri_session="))?.trim().slice("qadri_session=".length);
+    if (token) headers.Authorization = `Bearer ${token}`;
+  } catch { /* sessionStorage may be unavailable */ }
   const response = await fetch("/api/gallery?format=rest&operation=gallery", {
     method: "POST",
     credentials: "include",
-    headers: { "content-type": "application/json" },
+    cache: "no-store",
+    headers,
     body: JSON.stringify({ json: input }),
   });
   const data = await response.json().catch(() => null);

@@ -16,6 +16,10 @@
       "destination": "/api/index.ts?operation=design.generate"
     },
     {
+      "source": "/api/gallery",
+      "destination": "/api/index.ts?operation=gallery"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
