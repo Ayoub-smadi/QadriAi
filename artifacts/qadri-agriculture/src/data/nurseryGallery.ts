@@ -56,8 +56,10 @@ async function requestGallery(input: Record<string, unknown> = {}) {
     body: JSON.stringify({ json: input }),
   });
   const data = await response.json().catch(() => null);
-  if (!response.ok || data?.error) throw new Error(data?.error || "تعذر تحميل معرض الصور");
-  return data?.user;
+  if (!response.ok || data?.error || data?.[0]?.error) {
+    throw new Error(data?.error || data?.[0]?.error?.json?.message || "تعذر تحميل معرض الصور");
+  }
+  return data?.user ?? data?.[0]?.result?.data?.json;
 }
 
 export async function getNurseryGalleryRemote() {
