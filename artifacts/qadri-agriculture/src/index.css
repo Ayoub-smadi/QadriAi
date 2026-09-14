@@ -136,8 +136,9 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 
 @media (prefers-reduced-motion: no-preference) { a, button { transition-duration: 180ms; transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1); } button:active { transform: scale(.97); } }
 
-.nursery-gallery { position: relative; overflow-x: auto; margin-left: -1rem; margin-right: -1rem; padding: .75rem 1rem 1rem; mask-image: none; scrollbar-width: thin; }
-.nursery-gallery__track { display: flex; width: max-content; gap: 1rem; }
+.nursery-gallery { position: relative; overflow: hidden; margin-left: -1rem; margin-right: -1rem; padding: .75rem 1rem 1rem; mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent); }
+.nursery-gallery__track { display: flex; width: max-content; gap: 1rem; animation: nursery-marquee 48s linear infinite; }
+.nursery-gallery:hover .nursery-gallery__track, .nursery-gallery:focus-within .nursery-gallery__track { animation-play-state: paused; }
 .nursery-gallery__card { position: relative; flex: 0 0 17rem; height: 13rem; overflow: hidden; border: 5px solid rgba(255,255,255,.78); border-radius: 1.65rem; background: #dfead0; box-shadow: 0 14px 30px rgba(48,67,22,.14); transform: rotate(-1.3deg); }
 .nursery-gallery__card:nth-child(3n) { transform: translateY(1.1rem) rotate(1.4deg); }
 .nursery-gallery__card:nth-child(4n) { transform: translateY(-.3rem) rotate(-2deg); }
