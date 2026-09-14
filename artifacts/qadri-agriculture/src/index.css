@@ -160,13 +160,13 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 @media (prefers-reduced-motion: reduce) { .video-library-reveal { animation: none; } }
 
 .qadri-services-section { background: radial-gradient(circle at 50% 18%, rgba(214,239,224,.68), transparent 28%), #fff; }
-.qadri-services-orbit { position: relative; min-height: 33rem; overflow: hidden; border: 1px solid rgba(3,79,59,.08); border-radius: 2rem; background: linear-gradient(135deg, #f9fcf8 0%, #edf8ef 100%); box-shadow: 0 24px 60px rgba(38,91,60,.1); }
+.qadri-services-orbit { position: relative; min-height: 38rem; overflow: hidden; border: 1px solid rgba(3,79,59,.08); border-radius: 2rem; background: linear-gradient(135deg, #f9fcf8 0%, #edf8ef 100%); box-shadow: 0 24px 60px rgba(38,91,60,.1); }
 .qadri-services-orbit::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(28,103,67,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(28,103,67,.045) 1px, transparent 1px); background-size: 32px 32px; mask-image: radial-gradient(circle, black, transparent 75%); content: ""; }
-.qadri-services-orbit__rings { position: absolute; inset: 50% auto auto 50%; width: 24rem; height: 24rem; transform: translate(-50%, -50%); }
+.qadri-services-orbit__rings { position: absolute; inset: 50% auto auto 50%; width: 22rem; height: 22rem; transform: translate(-50%, -50%); }
 .qadri-services-orbit__rings span { position: absolute; inset: 0; border: 1px solid rgba(64,145,101,.18); border-radius: 50%; animation: qadri-orbit-pulse 4s ease-in-out infinite; }
 .qadri-services-orbit__rings span:nth-child(2) { inset: 2.5rem; animation-delay: .65s; } .qadri-services-orbit__rings span:nth-child(3) { inset: 5rem; animation-delay: 1.3s; }
-.qadri-services-orbit__core { position: absolute; inset: 50% auto auto 50%; z-index: 2; display: flex; width: min(24rem, 46%); transform: translate(-50%, -50%); flex-direction: column; align-items: center; text-align: center; }
-.qadri-services-orbit__core-icon { display: grid; place-items: center; position: relative; width: 5.4rem; height: 5.4rem; border: 1px solid rgba(46,126,82,.22); border-radius: 1.7rem; color: #176447; background: #dff1e3; box-shadow: 0 12px 25px rgba(31,112,72,.14); }
+.qadri-services-orbit__core { position: absolute; inset: 50% auto auto 50%; z-index: 1; display: flex; width: 19rem; height: 19rem; transform: translate(-50%, -50%); flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(46,126,82,.2); border-radius: 50%; background: rgba(255,255,255,.9); box-shadow: 0 18px 50px rgba(38,91,60,.14), inset 0 0 0 1rem rgba(221,241,226,.38); text-align: center; }
+.qadri-services-orbit__core-icon { display: grid; place-items: center; position: relative; width: 4.2rem; height: 4.2rem; border: 1px solid rgba(46,126,82,.22); border-radius: 1.35rem; color: #176447; background: #dff1e3; box-shadow: 0 12px 25px rgba(31,112,72,.14); }
 .qadri-services-orbit__core-icon img { position: absolute; inset: .75rem; width: calc(100% - 1.5rem); height: calc(100% - 1.5rem); object-fit: contain; mix-blend-mode: multiply; opacity: .7; }
 .qadri-services-orbit__core-icon svg { position: relative; opacity: .85; }
 .qadri-services-orbit__eyebrow { margin-top: 1.2rem; color: #609177; font-size: .58rem; font-weight: 900; letter-spacing: .15em; }
@@ -174,16 +174,18 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 .qadri-services-orbit__core p { margin-top: .5rem; max-width: 18rem; color: #70877a; font-size: .78rem; line-height: 1.65; }
 .qadri-services-orbit__cta { display: inline-flex; align-items: center; gap: .35rem; margin-top: 1rem; border-radius: 999px; background: #075a44; padding: .65rem 1rem; color: white; font-size: .75rem; font-weight: 800; text-decoration: none; box-shadow: 0 9px 20px rgba(7,90,68,.2); transition: transform 180ms ease, background 180ms ease; }
 .qadri-services-orbit__cta:hover { transform: translateY(-2px); background: #064936; }
-.qadri-services-grid { position: relative; z-index: 3; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-content: center; min-height: 33rem; padding: 2rem; }
-.qadri-service-tile { display: flex; align-items: center; gap: .9rem; min-height: 8rem; padding: 1.1rem; border: 1px solid rgba(3,79,59,.1); border-radius: 1.25rem; background: rgba(255,255,255,.86); box-shadow: 0 14px 30px rgba(48,67,22,.08); text-decoration: none; backdrop-filter: blur(10px); transition: transform 220ms cubic-bezier(.23,1,.32,1), border-color 220ms ease, box-shadow 220ms ease, background 220ms ease; }
+.qadri-services-grid { position: absolute; inset: 0; z-index: 3; display: block; min-height: 0; padding: 0; pointer-events: none; }
+.qadri-service-tile { position: absolute; display: flex; align-items: center; gap: .7rem; width: 11.5rem; min-height: 6.2rem; padding: .85rem; border: 1px solid rgba(3,79,59,.1); border-radius: 1.15rem; background: rgba(255,255,255,.92); box-shadow: 0 14px 30px rgba(48,67,22,.08); text-decoration: none; backdrop-filter: blur(10px); pointer-events: auto; transition: transform 220ms cubic-bezier(.23,1,.32,1), border-color 220ms ease, box-shadow 220ms ease, background 220ms ease; }
 .qadri-service-tile:hover, .qadri-service-tile.is-active { transform: translateY(-5px); border-color: rgba(42,137,88,.35); background: #fff; box-shadow: 0 22px 42px rgba(42,113,72,.14); }
 .qadri-service-tile__icon { position: relative; flex: 0 0 3.1rem; display: grid; place-items: center; width: 3.1rem; height: 3.1rem; overflow: hidden; border-radius: 1rem; color: #2b795a; background: #e8f4e8; }
 .qadri-service-tile__icon img { position: absolute; inset: .4rem; z-index: 1; width: calc(100% - .8rem); height: calc(100% - .8rem); object-fit: contain; mix-blend-mode: multiply; }
 .qadri-service-tile__icon svg { opacity: .22; }
 .qadri-service-tile h3 { color: #294c36; font-size: 1rem; font-weight: 900; line-height: 1.35; }
 .qadri-service-tile span { display: inline-flex; align-items: center; gap: .25rem; margin-top: .55rem; color: #3b8b64; font-size: .72rem; font-weight: 800; }
+.qadri-service-tile--1 { top: 2rem; inset-inline-start: 2rem; } .qadri-service-tile--2 { top: 2rem; inset-inline-end: 2rem; }
+.qadri-service-tile--3 { bottom: 2rem; inset-inline-start: 2rem; } .qadri-service-tile--4 { bottom: 2rem; inset-inline-end: 2rem; }
 @keyframes qadri-orbit-pulse { 0%,100% { transform: scale(.97); opacity: .5; } 50% { transform: scale(1.03); opacity: 1; } }
-@media (max-width: 900px) { .qadri-services-orbit { min-height: auto; padding-top: 23rem; } .qadri-services-orbit__core { top: 11rem; width: min(20rem, 80%); } .qadri-services-orbit__rings { top: 11rem; width: 20rem; height: 20rem; } .qadri-services-grid { grid-template-columns: 1fr; min-height: auto; padding: 1.25rem; } .qadri-service-tile { min-height: 6.6rem; } }
+@media (max-width: 900px) { .qadri-services-orbit { min-height: auto; padding: 22rem 1rem 1rem; } .qadri-services-orbit__core { top: 10.5rem; width: 17rem; height: 17rem; } .qadri-services-orbit__rings { top: 10.5rem; width: 19rem; height: 19rem; } .qadri-services-grid { position: relative; inset: auto; display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; } .qadri-service-tile, .qadri-service-tile--1, .qadri-service-tile--2, .qadri-service-tile--3, .qadri-service-tile--4 { position: relative; inset: auto; width: auto; min-height: 6.3rem; } }
 @media (prefers-reduced-motion: reduce) { .qadri-services-orbit__rings span { animation: none; } }
 
 .window-rescue__scene { position: absolute; inset: 0; height: 100%; width: 100%; }
