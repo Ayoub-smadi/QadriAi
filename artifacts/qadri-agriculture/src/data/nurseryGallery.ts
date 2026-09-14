@@ -50,13 +50,12 @@ async function requestGallery(input: Record<string, unknown> = {}) {
     const token = raw?.split(";").find(value => value.trim().startsWith("qadri_session="))?.trim().slice("qadri_session=".length);
     if (token) headers.Authorization = `Bearer ${token}`;
   } catch { /* sessionStorage may be unavailable */ }
-  const isList = input.action === "list";
-  const response = await fetch("/api/gallery?format=rest&operation=gallery", {
-    method: isList ? "GET" : "POST",
+  const response = await fetch(`/api/gallery?format=rest&operation=gallery&galleryVersion=${Date.now()}`, {
+    method: "POST",
     credentials: "include",
     cache: "no-store",
     headers,
-    ...(isList ? {} : { body: JSON.stringify({ json: input }) }),
+    body: JSON.stringify({ json: input }),
   });
   const data = await response.json().catch(() => null);
   if (!response.ok || data?.error || data?.[0]?.error) {
@@ -66,8 +65,18 @@ async function requestGallery(input: Record<string, unknown> = {}) {
 }
 
 export async function getNurseryGalleryRemote() {
-  const images = await requestGallery({ action: "list" });
-  if (!Array.isArray(images)) return [];
+  let images: unknown;
+  let lastError: unknown;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      images = await requestGallery({ action: "list" });
+      if (Array.isArray(images)) break;
+    } catch (error) {
+      lastError = error;
+      await new Promise(resolve => setTimeout(resolve, 250));
+    }
+  }
+  if (!Array.isArray(images)) throw lastError instanceof Error ? lastError : new Error("تعذر تحميل صور المعرض");
   cacheNurseryGallery(images as NurseryGalleryImage[]);
   return images as NurseryGalleryImage[];
 }

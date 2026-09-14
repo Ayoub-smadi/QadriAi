@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, Bot, CheckCircle2, ClipboardCheck, DraftingCompa
 import { Link, useLocation } from "wouter";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { getNurseryGallery, getNurseryGalleryRemote, subscribeToNurseryGallery, type NurseryGalleryImage } from "@/data/nurseryGallery";
+import { defaultNurseryGallery, getNurseryGalleryRemote, subscribeToNurseryGallery, type NurseryGalleryImage } from "@/data/nurseryGallery";
 import { getDailyPlant } from "@/data/dailyPlant";
 
 
@@ -75,7 +75,7 @@ export default function Home() {
     { icon: Sprout, title: language === "ar" ? "ماذا أزرع؟" : "What should I grow?", text: language === "ar" ? "ترشيحات قابلة للتفسير قبل بدء التخطيط أو التنفيذ." : "Explainable suitability recommendations before you plan or build.", href: "/selector", tone: "bg-[#edf3ee]" },
     { icon: TreePine, title: language === "ar" ? "تابع مزرعتك وحديقتك" : "Manage farms & gardens", text: language === "ar" ? "مهام العناية والمشاريع والسجل الزراعي في مساحة واحدة." : "Care tasks, projects, and your agricultural record in one workspace.", href: "/dashboard", tone: "bg-[#edf0df]" },
   ];
-  const [nurseryGallery, setNurseryGallery] = useState<NurseryGalleryImage[]>(() => getNurseryGallery());
+  const [nurseryGallery, setNurseryGallery] = useState<NurseryGalleryImage[]>(() => [...defaultNurseryGallery]);
   useEffect(() => {
     const refreshGallery = () => { void getNurseryGalleryRemote().then(images => setNurseryGallery(images)).catch(() => undefined); };
     const unsubscribe = subscribeToNurseryGallery(refreshGallery);
