@@ -466,10 +466,10 @@ async function handle(req: any, res: any) {
   try {
     if (path.includes("ai.consult") || queryOperation === "ai.consult") return await handleGemini(req, res);
     if (path.includes("design/generate") || String(req.query?.operation || "") === "design.generate" || queryOperation === "generate") return res.status(200).json(await generateGeminiDesign(readInput(req)));
+    if (path.includes("/api/gallery") || queryOperation === "gallery") return await handleNurseryGallery(req, res, readInput(req));
     await ensureUsersSchema();
 
     if (operation === "quotes") return await handleQuoteOperation(req, res, readInput(req));
-    if (path.includes("/api/gallery") || queryOperation === "gallery") return await handleNurseryGallery(req, res, readInput(req));
 
     if (operation === "me") {
       const userId = getSessionUserId(req);

@@ -6,6 +6,7 @@ export type NurseryGalleryImage = {
 };
 
 const GALLERY_KEY = "al-qadri-nursery-gallery-v1";
+const CONFIRMED_KEY = "al-qadri-nursery-gallery-confirmed-v1";
 const CHANGE_EVENT = "al-qadri-nursery-gallery-change";
 
 export const defaultNurseryGallery: NurseryGalleryImage[] = [
@@ -38,7 +39,7 @@ function readStored(): NurseryGalleryImage[] | null {
 }
 
 export function getNurseryGallery() {
-  return [];
+  return window.localStorage.getItem(CONFIRMED_KEY) === "1" ? (readStored() || []) : [];
 }
 
 async function requestGallery(input: Record<string, unknown> = {}) {
@@ -48,12 +49,13 @@ async function requestGallery(input: Record<string, unknown> = {}) {
     const token = raw?.split(";").find(value => value.trim().startsWith("qadri_session="))?.trim().slice("qadri_session=".length);
     if (token) headers.Authorization = `Bearer ${token}`;
   } catch { /* sessionStorage may be unavailable */ }
+  const isList = input.action === "list";
   const response = await fetch("/api/gallery?format=rest&operation=gallery", {
-    method: "POST",
+    method: isList ? "GET" : "POST",
     credentials: "include",
     cache: "no-store",
     headers,
-    body: JSON.stringify({ json: input }),
+    ...(isList ? {} : { body: JSON.stringify({ json: input }) }),
   });
   const data = await response.json().catch(() => null);
   if (!response.ok || data?.error || data?.[0]?.error) {
@@ -64,7 +66,9 @@ async function requestGallery(input: Record<string, unknown> = {}) {
 
 export async function getNurseryGalleryRemote() {
   const images = await requestGallery({ action: "list" });
-  return Array.isArray(images) ? images as NurseryGalleryImage[] : [];
+  if (!Array.isArray(images)) return [];
+  cacheNurseryGallery(images as NurseryGalleryImage[]);
+  return images as NurseryGalleryImage[];
 }
 
 export async function addNurseryGalleryImage(input: Omit<NurseryGalleryImage, "id">) {
@@ -88,5 +92,6 @@ export function subscribeToNurseryGallery(listener: () => void) {
 
 export function cacheNurseryGallery(images: NurseryGalleryImage[]) {
   window.localStorage.setItem(GALLERY_KEY, JSON.stringify(images));
+  window.localStorage.setItem(CONFIRMED_KEY, "1");
   window.dispatchEvent(new CustomEvent(CHANGE_EVENT));
 }
