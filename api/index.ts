@@ -362,12 +362,19 @@ const initialNurseryGallery = [
   { id: "gallery-17", src: "/assets/gallery-17-nursery-greenery.jpeg", ar: "خضرة تنمو بخبرة القادري", en: "Greenery grown with Al-Qadri expertise" },
   { id: "nursery-09", src: "/assets/nursery-09-black-planter.jpeg", ar: "أحواض زراعية بتنسيق القادري", en: "Planters styled by Al-Qadri" },
 ];
+const initialBusinessServices = [
+  { id: "service-supply", src: "/assets/gallery-11-greenhouse-seedlings.jpeg", ar: "توريد المنتجات الزراعية", en: "Agricultural Supply" },
+  { id: "service-projects", src: "/assets/qadri-productive-garden.jpg", ar: "تأسيس المشاريع الزراعية", en: "Agricultural Projects" },
+  { id: "service-trade", src: "/assets/qadri-natural-agriculture.jpg", ar: "الاستيراد والتصدير", en: "Import & Export" },
+  { id: "service-gardens", src: "/assets/qadri-garden-team.png", ar: "تنسيق الحدائق وصيانتها", en: "Garden Landscaping & Maintenance" },
+];
 async function ensureNurseryGallerySchema() {
   if (!nurseryGallerySchemaReady) {
     nurseryGallerySchemaReady = pool.query(`
       CREATE TABLE IF NOT EXISTS "nursery_gallery" (
         "id" INTEGER PRIMARY KEY DEFAULT 1,
         "images" JSONB NOT NULL,
+        "services" JSONB NOT NULL DEFAULT '[]'::jsonb,
         "updatedAt" TIMESTAMP NOT NULL DEFAULT NOW()
       )
     `).then(() => undefined).catch(error => { nurseryGallerySchemaReady = undefined; throw error; });
@@ -378,23 +385,26 @@ async function ensureNurseryGallerySchema() {
 async function handleNurseryGallery(req: any, res: any, input: any) {
   res.locals.galleryRest = true;
   await ensureNurseryGallerySchema();
-  await pool.query('INSERT INTO "nursery_gallery" ("id", "images") VALUES (1, $1::jsonb) ON CONFLICT ("id") DO NOTHING', [JSON.stringify(initialNurseryGallery)]);
+  await pool.query('ALTER TABLE "nursery_gallery" ADD COLUMN IF NOT EXISTS "services" JSONB NOT NULL DEFAULT \'[]\'::jsonb');
+  await pool.query('INSERT INTO "nursery_gallery" ("id", "images", "services") VALUES (1, $1::jsonb, $2::jsonb) ON CONFLICT ("id") DO UPDATE SET "services" = CASE WHEN "nursery_gallery"."services" = \'[]\'::jsonb THEN EXCLUDED."services" ELSE "nursery_gallery"."services" END', [JSON.stringify(initialNurseryGallery), JSON.stringify(initialBusinessServices)]);
   const action = String(input?.action || "list");
+  const collection = input?.collection === "services" ? "services" : "images";
   if (action === "list") {
-    const result = await pool.query('SELECT "images" FROM "nursery_gallery" WHERE "id" = 1');
-    return sendSuccess(res, result.rows[0]?.images || []);
+    const result = await pool.query('SELECT "images", "services" FROM "nursery_gallery" WHERE "id" = 1');
+    return sendSuccess(res, collection === "services" ? (result.rows[0]?.services || initialBusinessServices) : (result.rows[0]?.images || []));
   }
   const userId = requireSessionUser(req);
   const userResult = await pool.query<UserRow>('SELECT * FROM "users" WHERE "id" = $1 LIMIT 1', [userId]);
   if (userResult.rows[0]?.role !== "admin") throw Object.assign(new Error("غير مصرح بهذا الطلب."), { code: "FORBIDDEN" });
-  const currentResult = await pool.query('SELECT "images" FROM "nursery_gallery" WHERE "id" = 1');
-  const current = Array.isArray(currentResult.rows[0]?.images) ? currentResult.rows[0].images : [];
+  const currentResult = await pool.query('SELECT "images", "services" FROM "nursery_gallery" WHERE "id" = 1');
+  const current = Array.isArray(currentResult.rows[0]?.[collection]) ? currentResult.rows[0][collection] : [];
+  const column = collection === "services" ? "services" : "images";
   if (action === "add") {
     const image = input?.image && typeof input.image === "object" ? input.image : {};
-    const next = { id: `gallery-custom-${Date.now()}-${randomBytes(4).toString("hex")}`, src: String(image.src || ""), ar: String(image.ar || "من مشاتل القادري"), en: String(image.en || "From Al-Qadri Nurseries") };
+    const next = { id: `${collection === "services" ? "service" : "gallery"}-custom-${Date.now()}-${randomBytes(4).toString("hex")}`, src: String(image.src || ""), ar: String(image.ar || "من مشاتل القادري"), en: String(image.en || "From Al-Qadri Nurseries") };
     if (!next.src) throw Object.assign(new Error("الصورة مطلوبة."), { code: "BAD_REQUEST" });
     const images = [...current, next];
-    await pool.query('UPDATE "nursery_gallery" SET "images" = $1::jsonb, "updatedAt" = NOW() WHERE "id" = 1', [JSON.stringify(images)]);
+    await pool.query(`UPDATE "nursery_gallery" SET "${column}" = $1::jsonb, "updatedAt" = NOW() WHERE "id" = 1`, [JSON.stringify(images)]);
     return sendSuccess(res, next);
   }
   if (action === "replace") {
@@ -405,12 +415,12 @@ async function handleNurseryGallery(req: any, res: any, input: any) {
       ar: String(image.ar || "من مشاتل القادري"),
       en: String(image.en || "From Al-Qadri Nurseries"),
     }));
-    await pool.query('UPDATE "nursery_gallery" SET "images" = $1::jsonb, "updatedAt" = NOW() WHERE "id" = 1', [JSON.stringify(images)]);
+    await pool.query(`UPDATE "nursery_gallery" SET "${column}" = $1::jsonb, "updatedAt" = NOW() WHERE "id" = 1`, [JSON.stringify(images)]);
     return sendSuccess(res, images);
   }
   if (action === "remove") {
     const images = current.filter((image: any) => image?.id !== String(input?.id || ""));
-    await pool.query('UPDATE "nursery_gallery" SET "images" = $1::jsonb, "updatedAt" = NOW() WHERE "id" = 1', [JSON.stringify(images)]);
+    await pool.query(`UPDATE "nursery_gallery" SET "${column}" = $1::jsonb, "updatedAt" = NOW() WHERE "id" = 1`, [JSON.stringify(images)]);
     return sendSuccess(res, { success: true });
   }
   throw Object.assign(new Error("عملية معرض غير معروفة."), { code: "BAD_REQUEST" });
