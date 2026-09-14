@@ -73,7 +73,17 @@ export default function Home() {
     { icon: TreePine, title: language === "ar" ? "تابع مزرعتك وحديقتك" : "Manage farms & gardens", text: language === "ar" ? "مهام العناية والمشاريع والسجل الزراعي في مساحة واحدة." : "Care tasks, projects, and your agricultural record in one workspace.", href: "/dashboard", tone: "bg-[#edf0df]" },
   ];
   const [nurseryGallery, setNurseryGallery] = useState<NurseryGalleryImage[]>(() => getNurseryGallery());
-  useEffect(() => subscribeToNurseryGallery(() => setNurseryGallery(getNurseryGallery())), []);
+  useEffect(() => {
+    const refreshGallery = () => setNurseryGallery([...getNurseryGallery()]);
+    const unsubscribe = subscribeToNurseryGallery(refreshGallery);
+    window.addEventListener("pageshow", refreshGallery);
+    window.addEventListener("focus", refreshGallery);
+    return () => {
+      unsubscribe();
+      window.removeEventListener("pageshow", refreshGallery);
+      window.removeEventListener("focus", refreshGallery);
+    };
+  }, []);
 
   return <PlatformShell>
     <main>
