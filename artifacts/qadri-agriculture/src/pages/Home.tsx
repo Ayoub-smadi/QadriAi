@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, Bot, CheckCircle2, ClipboardCheck, DraftingCompa
 import { Link, useLocation } from "wouter";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { defaultNurseryGallery, getNurseryGalleryRemote, subscribeToNurseryGallery, type NurseryGalleryImage } from "@/data/nurseryGallery";
+import { getNurseryGalleryRemote, subscribeToNurseryGallery, type NurseryGalleryImage } from "@/data/nurseryGallery";
 import { getDailyPlant } from "@/data/dailyPlant";
 
 
@@ -75,9 +75,9 @@ export default function Home() {
     { icon: Sprout, title: language === "ar" ? "ماذا أزرع؟" : "What should I grow?", text: language === "ar" ? "ترشيحات قابلة للتفسير قبل بدء التخطيط أو التنفيذ." : "Explainable suitability recommendations before you plan or build.", href: "/selector", tone: "bg-[#edf3ee]" },
     { icon: TreePine, title: language === "ar" ? "تابع مزرعتك وحديقتك" : "Manage farms & gardens", text: language === "ar" ? "مهام العناية والمشاريع والسجل الزراعي في مساحة واحدة." : "Care tasks, projects, and your agricultural record in one workspace.", href: "/dashboard", tone: "bg-[#edf0df]" },
   ];
-  const [nurseryGallery, setNurseryGallery] = useState<NurseryGalleryImage[]>(() => [...defaultNurseryGallery]);
+  const [nurseryGallery, setNurseryGallery] = useState<NurseryGalleryImage[]>([]);
   useEffect(() => {
-    const refreshGallery = () => { void getNurseryGalleryRemote().then(images => setNurseryGallery(images)).catch(() => undefined); };
+    const refreshGallery = () => { void getNurseryGalleryRemote().then(images => setNurseryGallery(images)).catch(() => setNurseryGallery([])); };
     const unsubscribe = subscribeToNurseryGallery(refreshGallery);
     window.addEventListener("pageshow", refreshGallery);
     window.addEventListener("focus", refreshGallery);

@@ -342,26 +342,7 @@ async function ensureQuoteSchema() {
 }
 
 let nurseryGallerySchemaReady: Promise<void> | undefined;
-const initialNurseryGallery = [
-  { id: "nursery-01", src: "/assets/nursery-01.jpeg", ar: "مشاتل القادري الزراعية", en: "Al-Qadri Agricultural Nurseries" },
-  { id: "nursery-02", src: "/assets/nursery-02.jpeg", ar: "أشجار مزهرة للحدائق", en: "Flowering trees for gardens" },
-  { id: "nursery-03", src: "/assets/nursery-03.jpeg", ar: "نباتات وتنسيقات موسمية", en: "Seasonal plants and arrangements" },
-  { id: "nursery-04", src: "/assets/nursery-04.jpeg", ar: "نخيل وتنسيقات خارجية", en: "Palms and outdoor landscaping" },
-  { id: "nursery-05", src: "/assets/nursery-05.jpeg", ar: "أشجار الزينة والخضرة", en: "Ornamental trees and greenery" },
-  { id: "nursery-06", src: "/assets/nursery-06.jpeg", ar: "ألوان من مشتلنا", en: "Color from our nursery" },
-  { id: "nursery-07", src: "/assets/nursery-07.jpeg", ar: "حدائق تنبض بالحياة", en: "Gardens full of life" },
-  { id: "nursery-08", src: "/assets/nursery-08.jpeg", ar: "خبرة تنمو معك", en: "Experience that grows with you" },
-  { id: "gallery-09", src: "/assets/gallery-09-sculpted-planters.jpeg", ar: "أحواض وأعمال حجرية فنية", en: "Sculpted planters and stonework" },
-  { id: "gallery-10", src: "/assets/gallery-10-olive-nursery.jpeg", ar: "شتلات الزيتون في مشتلنا", en: "Olive seedlings in our nursery" },
-  { id: "gallery-11", src: "/assets/gallery-11-greenhouse-seedlings.jpeg", ar: "شتلات خضراء داخل البيوت المحمية", en: "Green seedlings in the greenhouse" },
-  { id: "gallery-12", src: "/assets/gallery-12-old-olive-trees.jpeg", ar: "أشجار زيتون معمّرة", en: "Mature olive trees" },
-  { id: "gallery-13", src: "/assets/gallery-13-ficus-nursery.jpeg", ar: "فيكس وتنسيقات داخلية", en: "Ficus trees and indoor arrangements" },
-  { id: "gallery-14", src: "/assets/gallery-14-ornamental-plants.jpeg", ar: "نباتات زينة مختارة", en: "Selected ornamental plants" },
-  { id: "gallery-15", src: "/assets/gallery-15-grafted-olive-trees.jpeg", ar: "زيتون مطعّم بعناية", en: "Carefully grafted olive trees" },
-  { id: "gallery-16", src: "/assets/gallery-16-garden-tree.jpeg", ar: "أشجار للحدائق والمساحات الخارجية", en: "Trees for gardens and outdoor spaces" },
-  { id: "gallery-17", src: "/assets/gallery-17-nursery-greenery.jpeg", ar: "خضرة تنمو بخبرة القادري", en: "Greenery grown with Al-Qadri expertise" },
-  { id: "nursery-09", src: "/assets/nursery-09-black-planter.jpeg", ar: "أحواض زراعية بتنسيق القادري", en: "Planters styled by Al-Qadri" },
-];
+const legacyGalleryIds = new Set(["nursery-01", "nursery-02", "nursery-03", "nursery-04", "nursery-05", "nursery-06", "nursery-07", "nursery-08", "gallery-09", "gallery-10", "gallery-11", "gallery-12", "gallery-13", "gallery-14", "gallery-15", "gallery-16", "gallery-17", "nursery-09"]);
 async function ensureNurseryGallerySchema() {
   if (!nurseryGallerySchemaReady) {
     nurseryGallerySchemaReady = pool.query(`
@@ -378,17 +359,18 @@ async function ensureNurseryGallerySchema() {
 async function handleNurseryGallery(req: any, res: any, input: any) {
   res.locals.galleryRest = true;
   await ensureNurseryGallerySchema();
-  await pool.query('INSERT INTO "nursery_gallery" ("id", "images") VALUES (1, $1::jsonb) ON CONFLICT ("id") DO NOTHING', [JSON.stringify(initialNurseryGallery)]);
+  await pool.query('INSERT INTO "nursery_gallery" ("id", "images") VALUES (1, $1::jsonb) ON CONFLICT ("id") DO NOTHING', [JSON.stringify([])]);
   const action = String(input?.action || "list");
   if (action === "list") {
     const result = await pool.query('SELECT "images" FROM "nursery_gallery" WHERE "id" = 1');
-    return sendSuccess(res, result.rows[0]?.images || []);
+    const images = Array.isArray(result.rows[0]?.images) ? result.rows[0].images.filter((image: any) => image && !legacyGalleryIds.has(String(image.id))) : [];
+    return sendSuccess(res, images);
   }
   const userId = requireSessionUser(req);
   const userResult = await pool.query<UserRow>('SELECT * FROM "users" WHERE "id" = $1 LIMIT 1', [userId]);
   if (userResult.rows[0]?.role !== "admin") throw Object.assign(new Error("غير مصرح بهذا الطلب."), { code: "FORBIDDEN" });
   const currentResult = await pool.query('SELECT "images" FROM "nursery_gallery" WHERE "id" = 1');
-  const current = Array.isArray(currentResult.rows[0]?.images) ? currentResult.rows[0].images : [];
+  const current = Array.isArray(currentResult.rows[0]?.images) ? currentResult.rows[0].images.filter((image: any) => image && !legacyGalleryIds.has(String(image.id))) : [];
   if (action === "add") {
     const image = input?.image && typeof input.image === "object" ? input.image : {};
     const next = { id: `gallery-custom-${Date.now()}-${randomBytes(4).toString("hex")}`, src: String(image.src || ""), ar: String(image.ar || "من مشاتل القادري"), en: String(image.en || "From Al-Qadri Nurseries") };
