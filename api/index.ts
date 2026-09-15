@@ -381,7 +381,7 @@ async function handleNurseryGallery(req: any, res: any, input: any) {
   }
   if (action === "replace") {
     if (!Array.isArray(input?.images)) throw Object.assign(new Error("قائمة الصور مطلوبة."), { code: "BAD_REQUEST" });
-    const images = input.images.filter((image: any) => image && typeof image.id === "string" && typeof image.src === "string" && image.src.length > 0).map((image: any) => ({
+    const images = input.images.filter((image: any) => image && typeof image.id === "string" && !legacyGalleryIds.has(String(image.id)) && typeof image.src === "string" && image.src.length > 0).map((image: any) => ({
       id: image.id,
       src: image.src,
       ar: String(image.ar || "من مشاتل القادري"),
