@@ -39,12 +39,13 @@ async function requestGallery(input: Record<string, unknown> = {}) {
     const token = raw?.split(";").find(value => value.trim().startsWith("qadri_session="))?.trim().slice("qadri_session=".length);
     if (token) headers.Authorization = `Bearer ${token}`;
   } catch { /* sessionStorage may be unavailable */ }
-  const response = await fetch(`/api/gallery?format=rest&operation=gallery&galleryVersion=${Date.now()}`, {
-    method: "POST",
+  const isList = input.action === "list";
+  const response = await fetch(`/api/gallery?format=rest&operation=gallery&v=${Date.now()}`, {
+    method: isList ? "GET" : "POST",
     credentials: "include",
     cache: "no-store",
     headers,
-    body: JSON.stringify({ json: input }),
+    ...(isList ? {} : { body: JSON.stringify({ json: input }) }),
   });
   const data = await response.json().catch(() => null);
   if (!response.ok || data?.error || data?.[0]?.error) {
