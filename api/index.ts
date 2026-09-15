@@ -440,6 +440,32 @@ async function handleQuoteOperation(req: any, res: any, input: any) {
   return sendSuccess(res, result.rows);
 }
 
+let userStorageSchemaReady: Promise<void> | undefined;
+async function ensureUserStorageSchema() {
+  if (!userStorageSchemaReady) {
+    userStorageSchemaReady = pool.query(`CREATE TABLE IF NOT EXISTS "user_storage" ("userId" INTEGER NOT NULL REFERENCES "users"("id") ON DELETE CASCADE, "key" VARCHAR(160) NOT NULL, "value" JSONB NOT NULL, "updatedAt" TIMESTAMP NOT NULL DEFAULT NOW(), PRIMARY KEY ("userId", "key"))`).then(() => undefined).catch(error => { userStorageSchemaReady = undefined; throw error; });
+  }
+  await userStorageSchemaReady;
+}
+async function handleUserStorage(req: any, res: any, input: any) {
+  const userId = requireSessionUser(req);
+  await ensureUserStorageSchema();
+  const action = String(input?.action || "get");
+  const key = String(input?.key || "").trim();
+  if (action !== "list" && !key) throw Object.assign(new Error("مفتاح التخزين مطلوب."), { code: "BAD_REQUEST" });
+  if (action === "list") return sendSuccess(res, (await pool.query('SELECT "key", "value", "updatedAt" FROM "user_storage" WHERE "userId" = $1 ORDER BY "key"', [userId])).rows);
+  if (action === "get") return sendSuccess(res, (await pool.query('SELECT "value", "updatedAt" FROM "user_storage" WHERE "userId" = $1 AND "key" = $2 LIMIT 1', [userId, key])).rows[0] || null);
+  if (action === "set") {
+    await pool.query('INSERT INTO "user_storage" ("userId", "key", "value", "updatedAt") VALUES ($1, $2, $3::jsonb, NOW()) ON CONFLICT ("userId", "key") DO UPDATE SET "value" = EXCLUDED."value", "updatedAt" = NOW()', [userId, key, JSON.stringify(input?.value ?? null)]);
+    return sendSuccess(res, { key, value: input?.value ?? null });
+  }
+  if (action === "delete") {
+    await pool.query('DELETE FROM "user_storage" WHERE "userId" = $1 AND "key" = $2', [userId, key]);
+    return sendSuccess(res, { success: true });
+  }
+  throw Object.assign(new Error("عملية تخزين غير معروفة."), { code: "BAD_REQUEST" });
+}
+
 async function handle(req: any, res: any) {
   res.locals = res.locals || {};
   res.locals.authRest = String(req.query?.format || "") === "rest";
@@ -463,6 +489,7 @@ async function handle(req: any, res: any) {
     await ensureUsersSchema();
 
     if (operation === "quotes") return await handleQuoteOperation(req, res, readInput(req));
+    if (operation === "storage") return await handleUserStorage(req, res, readInput(req));
 
     if (operation === "me") {
       const userId = getSessionUserId(req);

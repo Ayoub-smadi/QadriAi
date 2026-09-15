@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { getNeonValue, setNeonValue } from "@/data/neonStorage";
 
 export type Language = "ar" | "en";
 
@@ -15,9 +16,15 @@ type LanguageContextValue = { language: Language; setLanguage: (language: Langua
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>(() => (localStorage.getItem("al-qadri-language") as Language) || "ar");
+  const [language, setLanguageState] = useState<Language>("ar");
   useEffect(() => {
-    localStorage.setItem("al-qadri-language", language);
+    void getNeonValue<Language>("preference.language").then(value => { if (value === "ar" || value === "en") setLanguageState(value); }).catch(() => undefined);
+  }, []);
+  const setLanguage = (next: Language) => {
+    setLanguageState(next);
+    void setNeonValue("preference.language", next).catch(() => undefined);
+  };
+  useEffect(() => {
     document.documentElement.lang = language;
     document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
   }, [language]);
