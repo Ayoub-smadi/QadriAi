@@ -17,7 +17,7 @@
     },
     {
       "source": "/api/gallery",
-      "destination": "/api/index.ts?operation=gallery"
+      "destination": "/api/gallery.ts?operation=gallery"
     },
     {
       "source": "/(.*)",
