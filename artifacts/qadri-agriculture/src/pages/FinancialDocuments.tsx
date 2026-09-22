@@ -43,6 +43,7 @@ export default function FinancialDocuments() {
         <DocumentHeader doc={doc} type={type} />
         {type === "exportInvoice" ? <ExportForm doc={doc} patch={patch} addRow={addRow} /> : type === "purchaseOrder" ? <PurchaseOrderForm doc={doc} patch={patch} addRow={addRow} /> : type === "salesInvoice" || type === "purchaseInvoice" ? <SimpleInvoiceForm type={type} doc={doc} patch={patch} addRow={addRow} /> : <VoucherForm type={type} doc={doc} patch={patch} />}
         <div className="no-print mt-6 flex flex-wrap gap-2 border-t pt-5"><Button onClick={save} className="bg-[#0a4b39] text-white"><Save className="me-2 size-4" />حفظ المستند</Button><Button onClick={() => setDoc(emptyDocument(type))} variant="outline"><Plus className="me-2 size-4" />مستند جديد</Button><Button onClick={() => window.print()} variant="outline"><Printer className="me-2 size-4" />طباعة / PDF</Button><Button onClick={() => window.print()} variant="outline"><FileDown className="me-2 size-4" />PDF صفحة واحدة</Button></div>
+        <div className="mt-8 flex justify-start border-t-2 border-[#c8a75a] pt-5"><img src="/assets/qadri-stamp.png" alt="ختم مؤسسة القادري الزراعية" className="h-24 w-52 object-contain" /></div>
       </section>
     </div>
   </main></PlatformShell></AdminGate></AccessGate>;
