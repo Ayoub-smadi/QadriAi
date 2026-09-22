@@ -1,6 +1,6 @@
 export type DocumentType = "exportInvoice" | "purchaseOrder" | "receipt" | "disbursement";
 export type PaymentMethod = "cash" | "check" | "transfer" | "online";
-export type InvoiceRow = { item: string; weight: string; quantity: string; origin: string; notes: string; dinar: string; fils: string };
+export type InvoiceRow = { item: string; weight: string; quantity: string; origin: string; notes: string; dinar: string; fils: string; unit?: string; unitPrice?: string; lineTotal?: string };
 export type FinancialDocument = {
   id: string; type: DocumentType; number: string; date: string; institutionName: string; address: string;
   sourceName: string; facilityNumber: string; destination: string; totalDinar: string; totalFils: string;
@@ -8,6 +8,9 @@ export type FinancialDocument = {
   namePrefix: string; personName: string; amount: string; amountText: string; description: string;
   paymentMethod: PaymentMethod; notes: string; createdAt: string; updatedAt: string;
   supplier: string; requester: string; department: string; expectedDate: string; priority: string; terms: string;
+  currency: string; buyerOrg: string; buyerName: string; buyerTitle: string; buyerPhone: string; buyerEmail: string; buyerAddress: string;
+  supplierName: string; supplierContact: string; supplierPhone: string; supplierEmail: string; supplierAddress: string;
+  tax: string; deliveryFee: string; finalTotal: string; buyerApprovalDate: string; supplierApprovalDate: string;
 };
 const KEY = "al-qadri-financial-documents-v1";
 const EVENT = "al-qadri-financial-documents-change";
@@ -15,9 +18,10 @@ const now = () => new Date().toISOString();
 const id = () => `doc-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 export const emptyDocument = (type: DocumentType): FinancialDocument => ({
   id: id(), type,
-  number: type === "exportInvoice" ? `EXP-${new Date().getFullYear()}-${Date.now().toString().slice(-4)}` : type === "purchaseOrder" ? `PO-${new Date().getFullYear()}-${Date.now().toString().slice(-4)}` : `${type === "receipt" ? "REC" : "DIS"}-${Date.now().toString().slice(-5)}`,
-  date: now().slice(0, 10), institutionName: "مؤسسة القادري الزراعية", address: "جرش - طريق عمان", sourceName: "", facilityNumber: "", destination: "", totalDinar: "0", totalFils: "000", totalInWords: "", certificateText: "", exportPermissionText: "", stampUrl: "/assets/qadri-stamp.png",
-  rows: [{ item: "", weight: "", quantity: "", origin: "", notes: "", dinar: "0", fils: "000" }], namePrefix: "السيد", personName: "", amount: "0", amountText: "", description: "", paymentMethod: "cash", notes: "", createdAt: now(), updatedAt: now(), supplier: "", requester: "", department: "", expectedDate: "", priority: "عادي", terms: "",
+  number: type === "exportInvoice" ? `EXP-${new Date().getFullYear()}-${Date.now().toString().slice(-4)}` : type === "purchaseOrder" ? "PO 000000" : `${type === "receipt" ? "REC" : "DIS"}-${Date.now().toString().slice(-5)}`,
+  date: type === "purchaseOrder" ? "09/19/2026" : now().slice(0, 10), institutionName: "مؤسسة القادري الزراعية", address: "جرش - طريق عمان", sourceName: "", facilityNumber: "", destination: "", totalDinar: "0", totalFils: "000", totalInWords: "", certificateText: "", exportPermissionText: "", stampUrl: "/assets/qadri-stamp.png",
+  rows: [{ item: "", weight: "", quantity: "", origin: "", notes: "", dinar: "0", fils: "000", unit: "", unitPrice: "", lineTotal: "" }], namePrefix: "السيد", personName: "", amount: "0", amountText: "", description: "", paymentMethod: "cash", notes: "", createdAt: now(), updatedAt: now(), supplier: "", requester: "", department: "", expectedDate: "", priority: "عادي", terms: "",
+  currency: "دينار أردني (JOD)", buyerOrg: "مؤسسة القادري الزراعية", buyerName: "م. ثامر أحمد عبد الرحمن القادري", buyerTitle: "المدير العام", buyerPhone: "0777772211", buyerEmail: "tamerqadri@gmail.com", buyerAddress: "جرش – الأردن", supplierName: "", supplierContact: "", supplierPhone: "", supplierEmail: "", supplierAddress: "", tax: "0", deliveryFee: "0", finalTotal: "0", buyerApprovalDate: "09/19/2026", supplierApprovalDate: "",
 });
 export function getDocuments(): FinancialDocument[] { if (typeof window === "undefined") return []; try { const data = JSON.parse(localStorage.getItem(KEY) || "[]"); return Array.isArray(data) ? data : []; } catch { return []; } }
 export function saveDocument(doc: FinancialDocument) { const list = getDocuments(); const next = { ...doc, updatedAt: now() }; const i = list.findIndex(item => item.id === doc.id); if (i >= 0) list[i] = next; else list.unshift(next); localStorage.setItem(KEY, JSON.stringify(list)); window.dispatchEvent(new CustomEvent(EVENT)); return next; }
