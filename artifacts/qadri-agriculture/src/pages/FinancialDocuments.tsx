@@ -54,6 +54,7 @@ export default function FinancialDocuments() {
 
 type CatalogItem = { id: string; number: number; name: string; images: string[] };
 const catalogId = () => `catalog-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+const CATALOG_STORAGE_KEY = "qadri-financial-catalog";
 
 function CatalogEditor({ onClose }: { onClose: () => void }) {
   const [subtitle, setSubtitle] = useState("كتالوج المنتجات الزراعية");
@@ -61,6 +62,22 @@ function CatalogEditor({ onClose }: { onClose: () => void }) {
   const [logo, setLogo] = useState("/assets/qadri-logo.png");
   const [downloading, setDownloading] = useState(false);
   const catalogRef = useRef<HTMLDivElement>(null);
+  const skipCatalogSave = useRef(true);
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(CATALOG_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved) as { subtitle?: string; logo?: string; items?: CatalogItem[] };
+        if (parsed.subtitle !== undefined) setSubtitle(parsed.subtitle);
+        if (parsed.logo) setLogo(parsed.logo);
+        if (Array.isArray(parsed.items) && parsed.items.length) setItems(parsed.items.map((item, index) => ({ ...item, number: index + 1, images: Array.isArray(item.images) ? item.images.slice(0, 2) : [] })));
+      }
+    } catch (error) { console.warn("Could not restore catalog", error); }
+  }, []);
+  useEffect(() => {
+    if (skipCatalogSave.current) { skipCatalogSave.current = false; return; }
+    try { localStorage.setItem(CATALOG_STORAGE_KEY, JSON.stringify({ subtitle, logo, items })); } catch (error) { console.warn("Could not save catalog", error); }
+  }, [subtitle, logo, items]);
   const addItem = () => setItems(current => [...current, { id: catalogId(), number: current.length + 1, name: "", images: [] }]);
   const removeItem = (id: string) => setItems(current => current.length > 1 ? current.filter(item => item.id !== id).map((item, index) => ({ ...item, number: index + 1 })) : current);
   const updateItem = (id: string, patch: Partial<CatalogItem>) => setItems(current => current.map(item => item.id === id ? { ...item, ...patch } : item));
