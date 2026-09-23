@@ -20,7 +20,7 @@ export default function PageEditor() {
   const [fontSize, setFontSize] = useState("16");
   const [fontFamily, setFontFamily] = useState("Tajawal");
   const [textColor, setTextColor] = useState("#17342d");
-  const [accentColor, setAccentColor] = useState("#c8a75a");
+  const [accentColor, setAccentColor] = useState("#000000");
   const [borderColor, setBorderColor] = useState("#b7cfc1");
   const [tableHeaderColor, setTableHeaderColor] = useState("#edf5ee");
   const [rowHeight, setRowHeight] = useState("44");
