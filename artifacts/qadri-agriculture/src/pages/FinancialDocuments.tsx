@@ -70,27 +70,45 @@ function CatalogEditor({ onClose }: { onClose: () => void }) {
   const downloadPdf = async () => {
     if (!catalogRef.current) return;
     setDownloading(true);
+    const exportRoot = document.createElement("div");
+    exportRoot.style.cssText = "position:fixed;left:-10000px;top:0;width:900px;background:#fff;padding:0;margin:0;z-index:-1;";
+    const clone = catalogRef.current.cloneNode(true) as HTMLDivElement;
+    clone.style.width = "900px";
+    clone.style.maxWidth = "900px";
+    clone.style.margin = "0";
+    clone.style.boxShadow = "none";
+    clone.querySelectorAll("button").forEach(node => node.remove());
+    clone.querySelectorAll("input").forEach(node => {
+      const field = node as HTMLInputElement;
+      const replacement = document.createElement("span");
+      replacement.textContent = field.value || "";
+      replacement.style.cssText = "display:block;width:100%;min-height:28px;padding:6px;text-align:center;font-weight:700;";
+      field.replaceWith(replacement);
+    });
+    clone.querySelectorAll("label").forEach(label => label.classList.remove("no-print"));
+    exportRoot.appendChild(clone);
+    document.body.appendChild(exportRoot);
     try {
-      const canvas = await html2canvas(catalogRef.current, { scale: 2, backgroundColor: "#ffffff", useCORS: true, allowTaint: false, imageTimeout: 15000, logging: false });
+      await document.fonts?.ready;
+      await Promise.all(Array.from(exportRoot.querySelectorAll("img")).map(image => (image as HTMLImageElement).decode?.().catch(() => undefined)));
+      const canvas = await html2canvas(exportRoot, { scale: 2, backgroundColor: "#ffffff", useCORS: true, allowTaint: false, imageTimeout: 20000, logging: false, scrollX: 0, scrollY: 0 });
       const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
-      const width = 210;
-      const pageHeight = 297;
-      const height = canvas.height * width / canvas.width;
-      const image = canvas.toDataURL("image/jpeg", 0.94);
-      const pages = Math.max(1, Math.ceil(height / pageHeight));
-      for (let page = 0; page < pages; page += 1) { if (page) pdf.addPage(); pdf.addImage(image, "JPEG", 0, -page * pageHeight, width, height); }
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const imageHeight = canvas.height * pageWidth / canvas.width;
+      const image = canvas.toDataURL("image/jpeg", 0.95);
+      const pages = Math.max(1, Math.ceil(imageHeight / pageHeight));
+      for (let page = 0; page < pages; page += 1) { if (page) pdf.addPage(); pdf.addImage(image, "JPEG", 0, -page * pageHeight, pageWidth, imageHeight); }
       pdf.save("كتالوج_مؤسسة_القادري.pdf");
     } catch (error) {
-      console.error("Catalog visual PDF failed; using direct fallback", error);
+      console.error("Catalog visual PDF failed", error);
       const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
-      let y = 22;
-      pdf.setFontSize(18); pdf.text("Al-Qadri Agricultural Establishment", 105, y, { align: "center" }); y += 10;
-      pdf.setFontSize(13); pdf.text("Catalog", 105, y, { align: "center" }); y += 14;
-      items.forEach(item => { if (y > 270) { pdf.addPage(); y = 22; } pdf.setFontSize(12); pdf.text(`${item.number}. ${item.name || "Item"}`, 190, y, { align: "right" }); y += 8; item.images.slice(0, 3).forEach(image => { try { pdf.addImage(image, "JPEG", 145, y - 5, 45, 34); y += 38; } catch { y += 4; } }); y += 4; });
-      pdf.setFontSize(10); pdf.text("Moussat Al-Qadri Agricultural Establishment | 00962777772211", 105, 282, { align: "center" });
+      pdf.setFontSize(16); pdf.text("Qadri Agricultural Catalog", 105, 20, { align: "center" });
+      pdf.setFontSize(11); items.forEach((item, index) => pdf.text(`${index + 1}. ${item.name || "Catalog item"}`, 190, 35 + index * 8, { align: "right" }));
       pdf.save("catalog-qadri.pdf");
-    } finally { setDownloading(false); }
+    } finally { exportRoot.remove(); setDownloading(false); }
   };
+
   return <section className="mt-6 rounded-2xl border-2 bg-[#eef5f0] p-4 shadow-[0_18px_50px_rgba(20,69,48,.1)]" style={{ borderColor: "#000000" }}><div className="no-print mb-4 flex flex-wrap items-center justify-between gap-2"><Button type="button" onClick={onClose} variant="outline">العودة للفواتير</Button><div className="flex gap-2"><Button type="button" onClick={addItem} className="bg-[#0a4b39] text-white"><Plus className="me-2 size-4" />إضافة بند</Button><Button type="button" onClick={downloadPdf} disabled={downloading} className="bg-[#c8a75a] text-[#3f3012] hover:bg-[#b49348]"><FileDown className="me-2 size-4" />{downloading ? "جاري تجهيز PDF" : "تنزيل PDF"}</Button></div></div><div ref={catalogRef} className="mx-auto max-w-[900px] bg-white p-7 shadow-[0_12px_35px_rgba(25,65,47,.14)] sm:p-12" dir="rtl"><header className="border-b-2 pb-6 text-center" style={{ borderColor: "#000000" }}><label className="no-print block cursor-pointer"><img src={logo} alt="شعار مؤسسة القادري الزراعية" className="mx-auto h-24 w-auto object-contain" /><input type="file" accept="image/*" className="hidden" onChange={uploadLogo} /></label><h1 className="mt-3 text-3xl font-black text-[#174d3b]">مؤسسة القادري الزراعية</h1><input value={subtitle} onChange={event => setSubtitle(event.target.value)} className="no-print mt-4 w-full rounded-lg border border-[#d8e7dd] bg-[#f8fbf8] p-2 text-center text-lg font-bold text-[#476259] outline-none" placeholder="العنوان الفرعي" /><h2 className="hidden print:block mt-4 text-lg font-bold text-[#476259]">{subtitle}</h2></header><div className="mt-8 overflow-x-auto"><table className="w-full min-w-[580px] border-collapse text-center"><thead><tr className="bg-[#0a4b39] text-white"><th className="w-20 border border-[#0a4b39] p-3">الرقم</th><th className="border border-[#0a4b39] p-3">الاسم</th><th className="w-[48%] border border-[#0a4b39] p-3">الصورة</th></tr></thead><tbody>{items.map(item => <tr key={item.id} className="align-middle even:bg-[#f7faf6]"><td className="border border-[#cfe0d6] p-3 text-lg font-black text-[#7d6125]">{item.number}<button type="button" onClick={() => removeItem(item.id)} className="no-print mt-2 block w-full text-xs font-normal text-red-700">حذف</button></td><td className="border border-[#cfe0d6] p-3"><Input value={item.name} onChange={event => updateItem(item.id, { name: event.target.value })} placeholder="اسم البند" className="no-print text-center font-bold" /><span className="hidden print:block font-bold">{item.name || "—"}</span></td><td className="border border-[#cfe0d6] p-3"><div className="no-print mb-3"><label className="inline-flex cursor-pointer items-center rounded-lg bg-[#edf5ee] px-3 py-2 text-xs font-bold text-[#174d3b]"><ImagePlus className="me-2 size-4" />إضافة صور للبند<input type="file" accept="image/*" multiple className="hidden" onChange={event => uploadImages(item.id, event)} /></label></div>{item.images.length ? <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">{item.images.map((image, index) => <div key={`${item.id}-${index}`} className="relative"><img src={image} alt={item.name || `صورة ${item.number}`} className="h-40 w-full rounded-lg object-cover ring-1 ring-[#d8e7dd] sm:h-48" /><button type="button" onClick={() => removeImage(item.id, index)} className="no-print absolute end-1 top-1 rounded-full bg-red-700 px-2 py-1 text-xs text-white">×</button></div>)}</div> : <div className="flex h-40 items-center justify-center rounded-lg border border-dashed border-[#b7cfc1] text-sm text-[#71877c]">أضف صورة أو أكثر</div>}</td></tr>)}</tbody></table></div><footer className="mt-10 border-t-2 pt-6 text-center text-sm font-bold leading-8 text-[#174d3b]" style={{ borderColor: "#000000" }}><p>مؤسسة القادري الزراعية</p><p>📞 00962777772211</p><p>✉️ tamerqadri@gmail.com</p><p dir="ltr">🌐 https://www.alqadrioffers.online</p></footer></div></section>;
 }
 
