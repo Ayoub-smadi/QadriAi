@@ -78,6 +78,10 @@ function CatalogEditor({ onClose }: { onClose: () => void }) {
     clone.style.margin = "0";
     clone.style.boxShadow = "none";
     clone.querySelectorAll("button").forEach(node => node.remove());
+    clone.querySelectorAll("label.no-print").forEach(label => {
+      if (label.querySelector("img")) { label.querySelectorAll("input").forEach(input => input.remove()); label.classList.remove("no-print"); }
+      else label.remove();
+    });
     clone.querySelectorAll("input").forEach(node => {
       const field = node as HTMLInputElement;
       const replacement = document.createElement("span");
@@ -85,7 +89,6 @@ function CatalogEditor({ onClose }: { onClose: () => void }) {
       replacement.style.cssText = "display:block;width:100%;min-height:28px;padding:6px;text-align:center;font-weight:700;";
       field.replaceWith(replacement);
     });
-    clone.querySelectorAll("label").forEach(label => label.classList.remove("no-print"));
     exportRoot.appendChild(clone);
     document.body.appendChild(exportRoot);
     try {
