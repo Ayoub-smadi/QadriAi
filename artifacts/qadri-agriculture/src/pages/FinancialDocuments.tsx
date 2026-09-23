@@ -94,14 +94,28 @@ function CatalogEditor({ onClose }: { onClose: () => void }) {
     try {
       await document.fonts?.ready;
       await Promise.all(Array.from(exportRoot.querySelectorAll("img")).map(image => (image as HTMLImageElement).decode?.().catch(() => undefined)));
-      const canvas = await html2canvas(exportRoot, { scale: 2, backgroundColor: "#ffffff", useCORS: true, allowTaint: false, imageTimeout: 20000, logging: false, scrollX: 0, scrollY: 0 });
       const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
-      const imageHeight = canvas.height * pageWidth / canvas.width;
-      const image = canvas.toDataURL("image/jpeg", 0.95);
-      const pages = Math.max(1, Math.ceil(imageHeight / pageHeight));
-      for (let page = 0; page < pages; page += 1) { if (page) pdf.addPage(); pdf.addImage(image, "JPEG", 0, -page * pageHeight, pageWidth, imageHeight); }
+      const rows = Array.from(clone.querySelectorAll("tbody tr"));
+      const pageRows = rows.length ? rows : [null];
+      for (let page = 0; page < pageRows.length; page += 1) {
+        const pageClone = clone.cloneNode(true) as HTMLDivElement;
+        const pageBody = pageClone.querySelector("tbody");
+        if (pageBody) {
+          pageBody.replaceChildren(pageRows[page] ? pageRows[page]!.cloneNode(true) : document.createElement("tr"));
+        }
+        if (page < pageRows.length - 1) pageClone.querySelector("footer")?.remove();
+        exportRoot.replaceChildren(pageClone);
+        await Promise.all(Array.from(exportRoot.querySelectorAll("img")).map(image => (image as HTMLImageElement).decode?.().catch(() => undefined)));
+        const canvas = await html2canvas(exportRoot, { scale: 2, backgroundColor: "#ffffff", useCORS: true, allowTaint: false, imageTimeout: 20000, logging: false, scrollX: 0, scrollY: 0 });
+        const scale = Math.min(pageWidth / canvas.width, pageHeight / canvas.height);
+        const imageWidth = canvas.width * scale;
+        const imageHeight = canvas.height * scale;
+        const image = canvas.toDataURL("image/jpeg", 0.95);
+        if (page) pdf.addPage();
+        pdf.addImage(image, "JPEG", (pageWidth - imageWidth) / 2, (pageHeight - imageHeight) / 2, imageWidth, imageHeight);
+      }
       pdf.save("كتالوج_مؤسسة_القادري.pdf");
     } catch (error) {
       console.error("Catalog visual PDF failed", error);
