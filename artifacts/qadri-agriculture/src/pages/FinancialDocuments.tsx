@@ -115,14 +115,27 @@ function CatalogEditor({ onClose }: { onClose: () => void }) {
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
       const rows = Array.from(clone.querySelectorAll("tbody tr"));
-      const pageRows = rows.length ? rows : [null];
-      for (let page = 0; page < pageRows.length; page += 1) {
+      const sourcePageHeight = 900 * pageHeight / pageWidth;
+      const headerHeight = clone.querySelector("header")?.getBoundingClientRect().height || 150;
+      const tableHeadHeight = clone.querySelector("thead")?.getBoundingClientRect().height || 50;
+      const footerHeight = clone.querySelector("footer")?.getBoundingClientRect().height || 120;
+      const rowHeights = rows.map(row => row.getBoundingClientRect().height || 430);
+      const usableHeight = sourcePageHeight - headerHeight - tableHeadHeight - footerHeight - 45;
+      const pageGroups: Element[][] = [];
+      let currentGroup: Element[] = [];
+      let currentHeight = 0;
+      rows.forEach((row, index) => {
+        const rowHeight = rowHeights[index] || 430;
+        if (currentGroup.length && currentHeight + rowHeight > usableHeight) { pageGroups.push(currentGroup); currentGroup = []; currentHeight = 0; }
+        currentGroup.push(row); currentHeight += rowHeight;
+      });
+      if (currentGroup.length) pageGroups.push(currentGroup);
+      if (!pageGroups.length) pageGroups.push([]);
+      for (let page = 0; page < pageGroups.length; page += 1) {
         const pageClone = clone.cloneNode(true) as HTMLDivElement;
         const pageBody = pageClone.querySelector("tbody");
-        if (pageBody) {
-          pageBody.replaceChildren(pageRows[page] ? pageRows[page]!.cloneNode(true) : document.createElement("tr"));
-        }
-        if (page < pageRows.length - 1) pageClone.querySelector("footer")?.remove();
+        if (pageBody) pageBody.replaceChildren(...pageGroups[page].map(row => row.cloneNode(true)));
+        if (page < pageGroups.length - 1) pageClone.querySelector("footer")?.remove();
         exportRoot.replaceChildren(pageClone);
         await Promise.all(Array.from(exportRoot.querySelectorAll("img")).map(image => (image as HTMLImageElement).decode?.().catch(() => undefined)));
         const canvas = await html2canvas(exportRoot, { scale: 2, backgroundColor: "#ffffff", useCORS: true, allowTaint: false, imageTimeout: 20000, logging: false, scrollX: 0, scrollY: 0 });
