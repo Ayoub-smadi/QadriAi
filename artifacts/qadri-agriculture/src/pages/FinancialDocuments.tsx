@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { documentTypeLabel, emptyDocument, getDocuments, removeDocument, saveDocument, subscribeToDocuments, type DocumentType, type FinancialDocument, type InvoiceRow, type PaymentMethod } from "@/data/financialDocuments";
 import { FileDown, ImagePlus, Plus, Printer, ReceiptText, Save, ShoppingCart, Trash2 } from "lucide-react";
+import { getNeonValue, setNeonValue } from "@/data/neonStorage";
 import { useEffect, useMemo, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -67,31 +68,29 @@ function CatalogEditor({ onClose }: { onClose: () => void }) {
   const [catalogView, setCatalogView] = useState<"editor" | "history">("editor");
   const [catalogHistory, setCatalogHistory] = useState<Array<{ id: string; title: string; savedAt: string; subtitle: string; logo: string; items: CatalogItem[] }>>([]);
   const catalogRef = useRef<HTMLDivElement>(null);
-  const skipCatalogSave = useRef(true);
   useEffect(() => {
-    try {
-      const history = JSON.parse(localStorage.getItem(CATALOG_HISTORY_KEY) || "[]");
+    let active = true;
+    Promise.all([
+      getNeonValue<{ subtitle?: string; logo?: string; items?: CatalogItem[] }>(CATALOG_STORAGE_KEY),
+      getNeonValue<Array<{ id: string; title: string; savedAt: string; subtitle: string; logo: string; items: CatalogItem[] }>>(CATALOG_HISTORY_KEY),
+    ]).then(([saved, history]) => {
+      if (!active) return;
       if (Array.isArray(history)) setCatalogHistory(history);
-      const saved = localStorage.getItem(CATALOG_STORAGE_KEY);
       if (saved) {
-        const parsed = JSON.parse(saved) as { subtitle?: string; logo?: string; items?: CatalogItem[] };
-        if (parsed.subtitle !== undefined) setSubtitle(parsed.subtitle);
-        if (parsed.logo) setLogo(parsed.logo);
-        if (Array.isArray(parsed.items) && parsed.items.length) setItems(parsed.items.map((item, index) => ({ ...item, number: index + 1, images: Array.isArray(item.images) ? item.images.slice(0, 2) : [] })));
+        if (saved.subtitle !== undefined) setSubtitle(saved.subtitle);
+        if (saved.logo) setLogo(saved.logo);
+        if (Array.isArray(saved.items) && saved.items.length) setItems(saved.items.map((item, index) => ({ ...item, number: index + 1, images: Array.isArray(item.images) ? item.images.slice(0, 2) : [] })));
       }
-    } catch (error) { console.warn("Could not restore catalog", error); }
+    }).catch(error => { console.warn("Could not restore catalog from Neon", error); if (active) setSavedMessage("تعذر تحميل الكتالوج من قاعدة البيانات"); });
+    return () => { active = false; };
   }, []);
-  useEffect(() => {
-    if (skipCatalogSave.current) { skipCatalogSave.current = false; return; }
-    try { localStorage.setItem(CATALOG_STORAGE_KEY, JSON.stringify({ subtitle, logo, items })); } catch (error) { console.warn("Could not save catalog", error); }
-  }, [subtitle, logo, items]);
   const addItem = () => setItems(current => [...current, { id: catalogId(), number: current.length + 1, name: "", images: [] }]);
   const removeItem = (id: string) => setItems(current => current.length > 1 ? current.filter(item => item.id !== id).map((item, index) => ({ ...item, number: index + 1 })) : current);
   const updateItem = (id: string, patch: Partial<CatalogItem>) => setItems(current => current.map(item => item.id === id ? { ...item, ...patch } : item));
   const uploadImages = (id: string, event: React.ChangeEvent<HTMLInputElement>) => { const files = Array.from(event.target.files || []).slice(0, 2); if (!files.length) return; Promise.all(files.map(file => new Promise<string>(resolve => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result)); reader.readAsDataURL(file); }))).then(images => updateItem(id, { images: images.slice(0, 2) })); event.target.value = ""; };
   const removeImage = (id: string, index: number) => { const item = items.find(value => value.id === id); if (!item) return; updateItem(id, { images: item.images.filter((_, imageIndex) => imageIndex !== index) }); };
   const uploadLogo = (event: React.ChangeEvent<HTMLInputElement>) => { const file = event.target.files?.[0]; if (!file) return; const reader = new FileReader(); reader.onload = () => setLogo(String(reader.result)); reader.readAsDataURL(file); };
-  const saveCatalog = async () => { try { const compactLogo = await compactCatalogImage(logo, 900); const compactItems = await Promise.all(items.map(async item => ({ ...item, images: await Promise.all(item.images.slice(0, 2).map(image => compactCatalogImage(image))) }))); const entry = { id: catalogId(), title: subtitle || "كتالوج المنتجات الزراعية", savedAt: new Date().toLocaleString("ar-JO"), subtitle, logo: compactLogo, items: compactItems }; const previous = JSON.parse(localStorage.getItem(CATALOG_HISTORY_KEY) || "[]") as typeof catalogHistory; const next = [entry, ...previous].slice(0, 6); localStorage.setItem(CATALOG_STORAGE_KEY, JSON.stringify({ subtitle, logo: compactLogo, items: compactItems })); try { localStorage.setItem(CATALOG_HISTORY_KEY, JSON.stringify(next)); } catch { localStorage.removeItem(CATALOG_HISTORY_KEY); localStorage.setItem(CATALOG_HISTORY_KEY, JSON.stringify([entry])); } setLogo(compactLogo); setItems(compactItems); setCatalogHistory(next); setCatalogView("history"); } catch (error) { console.warn("Could not save catalog", error); setSavedMessage("تعذر حفظ الكتالوج، حاول تقليل حجم الصور"); } };
+  const saveCatalog = async () => { try { const compactLogo = await compactCatalogImage(logo, 900); const compactItems = await Promise.all(items.map(async item => ({ ...item, images: await Promise.all(item.images.slice(0, 2).map(image => compactCatalogImage(image))) }))); const entry = { id: catalogId(), title: subtitle || "كتالوج المنتجات الزراعية", savedAt: new Date().toLocaleString("ar-JO"), subtitle, logo: compactLogo, items: compactItems }; const previous = (await getNeonValue<typeof catalogHistory>(CATALOG_HISTORY_KEY)) || []; const next = [entry, ...previous].slice(0, 20); await setNeonValue(CATALOG_STORAGE_KEY, { subtitle, logo: compactLogo, items: compactItems }); await setNeonValue(CATALOG_HISTORY_KEY, next); setLogo(compactLogo); setItems(compactItems); setCatalogHistory(next); setCatalogView("history"); } catch (error) { console.warn("Could not save catalog to Neon", error); setSavedMessage("تعذر حفظ الكتالوج في قاعدة البيانات"); } };
   const startNewCatalog = () => { setSubtitle("كتالوج المنتجات الزراعية"); setLogo("/assets/qadri-logo.png"); setItems([{ id: catalogId(), number: 1, name: "", images: [] }]); setCatalogView("editor"); };
   const openSavedCatalog = (entry: typeof catalogHistory[number]) => { setSubtitle(entry.subtitle); setLogo(entry.logo); setItems(entry.items); setCatalogView("editor"); };
   const downloadPdf = async () => {
