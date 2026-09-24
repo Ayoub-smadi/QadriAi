@@ -1,6 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { PlatformShell } from "@/components/PlatformShell";
-import { SmartPlantRescue } from "@/components/SmartPlantRescue";
 import { useLanguage } from "@/lib/i18n";
 import { ArrowLeft, ArrowRight, Bot, CheckCircle2, ClipboardCheck, DraftingCompass, Globe2, Leaf, LineChart, Mail, MapPin, Phone, ScanSearch, ShieldCheck, Sprout, TreePine } from "lucide-react";
 import { Link, useLocation } from "wouter";
@@ -8,7 +7,6 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { getNurseryGalleryRemote, subscribeToNurseryGallery, type NurseryGalleryImage } from "@/data/nurseryGallery";
 import { getDailyPlant } from "@/data/dailyPlant";
-import { HomeAvatarChat } from "@/components/HomeAvatarChat";
 
 
 function useTypewriter(text: string) {
@@ -101,11 +99,9 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-3"><Button asChild className="h-12 rounded-xl bg-[#034f3b] px-5 text-base text-white shadow-[0_12px_24px_rgba(3,79,59,.2)] hover:bg-[#023c2d]"><Link href={isAuthenticated ? "/dashboard" : "/selector"}>{t.start}<Arrow className="ms-2 size-4" /></Link></Button><Button asChild variant="outline" className="h-12 rounded-xl border-[#034f3b]/20 bg-white px-5 text-base text-[#034f3b] hover:bg-[#e8f5ef]"><Link href="/engineer"><Bot className="me-2 size-4" />{language === "ar" ? "اسأل الذكاء الاصطناعي" : "Ask the AI"}</Link></Button>{!isAuthenticated && <Button onClick={() => setLocation("/auth")} variant="outline" className="h-12 rounded-xl border-[#034f3b]/20 bg-white px-5 text-base text-[#034f3b] hover:bg-[#e8f5ef]">{t.signIn}</Button>}</div>
             <div className="mt-10 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-[#55766d]"><span className="flex items-center gap-2"><ShieldCheck className="size-4 text-[#2a8068]" />{language === "ar" ? "توصيات حذرة" : "Cautious guidance"}</span><span className="flex items-center gap-2"><CheckCircle2 className="size-4 text-[#2a8068]" />{language === "ar" ? "خطوات قابلة للتفسير" : "Explainable next steps"}</span></div>
           </div>
-          <div className="order-1 lg:order-2"><div className="relative mx-auto w-full max-w-[360px] lg:max-w-[390px]"><div className="absolute -inset-5 rounded-[2.5rem] bg-[#82cdb1]/25 blur-2xl" /><SmartPlantRescue language={language} /></div></div>
+          <div className="order-1 lg:order-2"><div className="relative mx-auto w-full max-w-[360px] lg:max-w-[390px]"><div className="absolute -inset-5 rounded-[2.5rem] bg-[#82cdb1]/25 blur-2xl" /><div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-[#D4E7DF] bg-[#F3FAF7] shadow-[0_24px_60px_rgba(3,79,59,.14)]"><img src="/assets/thamer-al-qadri.jpg" alt={language === "ar" ? "أفاتار القادري الزراعي" : "Al-Qadri agricultural avatar"} className="size-full object-cover object-top" /><div className="absolute inset-x-4 bottom-4 rounded-xl border border-white/60 bg-white/90 px-3 py-2 text-center text-xs font-bold text-[#174d3b] shadow-lg">{language === "ar" ? "المساعد الزراعي الذكي" : "Smart agricultural assistant"}</div></div></div></div>
         </div>
       </section>
-
-      <HomeAvatarChat />
 
       <section className="container py-12 sm:py-16"><div className="relative overflow-hidden rounded-[2rem] border border-[#35530e]/10 bg-[#f4f8ee] p-6 shadow-[0_16px_40px_rgba(48,67,22,.07)] sm:p-9" dir={language === "ar" ? "rtl" : "ltr"}><div className="pointer-events-none absolute -end-16 -top-20 size-48 rounded-full bg-[#dcebbd]/70 blur-3xl" /><div className="relative max-w-4xl"><p className="text-xs font-bold tracking-[.16em] text-[#759244]">{language === "ar" ? "رؤية زراعية من الأردن" : "AN AGRICULTURAL VISION FROM JORDAN"}</p><h2 className="mt-2 text-2xl font-bold tracking-tight text-[#293d12] sm:text-3xl">{language === "ar" ? "المهندس ثامر القادري" : "Engineer Thamer Al-Qadri"}</h2><img src="/assets/thamer-al-qadri.jpg" alt={language === "ar" ? "المهندس ثامر القادري خلال توقيع اتفاقية" : "Engineer Thamer Al-Qadri during an agreement signing"} className="mt-6 w-full max-w-3xl rounded-[1.5rem] object-cover shadow-[0_12px_28px_rgba(48,67,22,.12)]" loading="lazy" /><p className="mt-5 min-h-[11rem] text-base leading-8 text-[#5f6d50] sm:min-h-[8rem]" aria-live="polite">{typedBio}<span className="ms-1 inline-block font-bold text-[#6d9335] animate-pulse">|</span></p><div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold text-[#496327]"><a href="tel:0777772211" dir="ltr" className="inline-flex items-center gap-2 rounded-full border border-[#bcd3a1] bg-white/80 px-5 py-3 text-lg font-extrabold tracking-wide text-[#35530e] transition hover:bg-white"><Phone className="size-5" />0777772211</a><a href="mailto:tamerqadri@gmail.com" className="inline-flex items-center gap-2 rounded-full border border-[#bcd3a1] bg-white/80 px-4 py-2 transition hover:bg-white"><Mail className="size-4" />tamerqadri@gmail.com</a><a href="https://www.alqadrioffers.online" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#bcd3a1] bg-white/80 px-4 py-2 transition hover:bg-white"><Globe2 className="size-4" />{language === "ar" ? "الموقع الإلكتروني" : "Website"}</a></div></div></div></section>
 
