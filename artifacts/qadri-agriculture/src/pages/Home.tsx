@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { getNurseryGalleryRemote, subscribeToNurseryGallery, type NurseryGalleryImage } from "@/data/nurseryGallery";
 import { getDailyPlant } from "@/data/dailyPlant";
 import { PrivateAvatarSession } from "@/components/PrivateAvatarSession";
+import { DigitalHumanPreview } from "@/components/DigitalHumanPreview";
 
 
 function useTypewriter(text: string) {
@@ -106,6 +107,7 @@ export default function Home() {
       </section>
 
       <section className="container py-10 sm:py-14"><PrivateAvatarSession language={language} /></section>
+      <section className="container pb-10 sm:pb-14"><DigitalHumanPreview language={language} /></section>
 
       <section className="container py-12 sm:py-16"><div className="relative overflow-hidden rounded-[2rem] border border-[#35530e]/10 bg-[#f4f8ee] p-6 shadow-[0_16px_40px_rgba(48,67,22,.07)] sm:p-9" dir={language === "ar" ? "rtl" : "ltr"}><div className="pointer-events-none absolute -end-16 -top-20 size-48 rounded-full bg-[#dcebbd]/70 blur-3xl" /><div className="relative max-w-4xl"><p className="text-xs font-bold tracking-[.16em] text-[#759244]">{language === "ar" ? "رؤية زراعية من الأردن" : "AN AGRICULTURAL VISION FROM JORDAN"}</p><h2 className="mt-2 text-2xl font-bold tracking-tight text-[#293d12] sm:text-3xl">{language === "ar" ? "المهندس ثامر القادري" : "Engineer Thamer Al-Qadri"}</h2><img src="/assets/thamer-al-qadri.jpg" alt={language === "ar" ? "المهندس ثامر القادري خلال توقيع اتفاقية" : "Engineer Thamer Al-Qadri during an agreement signing"} className="mt-6 w-full max-w-3xl rounded-[1.5rem] object-cover shadow-[0_12px_28px_rgba(48,67,22,.12)]" loading="lazy" /><p className="mt-5 min-h-[11rem] text-base leading-8 text-[#5f6d50] sm:min-h-[8rem]" aria-live="polite">{typedBio}<span className="ms-1 inline-block font-bold text-[#6d9335] animate-pulse">|</span></p><div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold text-[#496327]"><a href="tel:0777772211" dir="ltr" className="inline-flex items-center gap-2 rounded-full border border-[#bcd3a1] bg-white/80 px-5 py-3 text-lg font-extrabold tracking-wide text-[#35530e] transition hover:bg-white"><Phone className="size-5" />0777772211</a><a href="mailto:tamerqadri@gmail.com" className="inline-flex items-center gap-2 rounded-full border border-[#bcd3a1] bg-white/80 px-4 py-2 transition hover:bg-white"><Mail className="size-4" />tamerqadri@gmail.com</a><a href="https://www.alqadrioffers.online" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#bcd3a1] bg-white/80 px-4 py-2 transition hover:bg-white"><Globe2 className="size-4" />{language === "ar" ? "الموقع الإلكتروني" : "Website"}</a></div></div></div></section>
 
