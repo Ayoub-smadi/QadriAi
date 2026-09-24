@@ -30,6 +30,8 @@ export type AIChatBoxProps = {
   emptyStateMessage?: string;
   suggestedPrompts?: string[];
   speechLanguage?: "ar" | "en";
+  onVoiceChatToggle?: (active: boolean) => void;
+  voiceChatActive?: boolean;
 };
 
 const MAX_ATTACHMENTS = 3;
@@ -111,6 +113,8 @@ export function AIChatBox({
   emptyStateMessage = "Start a conversation with AI",
   suggestedPrompts,
   speechLanguage,
+  onVoiceChatToggle,
+  voiceChatActive = false,
 }: AIChatBoxProps) {
   const [input, setInput] = useState("");
   const [speakingIndex, setSpeakingIndex] = useState<number | null>(null);
@@ -241,7 +245,7 @@ export function AIChatBox({
           <Textarea ref={undefined} value={input} onChange={event => setInput(event.target.value)} onKeyDown={handleKeyDown} placeholder={placeholder} className="min-h-10 max-h-32 flex-1 resize-none" rows={1} />
           <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/webp,audio/*" multiple className="hidden" onChange={event => { if (event.target.files) void addFiles(event.target.files); event.target.value = ""; }} />
           <Button type="button" variant="ghost" size="icon" disabled={isLoading || isRecording || attachments.length >= MAX_ATTACHMENTS} onClick={() => fileInputRef.current?.click()} title="إرفاق صورة أو صوت"><Paperclip className="size-4" /></Button>
-          <Button type="button" variant={isRecording ? "destructive" : "ghost"} size="icon" disabled={isLoading} onClick={isRecording ? stopRecording : startRecording} title={isRecording ? "إيقاف التسجيل" : "تسجيل صوت"}>{isRecording ? <Square className="size-4" /> : <Mic className="size-4" />}</Button>
+          <Button type="button" variant={onVoiceChatToggle ? (voiceChatActive ? "destructive" : "ghost") : (isRecording ? "destructive" : "ghost")} size="icon" disabled={isLoading} onClick={onVoiceChatToggle ? () => onVoiceChatToggle(!voiceChatActive) : (isRecording ? stopRecording : startRecording)} title={onVoiceChatToggle ? (voiceChatActive ? "إيقاف صوت الأفاتار" : "تحدث مع الأفاتار") : (isRecording ? "إيقاف التسجيل" : "تسجيل صوت")}>{onVoiceChatToggle ? (voiceChatActive ? <Square className="size-4" /> : <Mic className="size-4" />) : (isRecording ? <Square className="size-4" /> : <Mic className="size-4" />)}</Button>
           <Button type="submit" size="icon" disabled={(!input.trim() && !attachments.length) || isLoading || isRecording} className="size-10 shrink-0">{isLoading ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}</Button>
         </div>
         <p className="mt-2 text-[11px] text-muted-foreground">{isRecording ? "جاري التسجيل… اضغط زر الإيقاف عند الانتهاء." : "يمكنك الضغط على Enter للإرسال وShift+Enter لسطر جديد."}</p>

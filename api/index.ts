@@ -466,6 +466,20 @@ async function handleUserStorage(req: any, res: any, input: any) {
   throw Object.assign(new Error("عملية تخزين غير معروفة."), { code: "BAD_REQUEST" });
 }
 
+async function handleLiveAvatarSession(req: any, res: any) {
+  const apiKey = String(process.env.LIVEAVATAR_API_KEY || "").trim();
+  const avatarId = String(process.env.LIVEAVATAR_AVATAR_ID || "").trim();
+  if (!apiKey || !avatarId) throw Object.assign(new Error("لم يتم ضبط LIVEAVATAR_API_KEY و LIVEAVATAR_AVATAR_ID على الخادم."), { code: "INTERNAL_SERVER_ERROR" });
+  const persona: Record<string, string> = { language: String(process.env.LIVEAVATAR_LANGUAGE || "ar") };
+  if (process.env.LIVEAVATAR_VOICE_ID) persona.voice_id = String(process.env.LIVEAVATAR_VOICE_ID);
+  if (process.env.LIVEAVATAR_CONTEXT_ID) persona.context_id = String(process.env.LIVEAVATAR_CONTEXT_ID);
+  const response = await fetch("https://api.liveavatar.com/v1/sessions/token", { method: "POST", headers: { "X-API-KEY": apiKey, accept: "application/json", "content-type": "application/json" }, body: JSON.stringify({ mode: "FULL", avatar_id: avatarId, avatar_persona: persona }) });
+  const raw = await response.text();
+  let data: any = {};
+  try { data = JSON.parse(raw); } catch { /* handled below */ }
+  if (!response.ok || !data?.session_token) throw Object.assign(new Error(`تعذر إنشاء جلسة الأفاتار (${response.status}): ${data?.message || data?.error?.message || raw.slice(0, 240)}`), { code: "INTERNAL_SERVER_ERROR" });
+  return sendSuccess(res, { session_token: data.session_token, session_id: data.session_id });
+}
 async function handle(req: any, res: any) {
   res.locals = res.locals || {};
   res.locals.authRest = String(req.query?.format || "") === "rest";
@@ -490,6 +504,7 @@ async function handle(req: any, res: any) {
 
     if (operation === "quotes") return await handleQuoteOperation(req, res, readInput(req));
     if (operation === "storage") return await handleUserStorage(req, res, readInput(req));
+    if (operation === "session" && String(req.query?.operation || "") === "liveavatar.session") return await handleLiveAvatarSession(req, res);
 
     if (operation === "me") {
       const userId = getSessionUserId(req);

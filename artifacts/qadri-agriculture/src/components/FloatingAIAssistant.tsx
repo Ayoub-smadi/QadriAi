@@ -1,8 +1,9 @@
 import { AIChatBox, type ChatAttachment, type Message } from "@/components/AIChatBox";
-import { trpc } from "@/lib/trpc";
+import LiveAvatarPanel from "@/components/LiveAvatarPanel";
 import { useAuth } from "@/_core/hooks/useAuth";
-import { Bot, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { LiveAvatarSession } from "@heygen/liveavatar-web-sdk";
+import { X } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 
 export default function FloatingAIAssistant() {
@@ -10,36 +11,21 @@ export default function FloatingAIAssistant() {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
-  const consultation = trpc.ai.consult.useMutation({
-    onSuccess: result => setMessages(previous => [...previous, { role: "assistant", content: result.content, ...(result.images?.length ? { images: result.images } : {}) }]),
-    onError: error => setMessages(previous => [...previous, { role: "assistant", content: error.message || "تعذر الحصول على الرد الآن." }]),
-  });
-  useEffect(() => {
-    if (location === "/financial-documents") setOpen(false);
-  }, [location]);
-  useEffect(() => {
-    const openPrivateSession = () => setOpen(true);
-    window.addEventListener("qadri-ai-open", openPrivateSession);
-    return () => window.removeEventListener("qadri-ai-open", openPrivateSession);
-  }, []);
-  useEffect(() => {
-    localStorage.setItem("qadri-ai-chat-open", open ? "1" : "0");
-  }, [open]);
+  const [voiceChatActive, setVoiceChatActive] = useState(false);
+  const liveAvatarSessionRef = useRef<LiveAvatarSession | null>(null);
+  const onAvatarTranscript = useCallback((text: string) => setMessages(previous => [...previous, { role: "assistant", content: text }]), []);
+  const toggleVoiceChat = async (active: boolean) => { const session = liveAvatarSessionRef.current; if (!session) return; try { if (active) await session.voiceChat.start(); else session.voiceChat.stop(); setVoiceChatActive(active); } catch { setVoiceChatActive(false); setMessages(previous => [...previous, { role: "assistant", content: "تعذر تشغيل الميكروفون. اسمح بالوصول إلى الميكروفون ثم حاول مرة أخرى." }]); } };
+  useEffect(() => { if (location === "/financial-documents") setOpen(false); }, [location]);
+  useEffect(() => { if (typeof window !== "undefined") window.dispatchEvent(new CustomEvent("qadri-ai-open", { detail: { open } })); }, [open]);
   const send = (content: string, attachments?: ChatAttachment[]) => {
     const next = [...messages, { role: "user" as const, content, ...(attachments?.length ? { attachments } : {}) }];
     setMessages(next);
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent("financial-ai-command", { detail: { content } }));
-      setOpen(true);
-    }
-    if (location === "/financial-documents" && /فاتورة|سند قبض|سند صرف|وصل قبض|وصل صرف/i.test(content)) {
-      setMessages(previous => [...previous, { role: "assistant", content: "جهزت لك المستند وعبّيت البيانات المطلوبة. راجعه واضغط حفظ المستند." }]);
-      return;
-    }
-    consultation.mutate({ messages: next.map(message => ({ role: message.role, content: message.content })), attachments, language: "ar" });
+    if (typeof window !== "undefined") window.dispatchEvent(new CustomEvent("financial-ai-command", { detail: { content } }));
+    if (liveAvatarSessionRef.current && !attachments?.length) { liveAvatarSessionRef.current.message(content); return; }
+    if (!liveAvatarSessionRef.current) setMessages(previous => [...previous, { role: "assistant", content: "الأفاتار غير متصل حاليًا. حاول فتح المساعد مرة أخرى." }]);
   };
   return <>
     <button type="button" onClick={() => setOpen(value => !value)} aria-label="فتح المساعد الذكي" className="fixed bottom-5 end-5 z-[70] grid size-14 place-items-center rounded-full border-4 border-white bg-[#07513e] p-1 shadow-[0_12px_32px_rgba(4,66,49,.35)] transition hover:scale-105"><img src="/assets/chatbot.png" alt="المساعد الذكي" className="size-full rounded-full object-contain" /></button>
-    {open && <section className="fixed bottom-24 end-4 z-[70] flex h-[min(620px,calc(100dvh-7rem))] w-[min(420px,calc(100vw-2rem))] min-h-0 flex-col overflow-hidden rounded-[1.5rem] border border-[#9ccdb8] bg-white shadow-[0_20px_60px_rgba(3,63,47,.28)]" dir="rtl"><header className="flex shrink-0 items-center justify-between bg-[#07513e] px-4 py-3 text-white"><div className="flex items-center gap-2"><span className="grid size-9 place-items-center rounded-full bg-white p-0.5"><img src="/assets/chatbot.png" alt="المساعد الذكي" className="size-full rounded-full object-contain" /></span><div><b className="block text-sm">المساعد الإداري الذكي</b><span className="text-[11px] text-[#cbe9dc]">{user?.role === "admin" ? "متاح لتحضير الفواتير" : "مساعد القادري الزراعي"}</span></div></div><button type="button" onClick={() => setOpen(false)} className="rounded-lg p-2 hover:bg-white/10" aria-label="إغلاق"><X className="size-5" /></button></header><div className="min-h-0 flex-1 overflow-hidden"><AIChatBox messages={messages} onSendMessage={send} isLoading={consultation.isPending} height="auto" className="h-full rounded-none border-0 shadow-none" placeholder={user?.role === "admin" ? "مثال: اعمل فاتورة تصدير للجهة..." : "اكتب سؤالك الزراعي..."} emptyStateMessage={user?.role === "admin" ? "اطلب تجهيز فاتورة أو اسألني عن الإدارة" : "كيف أساعدك؟"} suggestedPrompts={user?.role === "admin" ? ["اعمل فاتورة تصدير جديدة", "جهز سند قبض", "جهز سند صرف"] : ["كيف أعتني بنباتاتي؟"]} speechLanguage="ar" /></div></section>}
+    {open && <section className="fixed bottom-24 end-4 z-[70] flex h-[min(510px,calc(100dvh-7rem))] w-[min(620px,calc(100vw-2rem))] min-h-0 flex-col overflow-hidden rounded-[1.25rem] border border-[#9ccdb8] bg-white shadow-[0_20px_60px_rgba(3,63,47,.28)]" dir="rtl"><header className="flex shrink-0 items-center justify-between bg-[#07513e] px-3 py-2 text-white"><div className="flex items-center gap-2"><b className="text-sm">المساعد الإداري الذكي</b><span className="text-[10px] text-[#cbe9dc]">جلسة LiveAvatar واحدة</span></div><button type="button" onClick={() => setOpen(false)} className="rounded-lg p-1.5 hover:bg-white/10" aria-label="إغلاق"><X className="size-4" /></button></header><div className="flex min-h-0 flex-1 flex-row gap-2 p-2"><LiveAvatarPanel sessionRef={liveAvatarSessionRef} onTranscript={onAvatarTranscript} /><div className="min-w-0 flex-1 overflow-hidden rounded-xl border border-[#d8e7dd]"><AIChatBox messages={messages} onSendMessage={send} isLoading={false} height="auto" className="h-full rounded-none border-0 shadow-none" placeholder={user?.role === "admin" ? "اكتب سؤالك أو اطلب مستندًا..." : "اكتب سؤالك الزراعي..."} emptyStateMessage="اكتب سؤالك للمساعد" suggestedPrompts={user?.role === "admin" ? ["اعمل فاتورة تصدير جديدة", "جهز سند قبض"] : ["كيف أعتني بنباتاتي؟"]} speechLanguage="ar" onVoiceChatToggle={toggleVoiceChat} voiceChatActive={voiceChatActive} /></div></div></section>}
   </>;
 }
