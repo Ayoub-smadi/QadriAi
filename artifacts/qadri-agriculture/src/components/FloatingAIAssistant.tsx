@@ -18,6 +18,11 @@ export default function FloatingAIAssistant() {
     if (location === "/financial-documents") setOpen(false);
   }, [location]);
   useEffect(() => {
+    const openPrivateSession = () => setOpen(true);
+    window.addEventListener("qadri-ai-open", openPrivateSession);
+    return () => window.removeEventListener("qadri-ai-open", openPrivateSession);
+  }, []);
+  useEffect(() => {
     localStorage.setItem("qadri-ai-chat-open", open ? "1" : "0");
   }, [open]);
   const send = (content: string, attachments?: ChatAttachment[]) => {
