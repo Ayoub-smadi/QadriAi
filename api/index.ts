@@ -477,8 +477,9 @@ async function handleLiveAvatarSession(req: any, res: any) {
   const raw = await response.text();
   let data: any = {};
   try { data = JSON.parse(raw); } catch { /* handled below */ }
-  if (!response.ok || !data?.session_token) throw Object.assign(new Error(`تعذر إنشاء جلسة الأفاتار (${response.status}): ${data?.message || data?.error?.message || raw.slice(0, 240)}`), { code: "INTERNAL_SERVER_ERROR" });
-  return sendSuccess(res, { session_token: data.session_token, session_id: data.session_id });
+  const sessionData = data?.data && typeof data.data === "object" ? data.data : data;
+  if (!response.ok || !sessionData?.session_token) throw Object.assign(new Error(`تعذر إنشاء جلسة الأفاتار (${response.status}): ${data?.message || data?.error?.message || raw.slice(0, 240)}`), { code: "INTERNAL_SERVER_ERROR" });
+  return sendSuccess(res, { session_token: sessionData.session_token, session_id: sessionData.session_id });
 }
 async function handle(req: any, res: any) {
   res.locals = res.locals || {};
