@@ -14,6 +14,7 @@ export type FinancialDocument = {
   requestedFrom: string; invoiceStatus: string; invoiceDiscount: string;
 };
 const KEY = "al-qadri-financial-documents-v1";
+const TRASH_KEY = "al-qadri-financial-documents-trash-v1";
 const EVENT = "al-qadri-financial-documents-change";
 const now = () => new Date().toISOString();
 const id = () => `doc-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
@@ -26,6 +27,9 @@ export const emptyDocument = (type: DocumentType): FinancialDocument => ({
 });
 export function getDocuments(): FinancialDocument[] { if (typeof window === "undefined") return []; try { const data = JSON.parse(localStorage.getItem(KEY) || "[]"); return Array.isArray(data) ? data : []; } catch { return []; } }
 export function saveDocument(doc: FinancialDocument) { const list = getDocuments(); const next = { ...doc, updatedAt: now() }; const i = list.findIndex(item => item.id === doc.id); if (i >= 0) list[i] = next; else list.unshift(next); localStorage.setItem(KEY, JSON.stringify(list)); window.dispatchEvent(new CustomEvent(EVENT)); return next; }
-export function removeDocument(documentId: string) { localStorage.setItem(KEY, JSON.stringify(getDocuments().filter(item => item.id !== documentId))); window.dispatchEvent(new CustomEvent(EVENT)); }
+export function getDeletedDocuments(): FinancialDocument[] { if (typeof window === "undefined") return []; try { const data = JSON.parse(localStorage.getItem(TRASH_KEY) || "[]"); return Array.isArray(data) ? data : []; } catch { return []; } }
+export function removeDocument(documentId: string) { const list = getDocuments(); const removed = list.find(item => item.id === documentId); if (removed) localStorage.setItem(TRASH_KEY, JSON.stringify([removed, ...getDeletedDocuments()].slice(0, 100))); localStorage.setItem(KEY, JSON.stringify(list.filter(item => item.id !== documentId))); window.dispatchEvent(new CustomEvent(EVENT)); }
+export function restoreDocument(documentId: string) { const trash = getDeletedDocuments(); const item = trash.find(value => value.id === documentId); if (!item) return; saveDocument(item); localStorage.setItem(TRASH_KEY, JSON.stringify(trash.filter(value => value.id !== documentId))); window.dispatchEvent(new CustomEvent(EVENT)); }
+export function purgeDeletedDocument(documentId: string) { localStorage.setItem(TRASH_KEY, JSON.stringify(getDeletedDocuments().filter(item => item.id !== documentId))); window.dispatchEvent(new CustomEvent(EVENT)); }
 export function subscribeToDocuments(listener: () => void) { const handler = () => listener(); window.addEventListener("storage", handler); window.addEventListener(EVENT, handler); return () => { window.removeEventListener("storage", handler); window.removeEventListener(EVENT, handler); }; }
 export const documentTypeLabel = (type: DocumentType) => type === "exportInvoice" ? "فاتورة تصدير" : type === "purchaseOrder" ? "طلب شراء" : type === "salesInvoice" ? "فاتورة بيع" : type === "purchaseInvoice" ? "فاتورة شراء" : type === "receipt" ? "سند قبض" : "سند صرف";

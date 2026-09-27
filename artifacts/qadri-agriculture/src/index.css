@@ -220,3 +220,10 @@ html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
 [class~="bg-[#35530e]"], [class~="bg-[#034f3b]"] { background-color: #004132 !important; }
 [class~="text-[#35530e]"], [class~="text-[#034f3b]"] { color: #004132 !important; }
 [class~="hover:bg-[#294108]"]:hover, [class~="hover:bg-[#023c2d]"]:hover { background-color: #003326 !important; }
+
+.a4-paper { box-sizing: border-box; }
+@media print {
+  @page { size: A4 portrait; margin: 0; }
+  .a4-paper { width: 210mm !important; min-height: 297mm !important; max-width: none !important; margin: 0 !important; padding: 14mm !important; box-shadow: none !important; page-break-after: always; }
+  .official-document-footer { margin-top: auto !important; }
+}
