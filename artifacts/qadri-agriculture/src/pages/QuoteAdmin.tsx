@@ -108,7 +108,7 @@ export default function QuoteAdmin() {
 
   useEffect(() => {
     let active = true;
-    fetchRemoteQuotes("admin").then(remote => { if (active) setRecords(remote); }).catch(error => toast.error(error instanceof Error ? error.message : "تعذر تحميل الطلبات."));
+    fetchRemoteQuotes("admin").then(remote => { if (active) { let hidden: string[] = []; try { hidden = JSON.parse(localStorage.getItem(QUOTE_TRASH_KEY) || "[]").map((item: QuoteRecord) => item.id); } catch {} setRecords(remote.filter(record => !hidden.includes(record.id))); } }).catch(error => toast.error(error instanceof Error ? error.message : "تعذر تحميل الطلبات."));
     return () => { active = false; };
   }, []);
   const requests = records.filter(record => record.kind === "request");
@@ -116,7 +116,7 @@ export default function QuoteAdmin() {
   const openEditor = (record: QuoteRecord) => { setSelectedId(record.id); setEditor({ ...record, items: record.items.map(item => ({ ...item })), visibleColumns: { ...record.visibleColumns }, columnLabels: { ...record.columnLabels } }); };
   const newQuote = () => openEditor(createEmptyQuote());
   const closeEditor = () => { setEditor(null); setSelectedId(null); };
-  const archiveQuote = (record: QuoteRecord) => { const nextTrash = [record, ...trash.filter(item => item.id !== record.id)].slice(0, 100); localStorage.setItem(QUOTE_TRASH_KEY, JSON.stringify(nextTrash)); setTrash(nextTrash); deleteRemoteQuote(record.id).then(() => setRecords(previous => previous.filter(item => item.id !== record.id))).catch(error => toast.error(error instanceof Error ? error.message : "تعذر حذف العرض.")); };
+  const archiveQuote = (record: QuoteRecord) => { const nextTrash = [record, ...trash.filter(item => item.id !== record.id)].slice(0, 100); localStorage.setItem(QUOTE_TRASH_KEY, JSON.stringify(nextTrash)); setTrash(nextTrash); setRecords(previous => previous.filter(item => item.id !== record.id)); };
   const restoreQuote = (record: QuoteRecord) => { updateRemoteQuote(record).then(saved => { setRecords(previous => [saved, ...previous]); const nextTrash = trash.filter(item => item.id !== record.id); setTrash(nextTrash); localStorage.setItem(QUOTE_TRASH_KEY, JSON.stringify(nextTrash)); toast.success(isArabic ? "تم استرجاع العرض." : "Quote restored."); }).catch(error => toast.error(error instanceof Error ? error.message : "تعذر استرجاع العرض.")); };
 
   const persist = () => {
