@@ -1,5 +1,5 @@
 kind = "web"
-previewPath = "/"
+previewPath = "/qadri-agriculture/"
 title = "Al-Qadri Smart Agriculture"
 description = "A bilingual smart agriculture platform that helps gardeners and farmers diagnose plants, plan landscapes and irrigation, choose suitable crops, and manage ongoing care."
 version = "1.0.0"
@@ -8,7 +8,7 @@ router = "path"
 
 [[services]]
 name = "web"
-paths = [ "/" ]
+paths = [ "/qadri-agriculture" ]
 localPort = 22365
 
 [services.development]
@@ -25,4 +25,4 @@ to = "/index.html"
 
 [services.env]
 PORT = "22365"
-BASE_PATH = "/"
+BASE_PATH = "/qadri-agriculture/"

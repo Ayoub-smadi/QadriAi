@@ -1,10 +1,10 @@
 ---
-name: Duplicate agriculture previews
-description: The project contains two agriculture web artifacts that can render through the same root preview path.
+name: Agriculture artifact copies
+description: Shared user-facing behavior across the two agriculture web artifacts.
 ---
 
-When changing authentication or other shared user-facing behavior, keep both agriculture web artifacts synchronized or explicitly retire one before assuming the preview reflects the change.
+The two agriculture artifact folders are parallel implementations of the same branded product. The smart-agriculture artifact is the root site; the older agriculture artifact has its own nested preview path. Keep shared authentication and user-facing behavior synchronized.
 
-**Why:** The duplicate root preview can make a corrected artifact appear broken when the user is actually viewing the other artifact.
+**Why:** The two implementations can diverge, and sharing a preview path makes Replit's root preview ambiguous.
 
-**How to apply:** Check both agriculture artifact folders and their workflows whenever a preview-only regression persists after the API and primary frontend look correct.
+**How to apply:** Check both artifact folders when changing shared flows; preserve distinct preview paths so the main site remains unambiguous.
