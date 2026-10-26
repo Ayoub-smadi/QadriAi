@@ -129,6 +129,26 @@
 
 html[dir="rtl"] .prose { text-align: start; }
 html[dir="rtl"] input, html[dir="rtl"] textarea { text-align: start; }
+/* Keep legacy hard-coded utility colors aligned with the teal brand palette. */
+:where([class*="bg-[#35530e]"]) { background-color: #034f3b !important; }
+:where([class*="bg-[#294108]"]) { background-color: #023c2d !important; }
+:where([class*="bg-[#b4ce65]"]) { background-color: #9dd7bd !important; }
+:where([class*="bg-[#dcebbd]/70"]) { background-color: color-mix(in srgb, #d5eee3 70%, transparent) !important; }
+:where([class*="bg-[#dcebbd]"]:not([class*="/70"])) { background-color: #d5eee3 !important; }
+:where([class*="bg-[#b4ce65]/35"]) { background-color: color-mix(in srgb, #9dd7bd 35%, transparent) !important; }
+:where([class*="bg-[#73973a]"]) { background-color: #2a8068 !important; }
+:where([class*="text-[#35530e]"]) { color: #034f3b !important; }
+:where([class*="text-[#314617]"], [class*="text-[#293d12]"], [class*="text-[#304515]"]) { color: #123f36 !important; }
+:where([class*="text-[#29410d]"]) { color: #023c2d !important; }
+:where([class*="text-[#52731f]"]) { color: #26745d !important; }
+:where([class*="text-[#b4ce65]"]) { color: #9dd7bd !important; }
+:where([class*="border-[#35530e]/8"]) { border-color: color-mix(in srgb, #034f3b 8%, transparent) !important; }
+:where([class*="border-[#35530e]/10"]) { border-color: color-mix(in srgb, #034f3b 10%, transparent) !important; }
+:where([class*="border-[#35530e]/12"]) { border-color: color-mix(in srgb, #034f3b 12%, transparent) !important; }
+:where([class*="border-[#35530e]/15"]) { border-color: color-mix(in srgb, #034f3b 15%, transparent) !important; }
+:where([class*="border-[#35530e]/20"]) { border-color: color-mix(in srgb, #034f3b 20%, transparent) !important; }
+:where([class*="border-[#b4ce65]/50"]) { border-color: color-mix(in srgb, #9dd7bd 50%, transparent) !important; }
+:where([class*="ring-[#b4ce65]"]) { --tw-ring-color: #9dd7bd !important; }
 @keyframes qadri-float {
   0%, 100% { transform: translate3d(0, 0, 0) rotate(-1deg); }
   50% { transform: translate3d(0, -10px, 0) rotate(1deg); }
