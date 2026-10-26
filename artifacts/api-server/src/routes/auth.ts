@@ -4,10 +4,10 @@ import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 import { Router, type IRouter, type Request, type Response } from "express";
 
 const router: IRouter = Router();
-// The requested bootstrap credentials are used only on the server. Deployments
-// can (and should) override them with ADMIN_USERNAME / ADMIN_PASSWORD secrets.
+// Bootstrap passwords come only from Replit Secrets; PostgreSQL stores only
+// their scrypt hashes.
 const ADMIN_USERNAME = (process.env.ADMIN_USERNAME || "Ayoub").trim().toLowerCase();
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Ayoub@123";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "";
 const SESSION_COOKIE = "qadri_session";
 const SESSION_MAX_AGE = 1000 * 60 * 60 * 24 * 365;
 const sessions = new Map<string, number>();
@@ -180,7 +180,7 @@ async function handleLogin(req: Request, res: Response) {
   const isAdmin = Boolean(input?.admin);
 
   if (isAdmin) {
-    if (!ADMIN_PASSWORD || normalizeUsername(identifier) !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) return sendError(res, "بيانات دخول الأدمن غير صحيحة.", "UNAUTHORIZED");
+    if (normalizeUsername(identifier) !== ADMIN_USERNAME) return sendError(res, "بيانات دخول الأدمن غير صحيحة.", "UNAUTHORIZED");
     await ensureAdminAccount();
   }
 
@@ -188,6 +188,7 @@ async function handleLogin(req: Request, res: Response) {
   if (!user) return sendError(res, isAdmin ? "حساب الأدمن غير موجود." : "رقم الهاتف أو كلمة المرور غير صحيحة.", "UNAUTHORIZED");
   if (isAdmin) {
     if (user.role !== "admin") return sendError(res, "هذا الحساب ليس أدمن.", "FORBIDDEN");
+    if (!verifyPassword(password, user.passwordHash)) return sendError(res, "بيانات دخول الأدمن غير صحيحة.", "UNAUTHORIZED");
   } else {
     if (user.role === "admin") return sendError(res, "استخدم دخول الأدمن لهذا الحساب.", "FORBIDDEN");
     if (!verifyPassword(password, user.passwordHash)) return sendError(res, "رقم الهاتف أو كلمة المرور غير صحيحة.", "UNAUTHORIZED");
@@ -225,7 +226,7 @@ router.post("/trpc/auth.logout", (req, res) => {
 });
 
 void ensureAdminAccount().catch(error => {
-  console.error("[Auth] admin seed failed", error);
+  console.error("[Auth] admin seed failed; verify the database schema and ADMIN_PASSWORD secret.");
 });
 
 export default router;
